@@ -25,10 +25,8 @@ ResultSet rs = null;
 			sql.setString(3, address.getCity());
 			sql.setInt(4, address.getUser().getId());
 			sql.setInt(5, address.getAddress_type().getId());
-			
 			sql.execute();
-		return true;
-			
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,7 +50,6 @@ ResultSet rs = null;
 				sql.setString(3, address.getCity());
 				sql.setInt(4, address.getAddress_type().getId() );
 				sql.setInt(5, address.getId());
-				
 				sql.execute();
 				return true;
 			} catch (SQLException e) {
