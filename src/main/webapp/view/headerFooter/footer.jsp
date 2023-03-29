@@ -1,7 +1,7 @@
 
 
 	<!-- Start Footer Area -->
-	<footer class="footer fixed-bottom">
+	<footer class="footer">
 		<!-- Start Footer  -->
 		<!-- End Footer Top -->
 		<!-- Start Footer Middle -->
