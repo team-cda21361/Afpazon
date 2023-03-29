@@ -1,5 +1,4 @@
 
-
 	<!-- Start Footer Area -->
 	<footer class="footer">
 		<!-- Start Footer  -->
