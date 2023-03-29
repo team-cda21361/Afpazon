@@ -4403,7 +4403,8 @@ top: 2px;
 ========================================*/
 .footer {
   background-color: #081828;
-  position: relative;
+ /*  position: relative; */
+ 	z-index: 1;
   /* Single Footer */
   /* End Single Footer */
 }
@@ -4573,10 +4574,10 @@ top: 2px;
   background-color: #fff;
 }
 
-.footer .footer-middle {
+/* .footer .footer-middle {
   padding-top: 40px;
   padding-bottom: 80px;
-}
+} */
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .footer .footer-middle {
@@ -4620,7 +4621,8 @@ top: 2px;
 }
 
 .footer .single-footer {
-  margin-top: 40px;
+
+  text-align: center;
 }
 
 @media (max-width: 767px) {
