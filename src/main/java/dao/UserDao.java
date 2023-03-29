@@ -23,7 +23,7 @@ public class UserDao implements IDAO<User> {
 
 		try {
 			sql = connect.prepareStatement("INSERT INTO user (lastName, firstName, email, password, gender, phone,"
-					+ "NOW(), isActive, role)" + "VALUES (?,?,?,?,?,?,?,?)");
+					+ " registrationDate , isActive, id_role)" + "VALUES (?,?,?,?,?,?,NOW(),?,?)");
 		
 			sql.setString(1, user.getLastName());
 			sql.setString(2, user.getFirstName());
