@@ -1,6 +1,6 @@
 # Ds store
-*.DS_Strore
-**/;DS_Store
+*.DS_Store
+**/DS_Store
 
 # Compiled class file
 *.class
