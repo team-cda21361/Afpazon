@@ -75,4 +75,11 @@ public class Address {
 	public void setAddress_type(Address_type address_type) {
 		this.address_type = address_type;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", address=" + address + ", zipCode=" + zipCode + ", city=" + city + ", user="
+				+ user + ", address_type=" + address_type + "]";
+	}
+	
 }
