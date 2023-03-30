@@ -1,4 +1,4 @@
-<section>
+<section style="max-width: min(80%, 1000px);margin:20px auto;">
 	Team CDA21361
 	Société SAS au capital de 8 euros
 	Siège social Afpa Paris Politzer 75012 Paris ;  
