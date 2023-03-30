@@ -10,8 +10,7 @@
 <title>AfpaZon.</title>
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="shortcut icon" type="image/x-icon"
-	href="assets/images/favicon.svg" />
+<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
@@ -19,6 +18,7 @@
 <link rel="stylesheet" href="assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="assets/css/glightbox.min.css" />
 <link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script defer src="assets/js/bootstrap.min.js"></script>
 <script defer src="assets/js/tiny-slider.js"></script>
 <script defer src="assets/js/glightbox.min.js"></script>
