@@ -4724,7 +4724,7 @@ ul, ol {
 	line-height: 24px;
 }
 
-.footer .single-footer h3::before {
+/* .footer .single-footer h3::before {
 	display: block;
 	position: absolute;
 	bottom: -2px;
@@ -4733,7 +4733,7 @@ ul, ol {
 	height: 3px;
 	background-color: #0167F3;
 	content: '';
-}
+} */
 
 @media ( max-width : 767px) {
 	.footer .single-footer h3::before {
