@@ -31,4 +31,5 @@ public class Address_type {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 }
