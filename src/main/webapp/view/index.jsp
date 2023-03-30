@@ -7,7 +7,7 @@
 	</div>
 	</div>
 </div>
-<!-- Carousel END -->
+
 
 <div>
 	<h2>JE SUIS HOME</h2>
