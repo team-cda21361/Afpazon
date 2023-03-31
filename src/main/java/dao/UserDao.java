@@ -128,7 +128,7 @@ public class UserDao implements IDAO<User> {
 			rs = sql.executeQuery();
 
 			if (rs.next()) {
-				if (BCrypt.checkpw(password, rs.getString("pwd"))) {
+				if (BCrypt.checkpw(password, rs.getString("password"))) {
 
 					return new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
 							rs.getString("email"), rs.getString("password"), rs.getString("gender"),
