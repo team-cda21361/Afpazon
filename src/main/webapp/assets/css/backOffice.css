@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/*Style Back office
+*/
+.backContainer{
+	width:95%;
+	margin:auto;
+}
+.dashBoardLine{
+	overflow: hidden;
+	height:30vh;
+	margin:30px 20px;
+}
+.tablePane{
+	overflow: scroll;
+	height:87%;
+}
