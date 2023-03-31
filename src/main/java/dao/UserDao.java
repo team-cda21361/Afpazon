@@ -34,7 +34,7 @@ public class UserDao implements IDAO<User> {
 			sql.setBoolean(7, user.isActive());
 			sql.setInt(8, user.getRole().getId());
 
-			sql.executeUpdate();
+			sql.execute();
 
 			return true;
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ public class UserDao implements IDAO<User> {
 			sql.setInt(8, user.getRole().getId());
 			sql.setInt(9, user.getId());
 
-			sql.execute();
+			sql.executeUpdate();
 
 			return true;
 		} catch (SQLException e) {
@@ -162,5 +162,31 @@ public class UserDao implements IDAO<User> {
 		}
 		return null;
 	}
+	/*
+	public ArrayList<User> search(String search) {
+		ArrayList<User> users = new ArrayList<>();
+		User user = null;
 
+		try {
+			sql = connect
+					.prepareStatement("select *, user.id as userId from user"
+							+ " inner join role on user.id_role=role.id WHERE CONCAT(lastName, ' ', firstName, ' ', email) LIKE ?");
+			sql.setString(1, "%" +search+ "%");
+			
+			rs = sql.executeQuery();
+
+			while (rs.next()) {
+				user = new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
+						rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone"),
+						rs.getDate("registrationDate"), rs.getBoolean("isActive"),
+						new Role(rs.getInt("id_role"), rs.getString("role")));
+				users.add(user);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return users;
+	}*/
 }
