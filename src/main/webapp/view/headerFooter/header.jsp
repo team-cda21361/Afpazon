@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -26,6 +25,8 @@
 <link rel="stylesheet" href="assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="assets/css/glightbox.min.css" />
 <link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/backOffice.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script defer src="assets/js/bootstrap.min.js"></script>
 <script defer src="assets/js/tiny-slider.js"></script>
 <script defer src="assets/js/glightbox.min.js"></script>
@@ -33,6 +34,7 @@
 </head>
 
 <body>
+<c:if test="">
 	<!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -303,3 +305,4 @@
 
 
 	<!-- Modal FIN -->
+	</c:if>

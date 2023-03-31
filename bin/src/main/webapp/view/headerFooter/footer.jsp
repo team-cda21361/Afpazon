@@ -1,6 +1,7 @@
-<c:if test="">
+
+
 	<!-- Start Footer Area -->
-	<footer class="footer">
+	<footer class="footer fixed-bottom">
 		<!-- Start Footer  -->
 		<!-- End Footer Top -->
 		<!-- Start Footer Middle -->
@@ -127,6 +128,6 @@
     </ul>
     <p class="text-center text-muted">© 2023 Scoreboard , Inc</p>
   </footer> -->
-</c:if>
+
 </body>
 </html>

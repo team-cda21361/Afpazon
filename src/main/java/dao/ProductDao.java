@@ -70,7 +70,7 @@ public class ProductDao implements IDAO<Product> {
 			while(rs.next()) {
 				Product product = new Product(rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
-						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("refenrence"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
