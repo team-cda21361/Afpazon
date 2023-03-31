@@ -121,7 +121,7 @@
 					</table>
 				</div>
 			</div>
-			<!-- end stock -->
+			<!-- end product -->
 			<!-- Start discount -->
 			<div>
 				<div class="d-flex justify-content-between">
