@@ -35,3 +35,22 @@ h3 {
 a.deleteBtn:hover {
 	color: rgb(220, 0, 0) !important;
 }
+
+#toShop {
+	display: block;
+	width: 60%;
+	margin: auto;
+	font-weight: bold;
+}
+
+.spacer {
+	height: 10px;
+}
+
+#ordersTable {
+	vertical-align: middle;
+}
+
+ul.pagination {
+	display: flex;
+}
