@@ -162,7 +162,7 @@ public class UserDao implements IDAO<User> {
 		}
 		return null;
 	}
-	/*
+	
 	public ArrayList<User> search(String search) {
 		ArrayList<User> users = new ArrayList<>();
 		User user = null;
@@ -188,5 +188,5 @@ public class UserDao implements IDAO<User> {
 		}
 
 		return users;
-	}*/
+	}
 }

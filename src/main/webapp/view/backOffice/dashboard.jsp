@@ -57,6 +57,7 @@
 								<th scope="col">Prenom</th>
 								<th scope="col">Email</th>
 								<th scope="col">Rôle</th>
+								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
 							</tr>
@@ -68,6 +69,10 @@
 								<td><c:out value="${user.firstName }"></c:out></td>
 								<td><c:out value="${user.email }"></c:out></td>
 								<td><c:out value="${user.role.role }"></c:out></td>
+								<td>
+								<c:if test="${user.isActive() == true}"><c:out value="OUI"></c:out></c:if>
+								<c:if test="${user.isActive() == false}"><c:out value="NON"></c:out></c:if>
+								</td>
 								<td><a href="dashboard?id=${user.id }"><i class="bi bi-pencil-square"></i></a></td>
 								<td><a href="dashboard?id=${user.id }"><i class="bi bi-trash3-fill"></i></a></td>
 							</tr>
@@ -77,8 +82,11 @@
 				</div>
 			</div>
 			<div>
-				<div class="alert alert-danger" role="alert">A simple danger
-					alert—check it out!</div>
+				<c:if test="${not empty criticalStock }">
+					<div class="alert alert-danger" role="alert">
+						<c:out value="${criticalStock }"></c:out>
+					</div>
+				</c:if>
 			</div>
 		</div>
 		<!-- end user -->
@@ -88,9 +96,9 @@
 			<div>
 				<div class="d-flex justify-content-between">
 					<h4>Produits</h4>
-					<form class="d-flex" role="search">
+					<form class="d-flex" role="search" method="post">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+							placeholder="Search" aria-label="Search" name="productSearch">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -102,6 +110,7 @@
 								<th scope="col">référence</th>
 								<th scope="col">Prix</th>
 								<th scope="col">Quantité</th>
+								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
 							</tr>
@@ -113,6 +122,10 @@
 								<td><c:out value="${stock.product.reference }"></c:out></td>
 								<td><c:out value="${stock.product.price }"></c:out></td>
 								<td><c:out value="${stock.quantity }"></c:out></td>
+								<td>
+								<c:if test="${stock.product.isActive() == true}"><c:out value="OUI"></c:out></c:if>
+								<c:if test="${stock.product.isActive() == false}"><c:out value="NON"></c:out></c:if>
+								</td>
 								<td><a href="dashboard?id=${stock.id }"><i class="bi bi-pencil-square"></i></a></td>
 								<td><a href="dashboard?id=${stock.id }"><i class="bi bi-trash3-fill"></i></a></td>
 							</tr>
@@ -121,14 +134,14 @@
 					</table>
 				</div>
 			</div>
-			<!-- end stock -->
+			<!-- end product -->
 			<!-- Start discount -->
 			<div>
 				<div class="d-flex justify-content-between">
 					<h4>Promotion</h4>
-					<form class="d-flex" role="search">
+					<form class="d-flex" role="search" method="post">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+							placeholder="Search" aria-label="Search" name="discountSearch">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
@@ -167,9 +180,9 @@
 			<div>
 				<div class="d-flex justify-content-between">
 					<h4>Commande</h4>
-					<form class="d-flex" role="search">
+					<form class="d-flex" role="search" method="post">
 						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search">
+							placeholder="Search" aria-label="Search" name="orderSearch">
 						<button class="btn btn-outline-success" type="submit">Search</button>
 					</form>
 				</div>
