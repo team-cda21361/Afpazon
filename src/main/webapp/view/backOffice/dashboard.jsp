@@ -7,36 +7,6 @@
 <title>Dashboard</title>
 </head>
 <body>
-<!--start Navbar -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary"
-		style="background: #F113DB">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="dashboard"><img alt="dashboard image"
-							src="assets/images/back_office/logo.png" width="55"></a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><img
-							alt="" src="assets/images/back_office/Catalogue.png" width="60"></a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#"> <img
-							alt="" src="assets/images/back_office/Stock.png" width="45">
-					</a></li>
-				</ul>
-				<a class=" d-flex nav-link" href="#"> <img alt=""
-					src="assets/images/back_office/logBack.png" width="60">
-				</a>
-			</div>
-		</div>
-	</nav>
-<!--end Navbar -->
 	<div class="backContainer">
 		<!-- start user -->
 		<div class="d-flex justify-content-between dashBoardLine">
@@ -51,7 +21,7 @@
 				</div>
 				<div class ="tablePane" >
 					<table class="table table-bordered">
-						<thead class="table-active">
+						<thead class="12table-active">
 							<tr>
 								<th scope="col">Nom</th>
 								<th scope="col">Prenom</th>
@@ -70,11 +40,11 @@
 								<td><c:out value="${user.email }"></c:out></td>
 								<td><c:out value="${user.role.role }"></c:out></td>
 								<td>
-								<c:if test="${user.isActive() == true}"><c:out value="OUI"></c:out></c:if>
-								<c:if test="${user.isActive() == false}"><c:out value="NON"></c:out></c:if>
+								<c:if test="${user.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="35"></c:if>
+								<c:if test="${user.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="30"></c:if>
 								</td>
-								<td><a href="dashboard?id=${user.id }"><i class="bi bi-pencil-square"></i></a></td>
-								<td><a href="dashboard?id=${user.id }"><i class="bi bi-trash3-fill"></i></a></td>
+								<td><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="30"></a></td>
+								<td><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="30"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -84,7 +54,7 @@
 			<div>
 				<c:if test="${not empty criticalStock }">
 					<div class="alert alert-danger" role="alert">
-						<c:out value="${criticalStock }"></c:out>
+						<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="30"></a></p>
 					</div>
 				</c:if>
 			</div>
@@ -123,11 +93,11 @@
 								<td><c:out value="${stock.product.price }"></c:out></td>
 								<td><c:out value="${stock.quantity }"></c:out></td>
 								<td>
-								<c:if test="${stock.product.isActive() == true}"><c:out value="OUI"></c:out></c:if>
-								<c:if test="${stock.product.isActive() == false}"><c:out value="NON"></c:out></c:if>
+								<c:if test="${stock.product.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="35"></c:if>
+								<c:if test="${stock.product.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="30"></c:if>
 								</td>
-								<td><a href="dashboard?id=${stock.id }"><i class="bi bi-pencil-square"></i></a></td>
-								<td><a href="dashboard?id=${stock.id }"><i class="bi bi-trash3-fill"></i></a></td>
+								<td><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="30"></a></td>
+								<td><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="30"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -164,8 +134,8 @@
 								<td><c:out value="${discount.percent }"></c:out></td>
 								<td><c:out value="${discount.startDate }"></c:out></td>
 								<td><c:out value="${discount.endDate }"></c:out></td>
-								<td><a href="dashboard?id=${discount.id }"><i class="bi bi-pencil-square"></i></a></td>
-								<td><a href="dashboard?id=${discount.id }"><i class="bi bi-trash3-fill"></i></a></td>
+								<td><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="30"></a></td>
+								<td><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="30"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -205,8 +175,8 @@
 								<td><c:out value="${order.user.email }"></c:out></td>
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
-								<td><a href="dashboard?id=${order.id }"><i class="bi bi-pencil-square"></i></a></td>
-								<td><a href="dashboard?id=${order.id }"><i class="bi bi-trash3-fill"></i></a></td>
+								<td><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="30"></a></td>
+								<td><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="30"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>

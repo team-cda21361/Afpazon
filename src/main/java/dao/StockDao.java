@@ -30,7 +30,7 @@ public class StockDao implements IDAO<Stock>{
 		ArrayList<Stock> listStock = new ArrayList<>();
 		try {
 			sql = connect.prepareStatement("SELECT *,s.id as idStock,p.id as idProd FROM stock s INNER JOIN product p ON s.id_product = p.id"
-					+ " INNER JOIN vat ON p.id_vat = vat.id");
+					+ " INNER JOIN vat ON p.id_vat = vat.id ORDER BY quantity ASC" );
 			rs = sql.executeQuery();
 
 			while(rs.next()) {

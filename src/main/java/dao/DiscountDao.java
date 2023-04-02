@@ -40,7 +40,7 @@ public class DiscountDao implements IDAO<Discount> {
 	public ArrayList<Discount> read() {
 		ArrayList<Discount> listStock = new ArrayList<>();
 		try {
-			sql = connect.prepareStatement("SELECT * FROM  discount");
+			sql = connect.prepareStatement("SELECT * FROM  discount ORDER BY startDate desc");
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
@@ -76,7 +76,7 @@ public class DiscountDao implements IDAO<Discount> {
 	public ArrayList<Discount> search(String search) {
 		ArrayList<Discount> listStock = new ArrayList<>();
 		try {
-			sql = connect.prepareStatement("SELECT * FROM  discount WHERE CONCAT(voucher, ' ', startDate, ' ', endDate) LIKE ?");
+			sql = connect.prepareStatement("SELECT * FROM  discount WHERE CONCAT(voucher, ' ', startDate, ' ', endDate) LIKE ? ORDER BY startDate desc");
 			sql.setString(1, "%" +search+ "%");
 			rs = sql.executeQuery();
 

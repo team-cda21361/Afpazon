@@ -17,7 +17,16 @@ public class User {
 	public User() {
 	}
 	
-	
+	/*
+	 * constructor only for dev mock(to be deleted after developpement
+	 */
+	public User(String email, Role role) {
+		
+		this.email = email;
+		this.role = role;
+	}
+
+
 	/*for registration*/
 	public User(String lastName, String firstName, String email, String password, Role role) {
 		this.lastName = lastName;
