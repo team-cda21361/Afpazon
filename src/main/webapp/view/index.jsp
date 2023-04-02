@@ -32,7 +32,7 @@
 						<div class="product-image">
 							<img src="assets/images/products/product-1.jpg" alt="#">
 							<div class="button">
-								<a href="product-details.html" class="btn"><i
+								<a href="product-details.html" class="btn" name="getCart" value="${product.id }"><i
 									class="lni lni-cart"></i> Add to Cart</a>
 							</div>
 						</div>
