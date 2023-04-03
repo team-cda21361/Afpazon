@@ -21,7 +21,7 @@
 				</div>
 				<div class ="tablePane" >
 					<table class="table table-bordered">
-						<thead class="table-active">
+						<thead class="12table-active">
 							<tr>
 								<th scope="col">Nom</th>
 								<th scope="col">Prenom</th>
@@ -40,6 +40,7 @@
 								<td><c:out value="${user.email }"></c:out></td>
 								<td><c:out value="${user.role.role }"></c:out></td>
 								<td>
+
 								<c:if test="${user.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="25"></c:if>
 								<c:if test="${user.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
@@ -143,7 +144,6 @@
 				</div>
 			</div>
 		</div>
-	
 	<!-- end discount -->
 	<!-- Start commande -->
 		<div class="d-flex justify-content-between dashBoardLine">

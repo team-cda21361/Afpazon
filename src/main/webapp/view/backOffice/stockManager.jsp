@@ -5,8 +5,8 @@
 				<thead class="table-active">
 					<tr>
 						<th scope="col">Nom</th>
-						<th scope="col">référence</th>
-						<th scope="col">Quantité</th>
+						<th scope="col">rï¿½fï¿½rence</th>
+						<th scope="col">Quantitï¿½</th>
 						<th scope="col">Editer</th>
 						<th scope="col">Supprimmer</th>
 					</tr>
@@ -31,11 +31,11 @@
 		    <input type="text" class="form-control" id="exampleInputEmail1" name="provider" value="${stockEdit.product.name }">
 		  </div>
 		  <div class="mb-3">
-		    <label for="reference" class="form-label">Référence</label>
+		    <label for="reference" class="form-label">Rï¿½fï¿½rence</label>
 		    <input type="text" class="form-control" id="idRef" name="reference" value="${stockEdit.product.reference }">
 		  </div>
 		  <div class="mb-3">
-		    <label for="reference" class="form-label">Quantité</label>
+		    <label for="reference" class="form-label">Quantitï¿½</label>
 		    <input type="number" class="form-control" id="idRef" name="quantity">
 		  </div>
 		  <button type="submit" class="btn btn-outline-primary">Commander <img alt="" src="assets/images/back_office/send.png" width="35"></button>
