@@ -1,3 +1,13 @@
+function loadCSS(filename){ 
+	var file = document.createElement("link");
+	file.setAttribute("rel", "stylesheet");
+	file.setAttribute("type", "text/css");
+	file.setAttribute("href", filename);
+	document.head.appendChild(file);
+}
+
+loadCSS("./assets/css/validation.css");
+
 $(document).ready(function() {
     setTimeout(function() {
         $(".timer").fadeOut(1500);
@@ -22,8 +32,6 @@ function checkformM(event) {
 				$(".error" + val.name).text(val.placeholder + msnError);
 				$("#" + val.name).addClass("is-invalid");
 				cont++;
-	
-				console.log("Error en el campo: "+ val.name + val.value + " COnt: "+cont);
 			} else {
 				$(".error" + val.name).text("");
 				$("#" + val.name)
@@ -31,21 +39,13 @@ function checkformM(event) {
 					.addClass("is-valid");
 			}
 		});
-		
-		console.log("****************1*****************");
-		console.log("password.val() "+password.val());
-	    console.log("passwordR.val() "+passwordR.val());
-	    console.log("****************2*****************");
 	    
 	    if(password.val() != undefined && passwordR.val() != undefined){
 			if(password.val() != passwordR.val()){
-				console.log("No son iguales " + passwordR.attr("id"));
-				console.log("Name: " + passwordR.attr("name"));
 				$(".errorpasswordR").addClass("error");
 				$(".errorpasswordR").text("Les deux mots de passe doivent être identiques.");
 				$("#" + passwordR.attr("id")).addClass("is-invalid");
 				cont++;
-				console.log("Error en el campo: If Password");
 			}else{
 				$(".errorpasswordR").addClass("error");
 			    $(".errorpasswordR").text("");
@@ -54,32 +54,24 @@ function checkformM(event) {
 						.addClass("is-valid");
 			}
 		}
-	    console.log("Email: "+ email.val());
 	    if(email.val() != undefined){
 			if (!regexEmail.test(email.val())) {
-			    console.log("Email pas correct: "+ cont);
 				$("#" + email.attr("id")).addClass("is-invalid");
 				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
 				email.attr("id").addClass("is-invalid");
 				cont++
 			} else {
-				console.log("Email IF entre NOT: "+ email.val());
 				$(".error" + email.attr("id")).text("");
 				email.attr("id").removeClass("is-invalid").addClass("is-valid");
 			}
 		}
 	});
-	console.log("Contador de errores1: "+ cont);
-	console.log("Contador de errores2: "+ cont2);
 
 	if (cont == 0 && cont2 == 0) {
 	    document.formM.submit();
 	}
 
 }
-
-
-
  
 function checkformML(event) {
 	event.preventDefault();
@@ -92,8 +84,6 @@ function checkformML(event) {
 				$(".error" + val.name).text(val.placeholder + msnError);
 				$("#" + val.name).addClass("is-invalid");
 				contL++;
-	
-				console.log("Error en el campo: "+ val.name + val.value + " COntL: "+contL);
 			} else {
 				$(".error" + val.name).text("");
 				$("#" + val.name)
@@ -102,7 +92,6 @@ function checkformML(event) {
 			}
 
 		});
-		    console.log("Email antes entre: "+ email.val());
 		if(email.val() != undefined){
 			if (!regexEmail.test(email.val())) {
 				$("#" + email.attr("id")).addClass("is-invalid");
@@ -111,24 +100,23 @@ function checkformML(event) {
 				contL++
 		
 			} else {
-				console.log("Email IF entre NOT: "+ email.val());
 				$(".error" + email.attr("id")).text("");
 				email.attr("id").removeClass("is-invalid").addClass("is-valid");
 			}
 		}
 		
 	});
-	console.log("Total: COntL: "+contL);
+
 
 	if (contL == 0) {
 	    document.formML.submit();
 	}
- console.log("Sorte: "+ email.val());
+
 
 }
-/*****************************/
 
-/****************PASSWORD REGEX et MSN errors***************************/
+
+/****************PASSWORD REGEX***************************/
 var mdp = document.querySelector("#password");
 var msn1 = document.querySelector("#num");
 var msn2 = document.querySelector("#esp");
@@ -154,7 +142,6 @@ function blurFunction() {
 $(".form-control").on("keyup", function() {
 	let msnError = " est un champ obligatoire!!!";
 	cont2 = 0;
-	console.log("Entra dans l'evenement Keyup");
 	if ($(this).val() == "" || $(this).val().length > 25 || $(this).val().length < 2) {
 		$(".error" + $(this).prop("id")).text($(this).prop("placeholder") + msnError);
 		$(this).addClass("is-invalid");
@@ -251,8 +238,6 @@ $(".form-control").on("keyup", function() {
 			$(this).removeClass("is-invalid").addClass("is-valid");
 		}
 	}
-	
-	console.log("cont2 en key "+cont2);
 	
 });
 

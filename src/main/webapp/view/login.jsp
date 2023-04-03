@@ -1,4 +1,4 @@
-<c:import url="headerFooter/header.jsp"></c:import>
+<script type="text/javascript" src="./assets/js/register.js"></script>
 <br>
 <section>
 
@@ -56,4 +56,3 @@
 		</div>
 	</div>
 </section>
-<c:import url="headerFooter/footer.jsp"></c:import>

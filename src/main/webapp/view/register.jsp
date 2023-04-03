@@ -1,4 +1,5 @@
-<c:import url="headerFooter/header.jsp"></c:import>
+<script defer type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./assets/js/validation.js"></script>
 <br>
 <section>
 
@@ -95,4 +96,3 @@
 		</div>
 	</div>
 </section>
-<c:import url="headerFooter/footer.jsp"></c:import>
