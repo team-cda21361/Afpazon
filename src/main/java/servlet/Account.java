@@ -36,7 +36,7 @@ public class Account extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = new User(12312313, "Fouquet", "Charles", "fouquetcharles@gmail.com", "", "M.", "0645716639", java.sql.Date.valueOf("2023-03-30"), true, new Role(729, "Vendeur"));
-		request.setAttribute("currentUser", user);
+		request.setAttribute("currentUser2", user);
 		
 		ArrayList<Address> addressesList = new ArrayList<>();
 		addressesList.add(new Address(1, "7 allée Epinette", 93340, "Le Raincy", new User(), new Address_type()));
@@ -45,13 +45,13 @@ public class Account extends HttpServlet {
 		request.setAttribute("addressesList", addressesList);
 		
 		ArrayList<Order> ordersList = new ArrayList<>();
-		ordersList.add(new Order(16415, java.sql.Date.valueOf("2023-03-28"), (float) 148.59, "", "", new User(), new Address(), new Status(1, "En cours de livraison")));
-		ordersList.add(new Order(15478, java.sql.Date.valueOf("2023-01-12"), (float) 148.59, "", "", new User(), new Address(), new Status(1, "Commande livrée")));
-		ordersList.add(new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Status(1, "Commande validée")));
+		ordersList.add(new Order(16415, java.sql.Date.valueOf("2023-03-28"), (float) 148.59, "", "", new User(), new Address(), new Address(), new Status(1, "En cours de livraison")));
+		ordersList.add(new Order(15478, java.sql.Date.valueOf("2023-01-12"), (float) 148.59, "", "", new User(), new Address(), new Address(), new Status(1, "Commande livrée")));
+		ordersList.add(new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Address("6-8 rue George et Maï Politzer", 75012, "Paris", new User(), new Address_type(1, "facturation")), new Status(3, "En cours de livraison")));
 		request.setAttribute("ordersList", ordersList);
 		
 		request.setAttribute("showOrderID", request.getParameter("showOrderID"));
-		request.setAttribute("orderSelected", new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "6F4564654456", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Status(1, "Commande validée")));
+		request.setAttribute("orderSelected", new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Address("6-8 rue George et Maï Politzer", 75012, "Paris", new User(), new Address_type(1, "facturation")), new Status(3, "En cours de livraison")));
 		
 		request.getRequestDispatcher("/view/account.jsp").forward(request,response);
 	}

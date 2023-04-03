@@ -163,6 +163,24 @@ public class UserDao implements IDAO<User> {
 		return null;
 	}
 	
+	public boolean findByEmail(String email) {
+		try {
+
+			sql = connect
+					.prepareStatement("select * from user WHERE user.email=?");
+			sql.setString(1, email);
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public ArrayList<User> search(String search) {
 		ArrayList<User> users = new ArrayList<>();
 		User user = null;
