@@ -397,7 +397,6 @@
 		<!--end Header backoffice -->
 
 	</c:if>
-
 	<c:if test="${currentUser.role.role == 'Admin' }">
 		<!--start Navbar -->
 		<nav class="navbar navbar-expand-lg bg-body-tertiary"

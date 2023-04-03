@@ -1,5 +1,6 @@
 <c:if test="${currentUser.role.role == 'Client' }">
-	<!-- Start Footer  -->
+<!-- Start Footer  -->
+<c:if test="${currentUser.role.role == 'Client' }">
 <footer class="footer">
 	<!-- Start Footer Middle -->
 	<div class="footer-middle">
@@ -83,6 +84,7 @@
 		</div>
 	</div>
 	<!-- End Footer Bottom -->
+    </c:if>
 </footer>
 </c:if>
  <script src="assets/carrousel/js/owl.carousel.min.js"></script>
