@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Stock;
-import beans.User;
 import dao.DiscountDao;
 import dao.OrderDao;
 import dao.StockDao;
@@ -85,7 +84,7 @@ public class Dashboard extends HttpServlet {
 			}
 		}
 		
-		request.getRequestDispatcher("view/backOffice/dashboard.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/backOffice/dashboard.jsp").forward(request, response);
 	}
 
 	/**

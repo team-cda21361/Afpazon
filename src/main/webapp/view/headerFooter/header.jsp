@@ -29,7 +29,6 @@
 <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
 <link rel="stylesheet" href="./assets/css/main.css" />
-<link rel="stylesheet" href="./assets/css/backOffice.css" />
 <link rel="stylesheet" href="./assets/css/datatables.min.css" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -60,6 +59,7 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- /End Preloader -->
 		<!-- Start Header Area -->
 		<header class="header navbar-area">
@@ -397,6 +397,7 @@
 		<!--end Header backoffice -->
 
 	</c:if>
+
 	<c:if test="${currentUser.role.role == 'Admin' }">
 		<!--start Navbar -->
 		<nav class="navbar navbar-expand-lg bg-body-tertiary"

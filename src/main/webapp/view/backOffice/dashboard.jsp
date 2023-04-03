@@ -1,32 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Dashboard</title>
-</head>
-<body>
+<script src="./assets/js/backoffice.js"></script>
+
 	<div class="backContainer">
 		<!-- start user -->
-		<div class="d-flex justify-content-between dashBoardLine">
-			<div>
+		<div class="row ">
+			<div class="col-8">
 				<div class="d-flex justify-content-between">
 					<h4>Utilisateurs</h4>
-					<form class="d-flex" role="search" method="post">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search" name="userSearch">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
 				</div>
-				<div class ="tablePane" >
-					<table class="table table-bordered">
-						<thead class="12table-active">
+					<table class="table table-bordered tableManager">
+						<thead class="table-active">
 							<tr>
 								<th scope="col">Nom</th>
 								<th scope="col">Prenom</th>
 								<th scope="col">Email</th>
-								<th scope="col">R√¥le</th>
+								<th scope="col">RÙle</th>
 								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
@@ -39,20 +26,22 @@
 								<td><c:out value="${user.firstName }"></c:out></td>
 								<td><c:out value="${user.email }"></c:out></td>
 								<td><c:out value="${user.role.role }"></c:out></td>
-								<td>
+								<td class="text-center">
 
 								<c:if test="${user.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="25"></c:if>
 								<c:if test="${user.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
-								<td><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
-				</div>
+					<div>
+					<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+					</div>
 			</div>
-			<div>
+			<div class="col-4">
 				<c:if test="${not empty criticalStock }">
 					<div class="alert alert-danger" role="alert">
 						<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
@@ -63,24 +52,18 @@
 		<!-- end user -->
 		
 		<!-- start product -->
-		<div class="d-flex justify-content-between dashBoardLine">
-			<div>
+		<div class="row ">
+			<div class = col-6>
 				<div class="d-flex justify-content-between">
 					<h4>Produits</h4>
-					<form class="d-flex" role="search" method="post">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search" name="productSearch">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
 				</div>
-				<div class="tablePane">
-					<table class="table table-bordered">
+					<table class="table table-bordered tableManager">
 						<thead class="table-active">
 							<tr>
 								<th scope="col">Nom</th>
-								<th scope="col">r√©f√©rence</th>
+								<th scope="col">rÈfÈrence</th>
 								<th scope="col">Prix</th>
-								<th scope="col">Quantit√©</th>
+								<th scope="col">QuantitÈ</th>
 								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
@@ -93,36 +76,32 @@
 								<td><c:out value="${stock.product.reference }"></c:out></td>
 								<td><c:out value="${stock.product.price }"></c:out></td>
 								<td><c:out value="${stock.quantity }"></c:out></td>
-								<td>
+								<td class="text-center">
 								<c:if test="${stock.product.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="25"></c:if>
 								<c:if test="${stock.product.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
-								<td><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
+					<div>
+						<a href="stockManager"><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+					</div>
 				</div>
-			</div>
-			<!-- end product -->
+				<!-- end product -->
 			<!-- Start discount -->
-			<div>
+			<div class="col-5">
 				<div class="d-flex justify-content-between">
 					<h4>Promotion</h4>
-					<form class="d-flex" role="search" method="post">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search" name="discountSearch">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
 				</div>
-				<div class="tablePane">
-					<table class="table table-bordered">
+					<table class="table table-bordered tableManager">
 						<thead class="table-active">
 							<tr>
 								<th scope="col">Code voucher</th>
 								<th scope="col">Pourcentage</th>
-								<th scope="col">Date de d√©but</th>
+								<th scope="col">Date de dÈbut</th>
 								<th scope="col">Date de fin</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
@@ -135,29 +114,25 @@
 								<td><c:out value="${discount.percent }"></c:out></td>
 								<td><c:out value="${discount.startDate }"></c:out></td>
 								<td><c:out value="${discount.endDate }"></c:out></td>
-								<td><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
-				</div>
+					<div>
+						<a href=""><img alt="discountManagement" src="assets/images/back_office/plus.png" width="20"></a>
+					</div>
 			</div>
 		</div>
 	<!-- end discount -->
 	<!-- Start commande -->
-		<div class="d-flex justify-content-between dashBoardLine">
-			<div>
+		<div class="row ">
+			<div class="col-10">
 				<div class="d-flex justify-content-between">
 					<h4>Commande</h4>
-					<form class="d-flex" role="search" method="post">
-						<input class="form-control me-2" type="search"
-							placeholder="Search" aria-label="Search" name="orderSearch">
-						<button class="btn btn-outline-success" type="submit">Search</button>
-					</form>
 				</div>
-				<div class ="tablePane" >
-					<table class="table table-bordered">
+					<table class="table table-bordered tableManager">
 						<thead class="table-active">
 							<tr>
 								<th scope="col">id commmande</th>
@@ -175,20 +150,22 @@
 								<td><c:out value="${order.user.email }"></c:out></td>
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
-								<td><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
-				</div>
+					<div>
+						<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+					</div>
 			</div>
 		</div>
 		<!-- end order -->
 		
 				<!-- start  -->
-		<div class="d-flex justify-content-between dashBoardLine">
-			<div>
+		<div class="row dashBoardLine">
+			<div class="col-5">
 				<div class="d-flex justify-content-between">
 					<h4>F.A.Q.</h4>
 					<form class="d-flex" role="search">
@@ -201,10 +178,8 @@
 					<table class="table table-bordered">
 						<thead class="table-active">
 							<tr>
-								<th scope="col">Nom</th>
-								<th scope="col">r√©f√©rence</th>
-								<th scope="col">Prix</th>
-								<th scope="col">Quantit√©</th>
+								<th scope="col">Sujet</th>
+								<th scope="col">Date de crÈation</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
 							</tr>
@@ -214,10 +189,13 @@
 						</tbody>
 					</table>
 				</div>
+				<div>
+					<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+				</div>
 			</div>
 			<!-- end stock -->
 			<!-- Start discount -->
-			<div>
+			<div class="col-5">
 				<div class="d-flex justify-content-between">
 					<h4>Newsletter</h4>
 					<form class="d-flex" role="search">
@@ -230,10 +208,8 @@
 					<table class="table table-bordered">
 						<thead class="table-active">
 							<tr>
-								<th scope="col">Code voucher</th>
-								<th scope="col">Pourcentage</th>
-								<th scope="col">Date de d√©but</th>
-								<th scope="col">Date de fin</th>
+								<th scope="col">Titre</th>
+								<th scope="col">Date de crÈation </th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
 							</tr>
@@ -242,6 +218,9 @@
 						 
 						</tbody>
 					</table>
+				</div>
+				<div>
+					<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
 				</div>
 			</div>
 		</div>
