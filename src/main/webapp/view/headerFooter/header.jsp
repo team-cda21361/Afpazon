@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -39,6 +39,7 @@
 
 <body>
 <c:if test="${currentUser.role.role == 'Client' }">
+
 	<!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -111,14 +112,36 @@
 					</div>
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-end">
-							<div class="user">
-								<i class="lni lni-user"></i> Bonjour
+					
+			<c:if test="${empty utilisateur }">
+      			<div class="user">
+								<i class="lni lni-user"></i> Bonjour				
 							</div>
 							<ul class="user-login">
-								<li><a href="login.html">S'inscrire</a></li>
-								<li><a href="register.html">Se Connecter</a></li>
+								<li><a href="register">S'inscrire</a></li>
+								<li><a href="login">Se Connecter</a></li>
 							</ul>
 						</div>
+      		</c:if>
+	      	
+	      	<c:if test="${not empty utilisateur }">
+	      		
+	      		
+	      		<div class="user">
+								<a href="account" title="My Account"><i class="lni lni-user"></i> Bonjour <c:out value="${utilisateur.getFirstName() }"></c:out></a>,				
+							</div>
+							<ul class="user-login">
+								<li><a href="logout">Se deconnecter</a></li>
+							</ul>
+						</div>
+	      	</c:if>
+						
+					</div>
+				</div>
+				<div class="row align-items-center">
+					<div class="col-lg-3 col-md-3 col-7"></div>
+					<div class="col-lg-5 col-md-7 d-xs-none"></div>
+					<div class="col-lg-4 col-md-2 col-5">
 						<div class="middle-right-area col-lg-6">
 							<div class="nav-hotline"></div>
 							<div class="navbar-cart">
@@ -249,42 +272,7 @@
 		</div>
 		<!-- End Header Bottom -->
 	</header>
-	<!-- End Header Area -->
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Se connecter</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<form method="post" action="register" name="login">
-					<div class="modal-body">
-						<div class="mb-3 ">
-							<label class="form-label">Email</label> <input type="email" class="form-control" placeholder="Email" id="email" name="email">
-							<p class="errortitre error"></p>
-						</div>
-						<div class="mb-3 ">
-							<label class="form-label">Password</label> <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-							<p class="errorminplayer error"></p>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">Fermer</button>
-						<button type="submit" class="btn btn-primary">Se
-							connecter</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Modal FIN -->
-	
+	<!-- End Header Area -->	
 	<!-- Header Backoffice -->
 	</c:if>
 	<c:if test="${currentUser.role.role == 'Admin' }">
