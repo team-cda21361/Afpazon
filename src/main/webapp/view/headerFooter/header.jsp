@@ -11,6 +11,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
+<!-- ========================= CSS Carousel ========================= -->
+<link rel="stylesheet" href="assets/carrousel/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="assets/carrousel/css/owl.theme.default.min.carousel.css">
+<link rel="stylesheet" href="assets/carrousel/css/style.carousel.css">
+<script src="assets/carrousel/js/jquery.min.carousel.js"></script>
+<script src="assets/carrousel/js/bootstrap.min.js"></script>
+<script src="assets/carrousel/js/popper.carousel.js"></script>
+
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="./assets/css/LineIcons.3.0.css" />
@@ -55,14 +64,20 @@
 				<div class="row align-items-center">
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-middle">
+							<span>
+								<h3
+									style="display: inline-block; margin-right: 5px; color: #d29bd6;">Chez</h3>
+							</span>
 							<!-- Start Header Logo -->
 							<a class="navbar-brand" href="index.html"> <img
 								src="assets/images/logo/Amazon version_blc_logo.svg.png"
 								alt="Logo" style="float: left;">
 							</a>
 							<!-- End Header Logo -->
+							<span style="margin-left: 5px;"></span>
 						</div>
 					</div>
+
 					<div class="col-lg-4 col-md-4 col-12">
 						<!-- Start Main Menu Search -->
 						<div class="main-menu-search">
@@ -104,21 +119,14 @@
 								<li><a href="register.html">Se Connecter</a></li>
 							</ul>
 						</div>
-					</div>
-				</div>
-				<div class="row align-items-center">
-					<div class="col-lg-3 col-md-3 col-7"></div>
-					<div class="col-lg-5 col-md-7 d-xs-none"></div>
-					<div class="col-lg-4 col-md-2 col-5">
-						<div class="middle-right-area">
+						<div class="middle-right-area col-lg-6">
 							<div class="nav-hotline"></div>
 							<div class="navbar-cart">
 								<div class="wishlist"></div>
 								<div class="cart-items">
-									<!-- <a href="javascript:void(0)" class="main-btn"> <i -->
-									<a href="cart" class="main-btn"> <i
-										class="lni lni-cart"></i> <span class="total-items">2</span>
-									</a>
+									<a href="javascript:void(0)" class="main-btn"> 
+                    <i class="lni lni-cart"></i> <span class="total-items">2</span>
+                  </a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
@@ -131,14 +139,12 @@
 													<a class="cart-img" href="product-details.html"><img
 														src="assets/images/header/cart-items/item1.jpg" alt="#"></a>
 												</div>
-
 												<div class="content">
 													<h4>
 														<a href="product-details.html"> Apple Watch Series 6</a>
 													</h4>
-													<p class="quantity">
-														1x - <span class="amount">$99.00</span>
-													</p>
+													<p class="quantity">1x</p>
+													<p class="price">$399.99</p>
 												</div></li>
 											<li><a href="javascript:void(0)" class="remove"
 												title="Remove this item"><i class="lni lni-close"></i></a>
@@ -148,11 +154,11 @@
 												</div>
 												<div class="content">
 													<h4>
-														<a href="product-details.html">Wi-Fi Smart Camera</a>
+														<a href="product-details.html">Beats Solo3 Wireless
+															On-Ear Headphones</a>
 													</h4>
-													<p class="quantity">
-														1x - <span class="amount">$35.00</span>
-													</p>
+													<p class="quantity">1x</p>
+													<p class="price">$199.95</p>
 												</div></li>
 										</ul>
 										<div class="bottom">
@@ -162,6 +168,7 @@
 											<div class="button">
 												<a href="cart" class="btn animate">Checkout</a>
 											</div>
+											<a href="checkout.html" class="btn animate">Checkout</a>
 										</div>
 									</div>
 									<!--/ End Shopping Item -->
@@ -170,19 +177,14 @@
 						</div>
 					</div>
 				</div>
+				<h2 style="color: #d29bd6;"> on vend tous ici pour
+					votre plus grand plaisir !</h2>
 			</div>
 		</div>
-		<!-- End Header Middle -->
-
 		<!-- End Topbar -->
-
-		<!-- End Topbar -->
-
-		<!-- Start Header Middle -->
 
 		<!-- Start Header Bottom -->
 		<div class="container">
-		<h2>"Chez AFPazon, on vend tous ici pour votre plus grand plaisir !"</h2>
 			<div class="row align-items-center">
 				<div class="col-lg-8 col-md-6 col-12">
 					<div class="nav-inner">
@@ -230,6 +232,7 @@
 						<!-- End Navbar -->
 					</div>
 				</div>
+
 				<div class="col-lg-4 col-md-6 col-12">
 					<!-- Start Nav Social -->
 					<div class="nav-social">
@@ -237,16 +240,11 @@
 						<ul>
 							<li><a href="javascript:void(0)"><i
 									class="lni lni-facebook-filled"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-twitter-original"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-instagram"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-skype"></i></a></li>
 						</ul>
 					</div>
 					<!-- End Nav Social -->
 				</div>
+
 			</div>
 		</div>
 		<!-- End Header Bottom -->

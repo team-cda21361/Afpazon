@@ -54,15 +54,28 @@
 								</ul>
 							</div>
 							<!-- End Single Widget -->
-
-<footer class="footer">
 	<!-- Start Footer  -->
-	<!-- End Footer Top -->
+<footer class="footer">
 	<!-- Start Footer Middle -->
 	<div class="footer-middle">
 		<div class="container">
 			<div class="bottom-inner">
 				<div class="row">
+				<div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-contact">
+                                <h3>Get In Touch With Us</h3>
+                                <p class="phone">Phone: +1 (900) 33 169 7720</p>
+                                <ul>
+                                    <li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
+                                    <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
+                                </ul>
+                                <p class="mail">
+                                    <a href="mailto:support@shopgrids.com">support@shopgrids.com</a>
+                                </p>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
 					<div class="col-md-6 col-12">
 						<!-- Single Widget -->
 						<div class="single-footer f-contact">
@@ -76,6 +89,18 @@
 						</div>
 						<!-- End Single Widget -->
 					</div>
+					<div class="col-lg-3 col-md-6 col-12">
+                            <!-- Single Widget -->
+                            <div class="single-footer f-link">
+                                <h3>Information</h3>
+                                <ul>
+                                    <li><a href="javascript:void(0)">About Us</a></li>
+                                    <li><a href="javascript:void(0)">Contact Us</a></li>
+                                    <li><a href="javascript:void(0)">FAQs Page</a></li>
+                                </ul>
+                            </div>
+                            <!-- End Single Widget -->
+                        </div>
 				</div>
 			</div>
 		</div>
@@ -106,18 +131,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- End Footer Bottom -->
-	</footer>
-	<!-- <footer class="py-3 my-4">
-   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="index" class="nav-link px-2 text-muted">Accueil</a></li>
-      <li class="nav-item"><a href="player" class="nav-link px-2 text-muted">Players</a></li>
-      <li class="nav-item"><a href="game" class="nav-link px-2 text-muted">Game</a></li>
-      <li class="nav-item"><a href="association" class="nav-link px-2 text-muted">Resulta</a></li>
-    </ul>
-    <p class="text-center text-muted">� 2023 Scoreboard , Inc</p>
-  </footer> -->
-</c:if>
+ <script src="assets/carrousel/js/owl.carousel.min.js"></script>
+ <script src="assets/carrousel/js/main.carousel.js"></script>
 </body>
 </html>
