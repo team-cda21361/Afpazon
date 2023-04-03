@@ -1,118 +1,6 @@
 /*======================================
     Variables
 ========================================*/
-/* caroussel */
-
-.col-center {
-	margin: 0 auto;
-	float: none !important;
-}
-
-.carousel {
-	margin: 30px auto 60px;
-	padding: 0 80px;
-}
-
-.carousel .item {
-	text-align: center;
-	overflow: hidden;
-}
-
-.carousel .item h4 {
-	font-family: 'Varela Round', sans-serif;
-}
-
-.carousel .item img {
-	max-width: 203px;
-	display: inline-block;
-	margin-left: 40px;
-}
-
-.carousel .item .btn {
-	border-radius: 0;
-	font-size: 12px;
-	text-transform: uppercase;
-	font-weight: bold;
-	border: none;
-	background: #0000a0;
-	padding: 6px 15px;
-	margin-top: 5px;
-}
-
-.carousel .item .btn:hover {
-	background: #8c5bff;
-}
-
-.carousel .item .btn i {
-	font-size: 14px;
-	font-weight: bold;
-	margin-left: 5px;
-}
-
-.carousel .thumb-wrapper {
-	margin: 5px;
-	text-align: left;
-	background: #f8f5f5;
-	box-shadow: 0px 2px 2px rgb(11 35 107 / 90%);;
-}
-
-.carousel .thumb-content {
-	padding: 15px;
-	font-size: 13px;
-}
-
-.carousel .carousel-control {
-	height: 44px;
-	width: 44px;
-	background: none;
-	margin: auto 0;
-	border-radius: 50%;
-	border: 3px solid rgb(6 0 157);;
-}
-
-.carousel .carousel-control i {
-	font-size: 36px;
-	position: absolute;
-	top: 50%;
-	display: inline-block;
-	margin: -19px 0 0 0;
-	z-index: 5;
-	left: 0;
-	right: 0;
-	color: rgb(94 12 208 / 80%);;
-	text-shadow: none;
-	font-weight: bold;
-}
-
-.carousel .carousel-control.left i {
-	margin-left: -3px;
-}
-
-.carousel .carousel-control.right i {
-	margin-right: -3px;
-}
-
-.carousel .carousel-indicators {
-	bottom: -50px;
-}
-
-.carousel-indicators li, .carousel-indicators li.active {
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	margin: 4px;
-	border-color: transparent;
-}
-
-.carousel-indicators li {
-	background: #ff8000;
-}
-
-.carousel-indicators li.active {
-	background: #8080ff;
-}
-/*  fin de carrouselle */
-
 /*======================================
     Normalize CSS
 ========================================*/
@@ -4724,7 +4612,7 @@ ul, ol {
 	line-height: 24px;
 }
 
-.footer .single-footer h3::before {
+/* .footer .single-footer h3::before {
 	display: block;
 	position: absolute;
 	bottom: -2px;
@@ -4733,7 +4621,7 @@ ul, ol {
 	height: 3px;
 	background-color: #0167F3;
 	content: '';
-}
+} */
 
 @media ( max-width : 767px) {
 	.footer .single-footer h3::before {
