@@ -4867,3 +4867,17 @@ ul, ol {
 		display: none;
 	}
 }
+/*Style Back office
+*/
+.backContainer{
+	width:95%;
+	margin:auto;
+}
+.dashBoardLine{
+	overflow: hidden;
+	height:30vh;
+}
+.tablePane{
+	overflow: scroll;
+	height:87%;
+}
