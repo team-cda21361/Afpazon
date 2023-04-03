@@ -1,4 +1,5 @@
-<!--<c:if test="">
+<c:if test="${currentUser.role.role == 'Client' }">
+	<!-- Start Footer Area -->
 	<footer class="footer">
 		<div class="footer-middle">
 			<div class="container">
@@ -130,9 +131,7 @@
 					</div>
 				</div>
 			</div>
-<!--</c:if>-->
-</footer>
  <script src="assets/carrousel/js/owl.carousel.min.js"></script>
-    <script src="assets/carrousel/js/main.carousel.js"></script>
+ <script src="assets/carrousel/js/main.carousel.js"></script>
 </body>
 </html>
