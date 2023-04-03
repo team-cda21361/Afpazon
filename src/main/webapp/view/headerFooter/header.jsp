@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<c:if test="">
+
 	<!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -280,4 +280,3 @@
 		</div>
 	</div>
 	<!-- Modal FIN -->
-	</c:if>

@@ -1,4 +1,3 @@
-<!--<c:if test="">
 	<footer class="footer">
 		<div class="footer-middle">
 			<div class="container">
@@ -105,7 +104,17 @@
 					</div>
 				</div>
 			</div>
-<!--</c:if>-->
-</footer>
+		</div>
+		<!-- End Footer Bottom -->
+	</footer>
+	<!-- <footer class="py-3 my-4">
+   <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="index" class="nav-link px-2 text-muted">Accueil</a></li>
+      <li class="nav-item"><a href="player" class="nav-link px-2 text-muted">Players</a></li>
+      <li class="nav-item"><a href="game" class="nav-link px-2 text-muted">Game</a></li>
+      <li class="nav-item"><a href="association" class="nav-link px-2 text-muted">Resulta</a></li>
+    </ul>
+    <p class="text-center text-muted">� 2023 Scoreboard , Inc</p>
+  </footer> -->
 </body>
 </html>
