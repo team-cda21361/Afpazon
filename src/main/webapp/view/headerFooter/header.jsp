@@ -12,16 +12,19 @@
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
 <!-- ========================= CSS here ========================= -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
-<link rel="stylesheet" href="assets/css/tiny-slider.css" />
-<link rel="stylesheet" href="assets/css/glightbox.min.css" />
-<link rel="stylesheet" href="assets/css/main.css" />
-<link rel="stylesheet" href="assets/css/backOffice.css" />
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="./assets/css/LineIcons.3.0.css" />
+<link rel="stylesheet" href="./assets/css/tiny-slider.css" />
+<link rel="stylesheet" href="./assets/css/glightbox.min.css" />
+<link rel="stylesheet" href="./assets/css/main.css" />
+<link rel="stylesheet" href="./assets/css/backOffice.css" />
+<link rel="stylesheet" href="./assets/css/datatables.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script defer src="assets/js/bootstrap.min.js"></script>
 <script defer src="assets/js/tiny-slider.js"></script>
 <script defer src="assets/js/glightbox.min.js"></script>
+<script type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./assets/js/datatables.min.js"></script>
 <script defer src="assets/js/main.js"></script>
 </head>
 
