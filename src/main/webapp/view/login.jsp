@@ -1,4 +1,5 @@
-<script type="text/javascript" src="./assets/js/register.js"></script>
+<script defer type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./assets/js/validation.js"></script>
 <br>
 <section>
 
