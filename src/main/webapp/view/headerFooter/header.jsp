@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -42,6 +44,7 @@
 <body>
 	<c:if test="${currentUser.role.role == 'Client' }">
 		<!--[if lte IE 9]>
+
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
         <a href="https://browsehappy.com/">upgrade your browser</a> to improve
@@ -111,6 +114,7 @@
 							</div>
 							<!-- End Main Menu Search -->
 						</div>
+
 						<div class="col-lg-4 col-md-4 col-4">
 							<div class="top-end">
 								<div class="user">
@@ -166,6 +170,61 @@
 											<div class="bottom">
 												<div class="total">
 													<span>Total</span> <span class="total-amount">$134.00</span>
+
+						<!-- End Main Menu Search -->
+					</div>
+					<div class="col-lg-4 col-md-4 col-12">
+						<div class="top-end">
+					
+			<c:if test="${empty utilisateur }">
+      			<div class="user">
+								<i class="lni lni-user"></i> Bonjour				
+							</div>
+							<ul class="user-login">
+								<li><a href="register">S'inscrire</a></li>
+								<li><a href="login">Se Connecter</a></li>
+							</ul>
+						</div>
+      		</c:if>
+	      	
+	      	<c:if test="${not empty utilisateur }">
+	      		
+	      		
+	      		<div class="user">
+								<a href="account" title="My Account"><i class="lni lni-user"></i> Bonjour <c:out value="${utilisateur.getFirstName() }"></c:out></a>,				
+							</div>
+							<ul class="user-login">
+								<li><a href="logout">Se deconnecter</a></li>
+							</ul>
+						</div>
+	      	</c:if>
+						
+					</div>
+				</div>
+				<div class="row align-items-center">
+					<div class="col-lg-3 col-md-3 col-7"></div>
+					<div class="col-lg-5 col-md-7 d-xs-none"></div>
+					<div class="col-lg-4 col-md-2 col-5">
+						<div class="middle-right-area col-lg-6">
+							<div class="nav-hotline"></div>
+							<div class="navbar-cart">
+								<div class="wishlist"></div>
+								<div class="cart-items">
+									<a href="javascript:void(0)" class="main-btn"> 
+                    <i class="lni lni-cart"></i> <span class="total-items">2</span>
+                  </a>
+									<!-- Shopping Item -->
+									<div class="shopping-item">
+										<div class="dropdown-cart-header">
+											<span>2 Items</span> <a href="cart">View Cart</a>
+										</div>
+										<ul class="shopping-list">
+											<li><a href="javascript:void(0)" class="remove"
+												title="Remove this item"><i class="lni lni-close"></i></a>
+												<div class="cart-img-head">
+													<a class="cart-img" href="product-details.html"><img
+														src="assets/images/header/cart-items/item1.jpg" alt="#"></a>
+
 												</div>
 												<div class="button">
 													<a href="cart" class="btn animate">Checkout</a>
@@ -247,6 +306,7 @@
 						<!-- End Nav Social -->
 					</div>
 
+
 				</div>
 			</div>
 			<!-- End Header Bottom -->
@@ -293,6 +353,14 @@
 		<!-- Modal FIN -->
 
 		<!-- Header Backoffice -->
+
+			</div>
+		</div>
+		<!-- End Header Bottom -->
+	</header>
+	<!-- End Header Area -->	
+	<!-- Header Backoffice -->
+
 	</c:if>
 	<c:if test="${currentUser.role.role == 'Admin' }">
 		<!--start Navbar -->
