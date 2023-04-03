@@ -63,7 +63,7 @@ public class OrderDao implements IDAO<Order> {
 				addtype.setId(2);	
 				Status status = new Status(rs.getString("status"));
 				Address address = new Address(rs.getInt("addressId"), rs.getString("address"), rs.getInt("zipCode"),rs.getString("city"),user,addtype);
-				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address,status) );
+				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address,address,status) );
 			
 			}
 
@@ -98,7 +98,7 @@ public class OrderDao implements IDAO<Order> {
 		try {
 			sql = connect
 					.prepareStatement("select *, u.id as userId, o.id as orderId, a.id as addressId from order_list o inner join user u on u.id=o.id_user "
-							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s "
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address_ledger a1 ON o.id_address_delivery = a1.id INNER JOIN address_ledger a2 ON o.id_address_billing = a2.id INNER JOIN status s "
 							+ "ON s.id = o.id_status WHERE CONCAT(email, ' ', status) LIKE ? ORDER BY dateOrder DESC");
 			sql.setString(1, "%"+ search +"%");
 			rs = sql.executeQuery();
@@ -110,8 +110,9 @@ public class OrderDao implements IDAO<Order> {
 						new Role(rs.getInt("id_role"), rs.getString("role")));
 				addtype.setId(2);	
 				Status status = new Status(rs.getString("status"));
-				Address address = new Address(rs.getInt("addressId"), rs.getString("address"), rs.getInt("zipCode"),rs.getString("city"),user,addtype);
-				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address,status) );
+				Address address1 = new Address(rs.getInt("a1.addressId"), rs.getString("a1.address"), rs.getInt("a1.zipCode"),rs.getString("a1.city"),user,addtype);
+				Address address2 = new Address(rs.getInt("a2.addressId"), rs.getString("a2.address"), rs.getInt("a2.zipCode"),rs.getString("a2.city"),user,addtype);
+				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address1,address2,status) );
 			
 			}
 

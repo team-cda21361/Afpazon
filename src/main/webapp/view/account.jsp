@@ -3,8 +3,8 @@
 <section class="container-account">
 	<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
 	
-	<div>Compte <c:out value="${fn:toLowerCase(currentUser.role.role)}" />, identifiant <c:out value="${currentUser.id}" />, créé le <fmt:formatDate type="date" value="${currentUser.registrationDate}" /></div>
-	<div id="accountNav">
+	<div>Compte <c:out value="${fn:toLowerCase(currentUser2.role.role)}" />, identifiant <c:out value="${currentUser2.id}" />, créé le <fmt:formatDate type="date" value="${currentUser2.registrationDate}" /></div>
+	<div id="accountNav" class="sticky-top">
 		<a class="btn btn-primary" href="#accountOrders" role="button"><i class="bi bi-box-seam"></i> Commandes</a>
 		<a class="btn btn-primary" href="#accountInfo" role="button"><i class="bi bi-person-badge"></i> Infos</a>
 		<a class="btn btn-primary" href="#accountPassword" role="button"><i class="bi bi-three-dots"></i> Mot de passe</a>
@@ -92,11 +92,11 @@
 				</div>
 				<div class="col">
 					<label for="newPwd" class="form-label">Nouveau</label>
-					<input type="password" class="form-control col-5" id="newPwd" name="newPwd">
+					<input type="password" class="form-control" id="newPwd" name="newPwd">
 				</div>
 				<div class="col">
 					<label for="confPwd" class="form-label">Confirmation</label>
-					<input type="password" class="form-control col-5" id="confPwd" name="confPwd">
+					<input type="password" class="form-control" id="confPwd" name="confPwd">
 				</div>
 			</div>
 		</div>
@@ -203,7 +203,7 @@
 					<p id="orderBillingZipCodeAndCity"></p>
 				</div>
 				<div class="col">
-					<h5>Informations de commande</h5>
+					<h5>Informations</h5>
 					<p>Total payé : <span id="orderTotalPrice"></span>&euro;</p>
 					<p>Etat : <span id="orderState"></span></p>
 					<c:if test="${not empty orderSelected.trackingNumber}">
@@ -214,8 +214,7 @@
 		</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
@@ -238,10 +237,10 @@
 
 <script type="text/javascript">
 	$(window).on('load', function() {
-			$('#userTitle').val("${currentUser.gender}");
-			$('#userLastName').val("${currentUser.lastName}");
-			$('#userFirstName').val("${currentUser.firstName}");
-			$('#userEmail').val("${currentUser.email}");
-			$('#userPhone').val("${currentUser.phone}");
+			$('#userTitle').val("${currentUser2.gender}");
+			$('#userLastName').val("${currentUser2.lastName}");
+			$('#userFirstName').val("${currentUser2.firstName}");
+			$('#userEmail').val("${currentUser2.email}");
+			$('#userPhone').val("${currentUser2.phone}");
 	});
 </script>
