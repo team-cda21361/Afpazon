@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 
 		if (user != null) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("utilisateur", user);
+			session.setAttribute("currentUser", user);
 			System.out.println("Connexion ok!!");
 		} else {
 			request.setAttribute("error", "Oups ! login ou mot de passe incorrect");

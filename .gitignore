@@ -2,6 +2,12 @@
 *.DS_Store
 **/.DS_Store
 
+# Dossier .settings
+/.settings/
+
+# Fichier classpath
+*.classpath
+
 # Compiled class file
 *.class
 
