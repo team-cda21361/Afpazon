@@ -10,24 +10,26 @@ public class Order {
 	private String trackingNumber;
 	private User user;
 	private Address address_delivery;
+	private Address address_billing;
 	private Status status;
 	
 	public Order() {
 	}
 	
 	public Order(Date date, Float totalPrice, String paymentToken, String trackingNumber, User user,
-			Address address_delivery, Status status) {
+			Address address_delivery, Address address_billing, Status status) {
 		this.date = date;
 		this.totalPrice = totalPrice;
 		this.paymentToken = paymentToken;
 		this.trackingNumber = trackingNumber;
 		this.user = user;
 		this.address_delivery = address_delivery;
+		this.address_billing = address_billing;
 		this.status = status;
 	}
 	
 	public Order(int id, Date date, Float totalPrice, String paymentToken, String trackingNumber, User user,
-			Address address_delivery, Status status) {
+			Address address_delivery, Address address_billing, Status status) {
 		this.id = id;
 		this.date = date;
 		this.totalPrice = totalPrice;
@@ -35,6 +37,7 @@ public class Order {
 		this.trackingNumber = trackingNumber;
 		this.user = user;
 		this.address_delivery = address_delivery;
+		this.address_billing = address_billing;
 		this.status = status;
 	}
 
@@ -92,6 +95,14 @@ public class Order {
 
 	public void setAddress_delivery(Address address_delivery) {
 		this.address_delivery = address_delivery;
+	}
+
+	public Address getAddress_billing() {
+		return address_billing;
+	}
+	
+	public void setAddress_billing(Address address_billing) {
+		this.address_billing = address_billing;
 	}
 
 	public Status getStatus() {

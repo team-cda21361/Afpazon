@@ -1,4 +1,5 @@
-	<!-- Start Footer  -->
+<c:if test="${currentUser.role.role == 'Client' }">
+<!-- Start Footer  -->
 <c:if test="${currentUser.role.role == 'Client' }">
 <footer class="footer">
 	<!-- Start Footer Middle -->
@@ -25,12 +26,12 @@
 						<!-- Single Widget -->
 						<div class="single-footer f-contact">
 							<h3>AfpaZon|Spear</h3>
-							<p>Afpazon est une entreprise de commerce en ligne française
-								basée à Paris. Elle est l'un des géants du Web. Créée par le
-								groupe SPEAR en Mars 2022, son siège social est situé à rue
-								politzer à Paris. La Société Afpazon est spécialisée dans la
-								vente de produits avec une philosophie très simple « On vend
-								tout »</p>
+							<p>Afpazon est une entreprise de commerce en ligne franï¿½aise
+								basï¿½e ï¿½ Paris. Elle est l'un des gï¿½ants du Web. Crï¿½ï¿½e par le
+								groupe SPEAR en Mars 2022, son siï¿½ge social est situï¿½ ï¿½ rue
+								politzer ï¿½ Paris. La Sociï¿½tï¿½ Afpazon est spï¿½cialisï¿½e dans la
+								vente de produits avec une philosophie trï¿½s simple ï¿½ On vend
+								tout ï¿½</p>
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -85,6 +86,7 @@
 	<!-- End Footer Bottom -->
     </c:if>
 </footer>
+</c:if>
  <script src="assets/carrousel/js/owl.carousel.min.js"></script>
     <script src="assets/carrousel/js/main.carousel.js"></script>
 </body>

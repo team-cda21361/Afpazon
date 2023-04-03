@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/view/register.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 	}
 
 	/**
@@ -41,25 +41,30 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//String email = request.getParameter("email");
-		//String password = request.getParameter("password");
-		 String email = "segardmarc@toto.fr";
-		 String password= "marc";
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 		
-		
+		System.out.println("email: "+email);
+		System.out.println("password: "+password);
 
 		UserDao userDao = new UserDao();
 		User user = userDao.login(email,password);
+
 		// System.out.println(user.getNom());
 
 		if (user != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("currentUser", user);
 			System.out.println("Connexion ok!!");
+			request.getRequestDispatcher("view/index.jsp").forward(request,response);
+			return;
 		} else {
-			request.setAttribute("error", "Oups ! login ou mot de passe incorrect");
+	      	request.setAttribute("msn", "L'email ou le mot de passe n'est pas correct.");
+			request.setAttribute("msnType",  "KO");
+			request.getRequestDispatcher("view/login.jsp").forward(request,response);
 		}
 
-		response.sendRedirect(request.getHeader("referer"));
+		//response.sendRedirect(request.getHeader("referer"));
+		doGet(request, response);
 	}
 }
