@@ -279,7 +279,51 @@
 			</div>
 		</div>
 	</div>
+
+
 	<!-- Modal FIN -->
+	
+	<!-- Header Backoffice -->
+	</c:if>
+	<c:if test="${currentUser.role.role == 'Admin' }">
+	<!--start Navbar -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background: #F113DB">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active"
+							aria-current="page" href="dashboard">
+							<img alt="dashboard image" src="assets/images/back_office/logo.png" width="55">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img alt="" src="assets/images/back_office/Catalogue.png" width="60">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="stockManager"> 
+							<img alt="" src="assets/images/back_office/Stock.png" width="45">
+						</a>
+					</li>
+				</ul>
+				<a class=" d-flex nav-link" href="#"> <img alt=""
+					src="assets/images/back_office/logBack.png" width="60">
+				</a>
+			</div>
+		</div>
+	</nav>
+<!--end Header backoffice -->
+
 	</c:if>
 	<c:if test="${currentUser.role.role == 'Admin' }">
 	<!--start Navbar -->
