@@ -114,7 +114,6 @@ h1 {
 
 h2 {
 	font-size: 40px;
-	margin-left: 27%;
 }
 
 h3 {
@@ -1032,7 +1031,7 @@ ul, ol {
 	margin-bottom: 20px;
 	position: relative;
 }
-
+/* gere lezs titre  */
 .section-title h2::before {
 	position: absolute;
 	left: 50%;
@@ -1503,7 +1502,7 @@ ul, ol {
 }
 
 .header .topbar .top-end {
-	float: right;
+	/* float: right; */
 	display: inline-block;
 }
 
@@ -1563,7 +1562,7 @@ ul, ol {
 	color: #0167F3;
 }
 
-.header .header-middle {
+/* .header .header-middle {
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -1575,7 +1574,7 @@ ul, ol {
 	align-items: center;
 	padding: 25px 0;
 	border-bottom: 1px solid #eee;
-}
+} */
 
 @media ( max-width : 767px) {
 	.header .header-middle .d-xs-none {
@@ -4565,15 +4564,15 @@ ul, ol {
 	}
 }
 
-.footer .footer-middle .newsletter-form input {
+/* .footer .footer-middle .newsletter-form input {
 	width: 100%;
 	border-radius: 4px;
 	padding: 0px 20px;
 	height: 50px;
 	border: 1px solid #eee;
-}
+} */
 
-.footer .footer-middle .newsletter-form .button {
+/*. footer .footer-middle .newsletter-form .button {
 	margin-top: 12px;
 }
 
@@ -4586,7 +4585,7 @@ ul, ol {
 	background-color: #0167F3;
 	color: #fff;
 }
-
+ */
 .footer .footer-middle .newsletter-form p {
 	color: #888;
 	margin-top: 20px;
@@ -4678,7 +4677,7 @@ ul, ol {
 .footer .single-footer.f-contact ul li span {
 	color: #d6d6d6;
 }
-
+/* 
 .footer .single-footer.f-contact .mail a {
 	color: #d6d6d6;
 }
@@ -4694,9 +4693,9 @@ ul, ol {
 
 .footer .single-footer.our-app .app-btn li:last-child {
 	margin-bottom: 0;
-}
+} */
 
-.footer .single-footer.our-app .app-btn li span {
+/* .footer .single-footer.our-app .app-btn li span {
 	display: block !important;
 }
 
@@ -4738,7 +4737,7 @@ ul, ol {
 	color: #fff;
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
-}
+} */
 
 .footer .single-footer.our-app .app-btn li a:hover {
 	background-color: #0167F3;
