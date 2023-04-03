@@ -12,7 +12,8 @@
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
 <!-- ========================= CSS here ========================= -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="assets/css/bootstrap.min.css" /> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
 <link rel="stylesheet" href="assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="assets/css/glightbox.min.css" />
@@ -112,13 +113,14 @@
 							<div class="navbar-cart">
 								<div class="wishlist"></div>
 								<div class="cart-items">
-									<a href="javascript:void(0)" class="main-btn"> <i
+									<!-- <a href="javascript:void(0)" class="main-btn"> <i -->
+									<a href="cart" class="main-btn"> <i
 										class="lni lni-cart"></i> <span class="total-items">2</span>
 									</a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
-											<span>2 Items</span> <a href="cart.html">View Cart</a>
+											<span>2 Items</span> <a href="cart">View Cart</a>
 										</div>
 										<ul class="shopping-list">
 											<li><a href="javascript:void(0)" class="remove"
@@ -156,7 +158,7 @@
 												<span>Total</span> <span class="total-amount">$134.00</span>
 											</div>
 											<div class="button">
-												<a href="checkout.html" class="btn animate">Checkout</a>
+												<a href="cart" class="btn animate">Checkout</a>
 											</div>
 										</div>
 									</div>
