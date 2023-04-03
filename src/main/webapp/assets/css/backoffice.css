@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/*Style Back office
+*/
+.backTitle{	
+	text-align:center;
+	margin-bottom:8%;
+}
+.backContainer{
+	width:95%;
+	margin:auto;
+}
+
+

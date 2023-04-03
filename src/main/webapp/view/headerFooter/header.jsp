@@ -26,7 +26,6 @@
 <link rel="stylesheet" href="./assets/css/tiny-slider.css" />
 <link rel="stylesheet" href="./assets/css/glightbox.min.css" />
 <link rel="stylesheet" href="./assets/css/main.css" />
-<link rel="stylesheet" href="./assets/css/backOffice.css" />
 <link rel="stylesheet" href="./assets/css/datatables.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <script defer src="assets/js/bootstrap.min.js"></script>
@@ -65,8 +64,7 @@
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-middle">
 							<span>
-								<h3
-									style="display: inline-block; margin-right: 5px; color: #d29bd6;">Chez</h3>
+								<h3 style="display: inline-block; margin-right: 5px; color: #d29bd6;">Chez</h3>
 							</span>
 							<!-- Start Header Logo -->
 							<a class="navbar-brand" href="index.html"> <img
@@ -115,8 +113,8 @@
 								<i class="lni lni-user"></i> Bonjour
 							</div>
 							<ul class="user-login">
-								<li><a href="login.html">S'inscrire</a></li>
-								<li><a href="register.html">Se Connecter</a></li>
+								<li><a href="login">S'inscrire</a></li>
+								<li><a href="register">Se Connecter</a></li>
 							</ul>
 						</div>
 						<div class="middle-right-area col-lg-6">
@@ -326,36 +324,4 @@
 	</nav>
 <!--end Header backoffice -->
 
-	</c:if>
-	<c:if test="${currentUser.role.role == 'Admin' }">
-	<!--start Navbar -->
-	<nav class="navbar navbar-expand-lg bg-body-tertiary"
-		style="background: #F113DB">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#"></a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="dashboard"><img alt="dashboard image"
-							src="assets/images/back_office/logo.png" width="55"></a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><img
-							alt="" src="assets/images/back_office/Catalogue.png" width="60"></a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="#"> <img
-							alt="" src="assets/images/back_office/Stock.png" width="45">
-					</a></li>
-				</ul>
-				<a class=" d-flex nav-link" href="#"> <img alt=""
-					src="assets/images/back_office/logBack.png" width="60">
-				</a>
-			</div>
-		</div>
-	</nav>
-<!--end Navbar -->
 	</c:if>
