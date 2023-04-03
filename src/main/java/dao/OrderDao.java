@@ -52,7 +52,7 @@ public class OrderDao implements IDAO<Order> {
 		try {
 			sql = connect
 					.prepareStatement("select *, u.id as userId, o.id as orderId, a.id as addressId from order_list o inner join user u on u.id=o.id_user "
-							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s ON s.id = o.id_status");
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s ON s.id = o.id_status ORDER BY dateOrder DESC");
 			rs = sql.executeQuery();
 
 			while (rs.next()) {
@@ -99,7 +99,7 @@ public class OrderDao implements IDAO<Order> {
 			sql = connect
 					.prepareStatement("select *, u.id as userId, o.id as orderId, a.id as addressId from order_list o inner join user u on u.id=o.id_user "
 							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s "
-							+ "ON s.id = o.id_status WHERE CONCAT(email, ' ', status) LIKE ?");
+							+ "ON s.id = o.id_status WHERE CONCAT(email, ' ', status) LIKE ? ORDER BY dateOrder DESC");
 			sql.setString(1, "%"+ search +"%");
 			rs = sql.executeQuery();
 

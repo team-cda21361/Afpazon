@@ -1,3 +1,5 @@
+<c:if test="${currentUser.role.role == 'Client' }">
+	<!-- Start Footer Area -->
 	<footer class="footer">
 		<div class="footer-middle">
 			<div class="container">
@@ -116,5 +118,6 @@
     </ul>
     <p class="text-center text-muted">� 2023 Scoreboard , Inc</p>
   </footer> -->
+</c:if>
 </body>
 </html>
