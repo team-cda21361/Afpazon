@@ -51,7 +51,7 @@ public class Account extends HttpServlet {
 		request.setAttribute("ordersList", ordersList);
 		
 		request.setAttribute("showOrderID", request.getParameter("showOrderID"));
-		request.setAttribute("orderSelected", new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Status(1, "Commande validée")));
+		request.setAttribute("orderSelected", new Order(17482, java.sql.Date.valueOf("2023-04-07"), (float) 148.59, "", "6F4564654456", new User(), new Address("5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type(2, "livraison")), new Status(1, "Commande validée")));
 		
 		request.getRequestDispatcher("/view/account.jsp").forward(request,response);
 	}

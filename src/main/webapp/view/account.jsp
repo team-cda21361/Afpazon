@@ -205,8 +205,12 @@
 					<p id="orderBillingZipCodeAndCity"></p>
 				</div>
 				<div class="col">
-					<label for="confPwd" class="form-label">Confirmation</label>
-					<input type="password" class="form-control col-5" id="confPwd" name="confPwd">
+					<h5>Informations de commande</h5>
+					<p>Total payé : <span id="orderTotalPrice"></span>&euro;</p>
+					<p>Etat : <span id="orderState"></span></p>
+					<c:if test="${not empty orderSelected.trackingNumber}">
+						<p>Suivi : <span id="orderTrackingNumber"></span></p>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -226,6 +230,9 @@
 			$('#orderZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
 			$('#orderBillingAddress').html("${orderSelected.address_delivery.address},");
 			$('#orderBillingZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
+			$('#orderTotalPrice').html("${orderSelected.totalPrice}");
+			$('#orderState').html("${orderSelected.status.status}");
+			$('#orderTrackingNumber').html("${orderSelected.trackingNumber}");
 			$('#orderDetailModal').modal('show');
 		});
 	</script>
