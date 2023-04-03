@@ -302,6 +302,8 @@
 	</div>
 
 	<!-- Modal FIN -->
+	
+	<!-- Header Backoffice -->
 	</c:if>
 	<c:if test="${currentUser.role.role == 'Admin' }">
 	<!--start Navbar -->
@@ -317,15 +319,22 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="dashboard"><img alt="dashboard image"
-							src="assets/images/back_office/logo.png" width="55"></a></li>
-					<li class="nav-item"><a class="nav-link" href="#"><img
-							alt="" src="assets/images/back_office/Catalogue.png" width="60"></a>
+					<li class="nav-item">
+						<a class="nav-link active"
+							aria-current="page" href="dashboard">
+							<img alt="dashboard image" src="assets/images/back_office/logo.png" width="55">
+						</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#"> <img
-							alt="" src="assets/images/back_office/Stock.png" width="45">
-					</a></li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img alt="" src="assets/images/back_office/Catalogue.png" width="60">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="stockManager"> 
+							<img alt="" src="assets/images/back_office/Stock.png" width="45">
+						</a>
+					</li>
 				</ul>
 				<a class=" d-flex nav-link" href="#"> <img alt=""
 					src="assets/images/back_office/logBack.png" width="60">
@@ -333,5 +342,5 @@
 			</div>
 		</div>
 	</nav>
-<!--end Navbar -->
+<!--end Header backoffice -->
 	</c:if>
