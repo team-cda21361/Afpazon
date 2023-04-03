@@ -28,6 +28,12 @@ DROP TABLE IF EXISTS address_type;
 CREATE TABLE address_type (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 type VARCHAR(15));
 
+DROP TABLE IF EXISTS address_ledger;
+CREATE TABLE address_ledger (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+address VARCHAR(255),
+zipCode INT(5),
+city VARCHAR(100));
+
 DROP TABLE IF EXISTS role;
 CREATE TABLE role (id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 role VARCHAR(10));
@@ -89,6 +95,7 @@ paymentToken VARCHAR(255),
 trackingNumber VARCHAR(255) NULL,
 id_user INT,
 id_address_delivery INT,
+id_address_billing INT,
 id_status INT);
 
 DROP TABLE IF EXISTS order_product;
@@ -131,7 +138,8 @@ ALTER TABLE address ADD CONSTRAINT FK_address_id_address_type FOREIGN KEY (id_ad
 ALTER TABLE alert ADD CONSTRAINT FK_alert_id_product FOREIGN KEY (id_product) REFERENCES product(id) ON DELETE SET NULL;
 ALTER TABLE image ADD CONSTRAINT FK_image_id_product FOREIGN KEY (id_product) REFERENCES product(id) ON DELETE SET NULL;
 ALTER TABLE order_list ADD CONSTRAINT FK_order_list_id_user FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE SET NULL;
-ALTER TABLE order_list ADD CONSTRAINT FK_order_list_id_address_delivery FOREIGN KEY (id_address_delivery) REFERENCES address(id) ON DELETE SET NULL;
+ALTER TABLE order_list ADD CONSTRAINT FK_order_list_id_address_delivery FOREIGN KEY (id_address_delivery) REFERENCES address_ledger(id) ON DELETE SET NULL;
+ALTER TABLE order_list ADD CONSTRAINT FK_order_list_id_address_billing FOREIGN KEY (id_address_billing) REFERENCES address_ledger(id) ON DELETE SET NULL;
 ALTER TABLE order_list ADD CONSTRAINT FK_order_list_id_status FOREIGN KEY (id_status) REFERENCES status(id) ON DELETE SET NULL;
 ALTER TABLE order_product ADD CONSTRAINT FK_order_product_id_product FOREIGN KEY (id_product) REFERENCES product(id) ON DELETE SET NULL;
 ALTER TABLE order_product ADD CONSTRAINT FK_order_product_id_order FOREIGN KEY (id_order) REFERENCES order_list(id) ON DELETE SET NULL;
@@ -362,33 +370,78 @@ INSERT INTO `address` (`id`, `address`, `zipCode`, `city`, `id_user`, `id_addres
     (19, '83095 Swallow Point', 11440, 'Ja Ela', 12, 2),
     (20, '61716 Columbus Avenue', 60230, 'Stepojevac', 4, 2)
 ;
+
+INSERT INTO address_ledger (address, zipCode, city) VALUES
+    ('913 Elka Way', '22304', 'Lannion'),
+    ('1 Delladonna Lane', '76069', 'Le Havre'),
+    ('28502 Service Place', '93321', 'Aubervilliers'),
+    ('99 Bluestem Plaza', '41919', 'Blois'),
+    ('21 Bonner Trail', '15104', 'Saint-Flour'),
+    ('977 Bultman Plaza', '84404', 'Apt'),
+    ('7 Lerdahl Place', '45969', 'Orléans'),
+    ('2475 Kim Hill', '42045', 'Saint-Étienne'),
+    ('109 High Crossing Junction', '13155', 'Tarascon'),
+    ('78 Riverside Place', '47555', 'Boé'),
+    ('11 Summer Ridge Lane', '91194', 'Gif-sur-Yvette'),
+    ('8 Grim Street', '94174', 'Le Perreux-sur-Marne'),
+    ('6286 Butterfield Court', '78181', 'Saint-Quentin-en-Yvelines'),
+    ('55220 Jenifer Court', '83087', 'Toulon'),
+    ('91 Mosinee Hill', '37942', 'Tours'),
+    ('2906 Everett Crossing', '41976', 'Blois'),
+    ('6058 Annamark Trail', '91304', 'Massy'),
+    ('37 Mallard Pass', '20311', 'Ajaccio'),
+    ('3 Barby Drive', '60022', 'Beauvais'),
+    ('9 Village Green Drive', '84147', 'Montfavet'),
+    ('2306 Redwing Street', '14097', 'Caen'),
+    ('7343 Helena Lane', '94865', 'Bonneuil-sur-Marne'),
+    ('0238 Superior Parkway', '59734', 'Saint-Amand-les-Eaux'),
+    ('563 Duke Place', '77554', 'Moissy-Cramayel'),
+    ('84647 Algoma Crossing', '75522', 'Paris 11'),
+    ('7308 Pine View Plaza', '76069', 'Le Havre'),
+    ('2 Fieldstone Road', '80004', 'Amiens'),
+    ('3 Autumn Leaf Junction', '69239', 'Lyon'),
+    ('77886 Lakeland Center', '07304', 'Tournon-sur-Rhône'),
+    ('4 Basil Alley', '13807', 'Istres'),
+    ('954 Larry Avenue', '75669', 'Paris 14'),
+    ('95821 Hoepker Point', '76404', 'Fécamp'),
+    ('63 Clove Avenue', '92762', 'Antony'),
+    ('458 Dunning Terrace', '92980', 'Paris La Défense'),
+    ('1 Marcy Pass', '87030', 'Limoges'),
+    ('035 Comanche Place', '84092', 'Avignon'),
+    ('0 American Plaza', '20195', 'Ajaccio'),
+    ('952 Sage Hill', '31029', 'Toulouse'),
+    ('64 Becker Parkway', '14030', 'Caen'),
+    ('73 Continental Alley', '93604', 'Aulnay-sous-Bois')
+;
 INSERT INTO `status` (`id`, `status`) VALUES
     (1, 'Commande validée'),
     (2, 'En préparation'),
     (3, 'En cours de livraison'),
     (4, 'Commande livrée')
 ;
-INSERT INTO order_list (`id`, `dateOrder`, `totalPrice`, `paymentToken`, `trackingNumber`, `id_user`, `id_address_delivery`, `id_status`) VALUES
-    (1, '0000-00-00', 14, '3557901867976722', '5610432730626823', 5, 17, 4),
-    (2, '0000-00-00', 118, '4844318201321807', '3532330109449589', 17, 7, 4),
-    (3, '0000-00-00', 120, '3543994218346239', '5266586991243110', 10, 15, 4),
-    (4, '0000-00-00', 176, '3547091665388867', '3540743303623447', 5, 9, 4),
-    (5, '0000-00-00', 215, '3574259868175763', '4041375988223086', 10, 15, 4),
-    (6, '0000-00-00', 139, '3553931211364493', '3567268103144871', 16, 20, 4),
-    (7, '0000-00-00', 62, '3588281697971802', '67711815561881491', 15, 2, 4),
-    (8, '0000-00-00', 139, '6376058914343950', '6386376168180706', 16, 14, 4),
-    (9, '0000-00-00', 139, '372301281014136', '4917074435705578', 5, 17, 4),
-    (10, '0000-00-00', 245, '30426252802203', '3535128704487385', 15, 2, 4),
-    (11, '0000-00-00', 297, '5100147996476161', '5602232318051372', 2, 5, 4),
-    (12, '0000-00-00', 121, '3569551211288864', '5204353413548880', 15, 3, 4),
-    (13, '0000-00-00', 15, '3542994142979130', '4844720473755465', 11, 4, 4),
-    (14, '0000-00-00', 232, '3583796958723704', '201817262159381', 5, 17, 4),
-    (15, '0000-00-00', 126, '3569171493774471', '3583191360226423', 9, 13, 4),
-    (16, '0000-00-00', 151, '3536707568936733', '4026427586540095', 4, 18, 4),
-    (17, '0000-00-00', 253, '0604136715241982', '3571495295398809', 13, 6, 4),
-    (18, '0000-00-00', 80, '3568691851086847', '56022314571163543', 9, 8, 4),
-    (19, '0000-00-00', 274, '201878262465434', '5020408360967681', 18, 12, 4),
-    (20, '0000-00-00', 285, '3544675101350235', '3551108966809996', 13, 6, 4)
+INSERT INTO order_list (`id`, `dateOrder`, `totalPrice`, `paymentToken`, `trackingNumber`, `id_user`, `id_address_delivery`, `id_address_billing`, `id_status`) VALUES
+    (1, '0000-00-00', 14, '3557901867976722', '5610432730626823', 5, 1, 2, 4)
+;
+INSERT INTO order_list (`dateOrder`, `totalPrice`, `paymentToken`, `trackingNumber`, `id_user`, `id_address_delivery`, `id_address_billing`, `id_status`) VALUES
+    ('0000-00-00', 118, '4844318201321807', '3532330109449589', 17, 3, 4, 4),
+    ('0000-00-00', 120, '3543994218346239', '5266586991243110', 10, 5, 6, 4),
+    ('0000-00-00', 176, '3547091665388867', '3540743303623447', 5, 7, 8, 4),
+    ('0000-00-00', 215, '3574259868175763', '4041375988223086', 10, 9, 10, 4),
+    ('0000-00-00', 139, '3553931211364493', '3567268103144871', 16, 11, 12, 4),
+    ('0000-00-00', 62, '3588281697971802', '67711815561881491', 15, 13, 14, 4),
+    ('0000-00-00', 139, '6376058914343950', '6386376168180706', 16, 15, 16, 4),
+    ('0000-00-00', 139, '372301281014136', '4917074435705578', 5, 17, 18, 4),
+    ('0000-00-00', 245, '30426252802203', '3535128704487385', 15, 19, 20, 4),
+    ('0000-00-00', 297, '5100147996476161', '5602232318051372', 2, 21, 22, 4),
+    ('0000-00-00', 121, '3569551211288864', '5204353413548880', 15, 23, 24, 4),
+    ('0000-00-00', 15, '3542994142979130', '4844720473755465', 11, 25, 26, 4),
+    ('0000-00-00', 232, '3583796958723704', '201817262159381', 5, 27, 28, 4),
+    ('0000-00-00', 126, '3569171493774471', '3583191360226423', 9, 29, 30, 4),
+    ('0000-00-00', 151, '3536707568936733', '4026427586540095', 4, 31, 32, 4),
+    ('0000-00-00', 253, '0604136715241982', '3571495295398809', 13, 33, 34, 4),
+    ('0000-00-00', 80, '3568691851086847', '56022314571163543', 9, 35, 36, 4),
+    ('0000-00-00', 274, '201878262465434', '5020408360967681', 18, 37, 38, 4),
+    ('0000-00-00', 285, '3544675101350235', '3551108966809996', 13, 39, 40, 4)
 ;
 INSERT INTO order_product (price, quantity, id_product, id_order) VALUES
     ('15,25', 2, 18, 13),
