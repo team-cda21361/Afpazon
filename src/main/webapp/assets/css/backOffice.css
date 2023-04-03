@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/*Style Back office
+*/
+.backTitle{	
+	text-align:center;
+	margin-bottom:8%;
+}
+.backContainer{
+	width:95%;
+	margin:auto;
+}
+.dashBoardLine{
+	overflow: hidden;
+	height:35vh;
+	margin:30px 20px;
+}
+.stockTable{
+	height:60%;
+}
+.tablePane{
+	overflow: scroll;
+	height:87%;
+}
+table th,table td{
+	text-align:center;
+}
