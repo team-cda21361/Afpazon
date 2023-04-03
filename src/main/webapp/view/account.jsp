@@ -186,7 +186,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="orderDetailModalLabel"><i class="bi bi-box-seam"></i> Détails de la commande n°<c:out value="${showOrderID}" /></h1>
+        <h1 class="modal-title fs-5" id="orderDetailModalLabel"><i class="bi bi-box-seam"></i> Détails de la commande n°<c:out value="${orderSelected.id}" /></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -211,8 +211,20 @@
 					</c:if>
 				</div>
 			</div>
-			<hr>
-			<h5>Contenu de la commande</h5>
+			<hr class="superCompactHR">
+			<h5 class="text-center">Contenu de la commande</h5>
+			<c:if test="${not empty productsList}">
+				<hr class="compactHR">
+				<c:forEach items="${productsList}" var="product">
+					<div class="row">
+						<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
+						<div class="col">
+							<h5><c:out value="${product.product.name}" /></h5>
+						</div>
+					</div>
+					<hr class="compactHR">
+				</c:forEach>
+			</c:if>
 		</div>
       </div>
       <div class="modal-footer">
@@ -222,7 +234,7 @@
   </div>
 </div>
 
-<c:if test="${not empty showOrderID}">
+<c:if test="${not empty orderSelected}">
 	<script type="text/javascript">
 		$(window).on('load', function() {
 			$('#orderAddress').html("${orderSelected.address_delivery.address},");
