@@ -56,6 +56,8 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("utilisateur", user);
 			System.out.println("Connexion ok!!");
+			request.getRequestDispatcher("view/index.jsp").forward(request,response);
+			return;
 		} else {
 	      	request.setAttribute("msn", "L'email ou le mot de passe n'est pas correct.");
 			request.setAttribute("msnType",  "KO");

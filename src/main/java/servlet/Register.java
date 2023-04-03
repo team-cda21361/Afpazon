@@ -130,7 +130,7 @@ public class Register extends HttpServlet {
 		if (userDao.create(user)) {
 	      	request.setAttribute("msn", "Le compte utilisateur a été créé avec succès.");
 			request.setAttribute("msnType",  "OK");
-			request.getRequestDispatcher("view/register.jsp").forward(request,response);
+			request.getRequestDispatcher("view/login.jsp").forward(request,response);
 
 			//response.sendRedirect("/cda/");
 

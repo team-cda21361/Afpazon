@@ -4,6 +4,12 @@ $(document).ready(function() {
     },5000);  
 });
 
+/*************Validation Login****************/
+var regexPass = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/);
+var regexEmail = new RegExp(/^[A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9][@][A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9]?[\.][A-Za-z0-9]{2,3}$/);
+var email = $(".email");
+var passwordR  = $(".passwordR");
+var passwordR  = $(".passwordR");
 
 function checkformM(event) {
 	event.preventDefault();
@@ -25,35 +31,42 @@ function checkformM(event) {
 					.addClass("is-valid");
 			}
 		});
-		console.log("*********************************");
+		
+		console.log("****************1*****************");
 		console.log("password.val() "+password.val());
 	    console.log("passwordR.val() "+passwordR.val());
-	    console.log("*********************************");
-		if(password.val() != passwordR.val()){
-			console.log("No son iguales " + passwordR.attr("id"));
-			console.log("Name: " + passwordR.attr("name"));
-			$(".errorpasswordR").addClass("error");
-			$(".errorpasswordR").text("Les deux mots de passe doivent être identiques.");
-			$("#" + passwordR.attr("id")).addClass("is-invalid");
-			cont++;
-			console.log("Error en el campo: If Password");
-		}else{
-			$(".errorpasswordR").addClass("error");
-		    $(".errorpasswordR").text("");
-			$("#" + passwordR.attr("id"))
-					.removeClass("is-invalid")
-					.addClass("is-valid");
-
+	    console.log("****************2*****************");
+	    
+	    if(password.val() != undefined && passwordR.val() != undefined){
+			if(password.val() != passwordR.val()){
+				console.log("No son iguales " + passwordR.attr("id"));
+				console.log("Name: " + passwordR.attr("name"));
+				$(".errorpasswordR").addClass("error");
+				$(".errorpasswordR").text("Les deux mots de passe doivent être identiques.");
+				$("#" + passwordR.attr("id")).addClass("is-invalid");
+				cont++;
+				console.log("Error en el campo: If Password");
+			}else{
+				$(".errorpasswordR").addClass("error");
+			    $(".errorpasswordR").text("");
+				$("#" + passwordR.attr("id"))
+						.removeClass("is-invalid")
+						.addClass("is-valid");
+			}
 		}
-if (!regexEmail.test(email.val())) {
-			$("#" + email.attr("id")).addClass("is-invalid");
-			$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-			email.attr("id").addClass("is-invalid");
-			cont++
-		} else {
-			console.log("Email IF entre NOT: "+ email.val());
-			$(".error" + email.attr("id")).text("");
-			email.attr("id").removeClass("is-invalid").addClass("is-valid");
+	    console.log("Email: "+ email.val());
+	    if(email.val() != undefined){
+			if (!regexEmail.test(email.val())) {
+			    console.log("Email pas correct: "+ cont);
+				$("#" + email.attr("id")).addClass("is-invalid");
+				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
+				email.attr("id").addClass("is-invalid");
+				cont++
+			} else {
+				console.log("Email IF entre NOT: "+ email.val());
+				$(".error" + email.attr("id")).text("");
+				email.attr("id").removeClass("is-invalid").addClass("is-valid");
+			}
 		}
 	});
 	console.log("Contador de errores1: "+ cont);
@@ -65,9 +78,6 @@ if (!regexEmail.test(email.val())) {
 
 }
 
-/*************Validation Login****************/
-var regexPass = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/);
-var regexEmail = new RegExp(/^[A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9][@][A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9]?[\.][A-Za-z0-9]{2,3}$/);
 
 
  
@@ -93,18 +103,18 @@ function checkformML(event) {
 
 		});
 		    console.log("Email antes entre: "+ email.val());
-		if (!regexEmail.test(email.val())) {
-
-			$("#" + email.attr("id")).addClass("is-invalid");
-			
-			$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-			email.attr("id").addClass("is-invalid");
-			contL++
-	
-		} else {
-			console.log("Email IF entre NOT: "+ email.val());
-			$(".error" + email.attr("id")).text("");
-			email.attr("id").removeClass("is-invalid").addClass("is-valid");
+		if(email.val() != undefined){
+			if (!regexEmail.test(email.val())) {
+				$("#" + email.attr("id")).addClass("is-invalid");
+				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
+				email.attr("id").addClass("is-invalid");
+				contL++
+		
+			} else {
+				console.log("Email IF entre NOT: "+ email.val());
+				$(".error" + email.attr("id")).text("");
+				email.attr("id").removeClass("is-invalid").addClass("is-valid");
+			}
 		}
 		
 	});
