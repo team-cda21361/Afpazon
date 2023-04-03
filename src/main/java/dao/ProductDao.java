@@ -76,7 +76,7 @@ public class ProductDao implements IDAO<Product> {
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 
 				listProducts.add(product);
-				System.out.println("Liste de PRODUCTs fait !!!");
+				System.out.println(rs.getBoolean("isActive"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -40,13 +40,13 @@ public class DiscountDao implements IDAO<Discount> {
 	public ArrayList<Discount> read() {
 		ArrayList<Discount> listStock = new ArrayList<>();
 		try {
-			sql = connect.prepareStatement("SELECT * FROM  discount");
+			sql = connect.prepareStatement("SELECT * FROM  discount ORDER BY startDate desc");
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
 			
 				listStock.add(new Discount(rs.getInt("id"),rs.getDate("startDate"),rs.getDate("endDate"),rs.getFloat("percent"),rs.getString("voucher")));
-				System.out.println("Liste de discount ok !!!");
+				//System.out.println("Liste de discount ok !!!");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,5 +72,22 @@ public class DiscountDao implements IDAO<Discount> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public ArrayList<Discount> search(String search) {
+		ArrayList<Discount> listStock = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT * FROM  discount WHERE CONCAT(voucher, ' ', startDate, ' ', endDate) LIKE ? ORDER BY startDate desc");
+			sql.setString(1, "%" +search+ "%");
+			rs = sql.executeQuery();
 
+			while(rs.next()) {
+			
+				listStock.add(new Discount(rs.getInt("id"),rs.getDate("startDate"),rs.getDate("endDate"),rs.getFloat("percent"),rs.getString("voucher")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de discount...");
+		}
+		return listStock;
+	}
 }

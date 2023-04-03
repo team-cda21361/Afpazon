@@ -11,21 +11,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
+<!-- ========================= CSS Carousel ========================= -->
+<link rel="stylesheet" href="assets/carrousel/css/owl.carousel.min.css">
+<link rel="stylesheet"
+	href="assets/carrousel/css/owl.theme.default.min.carousel.css">
+<link rel="stylesheet" href="assets/carrousel/css/style.carousel.css">
+<script src="assets/carrousel/js/jquery.min.carousel.js"></script>
+<script src="assets/carrousel/js/bootstrap.min.js"></script>
+<script src="assets/carrousel/js/popper.carousel.js"></script>
+
 <!-- ========================= CSS here ========================= -->
-<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-<link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
-<link rel="stylesheet" href="assets/css/tiny-slider.css" />
-<link rel="stylesheet" href="assets/css/glightbox.min.css" />
-<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="./assets/css/LineIcons.3.0.css" />
+<link rel="stylesheet" href="./assets/css/tiny-slider.css" />
+<link rel="stylesheet" href="./assets/css/glightbox.min.css" />
+<link rel="stylesheet" href="./assets/css/main.css" />
+<link rel="stylesheet" href="./assets/css/backOffice.css" />
+<link rel="stylesheet" href="./assets/css/datatables.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<!-- ========================= JS here ========================= -->
-<script defer type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<script defer type="text/javascript" src="assets/js/tiny-slider.js"></script>
-<script defer type="text/javascript" src="assets/js/glightbox.min.js"></script>
-<script defer type="text/javascript" src="assets/js/main.js"></script>
+<script defer src="assets/js/bootstrap.min.js"></script>
+<script defer src="assets/js/tiny-slider.js"></script>
+<script defer src="assets/js/glightbox.min.js"></script>
+<script type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="./assets/js/datatables.min.js"></script>
+<script defer src="assets/js/main.js"></script>
 </head>
 
 <body>
+<c:if test="${currentUser.role.role == 'Client' }">
 
 	<!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -52,14 +65,20 @@
 				<div class="row align-items-center">
 					<div class="col-lg-4 col-md-4 col-12">
 						<div class="top-middle">
+							<span>
+								<h3
+									style="display: inline-block; margin-right: 5px; color: #d29bd6;">Chez</h3>
+							</span>
 							<!-- Start Header Logo -->
 							<a class="navbar-brand" href="index.html"> <img
 								src="assets/images/logo/Amazon version_blc_logo.svg.png"
 								alt="Logo" style="float: left;">
 							</a>
 							<!-- End Header Logo -->
+							<span style="margin-left: 5px;"></span>
 						</div>
 					</div>
+
 					<div class="col-lg-4 col-md-4 col-12">
 						<!-- Start Main Menu Search -->
 						<div class="main-menu-search">
@@ -123,18 +142,18 @@
 					<div class="col-lg-3 col-md-3 col-7"></div>
 					<div class="col-lg-5 col-md-7 d-xs-none"></div>
 					<div class="col-lg-4 col-md-2 col-5">
-						<div class="middle-right-area">
+						<div class="middle-right-area col-lg-6">
 							<div class="nav-hotline"></div>
 							<div class="navbar-cart">
 								<div class="wishlist"></div>
 								<div class="cart-items">
-									<a href="javascript:void(0)" class="main-btn"> <i
-										class="lni lni-cart"></i> <span class="total-items">2</span>
-									</a>
+									<a href="javascript:void(0)" class="main-btn"> 
+                    <i class="lni lni-cart"></i> <span class="total-items">2</span>
+                  </a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
-											<span>2 Items</span> <a href="cart.html">View Cart</a>
+											<span>2 Items</span> <a href="cart">View Cart</a>
 										</div>
 										<ul class="shopping-list">
 											<li><a href="javascript:void(0)" class="remove"
@@ -143,14 +162,12 @@
 													<a class="cart-img" href="product-details.html"><img
 														src="assets/images/header/cart-items/item1.jpg" alt="#"></a>
 												</div>
-
 												<div class="content">
 													<h4>
 														<a href="product-details.html"> Apple Watch Series 6</a>
 													</h4>
-													<p class="quantity">
-														1x - <span class="amount">$99.00</span>
-													</p>
+													<p class="quantity">1x</p>
+													<p class="price">$399.99</p>
 												</div></li>
 											<li><a href="javascript:void(0)" class="remove"
 												title="Remove this item"><i class="lni lni-close"></i></a>
@@ -160,11 +177,11 @@
 												</div>
 												<div class="content">
 													<h4>
-														<a href="product-details.html">Wi-Fi Smart Camera</a>
+														<a href="product-details.html">Beats Solo3 Wireless
+															On-Ear Headphones</a>
 													</h4>
-													<p class="quantity">
-														1x - <span class="amount">$35.00</span>
-													</p>
+													<p class="quantity">1x</p>
+													<p class="price">$199.95</p>
 												</div></li>
 										</ul>
 										<div class="bottom">
@@ -172,8 +189,9 @@
 												<span>Total</span> <span class="total-amount">$134.00</span>
 											</div>
 											<div class="button">
-												<a href="checkout.html" class="btn animate">Checkout</a>
+												<a href="cart" class="btn animate">Checkout</a>
 											</div>
+											<a href="checkout.html" class="btn animate">Checkout</a>
 										</div>
 									</div>
 									<!--/ End Shopping Item -->
@@ -182,19 +200,14 @@
 						</div>
 					</div>
 				</div>
+				<h2 style="color: #d29bd6;"> on vend tous ici pour
+					votre plus grand plaisir !</h2>
 			</div>
 		</div>
-		<!-- End Header Middle -->
-
 		<!-- End Topbar -->
-
-		<!-- End Topbar -->
-
-		<!-- Start Header Middle -->
 
 		<!-- Start Header Bottom -->
 		<div class="container">
-		<h2>"Chez AFPazon, on vend tous ici pour votre plus grand plaisir !"</h2>
 			<div class="row align-items-center">
 				<div class="col-lg-8 col-md-6 col-12">
 					<div class="nav-inner">
@@ -230,9 +243,9 @@
 								id="navbarSupportedContent">
 								<ul id="nav" class="navbar-nav ms-auto">
 									<li class="nav-item"><a href="index.html"
-										aria-label="Toggle navigation">Promotion</a></li>
+										aria-label="Toggle navigation">Promotions</a></li>
 									<li class="nav-item"><a href="index.html"
-										aria-label="Toggle navigation">Nouveauter</a></li>
+										aria-label="Toggle navigation">Nouveautés</a></li>
 									<li class="nav-item"><a href="contact.html"
 										aria-label="Toggle navigation">Contactez nous</a></li>
 								</ul>
@@ -242,6 +255,7 @@
 						<!-- End Navbar -->
 					</div>
 				</div>
+
 				<div class="col-lg-4 col-md-6 col-12">
 					<!-- Start Nav Social -->
 					<div class="nav-social">
@@ -249,18 +263,87 @@
 						<ul>
 							<li><a href="javascript:void(0)"><i
 									class="lni lni-facebook-filled"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-twitter-original"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-instagram"></i></a></li>
-							<li><a href="javascript:void(0)"><i
-									class="lni lni-skype"></i></a></li>
 						</ul>
 					</div>
 					<!-- End Nav Social -->
 				</div>
+
 			</div>
 		</div>
 		<!-- End Header Bottom -->
 	</header>
-	<!-- End Header Area -->
+	<!-- End Header Area -->	
+	<!-- Header Backoffice -->
+	</c:if>
+	<c:if test="${currentUser.role.role == 'Admin' }">
+	<!--start Navbar -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background: #F113DB">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active"
+							aria-current="page" href="dashboard">
+							<img alt="dashboard image" src="assets/images/back_office/logo.png" width="55">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img alt="" src="assets/images/back_office/Catalogue.png" width="60">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="stockManager"> 
+							<img alt="" src="assets/images/back_office/Stock.png" width="45">
+						</a>
+					</li>
+				</ul>
+				<a class=" d-flex nav-link" href="#"> <img alt=""
+					src="assets/images/back_office/logBack.png" width="60">
+				</a>
+			</div>
+		</div>
+	</nav>
+<!--end Header backoffice -->
+
+	</c:if>
+	<c:if test="${currentUser.role.role == 'Admin' }">
+	<!--start Navbar -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background: #F113DB">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="dashboard"><img alt="dashboard image"
+							src="assets/images/back_office/logo.png" width="55"></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><img
+							alt="" src="assets/images/back_office/Catalogue.png" width="60"></a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#"> <img
+							alt="" src="assets/images/back_office/Stock.png" width="45">
+					</a></li>
+				</ul>
+				<a class=" d-flex nav-link" href="#"> <img alt=""
+					src="assets/images/back_office/logBack.png" width="60">
+				</a>
+			</div>
+		</div>
+	</nav>
+<!--end Navbar -->
+	</c:if>
