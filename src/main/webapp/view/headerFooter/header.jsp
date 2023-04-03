@@ -11,14 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
-<!-- caroussel -->
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Varela+Round">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--fin caroussel link  -->
-  
 <!-- ========================= CSS here ========================= -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/LineIcons.3.0.css" />
@@ -52,53 +44,31 @@
 		</div>
 	</div>
 	<!-- /End Preloader -->
-
 	<!-- Start Header Area -->
 	<header class="header navbar-area">
 		<!-- Start Topbar -->
 		<div class="topbar">
 			<div class="container">
 				<div class="row align-items-center">
-					<div class="col-lg-4 col-md-4 col-12"></div>
 					<div class="col-lg-4 col-md-4 col-12">
-						<div class="top-middle"></div>
-					</div>
-					<div class="col-lg-4 col-md-4 col-12">
-						<div class="top-end">
-							<div class="user">
-								<i class="lni lni-user"></i> Bonjour
-							</div>
-							<ul class="user-login">
-								<li><a href="register">S'inscrire</a></li>
-								<li><a href="#" data-bs-toggle="modal"
-									data-bs-target="#exampleModal">Se Connecter </a></li>
-							</ul>
+						<div class="top-middle">
+							<!-- Start Header Logo -->
+							<a class="navbar-brand" href="index.html"> <img
+								src="assets/images/logo/Amazon version_blc_logo.svg.png"
+								alt="Logo" style="float: left;">
+							</a>
+							<!-- End Header Logo -->
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End Topbar -->
-		<!-- Start Header Middle -->
-		<div class="header-middle">
-			<div class="container">
-
-				<div class="row align-items-center">
-					<div class="col-lg-3 col-md-3 col-7">
-						<!-- Start Header Logo -->
-						<a class="navbar-brand" href="index.html"> <img
-							src="assets/images/logo/Amazon_logo.svg.png" alt="Logo">
-						</a>
-						<!-- End Header Logo -->
-					</div>
-					<div class="col-lg-5 col-md-7 d-xs-none">
+					<div class="col-lg-4 col-md-4 col-12">
 						<!-- Start Main Menu Search -->
 						<div class="main-menu-search">
 							<!-- navbar search start -->
 							<div class="navbar-search search-style-5">
 								<div class="search-select">
 									<div class="select-position">
-										<select id="select1">
+										<select id="select1"
+											style="background-color: #fff; color: #333;">
 											<option selected>Categories</option>
 											<option value="1">option 01</option>
 											<option value="2">option 02</option>
@@ -121,16 +91,26 @@
 						</div>
 						<!-- End Main Menu Search -->
 					</div>
+					<div class="col-lg-4 col-md-4 col-12">
+						<div class="top-end">
+							<div class="user">
+								<i class="lni lni-user"></i> Bonjour
+							</div>
+							<ul class="user-login">
+								<li><a href="login.html">S'inscrire</a></li>
+								<li><a href="register.html">Se Connecter</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row align-items-center">
+					<div class="col-lg-3 col-md-3 col-7"></div>
+					<div class="col-lg-5 col-md-7 d-xs-none"></div>
 					<div class="col-lg-4 col-md-2 col-5">
 						<div class="middle-right-area">
 							<div class="nav-hotline"></div>
 							<div class="navbar-cart">
-								<div class="wishlist">
-									<!-- <a href="javascript:void(0)">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items">0</span>
-                                    </a> -->
-								</div>
+								<div class="wishlist"></div>
 								<div class="cart-items">
 									<a href="javascript:void(0)" class="main-btn"> <i
 										class="lni lni-cart"></i> <span class="total-items">2</span>
@@ -189,8 +169,16 @@
 			</div>
 		</div>
 		<!-- End Header Middle -->
+
+		<!-- End Topbar -->
+
+		<!-- End Topbar -->
+
+		<!-- Start Header Middle -->
+
 		<!-- Start Header Bottom -->
 		<div class="container">
+		<h2>"Chez AFPazon, on vend tous ici pour votre plus grand plaisir !"</h2>
 			<div class="row align-items-center">
 				<div class="col-lg-8 col-md-6 col-12">
 					<div class="nav-inner">
@@ -229,7 +217,6 @@
 										aria-label="Toggle navigation">Promotions</a></li>
 									<li class="nav-item"><a href="index.html"
 										aria-label="Toggle navigation">Nouveautés</a></li>
-
 									<li class="nav-item"><a href="contact.html"
 										aria-label="Toggle navigation">Contactez nous</a></li>
 								</ul>
@@ -267,27 +254,20 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Se
-						connecter</h1>
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Se connecter</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
 				<form method="post" action="register" name="login">
 					<div class="modal-body">
 						<div class="mb-3 ">
-							<label class="form-label">Email</label> <input type="email"
-								class="form-control" placeholder="Email" id="email" name="email">
+							<label class="form-label">Email</label> <input type="email" class="form-control" placeholder="Email" id="email" name="email">
 							<p class="errortitre error"></p>
 						</div>
-
 						<div class="mb-3 ">
-							<label class="form-label">Password</label> <input type="password"
-								class="form-control" placeholder="Password" id="password"
-								name="password">
+							<label class="form-label">Password</label> <input type="password" class="form-control" placeholder="Password" id="password" name="password">
 							<p class="errorminplayer error"></p>
 						</div>
-
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
@@ -296,11 +276,9 @@
 							connecter</button>
 					</div>
 				</form>
-				
 			</div>
 		</div>
 	</div>
-
 	<!-- Modal FIN -->
 	</c:if>
 	<c:if test="${currentUser.role.role == 'Admin' }">

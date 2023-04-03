@@ -1,30 +1,12 @@
 <c:if test="${currentUser.role.role == 'Client' }">
 	<!-- Start Footer Area -->
 	<footer class="footer">
-		<!-- Start Footer  -->
-		<!-- End Footer Top -->
-		<!-- Start Footer Middle -->
 		<div class="footer-middle">
 			<div class="container">
 				<div class="bottom-inner">
 					<div class="row">
-						<!-- <div class="col-lg-3 col-md-6 col-12">
-							Single Widget
-							<div class="single-footer our-app">
-								<h3>Our Mobile App</h3>
-								<ul class="app-btn">
-									<li><a href="javascript:void(0)"> <i
-											class="lni lni-apple"></i> <span class="small-title">Download
-												on the</span> <span class="big-title">App Store</span>
-									</a></li>
-									<li><a href="javascript:void(0)"> <i
-											class="lni lni-play-store"></i> <span class="small-title">Download
-												on the</span> <span class="big-title">Google Play</span>
-									</a></li>
-								</ul>
-							</div>
 							End Single Widget
-						</div> -->
+						</div>
 						<div class="col-lg-3 col-md-6 col-12">
 							<!-- Single Widget -->
 							<div class="single-footer f-link">
@@ -44,11 +26,11 @@
 							<div class="single-footer f-contact">
 								<h3>AfpaZon|Spear</h3>
 								<p>Afpazon est une entreprise de commerce en ligne
-									française basée à Paris. Elle est l'un des géants du Web. Créée
-									par le groupe SPEAR en Mars 2022, son siège social est situé à
-									rue politzer à Paris. La Société Afpazon est spécialisée dans
-									la vente de produits avec une philosophie très simple « On vend
-									tout »</p>
+									franÃ§aise basÃ©e Ã  Paris. Elle est l'un des gÃ©ants du Web. CrÃ©Ã©e
+									par le groupe SPEAR en Mars 2022, son siÃ¨ge social est situÃ© Ã 
+									rue politzer Ã  Paris. La SociÃ©tÃ© Afpazon est spÃ©cialisÃ©e dans
+									la vente de produits avec une philosophie trÃ¨s simple Â« On vend
+									tout Â»</p>
 								<!-- <ul>
 									<li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
 									<li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
@@ -64,54 +46,63 @@
 							<div class="single-footer f-link">
 								<h3>Shop Departments</h3>
 								<ul>
-									<li><a href="javascript:void(0)">Computers &
-											Accessories</a></li>
+									<li><a href="javascript:void(0)">Computers & Accessories</a></li>
 									<li><a href="javascript:void(0)">Smartphones & Tablets</a></li>
 									<li><a href="javascript:void(0)">TV, Video & Audio</a></li>
-									<li><a href="javascript:void(0)">Cameras, Photo &
-											Video</a></li>
+									<li><a href="javascript:void(0)">Cameras, Photo & Video</a></li>
 									<li><a href="javascript:void(0)">Headphones</a></li>
 								</ul>
 							</div>
 							<!-- End Single Widget -->
+
+<footer class="footer">
+	<!-- Start Footer  -->
+	<!-- End Footer Top -->
+	<!-- Start Footer Middle -->
+	<div class="footer-middle">
+		<div class="container">
+			<div class="bottom-inner">
+				<div class="row">
+					<div class="col-md-6 col-12">
+						<!-- Single Widget -->
+						<div class="single-footer f-contact">
+							<h3>AfpaZon|Spear</h3>
+							<p>Afpazon est une entreprise de commerce en ligne franÃ§aise
+								basÃ©e Ã  Paris. Elle est l'un des gÃ©ants du Web. CrÃ©Ã©e par le
+								groupe SPEAR en Mars 2022, son siÃ¨ge social est situÃ© Ã  rue
+								politzer Ã  Paris. La SociÃ©tÃ© Afpazon est spÃ©cialisÃ©e dans la
+								vente de produits avec une philosophie trÃ¨s simple Â« On vend
+								tout Â»</p>
 						</div>
+						<!-- End Single Widget -->
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- End Footer Middle -->
-		<!-- Start Footer Bottom -->
-		<div class="footer-bottom">
-			<div class="container">
-				<div class="inner-content">
-					<div class="row align-items-center">
-						<div class="col-lg-4 col-12">
-							<div class="payment-gateway">
-								<span>We Accept:</span> <img
-									src="assets/images/footer/credit-cards-footer.png" alt="#">
-							</div>
+	</div>
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="inner-content">
+				<div class="row align-items-center">
+					<div class="col-lg-4 col-12">
+						<div class="payment-gateway">
+							<span>We Accept:</span> <img
+								src="assets/images/footer/credit-cards-footer.png" alt="#">
 						</div>
-						<div class="col-lg-4 col-12">
-							<div class="copyright">
-								<p>
-									Designed and Developed by SPEAR-Prod<a href="https://graygrids.com/"
-										rel="nofollow" target="_blank">GrayGrids</a>
-								</p>
-							</div>
+					</div>
+					<div class="col-lg-4 col-12">
+						<div class="copyright">
+							<p>
+								Designed and Developed by SPEAR-Prod<a
+									href="https://graygrids.com/" rel="nofollow" target="_blank">GrayGrids</a>
+							</p>
 						</div>
-						<div class="col-lg-4 col-12">
-							<ul class="socila">
-								<li><span>Follow Us On:</span></li>
-								<li><a href="javascript:void(0)"><i
-										class="lni lni-facebook-filled"></i></a></li>
-								<li><a href="javascript:void(0)"><i
-										class="lni lni-twitter-original"></i></a></li>
-								<li><a href="javascript:void(0)"><i
-										class="lni lni-instagram"></i></a></li>
-								<li><a href="javascript:void(0)"><i
-										class="lni lni-google"></i></a></li>
-							</ul>
-						</div>
+					</div>
+					<div class="col-lg-4 col-12">
+						<ul class="socila">
+							<li><span>Follow Us On:</span></li>
+							<li><a href="javascript:void(0)"><iclass="lni lni-facebook-filled"></i></a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -125,7 +116,7 @@
       <li class="nav-item"><a href="game" class="nav-link px-2 text-muted">Game</a></li>
       <li class="nav-item"><a href="association" class="nav-link px-2 text-muted">Resulta</a></li>
     </ul>
-    <p class="text-center text-muted">© 2023 Scoreboard , Inc</p>
+    <p class="text-center text-muted">ï¿½ 2023 Scoreboard , Inc</p>
   </footer> -->
 </c:if>
 </body>
