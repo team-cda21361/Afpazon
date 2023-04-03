@@ -137,15 +137,15 @@
 			<div class="row">
 				<div class="col-6">
 					<label for="inputStreet" class="form-label">Voie</label>
-					<input type="password" class="form-control" id="inputStreet" name="inputStreet">
+					<input type="text" class="form-control" id="inputStreet" name="inputStreet">
 				</div>
 				<div class="col">
 					<label for="inputZipCode" class="form-label">Code Postal</label>
-					<input type="password" class="form-control col-5" id="inputZipCode" name="inputZipCode">
+					<input type="text" class="form-control col-5" id="inputZipCode" name="inputZipCode">
 				</div>
 				<div class="col">
 					<label for="inputCity" class="form-label">Ville</label>
-					<input type="password" class="form-control col-5" id="inputCity" name="inputCity">
+					<input type="text" class="form-control col-5" id="inputCity" name="inputCity">
 				</div>
 			</div>
 		</div>
@@ -158,16 +158,16 @@
 		<div class="mb-3">
 			<div class="row">
 				<div class="col-6">
-					<label for="inputStreet" class="form-label">Voie</label>
-					<input type="password" class="form-control" id="inputStreet" name="inputStreet">
+					<label for="inputBillingStreet" class="form-label">Voie</label>
+					<input type="text" class="form-control" id="inputBillingStreet" name="inputBillingStreet">
 				</div>
 				<div class="col">
-					<label for="inputZipCode" class="form-label">Code Postal</label>
-					<input type="password" class="form-control col-5" id="inputZipCode" name="inputZipCode">
+					<label for="inputBillingZipCode" class="form-label">Code Postal</label>
+					<input type="text" class="form-control col-5" id="inputBillingZipCode" name="inputBillingZipCode">
 				</div>
 				<div class="col">
-					<label for="inputCity" class="form-label">Ville</label>
-					<input type="password" class="form-control col-5" id="inputCity" name="inputCity">
+					<label for="inputBillingCity" class="form-label">Ville</label>
+					<input type="text" class="form-control col-5" id="inputBillingCity" name="inputBillingCity">
 				</div>
 			</div>
 		</div>
@@ -211,6 +211,8 @@
 					</c:if>
 				</div>
 			</div>
+			<hr>
+			<h5>Contenu de la commande</h5>
 		</div>
       </div>
       <div class="modal-footer">
