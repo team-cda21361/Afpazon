@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<c:if test="">
+<c:if test="${currentUser.role.role == 'Client' }">
 	<!--[if lte IE 9]>
       <p class="browserupgrade">
         You are using an <strong>outdated</strong> browser. Please
@@ -115,13 +115,14 @@
 							<div class="navbar-cart">
 								<div class="wishlist"></div>
 								<div class="cart-items">
-									<a href="javascript:void(0)" class="main-btn"> <i
+									<!-- <a href="javascript:void(0)" class="main-btn"> <i -->
+									<a href="cart" class="main-btn"> <i
 										class="lni lni-cart"></i> <span class="total-items">2</span>
 									</a>
 									<!-- Shopping Item -->
 									<div class="shopping-item">
 										<div class="dropdown-cart-header">
-											<span>2 Items</span> <a href="cart.html">View Cart</a>
+											<span>2 Items</span> <a href="cart">View Cart</a>
 										</div>
 										<ul class="shopping-list">
 											<li><a href="javascript:void(0)" class="remove"
@@ -159,7 +160,7 @@
 												<span>Total</span> <span class="total-amount">$134.00</span>
 											</div>
 											<div class="button">
-												<a href="checkout.html" class="btn animate">Checkout</a>
+												<a href="cart" class="btn animate">Checkout</a>
 											</div>
 										</div>
 									</div>
@@ -217,9 +218,9 @@
 								id="navbarSupportedContent">
 								<ul id="nav" class="navbar-nav ms-auto">
 									<li class="nav-item"><a href="index.html"
-										aria-label="Toggle navigation">Promotion</a></li>
+										aria-label="Toggle navigation">Promotions</a></li>
 									<li class="nav-item"><a href="index.html"
-										aria-label="Toggle navigation">Nouveauter</a></li>
+										aria-label="Toggle navigation">Nouveautés</a></li>
 									<li class="nav-item"><a href="contact.html"
 										aria-label="Toggle navigation">Contactez nous</a></li>
 								</ul>
@@ -282,5 +283,81 @@
 			</div>
 		</div>
 	</div>
+
+
 	<!-- Modal FIN -->
+	
+	<!-- Header Backoffice -->
+	</c:if>
+	<c:if test="${currentUser.role.role == 'Admin' }">
+	<!--start Navbar -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background: #F113DB">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active"
+							aria-current="page" href="dashboard">
+							<img alt="dashboard image" src="assets/images/back_office/logo.png" width="55">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<img alt="" src="assets/images/back_office/Catalogue.png" width="60">
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="stockManager"> 
+							<img alt="" src="assets/images/back_office/Stock.png" width="45">
+						</a>
+					</li>
+				</ul>
+				<a class=" d-flex nav-link" href="#"> <img alt=""
+					src="assets/images/back_office/logBack.png" width="60">
+				</a>
+			</div>
+		</div>
+	</nav>
+<!--end Header backoffice -->
+
+	</c:if>
+	<c:if test="${currentUser.role.role == 'Admin' }">
+	<!--start Navbar -->
+	<nav class="navbar navbar-expand-lg bg-body-tertiary"
+		style="background: #F113DB">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#"></a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link active"
+						aria-current="page" href="dashboard"><img alt="dashboard image"
+							src="assets/images/back_office/logo.png" width="55"></a></li>
+					<li class="nav-item"><a class="nav-link" href="#"><img
+							alt="" src="assets/images/back_office/Catalogue.png" width="60"></a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="#"> <img
+							alt="" src="assets/images/back_office/Stock.png" width="45">
+					</a></li>
+				</ul>
+				<a class=" d-flex nav-link" href="#"> <img alt=""
+					src="assets/images/back_office/logBack.png" width="60">
+				</a>
+			</div>
+		</div>
+	</nav>
+<!--end Navbar -->
 	</c:if>

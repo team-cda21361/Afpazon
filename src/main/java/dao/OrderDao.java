@@ -52,7 +52,7 @@ public class OrderDao implements IDAO<Order> {
 		try {
 			sql = connect
 					.prepareStatement("select *, u.id as userId, o.id as orderId, a.id as addressId from order_list o inner join user u on u.id=o.id_user "
-							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s ON s.id = o.id_status");
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s ON s.id = o.id_status ORDER BY dateOrder DESC");
 			rs = sql.executeQuery();
 
 			while (rs.next()) {
@@ -91,5 +91,34 @@ public class OrderDao implements IDAO<Order> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	public ArrayList<Order> search(String search) {
+		ArrayList<Order> orders = new ArrayList<>();
+		Address_type addtype= new Address_type();
 
+		try {
+			sql = connect
+					.prepareStatement("select *, u.id as userId, o.id as orderId, a.id as addressId from order_list o inner join user u on u.id=o.id_user "
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address a ON o.id_address_delivery = a.id INNER JOIN status s "
+							+ "ON s.id = o.id_status WHERE CONCAT(email, ' ', status) LIKE ? ORDER BY dateOrder DESC");
+			sql.setString(1, "%"+ search +"%");
+			rs = sql.executeQuery();
+
+			while (rs.next()) {
+				User user = new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
+						rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone"),
+						rs.getDate("registrationDate"), rs.getBoolean("isActive"),
+						new Role(rs.getInt("id_role"), rs.getString("role")));
+				addtype.setId(2);	
+				Status status = new Status(rs.getString("status"));
+				Address address = new Address(rs.getInt("addressId"), rs.getString("address"), rs.getInt("zipCode"),rs.getString("city"),user,addtype);
+				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address,status) );
+			
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return orders;
+	}
 }

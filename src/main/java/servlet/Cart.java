@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,20 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Role;
-import beans.User;
+import beans.Item;
+import beans.Product;
+import dao.ProductDao;
+
+
+
 
 /**
- * Servlet implementation class home
+ * Servlet implementation class cart
  */
-@WebServlet("/")
-public class Index extends HttpServlet {
+@WebServlet("/cart")
+public class Cart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public Cart() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,29 +35,40 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	ProductDao productDao = new ProductDao();
+	Product product = new Product();
+	
 		
-		/*
-		 * Creation d'un mock pour jongler entre les pages backoffice et site client
-		 */
-		//decommenter ce user pour passer en mode Admin
-		Role roleAdmin = new Role("Admin");
-		User user =new User("mock@admin.fr",roleAdmin );
-		//decommenter ce user pour passer en mode Client
-		//Role roleClient = new Role("Client");
-		//User user =new User("mock@admin.fr",roleClient );
-		HttpSession session =request.getSession(true);
-		session.setAttribute("currentUser", user);
-	
-		if (user.getRole().getRole().equalsIgnoreCase("Admin")) {
-			response.sendRedirect("dashboard");
-			System.out.println("en mode Admin");
-		}else if(user.getRole().getRole().equalsIgnoreCase("Client")) {	
-			request.getRequestDispatcher("/view/index.jsp").forward(request,response);
-			System.out.println("en mode Client");
+		//PANIER 
+		HttpSession sessionP = request.getSession( true );
+		
+		
+		if((Cart) sessionP.getAttribute("cart")==null) {
+			Cart cart_temp= new Cart();
+			sessionP.setAttribute( "cart", cart_temp );
 		}
+		
+		if (request.getParameter("getCart") != null ) {
+			
+		Cart cartD= (Cart) sessionP.getAttribute("cart");
+			
+		
+			
+				product = productDao.findById(Integer.parseInt(request.getParameter("getCart")));
+			
+			
+			Item item = new Item(1,product); 
+			
+			// cartD.addItem(item);
+			
+			sessionP.setAttribute("cart", cartD);
+		}
+		//FIN PANIER
+
+		request.getRequestDispatcher("/view/cart.jsp").forward(request,response);
 	}
-		//fin mock
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

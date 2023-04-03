@@ -23,8 +23,7 @@
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-image">
-								<!--  à modifier au moment de la connection avec <c:out value="${product.mainPicPath}" />  -->
-								<img src="assets/images/products/product-5.jpg" alt="#">
+								<img src="<c:out value="${product.mainPicPath}" />" alt="#">
 								<div class="button">
 									<a href="product-details.html" class="btn"><i
 										class="lni lni-cart"></i> Add to Cart</a>
