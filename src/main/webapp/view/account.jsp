@@ -193,47 +193,52 @@
 		<div class="mb-3">
 			<div class="row">
 				<div class="col">
-					<h5>Adresse de livraison</h5>
-					<p id="orderAddress"></p>
-					<p id="orderZipCodeAndCity"></p>
-				</div>
-				<div class="col">
-					<h5>Adresse de facturation</h5>
-					<p id="orderBillingAddress"></p>
-					<p id="orderBillingZipCodeAndCity"></p>
-				</div>
-				<div class="col">
-					<h5>Informations</h5>
-					<p>Total payé : <span id="orderTotalPrice"></span>&euro;</p>
-					<p>Etat : <span id="orderState"></span></p>
-					<c:if test="${not empty orderSelected.trackingNumber}">
-						<p>Suivi : <span id="orderTrackingNumber"></span></p>
+					<div class="row">
+						<h5 class="text-center">Contenu de la commande</h5>
+						<hr class="superCompactHR">
+					</div>
+					<c:if test="${not empty productsList}">
+						<c:forEach items="${productsList}" var="product">
+							<div class="row">
+								<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
+								<div class="col">
+									<div class="row">
+										<h5><c:out value="${product.product.name}" /></h5>
+									</div>
+									<div class="row">
+										<p>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></p>
+									</div>
+									<div class="row">
+										<p>Quantité : <c:out value="${product.quantity}" /></p>
+									</div>
+								</div>
+							</div>
+							<hr class="compactHR">
+						</c:forEach>
 					</c:if>
 				</div>
-			</div>
-			<hr class="superCompactHR">
-			<h5 class="text-center">Contenu de la commande</h5>
-			<c:if test="${not empty productsList}">
-				<hr class="compactHR">
-				<c:forEach items="${productsList}" var="product">
-					<div class="row">
-						<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
-						<div class="col">
-							<div class="row">
-								<h5><c:out value="${product.product.name}" /></h5>
-							</div>
-							<div class="row">
-								<p>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></p>
-							</div>
-							<div class="row">
-								<p>Quantité : <c:out value="${product.quantity}" /></p>
-							</div>
+					<div class="col col-4">
+						<div class="row mb-3">
+							<h5>Adresse de livraison</h5>
+							<p id="orderAddress"></p>
+							<p id="orderZipCodeAndCity"></p>
+						</div>
+						<div class="row mb-3">
+							<h5>Adresse de facturation</h5>
+							<p id="orderBillingAddress"></p>
+							<p id="orderBillingZipCodeAndCity"></p>
+						</div>
+						<div class="row mb-3">
+							<h5>Informations</h5>
+							<p>Total payé : <span id="orderTotalPrice"></span>&euro;</p>
+							<p>Etat : <span id="orderState"></span></p>
+							<c:if test="${not empty orderSelected.trackingNumber}">
+								<p>Suivi : <span id="orderTrackingNumber"></span></p>
+							</c:if>
 						</div>
 					</div>
-					<hr class="compactHR">
-				</c:forEach>
-			</c:if>
-		</div>
+				</div>
+			</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
