@@ -1,5 +1,3 @@
-<title>Accueil|Carousel</title>
-
 <!--------------------------------------------------------CAROUSEL #1---------------------------------------------------->
 <section class="ftco-section">
 	<div class="container">
