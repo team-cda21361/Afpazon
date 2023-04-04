@@ -1,5 +1,7 @@
-<script defer type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="./assets/js/validation.js"></script>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+<script defer type="text/javascript" src="./assets/js/validation.js"></script>
+<script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
 <br>
 <section>
 

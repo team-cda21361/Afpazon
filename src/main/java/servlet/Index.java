@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Role;
 import beans.User;
+
 
 /**
  * Servlet implementation class home
@@ -32,25 +32,32 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		User user = new User();
 		/*
 		 * Creation d'un mock pour jongler entre les pages backoffice et site client
 		 */
 		//decommenter ce user pour passer en mode Admin
 //		Role roleAdmin = new Role("Admin");
-//		User user =new User("mock@admin.fr",roleAdmin );
+//		user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
 		Role roleClient = new Role("Client");
-		User user =new User("mock@admin.fr",roleClient );
+		user =new User("mock@admin.fr",roleClient );
+		user.setId(1);
+		user.setFirstName("Charles");
 		HttpSession session =request.getSession(true);
 		session.setAttribute("currentUser", user);
-	
-		if (user.getRole().getRole().equalsIgnoreCase("Admin")) {
-			response.sendRedirect("dashboard");
-			System.out.println("en mode Admin");
-		}else if(user.getRole().getRole().equalsIgnoreCase("Client")) {	
+		
+		if (user.getId() > 0) {
+			if (user.getRole().getRole().equalsIgnoreCase("Admin")) {
+				response.sendRedirect("dashboard");
+				System.out.println("en mode Admin");
+			} else {
+				request.getRequestDispatcher("/view/index.jsp").forward(request,response);
+				System.out.println("en mode Client");
+			}
+		} else {	
 			request.getRequestDispatcher("/view/index.jsp").forward(request,response);
-			System.out.println("en mode Client");
+			System.out.println("en mode visiteur");
 		}
 	}
 		//fin mock
