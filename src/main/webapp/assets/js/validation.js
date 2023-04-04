@@ -5,8 +5,9 @@ function loadCSS(filename){
 	file.setAttribute("href", filename);
 	document.head.appendChild(file);
 }
-
 loadCSS("./assets/css/validation.css");
+
+
 
 $(document).ready(function() {
     setTimeout(function() {
@@ -18,13 +19,14 @@ $(document).ready(function() {
 var regexPass = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/);
 var regexEmail = new RegExp(/^[A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9][@][A-Za-z0-9][A-Za-z0-9.-_]+[A-Za-z0-9]?[\.][A-Za-z0-9]{2,3}$/);
 var email = $(".email");
+var password  = $(".password");
 var passwordR  = $(".passwordR");
-var passwordR  = $(".passwordR");
+
 
 function checkformM(event) {
 	event.preventDefault();
 	$(".envform").on("click", function() {
-		cont = 0;
+	cont = 0;
 		let msnError = " est un champ obligatoire!!!!";
 		champs = $(".form-control");
 		$(champs).each(function(index, val) {
@@ -39,6 +41,7 @@ function checkformM(event) {
 					.addClass("is-valid");
 			}
 		});
+		
 	    
 	    if(password.val() != undefined && passwordR.val() != undefined){
 			if(password.val() != passwordR.val()){
@@ -58,20 +61,27 @@ function checkformM(event) {
 			if (!regexEmail.test(email.val())) {
 				$("#" + email.attr("id")).addClass("is-invalid");
 				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-				email.attr("id").addClass("is-invalid");
+				email.addClass("is-invalid");
 				cont++
 			} else {
 				$(".error" + email.attr("id")).text("");
-				email.attr("id").removeClass("is-invalid").addClass("is-valid");
+				email.removeClass("is-invalid").addClass("is-valid");
 			}
 		}
+		if (cont == 0) {
+	    document.formM.submit();
+	    }
+	
 	});
 
-	if (cont == 0 && cont2 == 0) {
-	    document.formM.submit();
-	}
+
+
+
 
 }
+
+
+
  
 function checkformML(event) {
 	event.preventDefault();
@@ -96,27 +106,26 @@ function checkformML(event) {
 			if (!regexEmail.test(email.val())) {
 				$("#" + email.attr("id")).addClass("is-invalid");
 				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-				email.attr("id").addClass("is-invalid");
+				email.addClass("is-invalid");
 				contL++
 		
 			} else {
 				$(".error" + email.attr("id")).text("");
-				email.attr("id").removeClass("is-invalid").addClass("is-valid");
+				email.removeClass("is-invalid").addClass("is-valid");
 			}
 		}
+
+		if (contL == 0) {
+		    document.formML.submit();
+		}		
 		
 	});
 
 
-	if (contL == 0) {
-	    document.formML.submit();
-	}
-
-
 }
+/*****************************/
 
-
-/****************PASSWORD REGEX***************************/
+/****************PASSWORD REGEX et MSN errors***************************/
 var mdp = document.querySelector("#password");
 var msn1 = document.querySelector("#num");
 var msn2 = document.querySelector("#esp");
@@ -157,7 +166,7 @@ $(".form-control").on("keyup", function() {
 		}
 	}
 	
-	if ($(this).prop("id") == "password") {
+	if ($(this).prop("id") == "password" && msn1 != null) {
 		password = $(this);
 		/*Validation password - nombres*/
 		if (regex0.test($(this).val())) {
@@ -238,6 +247,7 @@ $(".form-control").on("keyup", function() {
 			$(this).removeClass("is-invalid").addClass("is-valid");
 		}
 	}
+	
 	
 });
 
