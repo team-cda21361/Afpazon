@@ -219,7 +219,15 @@
 					<div class="row">
 						<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
 						<div class="col">
-							<h5><c:out value="${product.product.name}" /></h5>
+							<div class="row">
+								<h5><c:out value="${product.product.name}" /></h5>
+							</div>
+							<div class="row">
+								<p>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></p>
+							</div>
+							<div class="row">
+								<p>Quantité : <c:out value="${product.quantity}" /></p>
+							</div>
 						</div>
 					</div>
 					<hr class="compactHR">

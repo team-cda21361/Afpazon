@@ -60,8 +60,8 @@ public class Account extends HttpServlet {
 				request.setAttribute("orderSelected", orderSelected);
 				
 				ArrayList<Order_product> productsList = new ArrayList<>();
-				productsList.add(new Order_product(1567745, (float) 25.99, 2, new Product(4, "Rasoir", "", (float) 0, "./assets/products/img/product_4_mainPic.jpg", "", false, "", "", "", (float) 0, 0, 0, false, new VAT()), orderSelected));
-				productsList.add(new Order_product(1567745, (float) 25.99, 2, new Product(4, "Rasoir", "", (float) 0, "./assets/products/img/product_5_mainPic.jpg", "", false, "", "", "", (float) 0, 0, 0, false, new VAT()), orderSelected));
+				productsList.add(new Order_product(1567745, (float) 25.99, 2, new Product(4, "Rasoir Philips super cool SC4093/09", "", (float) 0, "./assets/products/img/product_4_mainPic.jpg", "", false, "", "", "", (float) 0, 0, 0, false, new VAT()), orderSelected));
+				productsList.add(new Order_product(1567745, (float) 150.99, 1, new Product(4, "Lave linge incroyable ChiQ CMB4546", "", (float) 0, "./assets/products/img/product_5_mainPic.jpg", "", false, "", "", "", (float) 0, 0, 0, false, new VAT()), orderSelected));
 				request.setAttribute("productsList", productsList);
 			}
 		}
