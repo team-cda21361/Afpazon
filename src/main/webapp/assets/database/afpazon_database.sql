@@ -346,7 +346,10 @@ INSERT INTO user (`id`, `lastName`, `firstName`, `email`, `password`, `gender`, 
     (17, 'Slidders', 'Dael', 'dsliddersg@shutterfly.com', '5gxmESaKSYA', 'M.', '0452518614', '2022-11-07', 1, 1),
     (18, 'Rosel', 'Blinny', 'broselh@ucoz.ru', 'r4gvEHr', 'Mme.', '6404075325', '2022-08-30', 1, 1),
     (19, 'O\'Day', 'Mace', 'modayi@huffingtonpost.com', 'zX2Oka', 'M.', '0238709373', '2022-05-06', 0, 1),
-    (20, 'Perchard', 'Netti', 'nperchardj@geocities.com', '98uMHIB', 'Mme.', '0748474157', '2022-11-09', 1, 1)
+    (20, 'Perchard', 'Netti', 'nperchardj@geocities.com', '98uMHIB', 'Mme.', '0748474157', '2022-11-09', 1, 1),
+    (21, 'Test (C)', 'Compte Test (C)', 'c@test.fr', 'test', 'M.', '0123456789', '2023-04-04', 1, 1),
+    (22, 'Test (V)', 'Compte Test (V)', 'v@test.fr', 'test', 'M.', '0123456789', '2023-04-04', 1, 729),
+    (23, 'Test (A)', 'Compte Test (A)', 'a@test.fr', 'test', 'M.', '0123456789', '2023-04-04', 1, 183)
 ;
 INSERT INTO `address` (`id`, `address`, `zipCode`, `city`, `id_user`, `id_address_type`) VALUES
     (1, '028 Debra Point', 64520, 'Zhoukou', 11, 2),
