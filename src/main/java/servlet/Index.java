@@ -37,11 +37,11 @@ public class Index extends HttpServlet {
 		 * Creation d'un mock pour jongler entre les pages backoffice et site client
 		 */
 		//decommenter ce user pour passer en mode Admin
-		Role roleAdmin = new Role("Admin");
-		User user =new User("mock@admin.fr",roleAdmin );
+//		Role roleAdmin = new Role("Admin");
+//		User user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
-//		Role roleClient = new Role("Client");
-//		User user =new User("mock@admin.fr",roleClient );
+		Role roleClient = new Role("Client");
+		User user =new User("mock@admin.fr",roleClient );
 		HttpSession session =request.getSession(true);
 		session.setAttribute("currentUser", user);
 	
