@@ -38,8 +38,8 @@
 				    </button>
 				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			          	<li class="nav-item"><em><a class="nav-link text-warning">Chez Afpazon, on vend tout pour votre plus grand plaisir !</a></em></li>
-				        <li class="nav-item dropdown ms-3">
+			          	<li class="nav-item w-60 fs-5 fw-bold"><em><a class="nav-link text-warning">"On vend tout !"</a></em></li>
+				        <li class="nav-item dropdown ms-3 my-auto">
 				          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						    Catégories
 						  </button>
