@@ -1,3 +1,7 @@
+	<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+<script defer type="text/javascript" src="./assets/js/product.js"></script>
+<script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
 	<main>
 	<!-- Start Item Details -->
     <section class="item-details section">
@@ -199,22 +203,4 @@
         </div>
     </div>
     <!-- script pour la gestion des vignetes et image principale -->
-    <script type="text/javascript">
-        const current = document.getElementById("current");
-        const opacity = 0.6;
-        const imgs = document.querySelectorAll(".img");
-        imgs.forEach(img => {
-            img.addEventListener("click", (e) => {
-                //reset opacity
-                imgs.forEach(img => {
-                    img.style.opacity = 1;
-                });
-                current.src = e.target.src;
-                //adding class 
-                //current.classList.add("fade-in");
-                //opacity
-                e.target.style.opacity = opacity;
-            });
-        });
-    </script>
 	</main>
