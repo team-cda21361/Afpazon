@@ -1,4 +1,12 @@
 
+.item-details .product-images .main-img {
+  width: 500px;
+  height: 400px;
+}
+.item-details .product-images .main-img #current {
+
+}
+
 .item-details .product-images img {
   width: 100%;
   cursor: pointer;

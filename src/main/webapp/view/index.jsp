@@ -3,7 +3,9 @@
 <script defer src="./assets/js/swiper-bundle.min.js"></script>
 <script defer src="./assets/js/slider.js"></script>
 <!--------------------------------------------------------CAROUSEL #1---------------------------------------------------->
-<h1>Container</h1>
+<br>
+<h3>Carousel </h3>
+<hr>
 <section>
 	<div class="container">
 		<div class="container swiper">
@@ -35,5 +37,6 @@
 		</div>
 	</div>
 </section>
+<br>
 <br>
 <!-- ---------------------------------------------------End CAROURSEL -------------------------->
