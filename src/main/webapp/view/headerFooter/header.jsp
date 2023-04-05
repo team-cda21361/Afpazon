@@ -57,7 +57,7 @@
 						  	  <option value="${category.id}"><c:out value="${category.category}" /></option>
 						  </c:forEach>
 						</select>
-				        <input class="form-control border-start-0 border-end-0 rounded-start-0 rounded-end-0" type="search" placeholder="Recherchez un produit..." aria-label="Search">
+				        <input class="form-control border-start-0 border-end-0 rounded-start-0 rounded-end-0" type="search" placeholder="Recherchez..." aria-label="Search">
 				        <button class="btn btn-outline-success rounded-start-0 rounded-end" type="submit"><i class="bi bi-search"></i></button>
 				      </form>
 				      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
