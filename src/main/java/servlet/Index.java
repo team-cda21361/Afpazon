@@ -43,8 +43,8 @@ public class Index extends HttpServlet {
 //		user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
 		ProductDao produitDao = new ProductDao();
-		Product produit = new Product();
-		ArrayList<beans.Product> listCarousel = new ArrayList();
+
+		ArrayList<beans.Product> listCarousel = new ArrayList<>();
 		
 		
 		Role roleClient = new Role("Client");

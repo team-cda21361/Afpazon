@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
                         <div class="product-images">
                             <main id="gallery">
                                 <div class="main-img">
-                                    <img src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />" id="current" alt="#">
+                                    <img src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />" id="current" alt="#" class="img">
                                 </div>
                                 <div class="images">
                                     <img src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />" class="img" alt="#">
@@ -42,10 +42,16 @@ pageEncoding="UTF-8"%>
                               <c:out value="${ product.getColor() }" />
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group quantity">
-                                        <label for="color">Quantity</label>
-                   <i class="bi bi-plus-circle"></i> 1 <i class="bi bi-dash-circle"></i>
+                                <div class="col-lg-3 col-md-3 col-12 ">
+                                    <div class="form-group quantity ">
+                                        <label for="color"><strong>Quantity: </strong></label>
+                                        <form method="post">
+                                        	<button type="submit" class="btn btn-light" name="plus" value="<c:out value="${ cantite }" />"><i class="bi bi-plus-circle"></i></button>
+                    					</form>
+                    					<c:out value="${ cantite }" />
+                    					<form method="post">
+                    						<button type="submit" class="btn btn-light" name="minus" value="<c:out value="${ cantite }" />"> <i class="bi bi-dash-circle"></i></button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +95,23 @@ pageEncoding="UTF-8"%>
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
-                          
+                          <div class="info-body custom-responsive-margin">
+     <c:forEach items="${ review }" var="review" varStatus="status">
+      <div class="form-group quantity ">
+     	<c:out value="${ review.getContent() }" />
+     </div>
+     </c:forEach>
+     <div>MSN 1</div>
+     <div>MSN 1</div>
+     <div>MSN 1</div>
+     <div>MSN 1</div>
+     <div>MSN 1</div>
+     <div>MSN 1</div>
+     
+
+
+      
+                          </div>
                         </div>
                     </div>
                 </div>

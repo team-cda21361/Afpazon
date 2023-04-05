@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ImageDao;
 import dao.ProductDao;
+import dao.ReviewDao;
 
 /**
  * Servlet implementation class Product
@@ -32,13 +33,31 @@ public class Product extends HttpServlet{
      */
     ImageDao imageDao =new ImageDao();
     ProductDao productDao = new ProductDao();
-    
+    ReviewDao reviewDao = new ReviewDao();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
     	int id = Integer.parseInt(request.getParameter("id"));
+    	int cantite = 1;
+
+    	if(request.getParameter("plus") != null) {
+    		cantite = Integer.parseInt(request.getParameter("plus"));
+    		cantite = cantite + 1;
+    	}
+    	if(request.getParameter("minus") != null) {
+    		cantite = Integer.parseInt(request.getParameter("minus"));
+    		cantite = cantite - 1;
+    		if(cantite <= 0) {
+    			cantite =1;
+    		}
+    	}
     	
-  
+    	System.out.println("Plus: "+request.getParameter("plus"));
+    	System.out.println("Minus: "+request.getParameter("minus"));
+    	
+    	request.setAttribute("review", reviewDao.findByIdProd(id));
+    	
 		request.setAttribute("images", imageDao.findImagesById(id));
+		request.setAttribute("cantite", cantite);
 		System.out.println("NOMBRE"+productDao.findById(id).getName());
 		request.setAttribute("product", productDao.findById(id));
 		
