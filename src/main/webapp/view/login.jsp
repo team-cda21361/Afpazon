@@ -1,5 +1,7 @@
-<script defer type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="./assets/js/validation.js"></script>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+<script defer type="text/javascript" src="./assets/js/validation.js"></script>
+<script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
 <br>
 <section>
 
@@ -23,20 +25,20 @@
 				<hr>
 				<div class="row">
 					<div class="mb-3 w-50">
-						<img src="assets/images/login.jpg">
+						<img src="assets/images/login.jpg" width="200px">
 					</div>
 					<div class="mb-3 w-50">
 					
 						<form method="post" onsubmit="checkformML(event)" action="login" name="formML">
 							<div class="mb-3">
 								<label class="form-label">*Email</label> <input type="text"
-									class="form-control" placeholder="Email" id="email" name="email">
+									class="form-control form-controlV" placeholder="Email" id="email" name="email">
 								<p class="erroremail error"></p>
 							</div>
 
 							<div class="mb-3 lab1">
 								<label class="form-label">*Password</label> <input
-									type="password" class="form-control" placeholder="Password"	id="password" name="password">
+									type="password" class="form-control form-controlV" placeholder="Password"	id="password" name="password">
 								<p class="errorpassword error"></p>
 								
 							</div>

@@ -1,12 +1,14 @@
 <h1 class="text-center text-dark my-3">Paiement</h1>
 
-<div class="row my-5">
+<div class="row justify-content-center">
 
-  <div class="col">
+<!--  ******************************************************************* DIV GAUCHE ************************************** -->
+
+  <div class="col-5">
   <h3 class="text-center text-dark my-5">Recapitulatif commande</h3>
    
-   <table class="table table-stripped mx-3">
-  <thead>
+   <table class="table table-bordered mx-3">
+  <thead class="table-active">
     <tr>
       <th scope="col">Image</th>
       <th scope="col">name</th>
@@ -42,10 +44,10 @@
    
   </div>
 
-  
-  <div class="col">
+<!--  ******************************************************************* DIV DROITE ************************************** -->
+  <div class="col-5 ml-3">
   <h3 class="text-center text-dark my-5">Recapitulatif client</h3>
-     <form class="row g-3">
+     <form class="row g-3" method="post">
   <div class="col-md-6">
     <label for="inputFirstName" class="form-label">Nom</label>
     <input type="text" class="form-control" id="inputFirstName" value="$(currentUser.firstName)" name="firstName">
@@ -75,10 +77,10 @@
 </select>
   </div>
 <div>
-<button type="submit" class="btn btn-success">+</button>
+<button type="button" class="btn btn-success">+</button>
 </div>
 
-<!-- <div class="d-none"> -->
+
 <div>
 <div class="col-md-6">
     <label for="validationBillingAddress" class="form-label">Adresse</label>

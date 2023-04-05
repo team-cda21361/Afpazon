@@ -1,5 +1,5 @@
 <div class="container w-75">
-	<h2 class="col-12 text-center mt-2">
+	<h3 class="col-12 text-center mt-2">
 		<c:if test="${action == 'add'}">
 			<c:out value="Ajout " />
 		</c:if>
@@ -7,7 +7,7 @@
 			<c:out value="Modification " />
 		</c:if>
 		d'utilisateur
-	</h2>
+	</h3>
 	<div class="form-check form-switch d-flex justify-content-center mt-2">
 		<label class="form-check-label me-5" >Compte actif :</label>
 		<input class="form-check-input" type="checkbox">
