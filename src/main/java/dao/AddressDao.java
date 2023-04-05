@@ -62,7 +62,14 @@ ResultSet rs = null;
 
 	@Override
 	public boolean delete(Address address) {
-		// TODO Auto-generated method stub
+		try {			
+			sql = connect.prepareStatement("DELETE FROM address WHERE id = ?");	
+			sql.setInt(1, address.getId());
+			sql.execute();
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();		
+		}
 		return false;
 	}
 
@@ -71,17 +78,18 @@ ResultSet rs = null;
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	public ArrayList<Address> readById(int id){
 		ArrayList<Address> list =new ArrayList<>();
 		
 		User currentUser = new User();
+		currentUser.setId(id);
+		
 		try {
 			sql = connect.prepareStatement("SELECT *,a.id as idType FROM address INNER JOIN user u ON u.id =id_user INNER JOIN address_type a ON a.id = id_address_type WHERE u.id=?");
 			sql.setInt(1, id);
-			
 			rs=sql.executeQuery();
 			while (rs.next()) {
-				currentUser.setId(id);
 				Address_type addressType =new Address_type(rs.getInt("idType"),rs.getString("type"));
 				list.add(new Address(rs.getInt("id"),rs.getString("address"),rs.getInt("zipCode"),rs.getString("city"),currentUser,addressType));
 			}
