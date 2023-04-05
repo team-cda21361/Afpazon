@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Item;
 import beans.Product;
+import dao.CategoryDao;
 import dao.ProductDao;
 
 /**
@@ -32,7 +33,7 @@ public class Cart extends HttpServlet{
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+    	CategoryDao.injectCategories(request);
         ProductDao productDao = new ProductDao();
         Product product = new Product();
         

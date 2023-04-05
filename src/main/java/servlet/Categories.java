@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Product;
 import beans.VAT;
+import dao.CategoryDao;
 
 /**
  * Servlet implementation class Categories
@@ -31,6 +32,7 @@ public class Categories extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CategoryDao.injectCategories(request);
 		ArrayList<Product> products = new ArrayList<>();
 		
 		/***********  MOC ************/
