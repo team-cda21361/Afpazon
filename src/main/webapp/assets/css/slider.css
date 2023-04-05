@@ -18,6 +18,7 @@
   border-radius: 8px 8px 0 0;
 }
 .card .profile-details {
+  height: 100px;
   display: flex;
   align-items: center;
   column-gap: 12px;

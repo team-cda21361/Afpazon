@@ -154,7 +154,7 @@ public class ProductDao implements IDAO<Product> {
 
 	@Override
 	public Product findById(int id) {
-
+		Product product = new Product();
 
 		try {
 			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat "
@@ -162,22 +162,54 @@ public class ProductDao implements IDAO<Product> {
 
 			sql.setInt(1,id);
 
+			System.out.println("sql id prod: "+sql);
 			ResultSet rs= sql.executeQuery();
 
 			if(rs.next()) {
-				new Product(rs.getString("name"),rs.getString("description"),
+				product = new Product(rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
-						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("refenrence"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 
 				System.out.println("FindById PRODUCT OK !!!");
+				return product;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("FindById PRODUCT NOK...");
 		}
-		return null;
+		return product;
+	}
+	
+	
+	
+	public ArrayList<Product> findProdCarousel() {
+		ArrayList<Product> listProducts = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat  ON product.id_vat = vat.id WHERE inCarousel=1");
+			rs = sql.executeQuery();
+			System.out.println("REALIZA LA CONSULTA");
+			
+			while(rs.next()) {
+				Product product = new Product(rs.getInt("id"), rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+
+				listProducts.add(product);
+			
+			}
+			return listProducts;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return listProducts;
 	}
 }

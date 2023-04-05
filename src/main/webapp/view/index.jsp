@@ -11,21 +11,21 @@
 				<div class="card-wrapper swiper-wrapper">
 				
 				
-				
+				 <c:forEach items="${ carousel }" var="carousel" varStatus="status">
 					<div class="card swiper-slide">
 						<div class="image-box">
-							<img src="images/showImg/fullDev.jpg" alt="" />
+							<img src="assets/images/product-details/<c:out value="${ carousel.getMainPicPath() }" />" alt="" />
 						</div>
-						<div class="profile-details">
+						<div class="profile-details d-inline-flex">
 							<a href="#" class="btn btn-primary"><i class="bi bi-cart-plus"></i></a>
-							<a href="#" class="btn btn-success"><i class="bi bi-plus-circle"></i>Info</a>
-														<div class="name-job">
-								<h3 class="name">David Cardlos</h3>
-								<h4 class="job">Full Stack Developer</h4>
+							<a href="product?id=<c:out value="${ carousel.getId() }" />" class="btn btn-success" title="Plus Info"><i class="bi bi-plus-circle"></i></a>
+							<div class="name-job">
+								<h3 class="name"><c:out value="${ carousel.getName() }" /></h3>
+								<h4 class="job"><strong>Prix: </strong> <c:out value="${ carousel.getPrice() }" /> &euro; </h4>
 							</div>
 						</div>
 					</div>
-					
+				</c:forEach>
 					
 				</div>
 			</div>
