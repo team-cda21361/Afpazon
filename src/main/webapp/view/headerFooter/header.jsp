@@ -294,7 +294,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="gen-catalog              ">
 							<img alt="" src="assets/images/back_office/Catalogue.png" width="60">
 						</a>
 					</li>
@@ -304,7 +304,7 @@
 						</a>
 					</li>
 				</ul>
-				<a class=" d-flex nav-link" href="#"> <img alt=""
+				<a class=" d-flex nav-link" href="login"> <img alt="login"
 					src="assets/images/back_office/logBack.png" width="60">
 				</a>
 			</div>

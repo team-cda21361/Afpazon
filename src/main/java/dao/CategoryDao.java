@@ -18,7 +18,7 @@ public class CategoryDao implements IDAO<Category> {
 	@Override
 	public boolean create(Category category) {
 		try {
-			sql = connect.prepareStatement("INSERT INTO category(category,isActive VALUES (?,?)");
+			sql = connect.prepareStatement("INSERT INTO category(category,isActive) VALUES (?,?)");
 			sql.setString(1, category.getCategory());
 			sql.setBoolean(2, category.isActive());
 			sql.execute();
@@ -47,7 +47,6 @@ public class CategoryDao implements IDAO<Category> {
 			e.printStackTrace();
 		}
 		//Retourne la liste des category ajout�s dans la liste
-		System.out.println(listategory);
 		return listategory;
 	}
 

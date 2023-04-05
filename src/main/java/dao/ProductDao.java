@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.AddProductList;
+import beans.Discount;
 import beans.Product;
 import beans.VAT;
 import connector.DBConnect;
@@ -167,17 +169,68 @@ public class ProductDao implements IDAO<Product> {
 			if(rs.next()) {
 				new Product(rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
-						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("refenrence"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 
-				System.out.println("FindById PRODUCT OK !!!");
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("FindById PRODUCT NOK...");
 		}
 		return null;
+	}
+	
+	//************************************Find by reference*******************************//
+	
+	public Product findByRef(String reference) {
+		try {
+			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat "
+					+ "ON product.id_vat = vat.id WHERE product.reference=?");
+			sql.setString(1,reference);
+			 rs= sql.executeQuery();
+			if(rs.next()) {
+			return new Product(rs.getInt("id"),rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	//************************************Read By category for discount list table*******************************//
+	public ArrayList<Product> readByCategory(ArrayList<Product> list, int catId) {
+		try {
+			sql = connect.prepareStatement("SELECT *, p.id as idProd FROM category c INNER JOIN category_product  cp ON c.id = id_category INNER JOIN product "
+					+ "p ON p.id = id_product INNER JOIN vat v ON v.id = id_vat WHERE c.id = ?");
+			sql.setInt(1, catId);
+			rs = sql.executeQuery();
+
+			while(rs.next()) {
+				Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+				
+				if (!new AddProductList().isExist(list, product.getId())) {
+					
+					list.add(product);
+				}
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return list;
 	}
 }

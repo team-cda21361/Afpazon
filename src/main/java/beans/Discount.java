@@ -26,6 +26,11 @@ public class Discount {
 		this.percent = percent;
 		this.voucher = voucher;
 	}
+	
+
+	public Discount(int id) {
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
