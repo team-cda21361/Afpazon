@@ -9,5 +9,10 @@
 	width:95%;
 	margin:auto;
 }
-
-
+.hiddenBtn{
+	border:none;
+	background:none;
+}
+.backRowMargin{
+	margin-top:20px;
+}
