@@ -105,7 +105,7 @@ public class Register extends HttpServlet {
     			return;
     			
             }	
-            if(userDao.findByEmail(email)) {
+            if(userDao.findIdByEmail(email)) {
     			request.setAttribute("msn", "Vous avez déjà un compte avec cette adresse e-mail.");
     			request.setAttribute("msnType",  "KO");
     			doGet(request, response);
