@@ -51,14 +51,14 @@
 				        </li>
 				      </ul>
 				      <form class="d-flex" role="search">
-				      	<select class="form-select" style="z-index: 1050;">
+				      	<select class="form-select rounded-end-0" style="z-index: 1050;">
 						  <option selected value="0">Toute la boutique</option>
 						  <c:forEach items="${categoriesList}" var="category">
 						  	  <option value="${category.id}"><c:out value="${category.category}" /></option>
 						  </c:forEach>
 						</select>
-				        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				        <button class="btn btn-outline-success" type="submit">Search</button>
+				        <input class="form-control border-start-0 border-end-0 rounded-start-0 rounded-end-0" type="search" placeholder="Recherchez..." aria-label="Search">
+				        <button class="btn btn-outline-success rounded-start-0 rounded-end" type="submit"><i class="bi bi-search"></i></button>
 				      </form>
 				      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					      <c:if test="${empty currentUser}">
