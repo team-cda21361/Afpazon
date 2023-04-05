@@ -18,6 +18,7 @@ import beans.Role;
 import beans.Status;
 import beans.User;
 import beans.VAT;
+import dao.CategoryDao;
 
 /**
  * Servlet implementation class Account
@@ -38,6 +39,7 @@ public class Account extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CategoryDao.injectCategories(request);
 		User user = new User(12312313, "Fouquet", "Charles", "fouquetcharles@gmail.com", "", "M.", "0645716639", java.sql.Date.valueOf("2023-03-30"), true, new Role(729, "Vendeur"));
 		request.setAttribute("currentUser2", user);
 		

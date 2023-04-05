@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Role;
 import beans.User;
+import dao.CategoryDao;
 
 
 /**
@@ -32,7 +33,9 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CategoryDao.injectCategories(request);
 		User user = new User();
+		HttpSession session =request.getSession(true);
 		/*
 		 * Creation d'un mock pour jongler entre les pages backoffice et site client
 		 */
@@ -40,12 +43,11 @@ public class Index extends HttpServlet {
 //		Role roleAdmin = new Role("Admin");
 //		user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
-		Role roleClient = new Role("Client");
-		user =new User("mock@admin.fr",roleClient );
-		user.setId(1);
-		user.setFirstName("Charles");
-		HttpSession session =request.getSession(true);
-		session.setAttribute("currentUser", user);
+//		Role roleClient = new Role("Client");
+//		user =new User("mock@admin.fr",roleClient );
+//		user.setId(1);
+//		user.setFirstName("Charles");
+//		session.setAttribute("currentUser", user);
 		
 		if (user.getId() > 0) {
 			if (user.getRole().getRole().equalsIgnoreCase("Admin")) {
