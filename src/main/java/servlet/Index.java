@@ -47,7 +47,7 @@ public class Index extends HttpServlet {
 		user =new User("mock@admin.fr",roleClient );
 		user.setId(1);
 		user.setFirstName("Charles");
-		HttpSession session =request.getSession(true);
+		//HttpSession session =request.getSession(true);
 		session.setAttribute("currentUser", user);
 	
 		if (user.getId() > 0) {
