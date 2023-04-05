@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import beans.Category;
 import connector.DBConnect;
 
@@ -14,13 +17,14 @@ public class CategoryDao implements IDAO<Category> {
 	PreparedStatement sql; 
 	ResultSet rs;
 	Category category = new Category();
+	public static ArrayList<Category> activeCategories = new ArrayList<>();
 	
 	@Override
 	public boolean create(Category category) {
 		try {
-			sql = connect.prepareStatement("INSERT INTO category(category,isActive VALUES (?,?)");
+			sql = connect.prepareStatement("INSERT INTO category (category, isActive) VALUES (?, ?)");
 			sql.setString(1, category.getCategory());
-			sql.setBoolean(2, category.isActive());
+			sql.setBoolean(2, true);
 			sql.execute();
 			return true;
 		} catch (SQLException e) {
@@ -31,34 +35,48 @@ public class CategoryDao implements IDAO<Category> {
 
 	@Override
 	public ArrayList<Category> read() {
-		ArrayList<Category> listategory =new ArrayList<>();
+		ArrayList<Category> listeCategory =new ArrayList<>();
 		try {
-			//Recup de tous les informations des category 
-			sql =  connect.prepareStatement("SELECT * FROM category");
-			//RS: stock le resultat de la requete SQL
+			sql = connect.prepareStatement("SELECT * FROM category");
 			rs = sql.executeQuery();
-			//Boucle sur chaque elt trouv� dans le ResultSet - equivalent de Foreach
 			while(rs.next()) {
-				category = new Category(rs.getInt("id"),rs.getString("category"),rs.getBoolean("isActive"));
-				//Ajout de l'element instanci�e au dessus dans la liste 
-				listategory.add(category);
+				category = new Category(rs.getInt("id"), rs.getString("category"), rs.getBoolean("isActive"));
+				listeCategory.add(category);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//Retourne la liste des category ajout�s dans la liste
-		System.out.println(listategory);
-		return listategory;
+		return listeCategory;
+	}
+	
+	public void readActives() {
+		activeCategories.clear();
+		try {
+			sql = connect.prepareStatement("SELECT * FROM category WHERE isActive = 1");
+			rs = sql.executeQuery();
+			while (rs.next()) {
+				activeCategories.add(new Category(rs.getInt("id"), rs.getString("category"), rs.getBoolean("isActive")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void injectCategories(HttpServletRequest request) {
+		HttpSession session = request.getSession(true);
+		CategoryDao categoryDao = new CategoryDao();
+		categoryDao.readActives();
+		session.setAttribute("categoriesList", activeCategories);
 	}
 
 	@Override
 	public boolean update(Category category) {
 		try {
-			sql = connect.prepareStatement("UPDATE category SET category =?, isActive=?  WHERE id=?");
-			sql.setString(1,category.getCategory());
-			sql.setBoolean(2,category.isActive());
-			sql.setInt(3,category.getId());
-			sql.executeUpdate();
+			sql = connect.prepareStatement("UPDATE category SET category = ?, isActive = ? WHERE id = ?");
+			sql.setString(1, category.getCategory());
+			sql.setBoolean(2, category.isActive());
+			sql.setInt(3, category.getId());
+			sql.execute();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,38 +87,35 @@ public class CategoryDao implements IDAO<Category> {
 	@Override
 	public boolean delete(Category category) {
 		try {			
-			sql = connect.prepareStatement("DELETE FROM category WHERE id=?");	
+			sql = connect.prepareStatement("DELETE FROM category WHERE id = ?");	
 			sql.setInt(1, category.getId());
-			sql.executeUpdate();
+			sql.execute();
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();		
 		}
 		return false;
-
 	}
+	
 	public boolean changeCategoryStatus(Category category) {
 		try {			
-			sql = connect.prepareStatement("Update   category set category=? , isActive=? WHERE id=?");	
+			sql = connect.prepareStatement("UPDATE category SET isActive = ? WHERE id = ?");	
 			sql.setBoolean(1, category.isActive());
 			sql.setInt(2, category.getId());
-			System.out.println(sql);
-			sql.executeUpdate();
+			sql.execute();
 			return true;
 		}catch(Exception e) {
-			e.printStackTrace();		
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Override
-	public Object findById(int id) {
+	public Category findById(int id) {
 		try {
-			sql = connect.prepareStatement("SELECT * FROM category "
-					+ " WHERE id=?");
-			sql.setInt(1,id);
-			System.out.println(sql);
-			 rs= sql.executeQuery();
+			sql = connect.prepareStatement("SELECT * FROM category WHERE id = ?");
+			sql.setInt(1, id);
+			rs= sql.executeQuery();
 			if(rs.next()) {
 				category = new Category(rs.getInt("id"),rs.getString("category"),rs.getBoolean("isActive"));
 				return category;
