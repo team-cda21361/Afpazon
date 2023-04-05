@@ -5,9 +5,8 @@ function loadCSS(filename){
 	file.setAttribute("href", filename);
 	document.head.appendChild(file);
 }
+
 loadCSS("./assets/css/validation.css");
-
-
 
 $(document).ready(function() {
     setTimeout(function() {
@@ -22,18 +21,19 @@ var email = $(".email");
 var password  = $(".password");
 var passwordR  = $(".passwordR");
 
-
 function checkformM(event) {
 	event.preventDefault();
 	$(".envform").on("click", function() {
-	cont = 0;
+		cont = 0;
 		let msnError = " est un champ obligatoire!!!!";
-		champs = $(".form-control");
+		champs = $(".form-controlV");
 		$(champs).each(function(index, val) {
 			if (val.value == "" || val.value.length > 30) {
 				$(".error" + val.name).text(val.placeholder + msnError);
 				$("#" + val.name).addClass("is-invalid");
 				cont++;
+	
+				console.log("Error en el campo: "+ val.name + val.value + " COnt: "+cont);
 			} else {
 				$(".error" + val.name).text("");
 				$("#" + val.name)
@@ -42,13 +42,20 @@ function checkformM(event) {
 			}
 		});
 		
+		console.log("****************1*****************");
+		console.log("password.val() "+password.val());
+	    console.log("passwordR.val() "+passwordR.val());
+	    console.log("****************2*****************");
 	    
 	    if(password.val() != undefined && passwordR.val() != undefined){
 			if(password.val() != passwordR.val()){
+				console.log("No son iguales " + passwordR.attr("id"));
+				console.log("Name: " + passwordR.attr("name"));
 				$(".errorpasswordR").addClass("error");
 				$(".errorpasswordR").text("Les deux mots de passe doivent être identiques.");
 				$("#" + passwordR.attr("id")).addClass("is-invalid");
 				cont++;
+				console.log("Error en el campo: If Password");
 			}else{
 				$(".errorpasswordR").addClass("error");
 			    $(".errorpasswordR").text("");
@@ -57,26 +64,27 @@ function checkformM(event) {
 						.addClass("is-valid");
 			}
 		}
+	    console.log("Email: "+ email.val());
 	    if(email.val() != undefined){
 			if (!regexEmail.test(email.val())) {
+			    console.log("Email pas correct: "+ cont);
 				$("#" + email.attr("id")).addClass("is-invalid");
 				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-				email.addClass("is-invalid");
+				email.attr("id").addClass("is-invalid");
 				cont++
 			} else {
+				console.log("Email IF entre NOT: "+ email.val());
 				$(".error" + email.attr("id")).text("");
-				email.removeClass("is-invalid").addClass("is-valid");
+				email.attr("id").removeClass("is-invalid").addClass("is-valid");
 			}
 		}
-		if (cont == 0) {
-	    document.formM.submit();
-	    }
-	
 	});
+	console.log("Contador de errores1: "+ cont);
+	console.log("Contador de errores2: "+ cont2);
 
-
-
-
+	if (cont == 0 && cont2 == 0) {
+	    document.formM.submit();
+	}
 
 }
 
@@ -88,12 +96,14 @@ function checkformML(event) {
 	$(".envformL").on("click", function() {
 		contL = 0;
 		let msnError = " est un champ obligatoire!!!!";
-		champs = $(".form-control");
+		champs = $(".form-controlV");
 		$(champs).each(function(index, val) {
 			if (val.value == "" || val.value.length > 30) {
 				$(".error" + val.name).text(val.placeholder + msnError);
 				$("#" + val.name).addClass("is-invalid");
 				contL++;
+	
+				console.log("Error en el campo: "+ val.name + val.value + " COntL: "+contL);
 			} else {
 				$(".error" + val.name).text("");
 				$("#" + val.name)
@@ -102,25 +112,28 @@ function checkformML(event) {
 			}
 
 		});
+		    console.log("Email antes entre: "+ email.val());
 		if(email.val() != undefined){
 			if (!regexEmail.test(email.val())) {
 				$("#" + email.attr("id")).addClass("is-invalid");
 				$(".error" + email.attr("id")).text("Vous devez saisir une adresse e-mail valide.");
-				email.addClass("is-invalid");
+				email.attr("id").addClass("is-invalid");
 				contL++
 		
 			} else {
+				console.log("Email IF entre NOT: "+ email.val());
 				$(".error" + email.attr("id")).text("");
-				email.removeClass("is-invalid").addClass("is-valid");
+				email.attr("id").removeClass("is-invalid").addClass("is-valid");
 			}
 		}
-
-		if (contL == 0) {
-		    document.formML.submit();
-		}		
 		
 	});
+	console.log("Total: COntL: "+contL);
 
+	if (contL == 0) {
+	    document.formML.submit();
+	}
+ console.log("Sorte: "+ email.val());
 
 }
 /*****************************/
@@ -148,9 +161,10 @@ function blurFunction() {
 
 
 
-$(".form-control").on("keyup", function() {
+$(".form-controlV").on("keyup", function() {
 	let msnError = " est un champ obligatoire!!!";
 	cont2 = 0;
+	console.log("Entra dans l'evenement Keyup");
 	if ($(this).val() == "" || $(this).val().length > 25 || $(this).val().length < 2) {
 		$(".error" + $(this).prop("id")).text($(this).prop("placeholder") + msnError);
 		$(this).addClass("is-invalid");
@@ -166,7 +180,7 @@ $(".form-control").on("keyup", function() {
 		}
 	}
 	
-	if ($(this).prop("id") == "password" && msn1 != null) {
+	if ($(this).prop("id") == "password") {
 		password = $(this);
 		/*Validation password - nombres*/
 		if (regex0.test($(this).val())) {
@@ -248,6 +262,7 @@ $(".form-control").on("keyup", function() {
 		}
 	}
 	
+	console.log("cont2 en key "+cont2);
 	
 });
 
