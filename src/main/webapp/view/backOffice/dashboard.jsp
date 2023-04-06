@@ -2,7 +2,7 @@
 
 	<div class="backContainer">
 		<!-- start user -->
-		<div class="row ">
+		<div class="row backRowMargin">
 			<div class="col-8">
 				<div class="d-flex justify-content-between">
 					<h4>Utilisateurs</h4>
@@ -31,14 +31,14 @@
 								<c:if test="${user.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="25"></c:if>
 								<c:if test="${user.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
-								<td class="text-center"><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="user-management?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 								<td class="text-center"><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
 					<div>
-					<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+					<a href="user-management"><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
 					</div>
 			</div>
 			<div class="col-4">
@@ -52,10 +52,10 @@
 		<!-- end user -->
 		
 		<!-- start product -->
-		<div class="row ">
+		<div class="row justify-content-between backRowMargin">
 			<div class = col-6>
 				<div class="d-flex justify-content-between">
-					<h4>Produits</h4>
+					<h4>Produits   <a href="stockManager"><img alt="" src="assets/images/back_office/littleStockNoir.png"></a></h4>
 				</div>
 					<table class="table table-bordered tableManager">
 						<thead class="table-active">
@@ -66,7 +66,7 @@
 								<th scope="col">Quantité</th>
 								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
-								<th scope="col">Supprimmer</th>
+								<th scope="col">Supprimer</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -80,14 +80,14 @@
 								<c:if test="${stock.product.isActive() == true}"><img alt="Icon check" src="assets/images/back_office/checkIcon.png" width="25"></c:if>
 								<c:if test="${stock.product.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
-								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="product-management?option=edit&id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
 					<div>
-						<a href="stockManager"><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+						<a href="product-management"><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
 					</div>
 				</div>
 				<!-- end product -->
@@ -104,7 +104,8 @@
 								<th scope="col">Date de début</th>
 								<th scope="col">Date de fin</th>
 								<th scope="col">Editer</th>
-								<th scope="col">Supprimmer</th>
+								<!-- isActive to be developped later-->
+								<!-- <th scope="col">Supprimmer</th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -114,20 +115,21 @@
 								<td><c:out value="${discount.percent }"></c:out></td>
 								<td><c:out value="${discount.startDate }"></c:out></td>
 								<td><c:out value="${discount.endDate }"></c:out></td>
-								<td class="text-center"><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td class="text-center"><a href="dashboard?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="discount?option=edit&id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<!-- isActive to be developped later-->
+								<!-- <td class="text-center"><a href="discount?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td> -->
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
 					<div>
-						<a href=""><img alt="discountManagement" src="assets/images/back_office/plus.png" width="20"></a>
+						<a href="discount"><img alt="discount" src="assets/images/back_office/plus.png" width="20"></a>
 					</div>
 			</div>
 		</div>
 	<!-- end discount -->
 	<!-- Start commande -->
-		<div class="row ">
+		<div class="row backRowMargin">
 			<div class="col-10">
 				<div class="d-flex justify-content-between">
 					<h4>Commande</h4>
@@ -139,6 +141,7 @@
 								<th scope="col">Email du client</th>
 								<th scope="col">date</th>
 								<th scope="col">status de livraison</th>
+								<th scope="col">Envoie facture</th>
 								<th scope="col">Editer</th>
 								<th scope="col">Supprimmer</th>
 							</tr>
@@ -150,21 +153,22 @@
 								<td><c:out value="${order.user.email }"></c:out></td>
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
-								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
+								<td class="text-center"><a href="order-management?option=edit&id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
 					</table>
 					<div>
-						<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
+						<a href="order-management"><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
 					</div>
 			</div>
 		</div>
 		<!-- end order -->
 		
 				<!-- start  -->
-		<div class="row dashBoardLine">
+		<div class="row backRowMargin">
 			<div class="col-5">
 				<div class="d-flex justify-content-between">
 					<h4>F.A.Q.</h4>

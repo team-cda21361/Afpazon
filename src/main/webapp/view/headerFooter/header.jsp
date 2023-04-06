@@ -130,10 +130,11 @@
 									<img alt="" src="assets/images/back_office/Stock.png" width="45">
 							</a></li>
 						</ul>
-						<a class=" d-flex nav-link" href="#"> <img alt=""
+						<a class=" d-flex nav-link" href="logout"> <img alt=""
 							src="assets/images/back_office/logBack.png" width="60">
 						</a>
 					</div>
 				</div>
+
 			</nav>
 		</c:if>
