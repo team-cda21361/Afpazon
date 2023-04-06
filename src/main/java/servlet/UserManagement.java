@@ -46,12 +46,17 @@ public class UserManagement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		/******* Faire connection */
-		String action = "add"; // donner par clé GET via route
-		User user = userDao.findById(2); // donner par clé GET via route
-		/*****************************/
-
-		ArrayList<Address> adresses = addressDao.readById(user.getId());
+		String action="add";
+		User user=null;
+		ArrayList<Address> adresses = new ArrayList<>();
+		
+		if (request.getParameter("id")!=null) {
+			action="update";
+			user = userDao.findById(Integer.parseInt(request.getParameter("id")));
+			adresses = addressDao.readById(user.getId());
+			
+		}
+		
 		ArrayList<Address> deliveryAddresses = new ArrayList<>();
 		ArrayList<Role> roles = roleDao.read();
 		ArrayList<String> genders = userDao.getGenders();
@@ -202,12 +207,8 @@ public class UserManagement extends HttpServlet {
 				}
 			};
 		}
-		
-		if (request.getParameter("delete").equals("delete")) {
-			System.out.println("J'ai cliqué sur supprimé");
-		}
 
-		doGet(request, response);
+		response.sendRedirect("dashboard");
 	}
 
 }
