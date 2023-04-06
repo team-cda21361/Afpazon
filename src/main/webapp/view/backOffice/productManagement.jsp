@@ -1,6 +1,7 @@
+<script src="assets/js/productManagement.js"></script>
 <!-- ****************************************** TITRE ************************************************************** -->
 <form method="post">
-<h2 class="backTitle text-center">Gestion produit </h2>
+<h2 class="backTitle text-center mt-3">Gestion produit</h2>
 
 	<%-- <h2 class="col-12 text-center my-5">
 		<c:if test="${action == 'add'}">
@@ -12,7 +13,8 @@
 		d'utilisateur
 	</h2> --%>
 	
-<!-- ******************** VA ET VIENS ****************************	 -->
+	
+<!-- ******************** SWITCH ****************************	 -->
 
 <div class="d-flex flex-row justify-content-center mt-5 pl-5">
 
@@ -37,19 +39,19 @@
 			<div class="column text-center">
 				<label class="form-label">Categories</label> 
 				<select class="form-select mb-3" aria-label="Default select example">
-					<option selected>SÃ©lectionner une categorie</option>
-					<c:forEach items="${categorys }" var="category">
-						<option value="<c:out value="${category.category}"></c:out>"><c:out value="${category.category}"></c:out></option>
+					<option selected>Choisissez une catégorie</option>
+					<c:forEach items="${categoryList }" var="category">
+						<option><c:out value="${category.category}"></c:out></option>
 					</c:forEach>
 				</select>
 			</div>
 	
 			<div class="column text-center">
-				<label class="form-label">Garantie (en annÃ©es)</label> 
+				<label class="form-label">Garantie (en années)</label> 
 				<select class="form-select mb-3" aria-label="Default select example">
-					<option selected>SÃ©lectionner une gantantie</option>
-					<c:forEach items="${products }" var="product">
-						<option value="<c:out value="${product.garanty}"></c:out>"><c:out value="${product.garanty}"></c:out></option>
+					<option selected>Choisissez une garantie</option>
+					<c:forEach items="${productList }" var="product">
+						<option><c:out value="${product.warranty}"></c:out></option>
 					</c:forEach>
 				</select> 
 			</div>
@@ -63,47 +65,52 @@
 			</div>
 			
 			
-			<label class="form-label">Promotion :
-					<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
-			</label> 
+			<label class="form-label">Promotion :</label> 
 			<select class="form-select mb-3" aria-label="Default select example">
-				<option selected>SÃ©lectionner une promotion</option>
-				<c:forEach items="${discounts }" var="discount">
-					<option value="<c:out value="${discount.id}"></c:out>"><c:out value="${discount.id}"></c:out></option>
+				<option selected>Choisissez une promotion</option>
+				<c:forEach items="${discountList }" var="discount">
+					<option value="${discount.id}"><c:out value="${discount.voucher} --- ${discount.percent}% --- ${discount.startDate} --- ${discount.endDate}"></c:out></option>
 				</c:forEach>
 			</select>
+	
+				<button class="btn btn-success d-flex flex-row align-items-end" type="button" onclick="adddiscount()">
+					<i   class="bi bi-plus-circle"></i>
+				</button>
 			
-			<div class="tablePane mt-3 border mb-3" style="height:20vh">
-		<table class="table table-bordered">
-				<thead class="table-active">
+			
+			
+			<!-- <div class="tablePane mb-3 border" style="height:30vh"> -->
+			<div>
+		<table id="tableProduct" class="table table-bordered">
+				<thead class="bg-secondary sticky-top">
 					<tr>
 						<th scope="col">Code</th>
 						<th scope="col">%</th>
-						<th scope="col">Date dÃ©but</th>
+						<th scope="col">Date début</th>
 						<th scope="col">Date fin</th>
 					</tr>
 				</thead>
 				<tbody>
 					 <c:forEach items="${discountList }" var="discount">
 						<tr>
-							<th><c:out value="${discount.voucher }"></c:out></th>
-							<td><c:out value="${discount.value }"></c:out></td>
-							<td><c:out value="${discount.startDate }"></c:out></td>
-							<td><c:out value="${discount.endDate }"></c:out></td>
+							<th><c:out value=""></c:out></th>
+							<td><c:out value=""></c:out></td>
+							<td><c:out value=""></c:out></td>
+							<td><c:out value=""></c:out></td>
 						</tr>
 				 	 </c:forEach>
 				</tbody>
 			</table>
 		</div>
 
-			<div class="d-flex flex-row justify-content-between">
+			<div class="d-flex flex-row justify-content-between mt-3">
 
 					<div class="column ">
 						<label class="form-label">Cliquer sur image pour ajouter/changer :</label> 
 	  					<input type="image" class="form-control mb-3" src=""  name="image">
 	  					<label class="form-label">
 	  						<a href=""><img alt="" src="assets/images/back_office/plus.png" width="20"></a>
-	  						Ajouter des images compÃ©mentaires :
+	  						Ajouter des images complémentaires :
 	  					</label>
 						
 					</div>
@@ -180,8 +187,8 @@
 				<div>
 					<select class="form-select mb-3" aria-label="Default select example">
 						<option selected>%</option>
-						<c:forEach items="${vats }" var="vat">
-							<option value="<c:out value="${vat.value}"></c:out>"><c:out value="${vat.value}"></c:out></option>
+						<c:forEach items="${vatList }" var="vat">
+							<option><c:out value="${vat.value}"></c:out></option>
 						</c:forEach>
 					</select>
 				</div>

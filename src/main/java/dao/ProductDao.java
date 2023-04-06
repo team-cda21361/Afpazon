@@ -266,4 +266,29 @@ public class ProductDao implements IDAO<Product> {
 		}
 		return list;
 	}
+	
+	
+//****************** READWARRANTY **********************************************************************************
+	
+	
+	public ArrayList<Product> readWarranty() {
+		ArrayList<Product> listProducts = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT DISTINCT warranty FROM product ORDER BY warranty");
+			rs = sql.executeQuery();
+
+			while(rs.next()) {
+				Product product = new Product(rs.getInt("warranty"));
+
+				listProducts.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listProducts;
+	}
+	
+	
+	
+	
 }

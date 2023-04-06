@@ -36,18 +36,18 @@ public class Index extends HttpServlet {
 		 * Creation d'un mock pour jongler entre les pages backoffice et site client
 		 */
 		//decommenter ce user pour passer en mode Admin
-//		Role roleAdmin = new Role("Admin");
-//		user =new User("mock@admin.fr",roleAdmin );
+		Role roleAdmin = new Role("Admin");
+		user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
 		ProductDao produitDao = new ProductDao();
 		Product produit = new Product();
 		ArrayList<beans.Product> listCarousel = new ArrayList();
 		
-		Role roleClient = new Role("Client");
-		user =new User("mock@admin.fr",roleClient );
+//		Role roleClient = new Role("Client");
+//		user =new User("mock@admin.fr",roleClient );
 		user.setId(1);
 		user.setFirstName("Charles");
-		HttpSession session =request.getSession(true);
+
 		session.setAttribute("currentUser", user);
 	
 		if (user.getId() > 0) {
