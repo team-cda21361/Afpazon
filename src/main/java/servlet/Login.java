@@ -65,8 +65,5 @@ public class Login extends HttpServlet {
 			request.setAttribute("msnType",  "KO");
 			request.getRequestDispatcher("view/login.jsp").forward(request,response);
 		}
-
-		//response.sendRedirect(request.getHeader("referer"));
-		doGet(request, response);
 	}
 }
