@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import beans.Role;
 import beans.User;
+import dao.CategoryDao;
 import dao.UserDao;
 
 /**
@@ -35,7 +36,7 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		CategoryDao.injectCategories(request);
 		request.getRequestDispatcher("view/register.jsp").forward(request,response);
 		
 	}
@@ -105,7 +106,7 @@ public class Register extends HttpServlet {
     			return;
     			
             }	
-            if(userDao.findByEmail(email)) {
+            if(userDao.findIdByEmail(email)) {
     			request.setAttribute("msn", "Vous avez déjà un compte avec cette adresse e-mail.");
     			request.setAttribute("msnType",  "KO");
     			doGet(request, response);

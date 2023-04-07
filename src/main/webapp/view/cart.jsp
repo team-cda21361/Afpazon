@@ -1,67 +1,67 @@
-
-<div class="container">
-	<div class="row">
-		<div class="col-8">
-
-			<table class="table align-middle">
-				<thead class="bg-secondary">
-					<tr>
-						<th class="col-md-3" scope="col">Photo</th>
-						<th class="col-md-3" scope="col">Produits</th>
-						<th class="col-md-3" scope="col">Prix</th>
-						<th class="col-md-3" scope="col">Quantite</th>
-						<th class="col-md-3" scope="col">Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="col-md-3"><img
-							src="assets/images/products/product-1.jpg" width="65%" alt="#"></td>
-						<td class="align-middle">Titre produit1</td>
-						<td>30 &euro;</td>
-						<td class="col-md-3"><i class="bi bi-dash-circle p-3"></i>2<i
-							class="bi bi-plus-circle  p-3"></i></td>
-						<td>Total</td>
-					</tr>
-					<tr>
-						<td class="col-md-3"><img
-							src="assets/images/products/product-1.jpg" width="65%" alt="#"></td>
-						<td>Titre produit1</td>
-						<td class="col-md-3">30 &euro;</td>
-						<td class="col-md-3"><i class="bi bi-dash-circle p-3"></i>2<i
-							class="bi bi-plus-circle p-3"></i></td>
-						<td>Total</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="col-4 bg-secondary opacity-80 text-dark">
-
-			<table class="my-5">
-
-				<tr>
-					<td class="col-md-3 p-3">Sous-Total</td>
-					<td class="col-md-3 p-3">140 &euro;</td>
-				</tr>
-
-				<tr>
-					<td class="col-md-3 p-3">Remise</td>
-					<td class="col-md-3 p-3">0 &euro;</td>
-				</tr>
-
-				<tr>
-					<td class="col-md-3 p-3">Total :</td>
-					<td class="col-md-3 p-3">140 &euro;</td>
-				</tr>
-			</table>
-			<a href="payment" class="btn animate">
-				<button class="btn btn-success" type="submit">Passer la
-					commande</button>
-			</a>
-		</div>
-	</div>
-
+<div class="container my-5">
+    <div class="row">
+        <div class="col-9">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>visuel</th>
+                        <th>Nom produit</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantite</th>
+                        <th>TTC</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <td><img height=100 src="assets/images/products/product-1.jpg"  alt="#"></td>
+                        <td>Titre produit 1</td>
+                        <td>120 &euro; ttc</td>
+                        <td><i class="bi bi-dash-circle p-3"></i>2<i class="bi bi-plus-circle  p-3"></i></td>
+                        <td>240 &euro; ttc</td>
+                    </tr>
+                    <tr>
+                        <td><img height=100 src="assets/images/products/product-2.jpg" alt="#"></td>
+                        <td>Titre produit 2</td>
+                        <td>30 &euro; ttc</td>
+                        <td><i class="bi bi-dash-circle p-3"></i>2<i class="bi bi-plus-circle p-3"></i></td>
+                        <td>60 &euro; ttc</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3 p-3 bg-secondary d-flex flex-column justify-content-between">
+            <div>
+                <table class="table text-light lh-lg">
+                    <thead class="text-center align-middle table-light">
+                        <tr>
+                            <th colspan="2">Commande total :</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-3 fst-italic">Sous-Total HT :</td>
+                            <td class="col-3 fst-italic">140 &euro;</td>
+                        </tr>
+                        <tr>
+                            <td class="col-3 fst-italic">Remise (5%):</td>
+                            <td class="col-3 fst-italic">0 &euro;</td>
+                        </tr>
+                        <tr>
+                            <td class="col-3 fst-italic">TVA (20 %) :</td>
+                            <td class="col-3 fst-italic"> 23,65 &euro;</td>
+                        </tr>
+                        <tr class="mt-5">
+                            <td class="col-3 fw-bolder">TOTAL TTC :</td>
+                            <td class="col-3 fw-bolder">140 &euro;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="align-self-end">
+                <a href="payment">
+                    <button class="btn btn-success" type="submit"><i class="bi bi-cash-coin me-3"></i>payer</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-

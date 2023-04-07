@@ -25,34 +25,34 @@
 				<hr>
 				<div class="row">
 					<div class="mb-3 w-50">
-						<img src="assets/images/register.png">
+						<img src="assets/images/register.png" width="220px">
 					</div>
 					<div class="mb-3 w-50">
 					
 						<form method="post" onsubmit="checkformM(event)" action="register" name="formM">
 							<div class="mb-3">
 								<label class="form-label">*Nom</label> <input type="text"
-									class="form-control" placeholder="Nom" id="last_name"
+									class="form-control form-controlV" placeholder="Nom" id="last_name"
 									name="last_name">
 								<p class="errorlast_name error"></p>
 							</div>
 							<div class="mb-3">
 								<label class="form-label">*Prenom</label> <input type="text"
-									class="form-control" placeholder="Prenom" id="first_name"
+									class="form-control form-controlV" placeholder="Prenom" id="first_name"
 									name="first_name">
 								<p class="errorfirst_name error"></p>
 							</div>
 
 							<div class="mb-3">
 								<label class="form-label">*Email</label> <input type="email"
-									class="form-control" placeholder="Email" id="email"
+									class="form-control form-controlV" placeholder="Email" id="email"
 									name="email">
 								<p class="erroremail error"></p>
 							</div>
 
 							<div class="mb-3 lab1">
 								<label class="form-label">*Password</label> <input
-									type="password" class="form-control" placeholder="Password"
+									type="password" class="form-control form-controlV" placeholder="Password"
 									id="password" name="password" onfocus="focusFunction()"
 									onblur="blurFunction()">
 								<p class="errorpassword error"></p>
@@ -78,7 +78,7 @@
 
 							<div class="mb-3">
 								<label class="form-label">*Ressaisir le mot de passe</label> <input
-									type="password" class="form-control"
+									type="password" class="form-control form-controlV"
 									placeholder="Ressaisir de mot de passe" id="passwordR" name="passwordR">
 								<p class="errorpasswordR error"></p>
 							</div>
