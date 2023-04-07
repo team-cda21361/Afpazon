@@ -31,10 +31,4 @@ public class Logout extends HttpServlet {
 		session.invalidate();
 		response.sendRedirect("/Afpazon");
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-
-
 }
