@@ -187,9 +187,34 @@
 	<hr>
 	<div class="text-end">
 		<h5 class="text-secondary"><i class="bi bi-person-fill-dash text-danger"></i> Désactiver mon compte</h5>
-		<button type="submit" class="btn btn-sm btn-outline-danger">Je désactive mon compte</button>
+		<button type="submit" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">Je désactive mon compte</button>
 	</div>
 </section>
+
+<!-- Modal de désactivation de compte -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-3 border-danger">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-danger" id="deactivateModalLabel">Désactivation de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-danger fw-bold">Êtes-vous sûr de vouloir désactiver votre compte ?</div>
+        <div class="text-danger opacity-75">Si oui, veuillez confirmer votre décision en saisissant votre mot de passe :</div>
+        <form id="deactivateForm" method="post">
+        	<input type="hidden" class="form-control" name="formSubmitted" value="accountDeactivation">
+			<input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
+	        <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation" placeholder="Saisissez votre mot de passe">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" form="deactivateForm" class="btn btn-outline-danger">Désactiver mon compte</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal des détails de commande -->
 <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">

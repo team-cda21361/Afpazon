@@ -83,17 +83,26 @@ public class Account extends HttpServlet {
 				request.setAttribute("productsList", productsList);
 			}
 		}
-		request.getRequestDispatcher("/view/account.jsp").forward(request,response);
+		if (request.getAttribute("deactivationLogOut") != null) {
+			if ((boolean)request.getAttribute("deactivationLogOut")) {
+				response.sendRedirect("accountDeactivated");
+			}
+		} else {
+			request.getRequestDispatcher("/view/account.jsp").forward(request,response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession();
 		
 		if (request.getParameter("formSubmitted").equals("accountInfo")) {
 			userDao.update(new User(((User) session.getAttribute("currentUser")).getId(), request.getParameter("userLastName"), request.getParameter("userFirstName"), request.getParameter("userEmail"), ((User) session.getAttribute("currentUser")).getPassword(), request.getParameter("userTitle"), request.getParameter("userPhone"), new Date(System.currentTimeMillis()), ((User) session.getAttribute("currentUser")).isActive(), ((User) session.getAttribute("currentUser")).getRole()));
+			User replacementUser = userDao.findById(((User) session.getAttribute("currentUser")).getId());
+			System.out.println(replacementUser.getId());
+			session.setAttribute("currentUser", userDao.findById(((User) session.getAttribute("currentUser")).getId()));
 			request.setAttribute("backToPage", "#accountInfo");
 		}
 		
@@ -113,6 +122,12 @@ public class Account extends HttpServlet {
 				addressDao.create(new Address(request.getParameter("inputBillingStreet"), Integer.parseInt(request.getParameter("inputBillingZipCode")), request.getParameter("inputBillingCity"), (User) session.getAttribute("currentUser"), new Address_type(1, "facturation")));
 			}
 			request.setAttribute("backToPage", "#accountBilling");
+		}
+		
+		if (request.getParameter("formSubmitted").equals("accountDeactivation")) {
+			if (userDao.deactivate(((User) session.getAttribute("currentUser")), request.getParameter("pwdForDeactivation"))) {
+				request.setAttribute("deactivationLogOut", true);
+			}
 		}
 		
 		doGet(request, response);
