@@ -1,0 +1,228 @@
+/* Google Fonts - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+.slide-container {
+margin: 0 30px;
+overflow: hidden;
+}
+.card {
+background: #fff;
+border-radius: 8px;
+}
+.card .image-box {
+height: 200px;
+}
+.card .image-box img {
+width: 100%;
+height: 100%;
+border-radius: 8px 8px 0 0;
+object-fit: contain;
+}
+.card .card-body {
+height: 200px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 15px;
+}
+.card .card-title {
+font-size: 18px;
+font-weight: 500;
+margin-bottom: 10px;
+}
+.card .card-text {
+font-size: 14px;
+color: #4d4d4d;
+margin-bottom: 10px;
+}
+.product-details {
+display: flex;
+flex-direction: column;
+}
+.card .card-text-long {
+font-size: 14px;
+color: #4d4d4d;
+margin-bottom: 10px;
+}
+.btn-toggle-details {
+background: none;
+border: none;
+font-size: 14px;
+color: #007bff;
+cursor: pointer;
+padding: 0;
+margin-top: 10px;
+}
+.card-subtitle {
+font-size: 16px;
+font-weight: 500;
+margin-top: 10px;
+}
+.card-subtitle strong {
+font-weight: 600;
+}
+.text-muted {
+font-size: 12px;
+color: #6c757d;
+}
+.swiper-navBtn {
+color: #000;
+height: 40px;
+width: 40px;
+background: #fff;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+z-index: 1;
+}
+.swiper-button-next {
+right: 0;
+}
+.swiper-button-prev {
+left: 0;
+}
+.swiper-pagination-bullet {
+background-color: #000;
+}
+
+@media screen and (max-width: 768px) {
+.swiper-navBtn {
+display: none;
+}
+}
+
+.container-fluid {
+padding: 0;
+}
+.container {
+max-width: 1140px;
+margin: 0 auto;
+}
+.swiper {
+position: relative;
+}
+.swiper-wrapper {
+display: flex;
+transition: transform 0.3s ease-in-out;
+}
+.swiper-slide {
+margin-right: 20px;
+flex: 0 0 calc(33.333% - 20px);
+}
+
+#section4 {
+padding: 50px 0;
+}
+.card {
+  height: auto;
+  max-height: 400px; /* hauteur maximale de la carte */
+  overflow: auto; /* ajouter une barre de défilement en cas de dépassement */
+}
+
+.card::-webkit-scrollbar {
+  background-color: transparent; /* couleur de fond transparente */
+  width: 5px; /* largeur de la barre de défilement */
+}
+
+.card::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.1); /* couleur de la barre de défilement */
+}
+/*
+IMG SIZE
+*/
+
+
+.myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
+
+
