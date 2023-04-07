@@ -245,7 +245,7 @@ public class UserDao implements IDAO<User> {
 		}
 		return genders;
 	}
-	
+
 	public boolean deactivate(User user, String password) {
 		try {
 			/*
