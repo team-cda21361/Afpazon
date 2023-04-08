@@ -38,13 +38,6 @@ public class Index extends HttpServlet {
 		Product produit = new Product();
 		ArrayList<beans.Product> listCarousel = new ArrayList();
 		
-		Role roleClient = new Role("Client");
-		user =new User("mock@admin.fr",roleClient );
-		user.setId(1);
-		user.setFirstName("Charles");
-		//HttpSession session =request.getSession(true);
-		session.setAttribute("currentUser", user);
-	
 		if (currentUser != null) {
 			if (currentUser.getRole().getRole().equalsIgnoreCase("Admin")) {
 				response.sendRedirect("dashboard");

@@ -103,5 +103,60 @@ ArrayList<Category_product> listCategoryProduct= new ArrayList<>();
 		return null;
 	}
 	
-
+	
+	public ArrayList <Category> findCategoriesByProductId(int product_id) {
+		ArrayList <Category>  categories = new ArrayList<>();
+		
+		try {
+			 sql =  connect.prepareStatement("select * from product inner join category_product on product.id = category_product.id_product inner join category on category_product.id_category= category.id WHERE id_product = ? order by category");
+			 sql.setInt(1,product_id);
+			 rs = sql.executeQuery();
+			while(rs.next()) {
+				 categories.add(new Category(rs.getInt("id_category"),rs.getString("category"),rs.getBoolean("isActive")));
+			}
+			
+			for (Category category :  categories) {
+				System.out.println(category.isActive());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		//Retourne la liste des category_product 
+		return  categories;	
+	}
+	
+	public ArrayList <Category> findCategoriesNotInProductByProductId(int product_id) {
+		ArrayList <Category>  categories = new ArrayList<>();
+		
+		try {
+			 sql =  connect.prepareStatement("select * from category where id NOT IN ( select distinct id_category from category_product where id_product = ?) order by category");
+			 sql.setInt(1,product_id);
+			 rs = sql.executeQuery();
+			while(rs.next()) {
+				 categories.add(new Category(rs.getInt("id"),rs.getString("category"),rs.getBoolean("isActive")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	
+		//Retourne la liste des category_product 
+		return  categories;	
+	}
+	
+	public boolean deleteCategoryFromProductById(int idCategory,int idProduct) {
+		try {
+			 sql =  connect.prepareStatement("delete from category_product where id_product=? and id_category=?");
+			 sql.setInt(1,idProduct);
+			 sql.setInt(2, idCategory);
+			 sql.execute();
+			 return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  false;
+	}
+	
 }
