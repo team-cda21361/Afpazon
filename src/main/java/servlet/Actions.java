@@ -24,7 +24,7 @@ public class Actions extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	Category_productDao category_productDao = new Category_productDao();
 	Product_discountDao product_discountDao = new Product_discountDao();
 
@@ -34,40 +34,46 @@ public class Actions extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action= request.getParameter("action");
-		int id = Integer.parseInt(request.getParameter("id"));
+		String action = request.getParameter("action");
 		int idProduct = Integer.parseInt(request.getParameter("id-product"));
-		
-		System.out.println("id"+ id);
-		System.out.println("idProduct" + idProduct);
-		System.out.println("action" + action);
-		
-		switch (action) {
-		case "delete-category-from-product": {
-			System.out.println("Je supprime la catégorie du produit");
-			category_productDao.deleteCategoryFromProductById(id,idProduct);
-			break;
+		String idString = request.getParameter("id");
+
+		System.out.println("id" + idString);
+
+		if (!idString.equals("Choisissez une promotion") && !idString.equals("Choisissez une categorie")) {
+
+			int id = Integer.parseInt(idString);
+
+			System.out.println("id" + id);
+			System.out.println("idProduct" + idProduct);
+
+			switch (action) {
+			case "delete-category-from-product": {
+				System.out.println("Je supprime la catégorie du produit");
+				category_productDao.deleteCategoryFromProductById(id, idProduct);
+				break;
+			}
+			case "delete-discount-from-product": {
+				System.out.println("Je supprime la promo du produit");
+				product_discountDao.deleteDiscountFromProductById(id, idProduct);
+				break;
+			}
+			case "add-category-to-product": {
+				System.out.println("J'ajoute la catégorie du produit");
+				category_productDao.addCategoryToProductById(id, idProduct);
+				break;
+			}
+			case "add-discount-to-product": {
+				System.out.println("J'ajoute la promo du produit");
+				product_discountDao.addDiscountToProductById(id, idProduct);
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + action);
+			}
 		}
-		case "delete-discount-from-product": {
-			System.out.println("Je supprime la promo du produit");
-			product_discountDao.deleteDiscountFromProductById(id, idProduct);
-			break;
-		}
-		case "add-category-to-product": {
-			System.out.println("J'ajoute la catégorie du produit");
-			category_productDao.addCategoryToProductById(id, idProduct);
-			break;
-		}
-		case "add-discount-to-product": {
-			System.out.println("J'ajoute la promo du produit");
-			product_discountDao.addDiscountToProductById(id, idProduct);
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + action);
-		}
-		
-		response.sendRedirect("product-management?id=1");
+
+		response.sendRedirect("product-management?id=" + idProduct);
 	}
 
 	/**

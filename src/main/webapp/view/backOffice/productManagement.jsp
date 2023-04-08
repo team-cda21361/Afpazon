@@ -35,7 +35,7 @@
 					<label class="form-label">Ajouter une categorie</label> <select
 						class="form-select mb-1" aria-label="Default select example"
 						name="id">
-						<option selected>Choisissez une catégorie</option>
+						<option selected>Choisissez une categorie</option>
 						<c:forEach items="${categories }" var="category">
 							<option value="${category.id}"><c:out
 									value="${category.category}"></c:out></option>
