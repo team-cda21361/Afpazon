@@ -159,4 +159,18 @@ ArrayList<Category_product> listCategoryProduct= new ArrayList<>();
 		return  false;
 	}
 	
+	public boolean addCategoryToProductById(int idCategory,int idProduct) {
+		try {
+			 sql =  connect.prepareStatement("insert into category_product (id_product,id_category) values (?,?)");
+			 sql.setInt(1,idProduct);
+			 sql.setInt(2, idCategory);
+			 sql.execute();
+			 return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  false;
+	}
+	
 }

@@ -1,13 +1,11 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import beans.Category;
 import beans.Discount;
 import beans.Product_discount;
 import connector.DBConnect;
@@ -91,6 +89,20 @@ public class Product_discountDao implements IDAO<Product_discount> {
 	public boolean deleteDiscountFromProductById(int idDiscount,int idProduct) {
 		try {
 			 sql =  connect.prepareStatement("delete from product_discount where id_product=? and id_discount=?");
+			 sql.setInt(1,idProduct);
+			 sql.setInt(2, idDiscount);
+			 sql.execute();
+			 return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  false;
+	}
+	
+	public boolean addDiscountToProductById(int idDiscount,int idProduct) {
+		try {
+			 sql =  connect.prepareStatement("insert into product_discount (id_product,id_discount) values (?,?)");
 			 sql.setInt(1,idProduct);
 			 sql.setInt(2, idDiscount);
 			 sql.execute();

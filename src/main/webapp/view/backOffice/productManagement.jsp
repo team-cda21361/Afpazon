@@ -1,158 +1,166 @@
 <script src="assets/js/productManagement.js"></script>
 <!-- ****************************************** TITRE ************************************************************** -->
-<form method="post">
-	<h2 class="col-12 text-center mt-5">
-		<c:if test="${action == 'add'}">
-			<c:out value="Ajout " />
-		</c:if>
-		<c:if test="${action == 'update'}">
-			<c:out value="Modification " />
-		</c:if>
-		produit
-	</h2>
 
+<h2 class="col-12 text-center mt-5">
+	<c:if test="${action == 'add'}">
+		<c:out value="Ajout " />
+	</c:if>
+	<c:if test="${action == 'update'}">
+		<c:out value="Modification " />
+	</c:if>
+	produit
+</h2>
+<!-- ******************** SWITCH ****************************	 -->
 
-	<!-- ******************** SWITCH ****************************	 -->
-
-	<div class="d-flex flex-row justify-content-center pl-5">
-		<div class="form-check form-switch mt-2">
-			<label class="form-check-label me-5">Present dans le
-				carrousel</label> <input class="form-check-input" type="checkbox"
-				<c:if test="${product.isInCarousel()}">
+<div class="d-flex flex-row justify-content-center pl-5">
+	<div class="form-check form-switch mt-2">
+		<label class="form-check-label me-5">Present dans le carrousel</label>
+		<input class="form-check-input" type="checkbox"
+			<c:if test="${product.isInCarousel()}">
 			<c:out value="checked"/>
 			</c:if>>
-		</div>
 	</div>
+</div>
 
 
-	<div class="row justify-content-center">
+<div class="row justify-content-center">
+	<!-- ****************************************** PREMIERE DIV ******************************************************* -->
+	<div class="col-7">
+		<div class="row">
+			<div class="w-25">
+				<form method="get" action="actions">
 
-		<!-- ****************************************** PREMIERE DIV ******************************************************* -->
-		<div class="col-7">
-			<div class="row">
-				<div class="w-25">
-
+					<input type="hidden" name="id-product" value=${product.id }>
+					<input type="hidden" name="action" value="add-category-to-product">
 					<label class="form-label">Ajouter une categorie</label> <select
 						class="form-select mb-1" aria-label="Default select example"
-						name="add-category-to-product">
+						name="id">
 						<option selected>Choisissez une catégorie</option>
 						<c:forEach items="${categories }" var="category">
 							<option value="${category.id}"><c:out
 									value="${category.category}"></c:out></option>
 						</c:forEach>
-					</select> <a href="actions?action=add-category-to-product">
-						<button class="btn btn-success d-flex flex-row align-items-end" type="button">
-							<i class="bi bi-plus-circle"></i>
-						</button>
-					</a>
-				</div>
+					</select>
+					<button class="btn btn-success d-flex flex-row align-items-end"
+						type="submit">
+						<i class="bi bi-plus-circle"></i>
+					</button>
 
-				<div class="w-50">
+				</form>
+			</div>
+			<div class="w-50">
+				<form method="get" action="actions">
+
+					<input type="hidden" name="id-product" value=${product.id }>
+					<input type="hidden" name="action" value="add-discount-to-product">
 					<label class="form-label">Ajouter une promotion :</label> <select
-						class="form-select mb-1" aria-label="Default select example">
+						class="form-select mb-1" aria-label="Default select example"
+						name="id">
 						<option selected>Choisissez une promotion</option>
 						<c:forEach items="${discounts }" var="discount">
 							<option value="${discount.id}"><c:out
 									value="${discount.voucher} --- ${discount.percent}% --- ${discount.startDate} --- ${discount.endDate}"></c:out></option>
 						</c:forEach>
-					</select> <a href="actions?action=add-discount-to-product">
-						<button class="btn btn-success d-flex flex-row align-items-end"
-							type="button">
-							<i class="bi bi-plus-circle"></i>
-						</button>
-					</a>
-				</div>
+					</select>
+					<button class="btn btn-success d-flex flex-row align-items-end"
+						type="submit">
+						<i class="bi bi-plus-circle"></i>
+					</button>
+
+				</form>
+			</div>
+		</div>
+
+		<div class="row mt-3">
+			<div class="w-25">
+				<table id="tableCategory" class="table table-bordered">
+					<caption class="h6">Catégorie(s) appliquée(s)</caption>
+					<thead class="bg-secondary sticky-top">
+						<tr>
+							<th scope="col">Catégorie</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${categories_product }" var="categorie_product">
+							<tr>
+								<td><c:out value="${categorie_product.category}"></c:out></td>
+								<td class="text-center"><a
+									href="actions?action=delete-category-from-product&id=${categorie_product.id }&id-product=${product.id}"><img
+										alt="Icon check"
+										src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 
-			<div class="row mt-3">
-				<div class="w-25">
-					<table id="tableCategory" class="table table-bordered">
-						<caption class="h6">Catégorie(s) appliquée(s)</caption>
-						<thead class="bg-secondary sticky-top">
+			<!-- <div class="tablePane mb-3 border" style="height:30vh"> -->
+			<div class="w-75">
+				<table id="tablePromo" class="table table-bordered">
+					<caption class="h6">Promotion(s) appliquée(s)</caption>
+					<thead class="bg-secondary sticky-top">
+						<tr>
+							<th scope="col">Code</th>
+							<th scope="col">%</th>
+							<th scope="col">Date début</th>
+							<th scope="col">Date fin</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${discounts_product }" var="discount_product">
 							<tr>
-								<th scope="col">Catégorie</th>
+								<td><c:out value="${discount_product.voucher}"></c:out></td>
+								<td><c:out value="${discount_product.percent}"></c:out></td>
+								<td><c:out value="${discount_product.startDate}"></c:out></td>
+								<td><c:out value="${discount_product.endDate}"></c:out></td>
+								<td class="text-center"><a
+									href="actions?action=delete-discount-from-product&id=${discount_product.id }&id-product=${product.id}"><img
+										alt="Icon check"
+										src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${categories_product }" var="categorie_product">
-								<tr>
-									<td><c:out value="${categorie_product.category}"></c:out></td>
-									<td class="text-center"><a
-										href="actions?action=delete-category-from-product&id=${categorie_product.id }&id-product=${product.id}"><img
-											alt="Icon check"
-											src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-
-				<!-- <div class="tablePane mb-3 border" style="height:30vh"> -->
-				<div class="w-75">
-					<table id="tablePromo" class="table table-bordered">
-						<caption class="h6">Promotion(s) appliquée(s)</caption>
-						<thead class="bg-secondary sticky-top">
-							<tr>
-								<th scope="col">Code</th>
-								<th scope="col">%</th>
-								<th scope="col">Date début</th>
-								<th scope="col">Date fin</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${discounts_product }" var="discount_product">
-								<tr>
-									<td><c:out value="${discount_product.voucher}"></c:out></td>
-									<td><c:out value="${discount_product.percent}"></c:out></td>
-									<td><c:out value="${discount_product.startDate}"></c:out></td>
-									<td><c:out value="${discount_product.endDate}"></c:out></td>
-									<td class="text-center"><a
-										href="actions?action=delete-discount-from-product&id=${discount_product.id }&id-product=${product.id}"><img
-											alt="Icon check"
-											src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
+		</div>
 
-			<div class="d-flex flex-row justify-content-between mt-3">
+		<div class="d-flex flex-row justify-content-between mt-3">
 
-				<div class="column w-50">
-					<label class="form-label">Cliquer sur image pour
-						ajouter/changer :</label> <input type="image" class="form-control mb-3"
-						src="<c:if test="${not empty product.mainPicPath }">
+			<div class="column w-50">
+				<label class="form-label">Cliquer sur image pour
+					ajouter/changer :</label> <input type="image" class="form-control mb-3"
+					src="<c:if test="${not empty product.mainPicPath }">
 								<c:out value="assets/images/products/${product.mainPicPath }" default=""/>
 							</c:if>
 							<c:if test="${empty product.mainPicPath }"><c:out value="assets/images/products/image_placeholder.png" default=""/>
 							</c:if>
 							"
-						name="image"> <label class="form-label"> <a
-						href=""><img alt="" src="assets/images/back_office/plus.png"
-							width="20"></a> Ajouter des images complèmentaires :
-					</label>
+					name="image"> <label class="form-label"> <a href=""><img
+						alt="" src="assets/images/back_office/plus.png" width="20"></a>
+					Ajouter des images complèmentaires :
+				</label>
 
-				</div>
+			</div>
 
-				<div class="column w-50">
-					<label class="form-label">Cliquer sur video pour
-						ajouter/changer :</label> <input type="image" class="form-control mb-3"
-						name="image"
-						src="<c:if test="${not empty product.videoPath }">
+			<div class="column w-50">
+				<label class="form-label">Cliquer sur video pour
+					ajouter/changer :</label> <input type="image" class="form-control mb-3"
+					name="image"
+					src="<c:if test="${not empty product.videoPath }">
 								<c:out value="assets/images/products/${product.videoPath}" default=""/>
 							</c:if>
 							<c:if test="${empty product.videoPath }">
 								<c:out value="assets/images/products/video_placeholder.png" default=""/>
 							</c:if>">
-				</div>
-
 			</div>
 
 		</div>
 
-		<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
-		<div class="col-4 mt-5 mr-3">
+	</div>
+	<div class="col-4 mt-5 mr-3">
+		<form method="post">
+			<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
+
 			<div class="row ">
 				<div class="w-25 ">
 					<label for="exampleFormControlSponsoring" class="form-label">Poids
@@ -272,6 +280,6 @@
 					</c:if>
 				</button>
 			</div>
-		</div>
+		</form>
 	</div>
-</form>
+</div>

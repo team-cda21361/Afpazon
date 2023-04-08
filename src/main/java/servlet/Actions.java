@@ -40,6 +40,7 @@ public class Actions extends HttpServlet {
 		
 		System.out.println("id"+ id);
 		System.out.println("idProduct" + idProduct);
+		System.out.println("action" + action);
 		
 		switch (action) {
 		case "delete-category-from-product": {
@@ -54,10 +55,12 @@ public class Actions extends HttpServlet {
 		}
 		case "add-category-to-product": {
 			System.out.println("J'ajoute la catégorie du produit");
+			category_productDao.addCategoryToProductById(id, idProduct);
 			break;
 		}
 		case "add-discount-to-product": {
 			System.out.println("J'ajoute la promo du produit");
+			product_discountDao.addDiscountToProductById(id, idProduct);
 			break;
 		}
 		default:
