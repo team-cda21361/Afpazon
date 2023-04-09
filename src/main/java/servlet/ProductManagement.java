@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Category;
+import beans.VAT;
 import dao.CategoryDao;
 import dao.Category_productDao;
 import dao.DiscountDao;
@@ -83,8 +84,42 @@ public class ProductManagement extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String nameProduct = request.getParameter("name");
+		String descriptionProduct = request.getParameter("description");
+		String priceProduct = request.getParameter("price");
+		String mainPicPath = request.getParameter("main-pic-path");
+		String videoPath = request.getParameter("video-path");
+		boolean inCaroussel = ((request.getParameter("in-caroussel")==null) ? false : true);
+		String sizeProduct = request.getParameter("size");
+		String reference = request.getParameter("reference");
+		String colorProduct = request.getParameter("color");
+		String weightProduct = request.getParameter("weight");
+		String warranty = request.getParameter("warranty");
+		String sponsorProduct = request.getParameter("sponsoring");
+		int idProduct;
+		String redirection;
+	
+		VAT vat = vatDao.findById(Integer.parseInt(request.getParameter("TVA")));
+		beans.Product product = new beans.Product(nameProduct, descriptionProduct, Float.parseFloat(priceProduct),mainPicPath, videoPath, inCaroussel, sizeProduct, reference, colorProduct, Float.parseFloat(weightProduct),
+				Integer.parseInt(warranty), Integer.parseInt(sponsorProduct),true ,vat);
+		
+		
+		if(request.getParameter("id-product").equals("")) {
+			if(!productDao.create(product)) {
+				//gérer l'erreur
+			}
+			beans.Product productFromDb = productDao.findByRef(product.getReference());
+			idProduct = productFromDb.getId();
+			redirection="product-management?id="+idProduct;
+		}else {
+			product.setId(Integer.parseInt(request.getParameter("id-product")));
+			if (!productDao.update(product)) {
+				//gérer l'erreur
+			}
+			redirection="dashboard";
+		}
+		
+		response.sendRedirect(redirection);
 	}
 
 }

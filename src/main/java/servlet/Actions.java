@@ -1,11 +1,13 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import dao.Category_productDao;
 import dao.Product_discountDao;
@@ -82,7 +84,13 @@ public class Actions extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+		String typeMedia = request.getParameter("type-media");
+		// int idProduct = Integer.parseInt(request.getParameter("id-product"));
+		String idProduct = request.getParameter("id-product");
+
+		System.out.println(typeMedia + " ---  " + idProduct);
+
+		//response.sendRedirect("product-management?id=" + idProduct);
 	}
 
 }

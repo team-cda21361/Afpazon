@@ -10,26 +10,14 @@
 	</c:if>
 	produit
 </h2>
-<!-- ******************** SWITCH ****************************	 -->
-
-<div class="d-flex flex-row justify-content-center pl-5">
-	<div class="form-check form-switch mt-2">
-		<label class="form-check-label me-5">Present dans le carrousel</label>
-		<input class="form-check-input" type="checkbox"
-			<c:if test="${product.isInCarousel()}">
-			<c:out value="checked"/>
-			</c:if>>
-	</div>
-</div>
-
 
 <div class="row justify-content-center">
 	<!-- ****************************************** PREMIERE DIV ******************************************************* -->
 	<div class="col-7">
-		<div class="row">
+		<div
+			class="row <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
 			<div class="w-25">
 				<form method="get" action="actions">
-
 					<input type="hidden" name="id-product" value=${product.id }>
 					<input type="hidden" name="action" value="add-category-to-product">
 					<label class="form-label">Ajouter une categorie</label> <select
@@ -71,7 +59,8 @@
 			</div>
 		</div>
 
-		<div class="row mt-3">
+		<div
+			class="row mt-3 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
 			<div class="w-25">
 				<table id="tableCategory" class="table table-bordered">
 					<caption class="h6">Catégorie(s) appliquée(s)</caption>
@@ -125,70 +114,99 @@
 		</div>
 
 		<div class="d-flex flex-row justify-content-between mt-3">
-
-			<div class="column w-50">
-				<label class="form-label">Cliquer sur image pour
-					ajouter/changer :</label> <input type="image" class="form-control mb-3"
-					src="<c:if test="${not empty product.mainPicPath }">
+			<div class="column w-50 m-3">
+				<form method="post" action="actions" enctype="multipart/form-data">
+					<input type="hidden" name="type-media" value="image"> <input
+						type="hidden" name="id-product" value=${product.id }> <input
+						type="file" id="download_img" class="form-control" name="image"
+						accept=".jpg,.png">
+					<button class="btn btn-success d-flex flex-row align-items-end"
+						type="submit">
+						<i class="bi bi-plus-circle"></i>
+					</button>
+					<input type="image" class="form-control mb-3"
+						src="<c:if test="${not empty product.mainPicPath }">
 								<c:out value="assets/images/products/${product.mainPicPath }" default=""/>
 							</c:if>
 							<c:if test="${empty product.mainPicPath }"><c:out value="assets/images/products/image_placeholder.png" default=""/>
 							</c:if>
 							"
-					name="image"> <label class="form-label"> <a href=""><img
-						alt="" src="assets/images/back_office/plus.png" width="20"></a>
-					Ajouter des images complèmentaires :
-				</label>
+						name="image">
 
+				</form>
+				<label class="form-label"> <a href=""> <img alt=""
+						src="assets/images/back_office/plus.png" width="20"></a> Ajouter
+					des images complèmentaires :
+				</label>
 			</div>
 
-			<div class="column w-50">
-				<label class="form-label">Cliquer sur video pour
-					ajouter/changer :</label> <input type="image" class="form-control mb-3"
-					name="image"
-					src="<c:if test="${not empty product.videoPath }">
+			<div class="column w-50 m-3">
+				<form method="post" action="actions" enctype="multipart/form-data">
+					<input type="hidden" name="type-media" value="video"> <input
+						type="hidden" name="id-product" value=${product.id }> <input
+						type="file" class="form-control" name="video" accept=".mp4">
+					<button class="btn btn-success d-flex flex-row align-items-end"
+						type="submit">
+						<i class="bi bi-plus-circle"></i>
+					</button>
+					<input type="image" class="form-control mb-3" name="image"
+						src="<c:if test="${not empty product.videoPath }">
 								<c:out value="assets/images/products/${product.videoPath}" default=""/>
 							</c:if>
 							<c:if test="${empty product.videoPath }">
 								<c:out value="assets/images/products/video_placeholder.png" default=""/>
 							</c:if>">
+				</form>
 			</div>
-
 		</div>
-
 	</div>
 	<div class="col-4 mt-5 mr-3">
 		<form method="post">
-			<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
+			<input type="hidden" name="id-product" value=${product.id }>
+			<input type="hidden" name="main-pic-path"
+				value=${product.mainPicPath }> <input type="hidden"
+				name="video-path" value=${product.videoPath }>
 
+			<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
+			<div class="row">
+				<div class="w-75">
+					<label>Présent dans le carrousel : </label>
+				</div>
+				<div class="w-25 form-check form-switch d-flex justify-content-end mb-3">
+					<input class="form-check-input" name="in-caroussel" type="checkbox"
+						<c:if test="${product.isInCarousel()}"> <c:out value="checked"/>
+					</c:if>>
+				</div>
+			</div>
 			<div class="row ">
-				<div class="w-25 ">
+				<div class="w-75 ">
 					<label for="exampleFormControlSponsoring" class="form-label">Poids
 						publicitaire (1-100) :</label>
 				</div>
-				<div class="w-75">
+				<div class="w-25">
 					<input type="number" min="1" max="100"
-						class="form-control mb-3 w-50 border border-warning"
+						class="form-control mb-3 border border-warning"
 						id="exampleFormControlSponsoring" name="sponsoring"
 						value="<c:out value="${product.sponsoring}" default=""/>">
 				</div>
 			</div>
 			<div class="row">
 				<div class="w-25">
-					<label>Reference :</label>
+					<label>Reference:</label>
 				</div>
 				<div class="w-75">
-					<input type="text" class="form-control mb-3 w-50" name="reference"
+					<input type="text" maxlength="30" class="form-control mb-3"
+						name="reference"
 						value="<c:out value="${product.reference }" default=""/>">
 				</div>
 			</div>
 			<div class="row">
-				<div class="w-25">
+				<div class="w-75">
 					<label>Garantie (en années):</label>
 				</div>
-				<div class="w-75">
+				<div class="w-25">
 					<select class="form-select mb-3 w-50"
-						aria-label="Default select example">
+						aria-label="Default select example" name="warranty">
 						<option selected value=<c:out value="${product.warranty }"/>>
 							<c:out value="${product.warranty }"
 								default="Choisissez une garantie" /></option>
@@ -203,13 +221,13 @@
 					<label>Nom :</label>
 				</div>
 				<div class="w-75">
-					<input type="text" class="form-control mb-3 w-50" name="name"
-						value="<c:out value="${product.name }" default=""/>">
+					<textarea type="text" maxlength="150" class="form-control mb-3"
+						name="name" value="<c:out value="${product.name }" default=""/>"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="w-25">
-					<label class="form-label">Description :</label>
+					<label class="form-label">Description:</label>
 				</div>
 				<div class="w-75">
 					<textarea class="form-control mb-3"
@@ -217,40 +235,43 @@
 							value="${product.description }" default="" /></textarea>
 				</div>
 			</div>
+
 			<div class="row">
 				<div class="w-25">
 					<label class="form-label">Taille :</label>
 				</div>
-				<div class="w-75">
-					<input type="text" class="form-control mb-3 w-50" name="color"
+				<div class="w-25">
+					<input type="text" maxlength="30" class="form-control mb-3" name="size"
 						value="<c:out value="${product.size }" default=""/>">
 				</div>
-			</div>
-			<div class="row">
-				<div class="w-25">
-					<label class="form-label">Couleur :</label>
-				</div>
-				<div class="w-75">
-					<input type="text" class="form-control mb-3 w-50" name="color"
-						value="<c:out value="${product.color}" default=""/>">
-				</div>
-			</div>
-			<div class="row">
-				<div class="w-25">
+
+				<div class="w-25 text-end">
 					<label class="form-label">Poids (kg) :</label>
 				</div>
-				<div class="w-75">
-					<input type="number" min="1" step="0.1"
-						class="form-control mb-3 w-50" name="weight"
+				<div class="w-25">
+					<input type="number" min="1" step="0.1" class="form-control mb-3"
+						name="weight"
 						value="<c:out value="${product.weight}" default=""/>">
 				</div>
 			</div>
+
+
+			<div class="row">
+				<div class="w-25">
+					<label class="form-label">Couleur:</label>
+				</div>
+				<div class="w-75">
+					<input type="text"  maxlength="30" class="form-control mb-3" name="color"
+						value="<c:out value="${product.color}" default=""/>">
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="w-25">
 					<label class="form-label">Prix :</label>
 				</div>
 				<div class="w-25">
-					<input type="number" min="1" max="100"
+					<input type="number" min="1" step="0.01"
 						class="form-control mb-3 w-40" id="exampleFormControlSize"
 						name="price" value="<c:out value="${product.price}" default=""/>">
 				</div>
@@ -259,15 +280,17 @@
 				</div>
 				<div class="w-25">
 					<select class="form-select mb-3"
-						aria-label="Default select example">
-						<option selected value=<c:out value="${product.vat.value }"/>>
+						aria-label="Default select example" name="TVA">
+						<option selected value=<c:out value="${product.vat.id }"/>>
 							<c:out value="${product.vat.value }" default="%" /></option>
 						<c:forEach items="${vats }" var="vat">
-							<option><c:out value="${vat.value}"></c:out></option>
+							<option value=<c:out value="${vat.id }"/>><c:out
+									value="${vat.value}"></c:out></option>
 						</c:forEach>
 					</select>
 				</div>
 			</div>
+
 			<div class="row justify-content-around mt-5">
 				<button type="button" class="btn btn-primary w-25">Gestion
 					des avis</button>
