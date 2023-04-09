@@ -3,7 +3,8 @@
 <section class="container-account">
 	<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
 	
-	<div>Compte <c:out value="${fn:toLowerCase(currentUser2.role.role)}" />, identifiant <c:out value="${currentUser2.id}" />, créé le <fmt:formatDate type="date" value="${currentUser2.registrationDate}" /></div>
+	<div>Compte <c:out value="${fn:toLowerCase(currentUser.role.role)}" /> créé le <fmt:formatDate type="date" value="${currentUser.registrationDate}" />.</div>
+	<div>Numéro client : <c:out value="${currentUser.id}" /></div>
 	<div id="accountNav" class="sticky-top">
 		<a class="btn btn-primary" href="#accountOrders" role="button"><i class="bi bi-box-seam"></i> Commandes</a>
 		<a class="btn btn-primary" href="#accountInfo" role="button"><i class="bi bi-person-badge"></i> Infos</a>
@@ -45,7 +46,8 @@
 	
 	<hr id="accountInfo">
 	<h3 class="text-secondary"><i class="bi bi-person-badge"></i> Mes informations personnelles</h3>
-	<form>
+	<form method="post">
+		<input type="hidden" class="form-control" name="formSubmitted" value="accountInfo">
 		<div class="mb-3">
 			<div class="row">
 				<div class="col">
@@ -105,7 +107,7 @@
 	
 	<hr id="accountDelivery">
 	<h3 class="text-secondary"><i class="bi bi-envelope"></i> Mes adresses</h3>
-	<c:if test="${not empty addressesList}">
+	<c:if test="${deliveryAddressesCounter > 0}">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -118,21 +120,26 @@
 			</thead>
 			<tbody class="table-group-divider">
 				<c:forEach items="${addressesList}" var="address">
-					<tr>
-						<td><c:out value="${address.address}" /></td>
-						<td><c:out value="${address.zipCode}" /></td>
-						<td><c:out value="${address.city}" /></td>
-						<td class="text-center"><a type="button" id="${address.id}" class="editBtn"><i class="bi bi-pencil-fill"></i></a></td>
-						<td class="text-center"><a type="button" id="${address.id}" class="deleteBtn"><i class="bi bi-trash3-fill"></i></a></td>
-					</tr>
+					<c:if test="${address.address_type.type == 'livraison'}">
+						<tr>
+							<td><c:out value="${address.address}" /></td>
+							<td><c:out value="${address.zipCode}" /></td>
+							<td><c:out value="${address.city}" /></td>
+							<td class="text-center"><a type="button" id="${address.id}" class="editBtn editAddress"><i class="bi bi-pencil-fill"></i></a></td>
+							<td class="text-center"><a type="button" href="?deleteAddress=${address.id}" id="${address.id}" class="deleteBtn"><i class="bi bi-trash3-fill"></i></a></td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
 	</c:if>
-	<c:if test="${empty addressesList}">
+	<c:if test="${deliveryAddressesCounter == 0}">
 		<h3 class="text-center mb-3">Aucune adresse renseignée</h3>
 	</c:if>
-	<form>
+	<form method="post">
+		<input type="hidden" class="form-control" name="formSubmitted" value="accountDelivery">
+		<input type="hidden" class="form-control" id="deliveryAddressAction" name="deliveryAddressAction" value="create">
+		<input type="hidden" class="form-control" id="deliveryAddressID" name="deliveryAddressID">
 		<div class="mb-3">
 			<div class="row">
 				<div class="col-6">
@@ -149,12 +156,15 @@
 				</div>
 			</div>
 		</div>
-		<button type="submit" class="btn btn-primary">Ajouter</button>
+		<button type="submit" class="btn btn-primary" id="addressBtn">Ajouter</button>
 	</form>
 	
 	<hr id="accountBilling">
 	<h3 class="text-secondary"><i class="bi bi-receipt"></i> Mon adresse de facturation</h3>
-	<form>
+	<form method="post">
+		<input type="hidden" class="form-control" name="formSubmitted" value="accountBilling">
+		<input type="hidden" class="form-control" id="billingAddressAction" name="billingAddressAction" value="create">
+		<input type="hidden" class="form-control" id="billingAddressID" name="billingAddressID">
 		<div class="mb-3">
 			<div class="row">
 				<div class="col-6">
@@ -177,9 +187,34 @@
 	<hr>
 	<div class="text-end">
 		<h5 class="text-secondary"><i class="bi bi-person-fill-dash text-danger"></i> Désactiver mon compte</h5>
-		<button type="submit" class="btn btn-sm btn-outline-danger">Je désactive mon compte</button>
+		<button type="submit" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deactivateModal">Je désactive mon compte</button>
 	</div>
 </section>
+
+<!-- Modal de désactivation de compte -->
+<div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-3 border-danger">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-danger" id="deactivateModalLabel">Désactivation de compte</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-danger fw-bold">Êtes-vous sûr de vouloir désactiver votre compte ?</div>
+        <div class="text-danger opacity-75">Si oui, veuillez confirmer votre décision en saisissant votre mot de passe :</div>
+        <form id="deactivateForm" method="post">
+        	<input type="hidden" class="form-control" name="formSubmitted" value="accountDeactivation">
+			<input type="hidden" class="form-control" id="userIDtoDeactivate" name="userIDtoDeactivate">
+	        <input type="password" class="form-control mt-3" id="pwdForDeactivation" name="pwdForDeactivation" placeholder="Saisissez votre mot de passe">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" form="deactivateForm" class="btn btn-outline-danger">Désactiver mon compte</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Modal des détails de commande -->
 <div class="modal fade" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
@@ -262,12 +297,46 @@
 	</script>
 </c:if>
 
+<c:forEach items="${addressesList}" var="address">
+	<c:if test="${address.address_type.type == 'facturation'}">
+		<script type="text/javascript">
+			$(window).on('load', function() {
+				$('#billingAddressAction').attr("value", "update");
+				$('#billingAddressID').attr("value", "${address.id}");
+				$('#inputBillingStreet').val("${address.address}");
+				$('#inputBillingZipCode').val("${address.zipCode}");
+				$('#inputBillingCity').val("${address.city}");
+			});
+		</script>
+	</c:if>
+</c:forEach>
+
 <script type="text/javascript">
 	$(window).on('load', function() {
-			$('#userTitle').val("${currentUser2.gender}");
-			$('#userLastName').val("${currentUser2.lastName}");
-			$('#userFirstName').val("${currentUser2.firstName}");
-			$('#userEmail').val("${currentUser2.email}");
-			$('#userPhone').val("${currentUser2.phone}");
+		$('#userTitle').val("${currentUser.gender}");
+		$('#userLastName').val("${currentUser.lastName}");
+		$('#userFirstName').val("${currentUser.firstName}");
+		$('#userEmail').val("${currentUser.email}");
+		$('#userPhone').val("${currentUser.phone}");
 	});
 </script>
+
+<script type="text/javascript">
+	$(".editAddress").on('click', function() {
+		$('#deliveryAddressAction').attr("value", "update");
+		$('#deliveryAddressID').attr("value", $(this).attr("id"));
+		$('#inputStreet').val($(this).parent().siblings().eq(0).html());
+		$('#inputZipCode').val($(this).parent().siblings().eq(1).html());
+		$('#inputCity').val($(this).parent().siblings().eq(2).html());
+		$('#addressBtn').text("Mettre à jour");
+	});
+</script>
+
+<c:if test="${not empty backToPage}">
+	<script type="text/javascript">
+		$(window).on('load', function() {
+			var goTo = $("${backToPage}");
+			$('html,body').animate({scrollTop: goTo.offset().top},'slow');
+		});
+	</script>
+</c:if>

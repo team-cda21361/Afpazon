@@ -245,4 +245,31 @@ public class UserDao implements IDAO<User> {
 		}
 		return genders;
 	}
+
+	public boolean deactivate(User user, String password) {
+		try {
+			/*
+			 * VERSION AVEC BCRYPT
+			 */
+			sql = connect.prepareStatement(
+					"select *, user.id as userId from user inner join role on user.id_role=role.id where email=?"); // test@test.fr
+			sql.setString(1, user.getEmail());
+
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				if (BCrypt.checkpw(password, rs.getString("password"))) {
+
+					sql = connect.prepareStatement("UPDATE user SET isActive = FALSE WHERE id = ? AND email = ?");
+					sql.setInt(1, user.getId());
+					sql.setString(2, user.getEmail());
+					sql.execute();
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
