@@ -103,27 +103,27 @@
 					  </div>
 					  <div class="mb-3">
 					    <label for="exampleInputPassword1" class="form-label">Date de fin</label>
-					    <input type="date" class="form-control" id="dateEndId"  name="endDate" value="
-					    <c:if test="${not empty discountEdit }">${discountEdit.endDate }</c:if>" required>
+					    <input type="date" class="form-control" id="dateEndId"  name="endDate" 
+					    value="<c:if test="${not empty discountEdit }">${discountEdit.endDate }</c:if>" required>
 					  </div>
 					  <div class="mb-3">
 					    <label for="exampleInputPassword1" class="form-label">Code</label>
-					    <input type="text" class="form-control" id="codeId"  name="voucher" value="
-					    <c:if test="${not empty discountEdit }">${discountEdit.voucher }</c:if>" >
+					    <input type="text" class="form-control" id="codeId"  name="voucher" 
+					    value="<c:if test="${not empty discountEdit }">${discountEdit.voucher }</c:if>" required>
 					  </div>
 					  <div class="mb-3">
 					    <label for="exampleInputPassword1" class="form-label">Pourcentage</label>
-					    <input type="text" class="form-control" id="percentId"  name="percent" value="<c:if test="${not empty discountEdit }">${discountEdit.percent }</c:if>">
+					    <input type="text" class="form-control" id="percentId"  name="percent" value="<c:if test="${not empty discountEdit }">${discountEdit.percent }</c:if>" required>
 					  </div>
 					  <div class="mb-3">
-					    <label for="exampleInputPassword1" class="form-label">Pourcentage</label>
-					    <input type="hidden" class="form-control" id="percentId"  name="discountId" value="<c:if test="${not empty discountEdit }">${discountEdit.id }</c:if>">
+					    <label for="discountId" class="form-label">Pourcentage</label>
+					    <input type="hidden" class="form-control" id="discountId"  name="discountId" value="<c:if test="${not empty discountEdit }">${discountEdit.id }</c:if>">
 					  </div>
 						<c:if test="${not empty discountEdit }">
-					  	 <button type="submit" class="btn btn-primary" name="updateDiscount">Mettre à jour</button>
+					  	 <button id="formBtn" type="submit" class="btn btn-primary" name="updateDiscount">Mettre à jour</button>
 					    </c:if>
 					    <c:if test="${empty discountEdit && not empty productList}">
-					 	 <button type="submit" class="btn btn-primary" name="createDiscount">Créer</button>
+					 	 <button id="formBtn" type="submit" class="btn btn-primary" name="createDiscount">Créer</button>
 					    </c:if>
 					</form>
 				</div>

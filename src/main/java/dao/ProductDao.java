@@ -159,23 +159,21 @@ public class ProductDao implements IDAO<Product> {
 		Product product = new Product();
 
 		try {
-			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat "
+			sql = connect.prepareStatement("SELECT *, product.id as idProd FROM product INNER JOIN vat "
 					+ "ON product.id_vat = vat.id WHERE product.id=?");
 
 			sql.setInt(1,id);
 
-			System.out.println("sql id prod: "+sql);
 			ResultSet rs= sql.executeQuery();
 
 			if(rs.next()) {
-				product = new Product(rs.getString("name"),rs.getString("description"),
+				product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
 						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 
-				System.out.println("FindById PRODUCT OK !!!");
 				return product;
 
 			}

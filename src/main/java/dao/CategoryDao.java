@@ -60,8 +60,7 @@ public class CategoryDao implements IDAO<Category> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//Retourne la liste des category ajout�s dans la liste
-		return listategory;
+
 
 	}
 	
