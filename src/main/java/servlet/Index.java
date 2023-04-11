@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Role;
 import beans.User;
 import dao.CategoryDao;
 import dao.ProductDao;
+import dao.Product_discountDao;
+
+
 /**
  * Servlet implementation class home
  */
@@ -30,28 +34,54 @@ public class Index extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		User user = new User();
+		/*
+		 * Creation d'un mock pour jongler entre les pages backoffice et site client
+		 */
+		//decommenter ce user pour passer en mode Admin
+//		Role roleAdmin = new Role("Admin");
+//		user =new User("mock@admin.fr",roleAdmin );
+		//decommenter ce user pour passer en mode Client
+		Product_discountDao produitDaoProduct_discountDao = new Product_discountDao();
+		ProductDao produitDao = new ProductDao();
+		
+		Product produit = new Product();
+		
+		ArrayList<beans.Product_discount> lisProductDiscounts = new ArrayList<>();
+		ArrayList<beans.Product> listNewProduct = new ArrayList<>();
+		ArrayList<beans.Product_discount> listNewProductDiscount = new ArrayList<>();
+
+
 		CategoryDao.injectCategories(request);
 		HttpSession session = request.getSession(true);
 		User currentUser = (User) session.getAttribute("currentUser");
-		ProductDao produitDao = new ProductDao();
+    
+		Role roleClient = new Role("Client");
+		user =new User("mock@admin.fr",roleClient );
 
-		Product produit = new Product();
-		ArrayList<beans.Product> listCarousel = new ArrayList();
-		
-	//	Role roleClient = new Role("Client");
-	//	user =new User("mock@admin.fr",roleClient );
 		user.setId(1);
 		user.setFirstName("Charles");
-		//HttpSession session =request.getSession(true);
 		session.setAttribute("currentUser", user);
 	
+    Product produit = new Product();
+		
 		if (currentUser != null) {
 			if (currentUser.getRole().getRole().equalsIgnoreCase("Admin")) {
 				response.sendRedirect("dashboard");
 				System.out.println("en mode Admin");
 			} else {
-				listCarousel = produitDao.findProdCarousel();
-				request.setAttribute("carousel", listCarousel);
+
+  
+				lisProductDiscounts = produitDaoProduct_discountDao.findProdDiscountSponsoring();
+				request.setAttribute("discountsProdSponsoring", lisProductDiscounts);
+				
+				listNewProduct = produitDao.findNewProdCarousel();
+				request.setAttribute("newProdCarousel", listNewProduct);
+				
+				listNewProductDiscount = produitDaoProduct_discountDao.findSponsoredProducts();
+				request.setAttribute("newProdSponsored", listNewProductDiscount);
+			
 				request.getRequestDispatcher("/view/index.jsp").forward(request,response);
 				System.out.println("en mode Client");
 			}
@@ -61,7 +91,6 @@ public class Index extends HttpServlet {
 		}
 	}
 		//fin mock
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
