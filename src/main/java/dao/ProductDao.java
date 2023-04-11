@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.AddProductList;
-import beans.Discount;
 import beans.Product;
 import beans.VAT;
 import connector.DBConnect;
@@ -301,15 +300,11 @@ public class ProductDao implements IDAO<Product> {
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
-
-				Product product = new Product();
 				listWarranties.add(rs.getInt("warranty"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listProducts;
-	}
 		return listWarranties;
 	}
 }
