@@ -18,9 +18,20 @@ public class ImageDao implements IDAO<Image> {
 	ResultSet rs;
 
 	@Override
-	public boolean create(Image object) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean create(Image image) {
+		System.out.println("Dans image : "+ image.getPicPath());
+		System.out.println("Dans image : "+ image.getId());
+		
+		try {
+			sql = connect.prepareStatement("INSERT INTO image (picPath, id_product) VALUES (?, ?)");
+			sql.setString(1, image.getPicPath());
+			sql.setInt(2, image.getId());
+			sql.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
