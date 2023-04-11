@@ -73,6 +73,34 @@ public class OrderDao implements IDAO<Order> {
 
 		return orders;
 	}
+	
+	public ArrayList<Order> readForUser(User user) {
+		ArrayList<Order> orders = new ArrayList<>();
+		Address_type addtype= new Address_type();
+
+		try {
+			sql = connect
+					.prepareStatement("select *, u.id as userId, o.id as orderId from order_list o inner join user u on u.id=o.id_user "
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address_ledger a1 ON o.id_address_delivery = a1.id INNER JOIN address_ledger a2 ON o.id_address_billing = a2.id INNER JOIN status s "
+							+ "ON s.id = o.id_status WHERE u.id = ? ORDER BY dateOrder DESC");
+			sql.setInt(1, user.getId());
+			rs = sql.executeQuery();
+
+			while (rs.next()) {
+				Status status = new Status(rs.getString("status"));
+				addtype.setId(2);	
+				Address addressDel = new Address(rs.getInt("a1.id"), rs.getString("a1.address"), rs.getInt("a1.zipCode"),rs.getString("a1.city"),user,addtype);
+				addtype.setId(1);	
+				Address addressBill = new Address(rs.getInt("a2.id"), rs.getString("a2.address"), rs.getInt("a2.zipCode"),rs.getString("a2.city"),user,addtype);
+				orders.add(new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,addressDel,addressBill,status) );
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return orders;
+	}
 
 	@Override
 	public boolean delete(Order order) {

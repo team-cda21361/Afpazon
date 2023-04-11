@@ -6,19 +6,7 @@ function loadCSS(filename){
 	document.head.appendChild(file);
 }
 
-loadCSS("./assets/css/account.css");
-
-$(document).ready( function () {
-    $('#ordersTable').DataTable({
-        language: {
-            url: "./assets/ajax/DataTables_Localization/fr-FR.json"
-        },
-        order:[[0,'desc']],
-        columnDefs: [
-		   { orderable: false, targets: -1 }
-		]
-    });
-} );
+loadCSS("./assets/css/review.css");
 
 $(document).ready(function() {
     $(".messageToUser").slideDown();

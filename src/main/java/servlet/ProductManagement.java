@@ -28,6 +28,7 @@ public class ProductManagement extends HttpServlet {
 	ProductDao productDao = new ProductDao();
 	CategoryDao categoryDao = new CategoryDao();
 	DiscountDao discountDao = new DiscountDao();
+
 	Product_discountDao product_discountDao = new Product_discountDao();
 	Category_productDao category_productDao = new Category_productDao();
 	VATDao vatDao = new VATDao();
@@ -48,7 +49,6 @@ public class ProductManagement extends HttpServlet {
 		String action="add";
 		ArrayList<Category> categoriesForSelect = new ArrayList<>();
 		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>();
-		
 		
 		if (request.getParameter("id")!=null) {
 			int productId= Integer.parseInt(request.getParameter("id"));
@@ -75,7 +75,6 @@ public class ProductManagement extends HttpServlet {
 		request.setAttribute("discounts", discountsForSelect);
 		request.setAttribute("vats", vatDao.read());
 		request.setAttribute("action", action);
-		
 		
 		request.getRequestDispatcher("view/backOffice/productManagement.jsp").forward(request, response);
 	}

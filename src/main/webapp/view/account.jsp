@@ -1,5 +1,20 @@
 <script type="text/javascript" src="./assets/js/account.js"></script>
 
+<c:if test="${not empty message}">
+	<c:choose>
+		<c:when test="${fn:contains(message, 'Erreur')}">
+			<div class="sticky-top messageToUser errorMessage">
+				<c:out value="${message}"/>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="sticky-top messageToUser">
+				<c:out value="${message}"/>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</c:if>
+
 <section class="container-account">
 	<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
 	
@@ -85,7 +100,8 @@
 	
 	<hr id="accountPassword">
 	<h3 class="text-secondary"><i class="bi bi-three-dots"></i> Mon mot de passe</h3>
-	<form>
+	<form method="post">
+		<input type="hidden" class="form-control" name="formSubmitted" value="accountPassword">
 		<div class="mb-3">
 			<div class="row">
 				<div class="col">
@@ -235,7 +251,7 @@
 					<c:if test="${not empty productsList}">
 						<c:forEach items="${productsList}" var="product">
 							<div class="row">
-								<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
+								<img class="productIMG" alt="..." src="./assets/products/img/${product.product.mainPicPath}">
 								<div class="col">
 									<div class="row">
 										<h5><c:out value="${product.product.name}" /></h5>
@@ -244,7 +260,12 @@
 										<div>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></div>
 									</div>
 									<div class="row">
-										<div>Quantité : <c:out value="${product.quantity}" /></div>
+										<div class="col">
+											<div class="itemRef opacity-50">Référence : <c:out value="${product.product.reference}" /></div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-warning reviewButton" href="review?productID=${product.product.id}" role="button"><i class="bi bi-star-half"></i> Laisser un avis</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -265,11 +286,15 @@
 						</div>
 						<div class="row mb-3">
 							<h5>Informations</h5>
+							<div>Passée le : <fmt:formatDate type="date" value="${orderSelected.date}" /></div>
 							<div>Total payé : <span id="orderTotalPrice"></span>&euro;</div>
 							<div>Etat : <span id="orderState"></span></div>
 							<c:if test="${not empty orderSelected.trackingNumber}">
 								<div>Suivi : <span id="orderTrackingNumber"></span></div>
 							</c:if>
+						</div>
+						<div class="row mb-3">
+							<a class="btn btn-danger w-75 mx-auto" href="printOrder?orderID=${orderSelected.id}" role="button"><i class="bi bi-file-earmark-pdf-fill"></i> Télécharger la facture</a>
 						</div>
 					</div>
 				</div>
@@ -287,8 +312,8 @@
 		$(window).on('load', function() {
 			$('#orderAddress').html("${orderSelected.address_delivery.address},");
 			$('#orderZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
-			$('#orderBillingAddress').html("${orderSelected.address_delivery.address},");
-			$('#orderBillingZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
+			$('#orderBillingAddress').html("${orderSelected.address_billing.address},");
+			$('#orderBillingZipCodeAndCity').html("${orderSelected.address_billing.zipCode} ${orderSelected.address_billing.city}");
 			$('#orderTotalPrice').html("${orderSelected.totalPrice}");
 			$('#orderState').html("${orderSelected.status.status}");
 			$('#orderTrackingNumber').html("${orderSelected.trackingNumber}");

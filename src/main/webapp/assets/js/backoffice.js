@@ -32,3 +32,15 @@ $('.toModal').click( function(){
 	console.log(modal)
 	modal.setAttribute("href",value);
 })
+
+/**************************** JS POUR STOCKMANAGEMENT *********************************/
+
+$(".toModal").click(function(){
+	
+	recup = $(this).attr("href")
+	console.log(recup+"aaaaa")
+	modal = document.querySelector("#modal")
+	console.log(modal+"bbbb")
+	modal.setAttribute("href", recup)
+	
+})

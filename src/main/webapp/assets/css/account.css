@@ -69,3 +69,37 @@ ul.pagination {
 	height: 100px;
 	object-fit: contain;
 }
+
+.itemRef {
+	font-size: 75%;
+}
+
+.reviewButton {
+	margin-left: auto;
+	margin-right: 0;
+	--bs-btn-padding-y: .25rem; 
+	--bs-btn-padding-x: .5rem; 
+	--bs-btn-font-size: .75rem;
+}
+
+.messageToUser {
+	display: none;
+	position: sticky;
+	float: right;
+	top: 15px;
+	right: 20px;
+	margin: 15px 0 auto auto;
+	width: min(80vw, 250px);
+	color: #558B2F;
+	background-color: #DCEDC8;
+	border: 1px solid #AED581;
+	border-radius: 10px;
+	text-align: center;
+	padding: 10px;
+}
+
+.errorMessage {
+	color: #E53935;
+	background-color: #FFCDD2;
+	border: 1px solid #EF9A9A;
+}

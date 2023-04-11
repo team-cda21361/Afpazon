@@ -60,7 +60,7 @@
 		<div class="row justify-content-between backRowMargin">
 			<div class = col-6>
 				<div class="d-flex justify-content-between">
-					<h4>Produits   <a href="stockManager"><img alt="" src="assets/images/back_office/littleStockNoir.png"></a></h4>
+					<h4>Produits   <a href="stock-management"><img alt="" src="assets/images/back_office/littleStockNoir.png"></a></h4>
 				</div>
 					<table class="table table-bordered tableManager">
 						<thead class="table-active">

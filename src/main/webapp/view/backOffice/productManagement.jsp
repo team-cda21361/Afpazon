@@ -1,5 +1,5 @@
 <script src="assets/js/productManagement.js"></script>
-<!-- ****************************************** TITRE ************************************************************** -->
+<!-- ****************************************** TITRE ************************************************************** --
 
 <h2 class="col-12 text-center mt-5">
 	<c:if test="${action == 'add'}">
@@ -63,10 +63,10 @@
 			class="row mt-3 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
 			<div class="w-25">
 				<table id="tableCategory" class="table table-bordered">
-					<caption class="h6">Catégorie(s) appliquée(s)</caption>
+					<caption class="h6">CatÃ©gorie(s) appliquÃ©e(s)</caption>
 					<thead class="bg-secondary sticky-top">
 						<tr>
-							<th scope="col">Catégorie</th>
+							<th scope="col">CatÃ©gorie</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -82,16 +82,16 @@
 					</tbody>
 				</table>
 			</div>
-
+      
 			<!-- <div class="tablePane mb-3 border" style="height:30vh"> -->
 			<div class="w-75">
 				<table id="tablePromo" class="table table-bordered">
-					<caption class="h6">Promotion(s) appliquée(s)</caption>
+					<caption class="h6">Promotion(s) appliquÃ©e(s)</caption>
 					<thead class="bg-secondary sticky-top">
 						<tr>
 							<th scope="col">Code</th>
 							<th scope="col">%</th>
-							<th scope="col">Date début</th>
+							<th scope="col">Date dÃ©but</th>
 							<th scope="col">Date fin</th>
 						</tr>
 					</thead>
@@ -125,18 +125,20 @@
 						<i class="bi bi-plus-circle"></i>
 					</button>
 					<input type="image" class="form-control mb-3"
-						src="<c:if test="${not empty product.mainPicPath }">
-								<c:out value="assets/images/products/${product.mainPicPath }" default=""/>
-							</c:if>
-							<c:if test="${empty product.mainPicPath }"><c:out value="assets/images/products/image_placeholder.png" default=""/>
-							</c:if>
-							"
-						name="image">
+						src="
+              <c:if test="${not empty product.mainPicPath }">
+                <c:out value="assets/images/products/${product.mainPicPath }" default=""/>
+              </c:if>
+              <c:if test="${empty product.mainPicPath }">
+                <c:out value="assets/images/products/image_placeholder.png" default=""/>
+              </c:if>
+            "
+          name="image">
 
 				</form>
 				<label class="form-label"> <a href=""> <img alt=""
 						src="assets/images/back_office/plus.png" width="20"></a> Ajouter
-					des images complèmentaires :
+					des images complÃ¨mentaires :
 				</label>
 			</div>
 
@@ -170,7 +172,7 @@
 			<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
 			<div class="row">
 				<div class="w-75">
-					<label>Présent dans le carrousel : </label>
+					<label>PrÃ©sent dans le carrousel : </label>
 				</div>
 				<div class="w-25 form-check form-switch d-flex justify-content-end mb-3">
 					<input class="form-check-input" name="in-caroussel" type="checkbox"
@@ -202,7 +204,7 @@
 			</div>
 			<div class="row">
 				<div class="w-75">
-					<label>Garantie (en années):</label>
+					<label>Garantie (en annÃ©es):</label>
 				</div>
 				<div class="w-25">
 					<select class="form-select mb-3 w-50"
@@ -278,14 +280,16 @@
 				<div class="w-25  text-end">
 					<label class="form-label">TVA :</label>
 				</div>
+
 				<div class="w-25">
-					<select class="form-select mb-3"
-						aria-label="Default select example" name="TVA">
-						<option selected value=<c:out value="${product.vat.id }"/>>
-							<c:out value="${product.vat.value }" default="%" /></option>
+					<select class="form-select mb-3" aria-label="Default select example" name="TVA">
+						<option selected value=<c:out value="${product.vat.id }"/>
+							<c:out value="${product.vat.value }" default="%" />
+            </option>
 						<c:forEach items="${vats }" var="vat">
-							<option value=<c:out value="${vat.id }"/>><c:out
-									value="${vat.value}"></c:out></option>
+							<option value=<c:out value="${vat.id }"/>
+                <c:out value="${vat.value}"></c:out>
+              </option>
 						</c:forEach>
 					</select>
 				</div>

@@ -40,8 +40,8 @@ public class Index extends HttpServlet {
 		 * Creation d'un mock pour jongler entre les pages backoffice et site client
 		 */
 		//decommenter ce user pour passer en mode Admin
-//		Role roleAdmin = new Role("Admin");
-//		user =new User("mock@admin.fr",roleAdmin );
+		Role roleAdmin = new Role("Admin");
+		user =new User("mock@admin.fr",roleAdmin );
 		//decommenter ce user pour passer en mode Client
 		Product_discountDao produitDaoProduct_discountDao = new Product_discountDao();
 		ProductDao produitDao = new ProductDao();
@@ -62,9 +62,8 @@ public class Index extends HttpServlet {
 
 		user.setId(1);
 		user.setFirstName("Charles");
+
 		session.setAttribute("currentUser", user);
-	
-    Product produit = new Product();
 		
 		if (currentUser != null) {
 			if (currentUser.getRole().getRole().equalsIgnoreCase("Admin")) {
