@@ -35,8 +35,8 @@ public class Index extends HttpServlet {
 		User currentUser = (User) session.getAttribute("currentUser");
 		ProductDao produitDao = new ProductDao();
 
-		Product produit = new Product();
-		ArrayList<beans.Product> listCarousel = new ArrayList();
+		ArrayList<beans.Product> listCarousel = new ArrayList<>();
+    Product produit = new Product();
 		
 		if (currentUser != null) {
 			if (currentUser.getRole().getRole().equalsIgnoreCase("Admin")) {

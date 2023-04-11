@@ -60,6 +60,7 @@ public class CategoryDao implements IDAO<Category> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
 	
 	public static void injectCategories(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
@@ -125,6 +126,4 @@ public class CategoryDao implements IDAO<Category> {
 		}
 		return null;
 	}
-	
-	
 }
