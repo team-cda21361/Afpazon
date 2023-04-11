@@ -22,3 +22,16 @@ $(document).ready( function () {
         ]
     });
 } );
+
+/**************************** JS POUR STOCKMANAGEMENT *********************************/
+
+$(".toModal").click(function(){
+	
+	recup = $(this).attr("href")
+	console.log(recup+"aaaaa")
+	modal = document.querySelector("#modal")
+	console.log(modal+"bbbb")
+	modal.setAttribute("href", recup)
+	
+})
+
