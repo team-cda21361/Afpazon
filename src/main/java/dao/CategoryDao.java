@@ -49,7 +49,6 @@ public class CategoryDao implements IDAO<Category> {
 		return listeCategory;
 	}
 	
-	/* A remettre en place avant PR
 	public void readActives() {
 		activeCategories.clear();
 		try {
@@ -61,30 +60,7 @@ public class CategoryDao implements IDAO<Category> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//Retourne la liste des category ajout�s dans la liste
-		return listategory;
-
-	}  */
-	
-	//A supprimer avant PR /////////////////////
-	
-	public ArrayList<Category> readActives() {
-		ArrayList<Category> listeCategory =new ArrayList<>();
-		activeCategories.clear();
-		try {
-			sql = connect.prepareStatement("SELECT * FROM category WHERE isActive = 1");
-			rs = sql.executeQuery();
-			while (rs.next()) {
-				activeCategories.add(new Category(rs.getInt("id"), rs.getString("category"), rs.getBoolean("isActive")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		//Retourne la liste des category ajout�s dans la liste
-		return listeCategory;
-
 	}
-	///////////////////////////////////
 	
 	public static void injectCategories(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);

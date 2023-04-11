@@ -55,7 +55,6 @@ public class ImageDao implements IDAO<Image> {
 			sql = connect.prepareStatement("SELECT * FROM image where id_product=?");
 			sql.setInt(1, id);
 			rs = sql.executeQuery();
-			System.out.println("REALIZA LA CONSULTA");
 			
 			while(rs.next()) {
 				Image image = new Image(rs.getString("picPath"),rs.getInt("id"));
