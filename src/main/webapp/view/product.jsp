@@ -14,12 +14,12 @@ pageEncoding="UTF-8"%>
                             <main id="gallery">
                                 <div class="main-img">
 
-                                    <img src="assets/products/img/<c:out value="${ product.getMainPicPath() }" />" id="current" alt="#">
+                                    <img src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />" id="current" alt="#">
                                 </div>
                                 <div class="images">
-                                    <img src="assets/products/img/<c:out value="${ product.getMainPicPath() }" />" class="img" alt="#">
+                                    <img src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />" class="img" alt="#">
                                 <c:forEach items="${ images }" var="images" varStatus="status">
-                                    <img src="assets/products/img/<c:out value="${ images.getPicPath() }" />" class="img" alt="#">
+                                    <img src="assets/images/product-details/<c:out value="${ images.getPicPath() }" />" class="img" alt="#">
                                 </c:forEach>
                                 </div>
                             </main>
