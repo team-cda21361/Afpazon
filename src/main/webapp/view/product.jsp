@@ -56,7 +56,7 @@
 							
 						    <c:if test="${empty discount }">		
 								<h3 class="price">
-									<c:out value="${ discount.getProduct().getPrice() }" />
+									<c:out value="${ product.getPrice() }" />
 									&euro; <span>-</span>
 								</h3>
 							</c:if>
