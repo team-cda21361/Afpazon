@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -8,17 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Address;
 import beans.Address_type;
 import beans.Order;
 import beans.Order_product;
 import beans.Product;
-import beans.Role;
 import beans.Status;
 import beans.User;
 import beans.VAT;
+import dao.AddressDao;
 import dao.CategoryDao;
+import dao.UserDao;
 
 /**
  * Servlet implementation class Account
@@ -26,6 +29,8 @@ import dao.CategoryDao;
 @WebServlet("/account")
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserDao userDao = new UserDao();
+	AddressDao addressDao = new AddressDao();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,15 +44,26 @@ public class Account extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 		CategoryDao.injectCategories(request);
-		User user = new User(12312313, "Fouquet", "Charles", "fouquetcharles@gmail.com", "", "M.", "0645716639", java.sql.Date.valueOf("2023-03-30"), true, new Role(729, "Vendeur"));
-		request.setAttribute("currentUser2", user);
+		User currentUser = (User) session.getAttribute("currentUser");
+		int deliveryAddressesCounter = 0;
+
+		if (request.getParameter("deleteAddress") != null) {
+			Address toDelete = new Address();
+			toDelete.setId(Integer.parseInt(request.getParameter("deleteAddress")));
+			addressDao.delete(toDelete);
+			request.setAttribute("backToPage", "#accountDelivery");
+		}
 		
-		ArrayList<Address> addressesList = new ArrayList<>();
-		addressesList.add(new Address(1, "7 allée Epinette", 93340, "Le Raincy", new User(), new Address_type()));
-		addressesList.add(new Address(7, "5 rue John Fitzgerald Kennedy", 95600, "Eaubonne", new User(), new Address_type()));
-		addressesList.add(new Address(9, "6-8 rue George et Maï Politzer", 75012, "Paris", new User(), new Address_type()));
-		request.setAttribute("addressesList", addressesList);
+		ArrayList<Address> addressesList = addressDao.readById(currentUser.getId());
+		for (Address address : addressesList) {
+			if (address.getAddress_type().getType().equals("livraison")) {
+				deliveryAddressesCounter++;
+			}
+		}
+		request.setAttribute("deliveryAddressesCounter", deliveryAddressesCounter);
+		request.setAttribute("addressesList", addressesList);			
 		
 		ArrayList<Order> ordersList = new ArrayList<>();
 		ordersList.add(new Order(16415, java.sql.Date.valueOf("2023-03-28"), (float) 148.59, "", "", new User(), new Address(), new Address(), new Status(1, "En cours de livraison")));
@@ -67,14 +83,53 @@ public class Account extends HttpServlet {
 				request.setAttribute("productsList", productsList);
 			}
 		}
-		request.getRequestDispatcher("/view/account.jsp").forward(request,response);
+		if (request.getAttribute("deactivationLogOut") != null) {
+			if ((boolean)request.getAttribute("deactivationLogOut")) {
+				response.sendRedirect("accountDeactivated");
+			}
+		} else {
+			request.getRequestDispatcher("/view/account.jsp").forward(request,response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		
+		if (request.getParameter("formSubmitted").equals("accountInfo")) {
+			userDao.update(new User(((User) session.getAttribute("currentUser")).getId(), request.getParameter("userLastName"), request.getParameter("userFirstName"), request.getParameter("userEmail"), ((User) session.getAttribute("currentUser")).getPassword(), request.getParameter("userTitle"), request.getParameter("userPhone"), new Date(System.currentTimeMillis()), ((User) session.getAttribute("currentUser")).isActive(), ((User) session.getAttribute("currentUser")).getRole()));
+			User replacementUser = userDao.findById(((User) session.getAttribute("currentUser")).getId());
+			System.out.println(replacementUser.getId());
+			session.setAttribute("currentUser", userDao.findById(((User) session.getAttribute("currentUser")).getId()));
+			request.setAttribute("backToPage", "#accountInfo");
+		}
+		
+		if (request.getParameter("formSubmitted").equals("accountDelivery")) {
+			if (request.getParameter("deliveryAddressAction").equals("update")) {
+				addressDao.update(new Address(Integer.parseInt(request.getParameter("deliveryAddressID")), request.getParameter("inputStreet"), Integer.parseInt(request.getParameter("inputZipCode")), request.getParameter("inputCity"), (User) session.getAttribute("currentUser"), new Address_type(2, "livraison")));
+			} else if (request.getParameter("deliveryAddressAction").equals("create")) {
+				addressDao.create(new Address(request.getParameter("inputStreet"), Integer.parseInt(request.getParameter("inputZipCode")), request.getParameter("inputCity"), (User) session.getAttribute("currentUser"), new Address_type(2, "livraison")));
+			}
+			request.setAttribute("backToPage", "#accountDelivery");
+		}
+		
+		if (request.getParameter("formSubmitted").equals("accountBilling")) {
+			if (request.getParameter("billingAddressAction").equals("update")) {
+				addressDao.update(new Address(Integer.parseInt(request.getParameter("billingAddressID")), request.getParameter("inputBillingStreet"), Integer.parseInt(request.getParameter("inputBillingZipCode")), request.getParameter("inputBillingCity"), (User) session.getAttribute("currentUser"), new Address_type(1, "facturation")));
+			} else if (request.getParameter("billingAddressAction").equals("create")) {
+				addressDao.create(new Address(request.getParameter("inputBillingStreet"), Integer.parseInt(request.getParameter("inputBillingZipCode")), request.getParameter("inputBillingCity"), (User) session.getAttribute("currentUser"), new Address_type(1, "facturation")));
+			}
+			request.setAttribute("backToPage", "#accountBilling");
+		}
+		
+		if (request.getParameter("formSubmitted").equals("accountDeactivation")) {
+			if (userDao.deactivate(((User) session.getAttribute("currentUser")), request.getParameter("pwdForDeactivation"))) {
+				request.setAttribute("deactivationLogOut", true);
+			}
+		}
+		
 		doGet(request, response);
 	}
 

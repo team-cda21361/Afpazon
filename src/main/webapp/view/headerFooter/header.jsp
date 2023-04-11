@@ -99,7 +99,34 @@
 			    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			  </div>
 			  <div class="offcanvas-body">
-			    ...
+			   <div>
+			  <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>visuel</th>
+                        <th>Nom produit</th>
+                        <th>Prix unitaire</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <td><img height=60 src="assets/images/products/product-1.jpg"  alt="#"></td>
+                        <td>Titre produit 1</td>
+                        <td>120 &euro; ttc</td>
+                    </tr>
+                    <tr>
+                        <td><img height=60 src="assets/images/products/product-2.jpg" alt="#"></td>
+                        <td>Titre produit 2</td>
+                        <td>30 &euro; ttc</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+			  <div class="align-self-end">
+                <a href="cart">
+                    <button class="btn btn-success" type="submit"><i class="bi bi-eye me-3"></i>Voir Panier</button>
+                </a>
+            </div>
 			  </div>
 			</div>
 		</c:if>

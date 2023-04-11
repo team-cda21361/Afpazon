@@ -63,6 +63,7 @@ public class CategoryDao implements IDAO<Category> {
 
 
 	}
+
 	
 	public static void injectCategories(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
