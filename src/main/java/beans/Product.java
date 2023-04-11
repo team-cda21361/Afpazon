@@ -58,6 +58,10 @@ public class Product {
 		this.isActive = isActive;
 		this.vat = vat;
 	}
+	
+	public Product(int warranty) {
+		this.warranty = warranty;
+	}
 
 	public int getId() {
 		return id;

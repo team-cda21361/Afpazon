@@ -11,6 +11,10 @@ import beans.VAT;
 import connector.DBConnect;
 
 public class VATDao implements IDAO<VAT> {
+	
+	Connection connect = DBConnect.getConnect();
+	PreparedStatement sql;
+	ResultSet rs;
 
 	Connection connect = DBConnect.getConnect();
 	PreparedStatement sql;
