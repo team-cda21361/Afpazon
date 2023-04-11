@@ -159,23 +159,20 @@ public class ProductDao implements IDAO<Product> {
 		Product product = new Product();
 
 		try {
-			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat "
+			sql = connect.prepareStatement("SELECT *, product.id as idProd FROM product INNER JOIN vat "
 					+ "ON product.id_vat = vat.id WHERE product.id=?");
-
 			sql.setInt(1,id);
 
-			System.out.println("sql id prod: "+sql);
 			ResultSet rs= sql.executeQuery();
 
 			if(rs.next()) {
-				product = new Product(rs.getString("name"),rs.getString("description"),
+				product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
 						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 
-				System.out.println("FindById PRODUCT OK !!!");
 				return product;
 
 			}
@@ -187,6 +184,7 @@ public class ProductDao implements IDAO<Product> {
 	}
 	
 	
+//****************** FINDBY CAROUSEL **********************************************************************************
 	
 	public ArrayList<Product> findProdCarousel() {
 		ArrayList<Product> listProducts = new ArrayList<>();
@@ -214,6 +212,33 @@ public class ProductDao implements IDAO<Product> {
 			System.err.println("Pas de liste de PRODUCTs...");
 		}
 		return listProducts;
+	}
+	public ArrayList<Product> findNewProdCarousel() {
+		ArrayList<Product> listNewProducts = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat  ON product.id_vat = vat.id ORDER BY product.id ASC LIMIT 10");
+			rs = sql.executeQuery();
+			System.out.println("REAL LA CONSULTA");
+			
+			while(rs.next()) {
+				Product product = new Product(rs.getInt("id"), rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+				
+				listNewProducts.add(product);
+				
+			}
+			return listNewProducts;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return listNewProducts;
 	}
 	
 	//************************************Find by reference*******************************//
@@ -267,28 +292,24 @@ public class ProductDao implements IDAO<Product> {
 		return list;
 	}
 	
+	//****************** READWARRANTY **********************************************************************************
 	
-//****************** READWARRANTY **********************************************************************************
-	
-	
-	public ArrayList<Product> readWarranty() {
-		ArrayList<Product> listProducts = new ArrayList<>();
+	public ArrayList<Integer> readWarranty() {
+		ArrayList<Integer> listWarranties = new ArrayList<>();
 		try {
 			sql = connect.prepareStatement("SELECT DISTINCT warranty FROM product ORDER BY warranty");
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
-				Product product = new Product(rs.getInt("warranty"));
 
-				listProducts.add(product);
+				Product product = new Product();
+				listWarranties.add(rs.getInt("warranty"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return listProducts;
 	}
-	
-	
-	
-	
+		return listWarranties;
+	}
 }

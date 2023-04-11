@@ -15,13 +15,3 @@ $(document).ready( function () {
     });
 } );
 
-
-/************************ HYDRATATION DU TABLEAU ********************************/
-
-function adddiscount(){
-	
-	var test = $(".discountSelect").text();
-	
-	console.log(test);
-	alert("je suis le onclick!");
-}

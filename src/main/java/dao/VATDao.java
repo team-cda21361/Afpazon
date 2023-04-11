@@ -6,11 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Role;
 import beans.VAT;
 import connector.DBConnect;
 
 public class VATDao implements IDAO<VAT> {
 	
+	Connection connect = DBConnect.getConnect();
+	PreparedStatement sql;
+	ResultSet rs;
+
 	Connection connect = DBConnect.getConnect();
 	PreparedStatement sql;
 	ResultSet rs;
@@ -25,10 +30,9 @@ public class VATDao implements IDAO<VAT> {
 	public ArrayList<VAT> read() {
 		ArrayList<VAT> vats = new ArrayList<>();
 		VAT vat = null;
-		
+
 		try {
-			sql = connect
-					.prepareStatement("SELECT * FROM vat");
+			sql = connect.prepareStatement("SELECT * FROM vat");
 			rs = sql.executeQuery();
 
 			while (rs.next()) {
@@ -56,9 +60,20 @@ public class VATDao implements IDAO<VAT> {
 	}
 
 	@Override
-	public Object findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public VAT findById(int id) {
+		VAT vat=null;
+		try {
+			sql = connect.prepareStatement("SELECT * FROM vat WHERE id=?");
+			sql.setInt(1, id);
+			rs=sql.executeQuery();
+			if (rs.next()) {
+				vat= (new VAT(rs.getInt("id"),rs.getFloat("value")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vat;
 	}
-
 }

@@ -56,7 +56,7 @@ public class RoleDao implements IDAO<Role>{
 	/*
 	 * 
 	 */
-	public Object findByName(String roleName) {
+	public Role findByName(String roleName) {
 		Role role=null;
 		try {
 			sql = connect.prepareStatement("SELECT * FROM role WHERE role=?");
