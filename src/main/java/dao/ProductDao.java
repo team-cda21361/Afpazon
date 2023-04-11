@@ -161,10 +161,7 @@ public class ProductDao implements IDAO<Product> {
 		try {
 			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat "
 					+ "ON product.id_vat = vat.id WHERE product.id=?");
-
 			sql.setInt(1,id);
-
-			System.out.println("sql id prod: "+sql);
 			ResultSet rs= sql.executeQuery();
 
 			if(rs.next()) {
@@ -265,5 +262,23 @@ public class ProductDao implements IDAO<Product> {
 			System.err.println("Pas de liste de PRODUCTs...");
 		}
 		return list;
+	}
+	
+	//****************** READWARRANTY **********************************************************************************
+	
+	public ArrayList<Integer> readWarranty() {
+		ArrayList<Integer> listWarranties = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT DISTINCT warranty FROM product ORDER BY warranty");
+			rs = sql.executeQuery();
+
+			while(rs.next()) {
+				Product product = new Product();
+				listWarranties.add(rs.getInt("warranty"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listWarranties;
 	}
 }

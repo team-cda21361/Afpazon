@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import beans.Discount;
 import beans.Product_discount;
 import connector.DBConnect;
 
@@ -50,5 +51,67 @@ public class Product_discountDao implements IDAO<Product_discount> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public ArrayList <Discount> findDiscountsByProductId(int product_id) {
+		ArrayList <Discount>  discounts = new ArrayList<>();
+		
+		try {
+			 sql =  connect.prepareStatement("select *, discount.id as discountId from product inner join product_discount on product.id = product_discount.id_product inner join discount on product_discount.id_discount= discount.id WHERE id_product = ? order by discount.startDate");
+			 sql.setInt(1,product_id);
+			 rs = sql.executeQuery();
+			while(rs.next()) {
+				discounts.add(new Discount(rs.getInt("discountId"),rs.getDate("startDate"),rs.getDate("endDate"),rs.getFloat("percent"),rs.getString("voucher")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//Retourne la liste des category_product 
+		return  discounts;	
+	}
+	
+	public ArrayList <Discount> findDiscountsNotInPorductByProductId(int product_id) {
+		ArrayList <Discount>  discounts = new ArrayList<>();
+		
+		try {
+			 sql =  connect.prepareStatement("select * from discount where id not in (select distinct id_discount from product_discount where id_product = ?) order by discount.startDate");
+			 sql.setInt(1,product_id);
+			 rs = sql.executeQuery();
+			while(rs.next()) {
+				discounts.add(new Discount(rs.getInt("id"),rs.getDate("startDate"),rs.getDate("endDate"),rs.getFloat("percent"),rs.getString("voucher")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//Retourne la liste des category_product 
+		return  discounts;	
+	}
+	
+	public boolean deleteDiscountFromProductById(int idDiscount,int idProduct) {
+		try {
+			 sql =  connect.prepareStatement("delete from product_discount where id_product=? and id_discount=?");
+			 sql.setInt(1,idProduct);
+			 sql.setInt(2, idDiscount);
+			 sql.execute();
+			 return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  false;
+	}
+	
+	public boolean addDiscountToProductById(int idDiscount,int idProduct) {
+		try {
+			 sql =  connect.prepareStatement("insert into product_discount (id_product,id_discount) values (?,?)");
+			 sql.setInt(1,idProduct);
+			 sql.setInt(2, idDiscount);
+			 sql.execute();
+			 return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return  false;
+	}
+	
 }
