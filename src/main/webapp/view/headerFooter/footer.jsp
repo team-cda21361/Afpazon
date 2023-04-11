@@ -1,4 +1,6 @@
-<c:if test="${(empty currentUser) || (currentUser.role.role == 'Client')}">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
+
+		<c:if test="${(empty currentUser) || (currentUser.role.role == 'Client')}">
 			<footer class="footer text-light bg-dark pt-4 pb-4">
 				<div class="container text-white-50">
 					<div class="row">
@@ -42,7 +44,7 @@
 							<div class="row align-middle">
 								<div class="col-lg-4 col-12">
 									<div class="payment-gateway">
-										<span>Partenaire de paiment </span> <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+										<span>Partenaire de paiement </span> <img src="./assets/images/credit-cards-footer.png" alt="#">
 									</div>
 								</div>
 								<div class="col-lg-4 col-12 text-center">
