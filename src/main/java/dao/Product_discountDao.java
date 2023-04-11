@@ -18,8 +18,16 @@ public class Product_discountDao implements IDAO<Product_discount> {
 	ResultSet rs;
 	@Override
 	public boolean create(Product_discount object) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			sql = connect.prepareStatement("INSERT INTO product_discount(id_product,id_discount) VALUES (?,?)");
+			sql.setInt(1, object.getProduct().getId());
+			sql.setInt(2, object.getDiscount().getId());
+			sql.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override

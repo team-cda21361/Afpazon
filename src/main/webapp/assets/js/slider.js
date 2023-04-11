@@ -46,6 +46,7 @@ var swiper = new Swiper(".slide-container", {
     },
   },
 });
+
 // Get the modal
 var modal = document.getElementById("myModal");
 const imgs = document.querySelectorAll(".myImg");
@@ -63,5 +64,4 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() { 
   modal.style.display = "none";
 }
-        
 
