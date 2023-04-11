@@ -1,7 +1,6 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,6 @@ import beans.Product;
 import beans.Review;
 import beans.Role;
 import beans.User;
-import beans.VAT;
 import connector.DBConnect;
 
 public class ReviewDao implements IDAO<Review> {
@@ -51,7 +49,41 @@ public class ReviewDao implements IDAO<Review> {
 		return null;
 	}
 	
+	public int findByIdT(int id) {
+		// TODO Auto-generated method stub
+		int total = 0;
+		try {
+			sql = connect.prepareStatement("SELECT COUNT(review.id) as total FROM review  "
+					+ " INNER JOIN user ON review.id_user = user.id  "
+					+ " INNER JOIN product ON review.id_product = product.id  "
+					+ " INNER JOIN role ON role.id = user.id_role "
+					+ " WHERE review.id_product=?");
+			
+			sql.setInt(1, id);
+			System.out.println("findByIdPT: "+sql);
+			
+			rs = sql.executeQuery();
+			System.out.println("SQL Reviw: ");
+			
+			if(rs.next()) {
+	
+			total = rs.getInt("total");
+			
+			}
+			return total;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+			
+		}
+		return total;
+	}
+	
+	
 	public ArrayList<Review> findByIdProd(int id) {
+
 		ArrayList<Review> listReviews = new ArrayList<>();
 
 		try {
@@ -89,9 +121,11 @@ public class ReviewDao implements IDAO<Review> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.err.println("Pas de liste de PRODUCTs...");
+			
 		}
 		return listReviews;
 	}
+	
 
 
 }

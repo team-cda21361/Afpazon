@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.invalidate();
-		request.getRequestDispatcher("/view/index.jsp").forward(request, response);
+		response.sendRedirect("/Afpazon");
 	}
 
 	/**
