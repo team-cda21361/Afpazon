@@ -64,8 +64,6 @@ public class Index extends HttpServlet {
 		user.setFirstName("Charles");
 
 		session.setAttribute("currentUser", user);
-	
-    Product produit = new Product();
 		
 		if (currentUser != null) {
 			if (currentUser.getRole().getRole().equalsIgnoreCase("Admin")) {
