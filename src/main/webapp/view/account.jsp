@@ -16,7 +16,7 @@
 </c:if>
 
 <section class="container-account">
-		<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
+	<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
 	
 	<div>Compte <c:out value="${fn:toLowerCase(currentUser.role.role)}" /> créé le <fmt:formatDate type="date" value="${currentUser.registrationDate}" />.</div>
 	<div>Numéro client : <c:out value="${currentUser.id}" /></div>
@@ -260,7 +260,12 @@
 										<div>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></div>
 									</div>
 									<div class="row">
-										<div class="itemRef opacity-50">Référence : <c:out value="${product.product.reference}" /></div>
+										<div class="col">
+											<div class="itemRef opacity-50">Référence : <c:out value="${product.product.reference}" /></div>
+										</div>
+										<div class="col text-end">
+											<a class="btn btn-warning reviewButton" href="review?productID=${product.product.id}" role="button"><i class="bi bi-star-half"></i> Laisser un avis</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -281,11 +286,15 @@
 						</div>
 						<div class="row mb-3">
 							<h5>Informations</h5>
+							<div>Passée le : <fmt:formatDate type="date" value="${orderSelected.date}" /></div>
 							<div>Total payé : <span id="orderTotalPrice"></span>&euro;</div>
 							<div>Etat : <span id="orderState"></span></div>
 							<c:if test="${not empty orderSelected.trackingNumber}">
 								<div>Suivi : <span id="orderTrackingNumber"></span></div>
 							</c:if>
+						</div>
+						<div class="row mb-3">
+							<a class="btn btn-danger w-75 mx-auto" href="printOrder?orderID=${orderSelected.id}" role="button"><i class="bi bi-file-earmark-pdf-fill"></i> Télécharger la facture</a>
 						</div>
 					</div>
 				</div>

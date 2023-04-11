@@ -74,6 +74,14 @@ ul.pagination {
 	font-size: 75%;
 }
 
+.reviewButton {
+	margin-left: auto;
+	margin-right: 0;
+	--bs-btn-padding-y: .25rem; 
+	--bs-btn-padding-x: .5rem; 
+	--bs-btn-font-size: .75rem;
+}
+
 .messageToUser {
 	display: none;
 	position: sticky;
