@@ -15,10 +15,6 @@ public class VATDao implements IDAO<VAT> {
 	PreparedStatement sql;
 	ResultSet rs;
 
-	Connection connect = DBConnect.getConnect();
-	PreparedStatement sql;
-	ResultSet rs;
-
 	@Override
 	public boolean create(VAT object) {
 		// TODO Auto-generated method stub
