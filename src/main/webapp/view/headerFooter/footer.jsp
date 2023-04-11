@@ -42,7 +42,7 @@
 							<div class="row align-middle">
 								<div class="col-lg-4 col-12">
 									<div class="payment-gateway">
-										<span>Partenaire de paiment </span> <img src="assets/images/footer/credit-cards-footer.png" alt="#">
+										<span>Partenaire de paiment </span> <img src="assets/images/credit-cards-footer.png" alt="logoPaypal">
 									</div>
 								</div>
 								<div class="col-lg-4 col-12 text-center">
