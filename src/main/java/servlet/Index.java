@@ -9,10 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Role;
 import beans.User;
+import dao.CategoryDao;
 import dao.ProductDao;
 import dao.Product_discountDao;
-import dao.CategoryDao;
 
 
 /**
@@ -55,7 +56,6 @@ public class Index extends HttpServlet {
 		CategoryDao.injectCategories(request);
 		HttpSession session = request.getSession(true);
 		User currentUser = (User) session.getAttribute("currentUser");
-		ProductDao produitDao = new ProductDao();
     
 		Role roleClient = new Role("Client");
 		user =new User("mock@admin.fr",roleClient );
