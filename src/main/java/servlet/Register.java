@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import beans.Role;
 import beans.User;
+import dao.CategoryDao;
 import dao.UserDao;
 
 /**
@@ -35,7 +36,7 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		CategoryDao.injectCategories(request);
 		request.getRequestDispatcher("view/register.jsp").forward(request,response);
 		
 	}
@@ -96,39 +97,27 @@ public class Register extends HttpServlet {
             // Return if the password
             // matched the ReGex
             if(!m.matches()) {
-    			request.setAttribute("msn", "Vous devez saisir une adresse e-mail valide par exemple example@example.fr.");
-    			request.setAttribute("msnType",  "KO");
-    			doGet(request, response);
+              request.setAttribute("msn", "Vous devez saisir une adresse e-mail valide par exemple example@example.fr.");
+              request.setAttribute("msnType",  "KO");
+              doGet(request, response);
       			
             }else if(userDao.findByEmail(email)) {
-    			request.setAttribute("msn", "Vous avez déjà un compte avec cette adresse e-mail.");
-    			request.setAttribute("msnType",  "KO");
-    			doGet(request, response);
+              request.setAttribute("msn", "Vous avez déjà un compte avec cette adresse e-mail.");
+              request.setAttribute("msnType",  "KO");
+              doGet(request, response);
             }				
         	
         }
-		
-		
-		
 		String pwd_with_bcrypt = BCrypt.hashpw(password, BCrypt.gensalt());
-		
-		
-
+    
 		Role role = new Role(1,"Client");
 		User user = new User(lastName, firstName, email, pwd_with_bcrypt, role);
-
-		// Variable d'instance == userDao
-
-		// userDao.addUser(user);
 
 		if (userDao.create(user)) {
 	      	request.setAttribute("msn", "Le compte utilisateur a été créé avec succès.");
 			request.setAttribute("msnType",  "OK");
 			request.getRequestDispatcher("view/login.jsp").forward(request,response);
 
-			//response.sendRedirect("/cda/");
-
-			// request.getRequestDispatcher("vue/index.jsp").forward(request, response);
 		} else {
 	      	request.setAttribute("msn", "Le compte d'utilisateur n'a pas pu être créé.");
 			request.setAttribute("msnType",  "KO");

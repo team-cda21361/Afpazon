@@ -19,7 +19,7 @@
                             <div class="d-flex flex-column">
                                 <h3>Information</h3>
                                 <ul class="list-unstyled">
-                                    <li><a href="" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">A propos</a></li>
+                                    <li><a href="about" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">A propos</a></li>
                                     <li><a href="cgv" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Conditions Générales de Vente</a></li>
                                 </ul>
                             </div>

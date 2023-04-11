@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.CategoryDao;
+
 /**
  * Servlet implementation class CGV
  */
@@ -26,7 +28,7 @@ public class Cgv extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		CategoryDao.injectCategories(request);
 		request.getRequestDispatcher("/view/CGV.jsp").forward(request,response);
 	}
 

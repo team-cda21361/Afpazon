@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
+import dao.CategoryDao;
 import dao.UserDao;
 
 /**
@@ -31,6 +32,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		CategoryDao.injectCategories(request);
 		request.getRequestDispatcher("/view/login.jsp").forward(request, response);
 	}
 
@@ -64,7 +66,5 @@ public class Login extends HttpServlet {
 			request.setAttribute("msnType",  "KO");
 			doGet(request, response);
 		}
-
-		//response.sendRedirect(request.getHeader("referer"));
 	}
 }

@@ -28,7 +28,7 @@
 	</head>
 
 	<body>
-		<c:if test="${(empty currentUser) || (currentUser.role.role == 'Client')}">
+		<c:if test="${(empty currentUser.id) || (currentUser.role.role == 'Client')}">
 			<header>
 				<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary ps-3 pe-3" data-bs-theme="dark">
 				  <div class="container-fluid">
@@ -38,31 +38,27 @@
 				    </button>
 				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			          	<li class="nav-item"><em><a class="nav-link text-warning">Chez Afpazon, on vend tout pour votre plus grand plaisir !</a></em></li>
-				        <li class="nav-item dropdown ms-3">
+			          	<li class="nav-item w-60 fs-5 fw-bold"><em><a class="nav-link text-warning">"On vend tout !"</a></em></li>
+				        <li class="nav-item dropdown ms-3 my-auto" style="z-index: 1050;">
 				          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						    Catégories
 						  </button>
 				          <ul class="dropdown-menu">
-				            <li><a class="dropdown-item" href="#">Livre</a></li>
-							<li><a class="dropdown-item" href="#">Musique</a></li>
-							<li><a class="dropdown-item" href="#">Jeux-Vidéo</a></li>
-							<li><a class="dropdown-item" href="#">High-tech</a></li>
-							<li><a class="dropdown-item" href="#">Electroménager</a></li>
+				          	<c:forEach items="${categoriesList}" var="category">
+					            <li><a class="dropdown-item" href="categories?catID=${category.id}"><c:out value="${category.category}" /></a></li>
+							</c:forEach>
 				          </ul>
 				        </li>
 				      </ul>
 				      <form class="d-flex" role="search">
-				      	<select class="form-select">
+				      	<select class="form-select rounded-end-0" style="z-index: 1050;">
 						  <option selected value="0">Toute la boutique</option>
-						  <option value="1">Livre</option>
-						  <option value="2">Musique</option>
-						  <option value="3">Jeux-Vidéo</option>
-						  <option value="4">High-tech</option>
-						  <option value="5">Electroménager</option>
+						  <c:forEach items="${categoriesList}" var="category">
+						  	  <option value="${category.id}"><c:out value="${category.category}" /></option>
+						  </c:forEach>
 						</select>
-				        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				        <button class="btn btn-outline-success" type="submit">Search</button>
+				        <input class="form-control border-start-0 border-end-0 rounded-start-0 rounded-end-0" type="search" placeholder="Recherchez..." aria-label="Search">
+				        <button class="btn btn-outline-success rounded-start-0 rounded-end" type="submit"><i class="bi bi-search"></i></button>
 				      </form>
 				      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					      <c:if test="${empty currentUser}">
@@ -103,7 +99,34 @@
 			    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 			  </div>
 			  <div class="offcanvas-body">
-			    ...
+			   <div>
+			  <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>visuel</th>
+                        <th>Nom produit</th>
+                        <th>Prix unitaire</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    <tr>
+                        <td><img height=60 src="assets/images/products/product-1.jpg"  alt="#"></td>
+                        <td>Titre produit 1</td>
+                        <td>120 &euro; ttc</td>
+                    </tr>
+                    <tr>
+                        <td><img height=60 src="assets/images/products/product-2.jpg" alt="#"></td>
+                        <td>Titre produit 2</td>
+                        <td>30 &euro; ttc</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+			  <div class="align-self-end">
+                <a href="cart">
+                    <button class="btn btn-success" type="submit"><i class="bi bi-eye me-3"></i>Voir Panier</button>
+                </a>
+            </div>
 			  </div>
 			</div>
 		</c:if>
@@ -134,10 +157,11 @@
 									<img alt="" src="assets/images/back_office/Stock.png" width="45">
 							</a></li>
 						</ul>
-						<a class=" d-flex nav-link" href="#"> <img alt=""
+						<a class=" d-flex nav-link" href="logout"> <img alt=""
 							src="assets/images/back_office/logBack.png" width="60">
 						</a>
 					</div>
 				</div>
+
 			</nav>
 		</c:if>

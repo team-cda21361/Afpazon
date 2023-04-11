@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +15,7 @@ import dao.ImageDao;
 import dao.ProductDao;
 import dao.Product_discountDao;
 import dao.ReviewDao;
+import dao.CategoryDao;
 
 /**
  * Servlet implementation class Product
@@ -43,7 +43,7 @@ public class Product extends HttpServlet{
     ArrayList<Review> listReviews = new ArrayList<>();
     Product_discountDao product_discountDao = new Product_discountDao();
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 		
     	int id = Integer.parseInt(request.getParameter("id"));
     	int cantite = 1;
@@ -59,9 +59,6 @@ public class Product extends HttpServlet{
     			cantite =1;
     		}
     	}
-    	
-
-    	
     	System.out.println("Plus: "+request.getParameter("plus"));
     	System.out.println("Minus: "+request.getParameter("minus"));
     	listReviews = reviewDao.findByIdProd(id);
@@ -80,15 +77,12 @@ public class Product extends HttpServlet{
     		request.setAttribute("startP", (startP/reviewTP));
     		request.setAttribute("lastIdReview", lastIdReview);
     	}
-		
-		
-		request.setAttribute("images", imageDao.findImagesById(id));
-		request.setAttribute("cantite", cantite);
-		request.setAttribute("product", productDao.findById(id));
-		request.setAttribute("discount", product_discountDao.findByIdProd(id));
-		
-		
-        request.getRequestDispatcher("/view/product.jsp").forward(request, response);
+      request.setAttribute("images", imageDao.findImagesById(id));
+      request.setAttribute("cantite", cantite);
+      request.setAttribute("product", productDao.findById(id));
+      request.setAttribute("discount", product_discountDao.findByIdProd(id));
+      CategoryDao.injectCategories(request);
+      request.getRequestDispatcher("/view/product.jsp").forward(request, response);
     }
     
     /**

@@ -19,37 +19,37 @@
 			</div>
 			<div class="d-flex flex-wrap m-4">
 				<c:forEach items="${products}" var="product">
-					<div class="col-lg-3 col-md-6 col-12">
+					<div class="m-3 ">
 						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-image">
-								<img src="<c:out value="${product.mainPicPath}" />" alt="#">
-								<div class="button">
-									<a href="product-details.html" class="btn"><i
-										class="lni lni-cart"></i> Add to Cart</a>
-								</div>
-							</div>
-							<div class="product-info">
-								<h4 class="title">
-									<a href="product-grids.html"><c:out
-											value="${product.name }" /></a>
-								</h4>
-								<ul class="review d-flex flex-wrap">
+						<div class="card" style="width: 16rem">
+								<img class="card-img-top" src="<c:out value="${product.mainPicPath}" />" alt="#">
+							<div class="card-body d-flex flex-column">
+									<h4 class="title text-center">
+										<a class="text-decoration-none text-dark" href="product?id=${product.id }">
+											<c:out value="${product.name }" />
+										</a>
+									</h4>
+								<ul class="review d-flex flex-wrap list-group-flush">
 									<c:forEach var="i" begin="1" end="${moyen_note }">
-										<li><i class="lni lni-star-filled"></i></li>
+										<li class="list-group-item"><i class="bi bi-star-fill text-warning"></i></li>
 										<p>
 									</c:forEach>
 									<c:forEach var="i" begin="1" end="${5 - moyen_note }">
-										<li><i class="lni lni-star"></i></li>
+										<li class="list-group-item"><i class="bi bi-star"></i></li>
 										<p>
 									</c:forEach>
-									<li><span><c:out value="${number_of_review}" />
+									<li class="list-group-item"><span class="mx-2"><c:out value="${number_of_review}" />
 											Avis</span></li>
 								</ul>
-								<div class="price">
-									<span><c:out value="${product.price }" /></span>
+								<div class="price text-center">
+									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.price }" /> &euro; TTC</span>
+								</div>
+								<div class="button btn btn-success align-self-end mt-3">
+									<a href="product-details.html" class="text-light text-decoration-none">
+									<i class="bi bi-cart4"></i></a>
 								</div>
 							</div>
+							
 						</div>
 						<!-- End Single Product -->
 					</div>
