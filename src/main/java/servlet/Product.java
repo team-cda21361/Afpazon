@@ -43,7 +43,7 @@ public class Product extends HttpServlet{
     ArrayList<Review> listReviews = new ArrayList<>();
     Product_discountDao product_discountDao = new Product_discountDao();
     
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
     	int id = Integer.parseInt(request.getParameter("id"));
     	int cantite = 1;

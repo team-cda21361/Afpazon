@@ -19,21 +19,21 @@
 								<div class="main-img">
 									<div class="img-div-current">
 										<img
-											src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />"
+											src="assets/products/img/<c:out value="${ product.getMainPicPath() }" />"
 											id="current" alt="#" class="img">
 									</div>
 								</div>
 								<div class="images">
 									<div class="img-div">
 										<img
-											src="assets/images/product-details/<c:out value="${ product.getMainPicPath() }" />"
+											src="assets/products/img/<c:out value="${ product.getMainPicPath() }" />"
 											alt="#" class="img">
 									</div>
 
 									<c:forEach items="${ images }" var="images" varStatus="status">
 										<div class="img-div">
 											<img
-												src="assets/images/product-details/<c:out value="${ images.getPicPath() }" />"
+												src="assets/products/img/<c:out value="${ images.getPicPath() }" />"
 												class="img" alt="#">
 										</div>
 									</c:forEach>
