@@ -36,7 +36,7 @@ public class StockDao implements IDAO<Stock>{
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
-				Product product = new Product(rs.getString("name"),rs.getString("description"),
+				Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
 						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),

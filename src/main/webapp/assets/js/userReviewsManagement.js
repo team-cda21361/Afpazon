@@ -1,3 +1,13 @@
+function loadCSS(filename){ 
+    var file = document.createElement("link");
+    file.setAttribute("rel", "stylesheet");
+    file.setAttribute("type", "text/css");
+    file.setAttribute("href", filename);
+    document.head.appendChild(file);
+}
+
+loadCSS("./assets/css/backoffice.css");
+
 $(document).ready(function () {
     $('#example').DataTable({
 		 language: {
@@ -13,12 +23,12 @@ $(document).ready(function () {
         ]
     });
 });
-console.log("coucou")
+
 $('.toModal').click( function(){
-	console.log("click");
-	var btn =$(this).attr("href");
+	
+	var value =$(this).attr("href");
 	var modal =document.querySelector("#modal")
 	
-	modal.setAttribute("href",btn);
+	modal.setAttribute("href",value);
 	
 })
