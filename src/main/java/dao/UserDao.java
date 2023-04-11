@@ -24,7 +24,7 @@ public class UserDao implements IDAO<User> {
 		try {
 			sql = connect.prepareStatement("INSERT INTO user (lastName, firstName, email, password, gender, phone,"
 					+ " registrationDate , isActive, id_role)" + "VALUES (?,?,?,?,?,?,NOW(),?,?)");
-		
+
 			sql.setString(1, user.getLastName());
 			sql.setString(2, user.getFirstName());
 			sql.setString(3, user.getEmail());
@@ -71,9 +71,9 @@ public class UserDao implements IDAO<User> {
 	public boolean update(User user) {
 		try {
 			sql = connect.prepareStatement(
-					"UPDATE user SET lastName=?,firstName=?,email=?,password=?,gender=?, phone=?,isActive=?, role=? "
+					"UPDATE user SET lastName=?,firstName=?,email=?,password=?,gender=?, phone=?,isActive=?, id_role=? "
 							+ " WHERE id=?");
-			
+
 			sql.setString(1, user.getLastName());
 			sql.setString(2, user.getFirstName());
 			sql.setString(3, user.getEmail());
@@ -145,7 +145,10 @@ public class UserDao implements IDAO<User> {
 	public User findById(int id) {
 		try {
 
-			sql = connect.prepareStatement("select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.id=?");
+
+			sql = connect.prepareStatement(
+					"select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.id=?");
+
 			sql.setInt(1, id);
 			rs = sql.executeQuery();
 
@@ -161,8 +164,29 @@ public class UserDao implements IDAO<User> {
 		}
 		return null;
 	}
+
+	public User findByEmail(String email) {
+		try {
+
+			sql = connect.prepareStatement(
+					"select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.email=?");
+			sql.setString(1, email);
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				return new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
+						rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone"),
+						rs.getDate("registrationDate"), rs.getBoolean("isActive"),
+						new Role(rs.getInt("id_role"), rs.getString("role")));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
-	public boolean findByEmail(String email) {
+	public boolean findByEmailB(String email) {
 		try {
 
 			sql = connect
@@ -179,17 +203,37 @@ public class UserDao implements IDAO<User> {
 		}
 		return false;
 	}
+	
+	
+	public boolean findIdByEmail(String email) {
+		try {
+
+			sql = connect
+					.prepareStatement("select * from user WHERE user.email=?");
+			sql.setString(1, email);
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 
 	public ArrayList<User> search(String search) {
 		ArrayList<User> users = new ArrayList<>();
 		User user = null;
 
 		try {
-			sql = connect
-					.prepareStatement("select *, user.id as userId from user"
-							+ " inner join role on user.id_role=role.id WHERE CONCAT(lastName, ' ', firstName, ' ', email) LIKE ?");
-			sql.setString(1, "%" +search+ "%");
-			
+			sql = connect.prepareStatement("select *, user.id as userId from user"
+					+ " inner join role on user.id_role=role.id WHERE CONCAT(lastName, ' ', firstName, ' ', email) LIKE ?");
+			sql.setString(1, "%" + search + "%");
+
 			rs = sql.executeQuery();
 
 			while (rs.next()) {
@@ -205,5 +249,48 @@ public class UserDao implements IDAO<User> {
 		}
 
 		return users;
+	}
+
+	public ArrayList<String> getGenders() {
+		ArrayList<String> genders = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("select distinct gender from user");
+			rs = sql.executeQuery();
+
+			while (rs.next()) {
+				genders.add(rs.getString("gender"));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return genders;
+	}
+
+	public boolean deactivate(User user, String password) {
+		try {
+			/*
+			 * VERSION AVEC BCRYPT
+			 */
+			sql = connect.prepareStatement(
+					"select *, user.id as userId from user inner join role on user.id_role=role.id where email=?"); // test@test.fr
+			sql.setString(1, user.getEmail());
+
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				if (BCrypt.checkpw(password, rs.getString("password"))) {
+
+					sql = connect.prepareStatement("UPDATE user SET isActive = FALSE WHERE id = ? AND email = ?");
+					sql.setInt(1, user.getId());
+					sql.setString(2, user.getEmail());
+					sql.execute();
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

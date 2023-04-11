@@ -62,6 +62,19 @@ public class User {
 		this.isActive = isActive;
 		this.role = role;
 	}
+	
+	public User(int id, String lastName, String firstName, String email, String gender, String phone,
+			Date registrationDate, boolean isActive, Role role) {
+		this.id = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
+		this.gender = gender;
+		this.phone = phone;
+		this.registrationDate = registrationDate;
+		this.isActive = isActive;
+		this.role = role;
+	}
 
 	public User(int id, String lastName, String firstName, String email, String gender, String phone,
 			Date registrationDate, boolean isActive, Role role) {
