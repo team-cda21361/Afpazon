@@ -81,7 +81,7 @@
 								<c:if test="${stock.product.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
 								<td class="text-center"><a href="product-management?option=edit&id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="product-management?option=delete&id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>

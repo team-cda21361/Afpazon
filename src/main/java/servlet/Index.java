@@ -59,6 +59,7 @@ public class Index extends HttpServlet {
     
 		Role roleClient = new Role("Client");
 		user =new User("mock@admin.fr",roleClient );
+
 		user.setId(1);
 		user.setFirstName("Charles");
 		session.setAttribute("currentUser", user);
