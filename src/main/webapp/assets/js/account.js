@@ -19,3 +19,14 @@ $(document).ready( function () {
 		]
     });
 } );
+
+$(document).ready(function() {
+    $(".messageToUser").slideDown();
+    setActiveNav();
+});
+
+const timeout = setTimeout(hideMessage, 5000);
+
+function hideMessage() {
+	$(".messageToUser").slideUp();
+}

@@ -1,7 +1,22 @@
 <script type="text/javascript" src="./assets/js/account.js"></script>
 
+<c:if test="${not empty message}">
+	<c:choose>
+		<c:when test="${fn:contains(message, 'Erreur')}">
+			<div class="sticky-top messageToUser errorMessage">
+				<c:out value="${message}"/>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="sticky-top messageToUser">
+				<c:out value="${message}"/>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</c:if>
+
 <section class="container-account">
-	<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
+		<h1><i class="bi bi-person-vcard"></i> Mon compte</h1>
 	
 	<div>Compte <c:out value="${fn:toLowerCase(currentUser.role.role)}" /> créé le <fmt:formatDate type="date" value="${currentUser.registrationDate}" />.</div>
 	<div>Numéro client : <c:out value="${currentUser.id}" /></div>
@@ -85,7 +100,8 @@
 	
 	<hr id="accountPassword">
 	<h3 class="text-secondary"><i class="bi bi-three-dots"></i> Mon mot de passe</h3>
-	<form>
+	<form method="post">
+		<input type="hidden" class="form-control" name="formSubmitted" value="accountPassword">
 		<div class="mb-3">
 			<div class="row">
 				<div class="col">
@@ -235,7 +251,7 @@
 					<c:if test="${not empty productsList}">
 						<c:forEach items="${productsList}" var="product">
 							<div class="row">
-								<img class="productIMG" alt="..." src="${product.product.mainPicPath}">
+								<img class="productIMG" alt="..." src="./assets/products/img/${product.product.mainPicPath}">
 								<div class="col">
 									<div class="row">
 										<h5><c:out value="${product.product.name}" /></h5>
@@ -244,7 +260,7 @@
 										<div>Prix unitaire : <c:out value="${product.price}" />&euro;  |  Quantité : <c:out value="${product.quantity}" /></div>
 									</div>
 									<div class="row">
-										<div>Quantité : <c:out value="${product.quantity}" /></div>
+										<div class="itemRef opacity-50">Référence : <c:out value="${product.product.reference}" /></div>
 									</div>
 								</div>
 							</div>
@@ -287,8 +303,8 @@
 		$(window).on('load', function() {
 			$('#orderAddress').html("${orderSelected.address_delivery.address},");
 			$('#orderZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
-			$('#orderBillingAddress').html("${orderSelected.address_delivery.address},");
-			$('#orderBillingZipCodeAndCity').html("${orderSelected.address_delivery.zipCode} ${orderSelected.address_delivery.city}");
+			$('#orderBillingAddress').html("${orderSelected.address_billing.address},");
+			$('#orderBillingZipCodeAndCity').html("${orderSelected.address_billing.zipCode} ${orderSelected.address_billing.city}");
 			$('#orderTotalPrice').html("${orderSelected.totalPrice}");
 			$('#orderState').html("${orderSelected.status.status}");
 			$('#orderTrackingNumber').html("${orderSelected.trackingNumber}");

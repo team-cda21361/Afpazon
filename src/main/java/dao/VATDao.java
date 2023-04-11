@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import beans.Role;
 import beans.VAT;
 import connector.DBConnect;
 
