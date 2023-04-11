@@ -1,4 +1,4 @@
-<script src="./assets/js/backoffice.js"></script>
+<script defer src="./assets/js/backoffice.js"></script>
 
 	<div class="backContainer">
 		<!-- start user -->
@@ -16,7 +16,7 @@
 								<th scope="col">Rôle</th>
 								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
-								<th scope="col">Supprimmer</th>
+								<th scope="col">(Des)Activer</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,7 +32,7 @@
 								<c:if test="${user.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
 								<td class="text-center"><a href="user-management?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td class="text-center"><a href="dashboard?id=${user.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a class="toModal" href="dashboard?userStatusOption=1&userId=${user.id }" data-bs-toggle="modal" data-bs-target="#exampleModal"><img alt="Icon check" src="assets/images/back_office/switch.png" width="25"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -42,11 +42,16 @@
 					</div>
 			</div>
 			<div class="col-4">
-				<c:if test="${not empty criticalStock }">
+			  <c:if test="${not empty error }">
 					<div class="alert alert-danger" role="alert">
-						<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
+	 					<c:out value="${error }"></c:out>
 					</div>
 				</c:if>
+					<c:if test="${not empty criticalStock }">
+						<div class="alert alert-danger" role="alert">
+							<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
+						</div>
+					</c:if>
 			</div>
 		</div>
 		<!-- end user -->
@@ -55,7 +60,7 @@
 		<div class="row justify-content-between backRowMargin">
 			<div class = col-6>
 				<div class="d-flex justify-content-between">
-					<h4>Produits   <a href="stockManager"><img alt="" src="assets/images/back_office/littleStockNoir.png"></a></h4>
+					<h4>Produits   <a href="stock-management"><img alt="" src="assets/images/back_office/littleStockNoir.png"></a></h4>
 				</div>
 					<table class="table table-bordered tableManager">
 						<thead class="table-active">
@@ -66,7 +71,7 @@
 								<th scope="col">Quantité</th>
 								<th scope="col">Actif</th>
 								<th scope="col">Editer</th>
-								<th scope="col">Supprimer</th>
+								<th scope="col">(Des)Activer</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,7 +86,7 @@
 								<c:if test="${stock.product.isActive() == false}"><img alt="Icon check" src="assets/images/back_office/falseIcon.png" width="20"></c:if>
 								</td>
 								<td class="text-center"><a href="product-management?option=edit&id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td class="text-center"><a href="dashboard?id=${stock.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
+								<td class="text-center"><a class="toModal" href="dashboard?productStatusOption=1&prodId=${stock.product.id }" data-bs-toggle="modal" data-bs-target="#exampleModal"><img alt="Icon check" src="assets/images/back_office/switch.png" width="25"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -143,7 +148,6 @@
 								<th scope="col">status de livraison</th>
 								<th scope="col">Envoie facture</th>
 								<th scope="col">Editer</th>
-								<th scope="col">Supprimmer</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -155,7 +159,6 @@
 								<td><c:out value="${order.status.status }"></c:out></td>
 								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
 								<td class="text-center"><a href="order-management?option=edit&id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
-								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -229,6 +232,26 @@
 			</div>
 		</div>
 		<!-- end FAQ and Newsletter -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">(Dés)Activation</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Etes-vous sûr(e) de vouloir continuer?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="" id="modal"><button type="button" class="btn btn-primary">(Dés)Activer)</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 	</div>
 </body>
 </html>

@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Product;
-import beans.Role;
 import beans.Stock;
-import beans.User;
 import beans.VAT;
 import connector.DBConnect;
 
@@ -22,7 +20,7 @@ public class StockDao implements IDAO<Stock>{
 		ResultSet rs;
 		
 	@Override
-	public boolean create(Stock object) {
+	public boolean create(Stock stock) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -36,7 +34,7 @@ public class StockDao implements IDAO<Stock>{
 			rs = sql.executeQuery();
 
 			while(rs.next()) {
-				Product product = new Product(rs.getString("name"),rs.getString("description"),
+				Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
 						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
 						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
@@ -55,19 +53,30 @@ public class StockDao implements IDAO<Stock>{
 	}
 
 	@Override
-	public boolean update(Stock object) {
+	public boolean update(Stock stock) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Stock object) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	public boolean delete(Stock stock) {
+
+			try {
+				sql = connect.prepareStatement("DELETE FROM stock WHERE id=?");
+
+				sql.setInt(1, stock.getId());
+				sql.execute();
+				
+				return true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
 
 	@Override
-	public Object findById(int id) {
+	public Stock findById(int id) {
 		try {
 
 			sql = connect.prepareStatement("SELECT *,s.id as idStock,p.id as idProd FROM stock s INNER JOIN product p ON s.id_product = p.id"

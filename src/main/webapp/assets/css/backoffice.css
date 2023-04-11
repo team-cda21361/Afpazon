@@ -16,3 +16,11 @@
 .backRowMargin{
 	margin-top:20px;
 }
+/* review management page */
+
+.reviewStar{
+	list-style:none;
+}
+.backReviewImage{
+	width:50%;
+}

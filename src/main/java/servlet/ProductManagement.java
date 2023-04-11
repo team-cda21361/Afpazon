@@ -34,6 +34,7 @@ public class ProductManagement extends HttpServlet {
 	ProductDao productDao = new ProductDao();
 	CategoryDao categoryDao = new CategoryDao();
 	DiscountDao discountDao = new DiscountDao();
+
 	Product_discountDao product_discountDao = new Product_discountDao();
 	Category_productDao category_productDao = new Category_productDao();
 	VATDao vatDao = new VATDao();
@@ -55,7 +56,7 @@ public class ProductManagement extends HttpServlet {
 		beans.Product product = null;
 		String action = "add";
 		ArrayList<Category> categoriesForSelect = new ArrayList<>();
-		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>();
+		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>()
 
 		if (request.getParameter("id") != null) {
 			int productId = Integer.parseInt(request.getParameter("id"));

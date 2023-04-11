@@ -134,7 +134,7 @@
 		<!-- Header Backoffice -->
 		<c:if test="${currentUser.role.role == 'Admin' }">
 			<nav class="navbar navbar-expand-lg bg-body-tertiary"
-				style="background: #F113DB">
+				style="background: #F113DB !important">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="#"></a>
 					<button class="navbar-toggler" type="button"

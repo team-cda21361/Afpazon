@@ -1,0 +1,27 @@
+.container-account{
+	max-width: min(70%, 900px);
+	padding: 0 20px 20px;
+	box-shadow: 0 -6px white, 0 6px white, -10px 0 10px -7px rgb(0, 0, 0, 0.10), 10px 0 10px -7px rgb(0, 0, 0, 0.10) !important;
+}
+
+.messageToUser {
+	display: none;
+	position: sticky;
+	float: right;
+	top: 15px;
+	right: 20px;
+	margin: 15px 0 auto auto;
+	width: min(80vw, 250px);
+	color: #558B2F;
+	background-color: #DCEDC8;
+	border: 1px solid #AED581;
+	border-radius: 10px;
+	text-align: center;
+	padding: 10px;
+}
+
+.errorMessage {
+	color: #E53935;
+	background-color: #FFCDD2;
+	border: 1px solid #EF9A9A;
+}

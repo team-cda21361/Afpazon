@@ -25,7 +25,7 @@
 				<hr>
 				<div class="row">
 					<div class="mb-3 w-50">
-						<img src="assets/images/register.png" width="220px">
+						<img src="assets/images/register.png" class="imgv">
 					</div>
 					<div class="mb-3 w-50">
 					
