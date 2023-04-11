@@ -77,7 +77,15 @@
 									<div class="form-group">
 										<h6>Choose color</h6>
 										<div class="single-checkbox checkbox-style-1">
-											<p><c:out value="${ product.getColor() }" /></p>
+									<c:if test="${ not empty product.getColor()  }">
+									    <p><c:out value="${ product.getColor()  }" /></p> 
+									</c:if>	
+									<c:if test="${ empty product.getColor()  }">
+									    <p> Non spécifié. </p>
+									</c:if>
+									
+									
+						
 										</div>
 
 									</div>
@@ -160,10 +168,45 @@
 								<p>	<c:out value="${ product.getDescription() }" /></p>
 								<h4>Caractéristiques</h4>
 								<ul class="features">
-								<li><strong>Size:</strong>
-									<c:out value="${ product.getSize() }" /></li>
-									<li><strong>Weihgt:</strong>
-									<c:out value="${ product.getWeight() }" /></li>
+								    <li><strong>Taille:</strong>  
+								    <c:if test="${ not empty product.getSize() }">
+									    <c:out value="${ product.getSize() }" />
+									</c:if>	
+									<c:if test="${ empty product.getSize() }">
+									    Non spécifié.
+									</c:if>
+	 
+									</li>
+									<li><strong>Poids: </strong>
+									<c:if test="${ not empty product.getWeight() }">
+									    <c:out value="${ product.getWeight() }" /> Kg.
+									</c:if>	
+									<c:if test="${ empty product.getWeight() }">
+									    Non spécifié.
+									</c:if>
+									</li>							
+									<li><strong>Garantie: </strong> 
+									
+									<c:if test="${ not empty product.getWarranty() }">
+									    <c:out value="${ product.getWarranty() }" /> an/ans.
+									</c:if>	
+									<c:if test="${ empty product.getWarranty() }">
+									    Non spécifié.
+									</c:if>
+
+									</li>
+									<li><strong>Référence: </strong> 
+									
+									<c:if test="${ not empty product.getReference() }">
+									    <c:out value="${ product.getReference() }" /> 
+									</c:if>	
+									<c:if test="${ empty product.getReference() }">
+									    Non spécifié.
+									</c:if>
+									
+									
+									
+									</li>
 								</ul>
 							</div>
 						</div>
