@@ -1,5 +1,5 @@
 
-<script src="./assets/js/backoffice.js"></script>
+<!-- <script src="./assets/js/backoffice.js"></script> -->
 <script defer src="assets/js/userReviewsManagement.js"></script>
 <div class="container">
 	<h3 class="col-12 text-center my-3">
@@ -15,11 +15,11 @@
 	</c:if>
 	<div class="row mt-5">
 		<div class="col-6 mt-5">
-			<div class="d-flex justify-content-between">
-			<div class="w-90 ">
-				<img class="backReviewImage" src="<c:out value="${product.mainPicPath}" />" alt="${product.mainPicPath}" >
+			<div class="row">
+			<div class="col-8 ">
+				<img class="backReviewImage" src="assets/products/img/<c:out value="${product.mainPicPath}" />" alt="${product.mainPicPath}" >
 			</div>
-			<div class=" me-5">
+			<div class="col-4">
 				<c:forEach items="${stars_reviews}" var="stars_review" varStatus="loop">
 					<ul class="d-flex flex-wrap">
 						<li ><span class="me-2 text-dark"><c:out value="${stars_review}" /> avis </span> 

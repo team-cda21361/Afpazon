@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Stock;
+import beans.User;
 import dao.DiscountDao;
 import dao.OrderDao;
+import dao.ProductDao;
 import dao.StockDao;
 import dao.UserDao;
 
@@ -23,6 +25,7 @@ public class Dashboard extends HttpServlet {
        UserDao userDao = new UserDao();
        StockDao stockDao = new StockDao();
        OrderDao orderDao = new OrderDao();
+       ProductDao productDao = new ProductDao();
        DiscountDao discountDao = new DiscountDao();
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,42 +40,53 @@ public class Dashboard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * conditon for user search method/read() if no search
+		 * user desactivation
 		 */
-		if (request.getParameter("userSearch")!=null) {
-			request.setAttribute("userList", userDao.search(request.getParameter("userSearch")));
+			if (request.getParameter("userStatusOption")!=null) {
+				int userId = Integer.parseInt(request.getParameter("userId"));
+				User user =userDao.findById(userId);
 			
-		}else {
+					if (user.isActive()) {
+						user.setActive(false);
+						if (!userDao.changeUserStatus(user)) {
+							request.setAttribute("error", "Oups! L'utilisateur n'a pas pu être désactivé");
+						}
+					} else if (!user.isActive()) {					
+						user.setActive(true);
+						if (!userDao.changeUserStatus(user)) {
+							request.setAttribute("error", "Oups! L'utilisateur n'a pas pu être activé");
+						}
+						
+					}
+			}
+			/*
+			 * product desactivation
+			 */
+			if (request.getParameter("productStatusOption")!=null) {
+				int prodId = Integer.parseInt(request.getParameter("prodId"));
+				beans.Product product =productDao.findById(prodId);
+				
+				if (product.isActive()) {
+					product.setActive(false);
+					if (!productDao.changeProductStatus(product)) {
+						request.setAttribute("error", "Oups! Le produit n'a pas pu être désactivé");
+					}
+				} else if (!product.isActive()) {					
+					product.setActive(true);
+					if (!productDao.changeProductStatus(product)) {
+						request.setAttribute("error", "Oups! Le produit n'a pas pu être activé");
+					}
+					
+				}
+			}
 			request.setAttribute("userList", userDao.read());
-		}
-		/*
-		 * conditon for product search method/read() if no search
-		 */
-		if (request.getParameter("productSearch")!=null) {
-			request.setAttribute("stockList", stockDao.search(request.getParameter("productSearch")));
-			
-		}else {
+		
 			request.setAttribute("stockList", stockDao.read());	
-		}
-		/*
-		 * conditon for discount search method/read() if no search
-		 */
-		if (request.getParameter("discountSearch")!=null) {
-			request.setAttribute("discountList", discountDao.search(request.getParameter("discountSearch")));
-			
-		}else {
 			
 			request.setAttribute("discountList", discountDao.read());
-		}
-		/*
-		 * conditon for user search method/read() if no search
-		 */
-		if (request.getParameter("orderSearch")!=null) {
-			request.setAttribute("orderList", orderDao.search(request.getParameter("orderSearch")));
-			
-		}else {
+		
 			request.setAttribute("orderList", orderDao.read());	
-		}
+		
 		
 		/*
 		 * Function to check if product stocks are critical
