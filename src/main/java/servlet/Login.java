@@ -57,10 +57,7 @@ public class Login extends HttpServlet {
 		if (user != null) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("currentUser", user);
-			System.out.println("Connexion ok!!");
-	      	request.setAttribute("msn", "Bienvenue à Afpazon "+ user.getFirstName() +" !.");
-			request.setAttribute("msnType",  "OK");	
-			request.getRequestDispatcher("view/index.jsp").forward(request,response);
+			response.sendRedirect("/Afpazon");
 		} else {
 	      	request.setAttribute("msn", "L'email ou le mot de passe n'est pas correct.");
 			request.setAttribute("msnType",  "KO");
