@@ -184,6 +184,7 @@ public class ProductDao implements IDAO<Product> {
 	}
 	
 	
+//****************** FINDBY CAROUSEL **********************************************************************************
 	
 	public ArrayList<Product> findProdCarousel() {
 		ArrayList<Product> listProducts = new ArrayList<>();
@@ -211,6 +212,33 @@ public class ProductDao implements IDAO<Product> {
 			System.err.println("Pas de liste de PRODUCTs...");
 		}
 		return listProducts;
+	}
+	public ArrayList<Product> findNewProdCarousel() {
+		ArrayList<Product> listNewProducts = new ArrayList<>();
+		try {
+			sql = connect.prepareStatement("SELECT * FROM product INNER JOIN vat  ON product.id_vat = vat.id ORDER BY product.id ASC LIMIT 10");
+			rs = sql.executeQuery();
+			System.out.println("REAL LA CONSULTA");
+			
+			while(rs.next()) {
+				Product product = new Product(rs.getInt("id"), rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+				
+				listNewProducts.add(product);
+				
+			}
+			return listNewProducts;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return listNewProducts;
 	}
 	
 	//************************************Find by reference*******************************//

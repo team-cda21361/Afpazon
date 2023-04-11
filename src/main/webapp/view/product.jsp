@@ -266,9 +266,6 @@
 		</div>
 	</section>
 	<!-- End Item Details -->
-	
-
-
 
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"

@@ -47,6 +47,21 @@ var swiper = new Swiper(".slide-container", {
   },
 });
 
+// Get the modal
+var modal = document.getElementById("myModal");
+const imgs = document.querySelectorAll(".myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+imgs.forEach(img => {
+    img.addEventListener("click", (e) => {
+		modal.style.display = "block";
+        modalImg.src = img.src;
+        captionText.innerHTML = img.alt;
+    });
+});
+var span = document.getElementsByClassName("close")[0];
 
-
+span.onclick = function() { 
+  modal.style.display = "none";
+}
 
