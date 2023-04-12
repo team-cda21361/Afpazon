@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.itextpdf.text.Image;
+
 import dao.Category_productDao;
+import dao.ImageDao;
 import dao.Product_discountDao;
 
 /**
@@ -29,6 +32,7 @@ public class Actions extends HttpServlet {
 
 	Category_productDao category_productDao = new Category_productDao();
 	Product_discountDao product_discountDao = new Product_discountDao();
+	ImageDao imageDao = new ImageDao();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -41,8 +45,11 @@ public class Actions extends HttpServlet {
 		String idString = request.getParameter("id");
 
 		System.out.println("id" + idString);
+		System.out.println("idProduct" + idProduct);
 
-		if (!idString.equals("Choisissez une promotion") && !idString.equals("Choisissez une categorie")) {
+		if (action.equals("delete-image-complementaire-from-product")) {
+			imageDao.deleteImageFromProduct(new beans.Image(idString,idProduct));
+		} else if (!idString.equals("Choisissez une promotion") && !idString.equals("Choisissez une categorie")) {
 
 			int id = Integer.parseInt(idString);
 
@@ -75,6 +82,10 @@ public class Actions extends HttpServlet {
 			}
 		}
 
+		if (action.equals("delete-image-complementaire-from-product")) {
+			System.out.println("Je supprime une image complémentaire");
+		}
+
 		response.sendRedirect("product-management?id=" + idProduct);
 	}
 
@@ -90,7 +101,7 @@ public class Actions extends HttpServlet {
 
 		System.out.println(typeMedia + " ---  " + idProduct);
 
-		//response.sendRedirect("product-management?id=" + idProduct);
+		// response.sendRedirect("product-management?id=" + idProduct);
 	}
 
 }

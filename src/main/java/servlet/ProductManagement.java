@@ -37,6 +37,7 @@ public class ProductManagement extends HttpServlet {
 
 	Product_discountDao product_discountDao = new Product_discountDao();
 	Category_productDao category_productDao = new Category_productDao();
+	ImageDao imageDao = new ImageDao();
 	VATDao vatDao = new VATDao();
 
 	/**
@@ -56,7 +57,8 @@ public class ProductManagement extends HttpServlet {
 		beans.Product product = null;
 		String action = "add";
 		ArrayList<Category> categoriesForSelect = new ArrayList<>();
-		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>()
+		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>();
+		ArrayList<Image> complementaryImages = new ArrayList<>();
 
 		if (request.getParameter("id") != null) {
 			int productId = Integer.parseInt(request.getParameter("id"));
@@ -65,6 +67,7 @@ public class ProductManagement extends HttpServlet {
 			request.setAttribute("product", product);
 			request.setAttribute("discounts_product", product_discountDao.findDiscountsByProductId(productId));
 			ArrayList<Category> categoriesProduct = category_productDao.findCategoriesByProductId(productId);
+			complementaryImages = imageDao.findImagesById(productId);
 
 			categoriesForSelect = category_productDao.findCategoriesNotInProductByProductId(productId);
 			discountsForSelect = product_discountDao.findDiscountsNotInPorductByProductId(productId);
@@ -79,6 +82,7 @@ public class ProductManagement extends HttpServlet {
 		request.setAttribute("warranties", productDao.readWarranty());
 		request.setAttribute("categories", categoriesForSelect);
 		request.setAttribute("discounts", discountsForSelect);
+		request.setAttribute("complementary_images", complementaryImages);
 		request.setAttribute("vats", vatDao.read());
 		request.setAttribute("action", action);
 
