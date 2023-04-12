@@ -2,7 +2,7 @@
 
 <c:if test="${not empty message}">
 	<c:choose>
-		<c:when test="${fn:contains(message, 'Erreur')}">
+		<c:when test="${fn:contains(message,'Erreur')}">
 			<div class="sticky-top messageToUser errorMessage">
 				<c:out value="${message}"/>
 			</div>

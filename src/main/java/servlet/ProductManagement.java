@@ -56,7 +56,7 @@ public class ProductManagement extends HttpServlet {
 		beans.Product product = null;
 		String action = "add";
 		ArrayList<Category> categoriesForSelect = new ArrayList<>();
-		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>()
+		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>();
 
 		if (request.getParameter("id") != null) {
 			int productId = Integer.parseInt(request.getParameter("id"));

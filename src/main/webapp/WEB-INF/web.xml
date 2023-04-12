@@ -20,7 +20,16 @@
 
 	<jsp-config>
 		<jsp-property-group>
-			<url-pattern>*.jsp</url-pattern>
+			<url-pattern>/view/about.jsp</url-pattern>
+			<url-pattern>/view/acount.jsp</url-pattern>
+			<url-pattern>/view/acountDeactivated.jsp</url-pattern>
+			<url-pattern>/view/cart.jsp</url-pattern>
+			<url-pattern>/view/categories.jsp</url-pattern>
+			<url-pattern>/view/CGV.jsp</url-pattern>
+			<url-pattern>/view/index.jsp</url-pattern>
+			<url-pattern>/view/login.jsp</url-pattern>
+			<url-pattern>/view/product.jsp</url-pattern>
+			<url-pattern>/view/register.jsp</url-pattern>
 			<include-prelude>/WEB-INF/jstlLib.jsp</include-prelude>
 			<include-prelude>/view/headerFooter/header.jsp</include-prelude>
 			<include-coda>/view/headerFooter/footer.jsp</include-coda>
