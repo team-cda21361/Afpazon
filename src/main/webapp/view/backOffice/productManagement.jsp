@@ -292,17 +292,16 @@
 				</div>
 
 				<div class="w-25">
-					<select class="form-select mb-3" aria-label="Default select example" name="TVA">
-						<option selected value=<c:out value="${product.vat.id }"/>
-							<c:out value="${product.vat.value }" default="%" />
-            </option>
-						<c:forEach items="${vats }" var="vat">
-							<option value=<c:out value="${vat.id }"/>
-                <c:out value="${vat.value}"></c:out>
-              </option>
-						</c:forEach>
-					</select>
-				</div>
+                    <select class="form-select mb-3"
+                        aria-label="Default select example" name="TVA">
+                        <option selected value=<c:out value="${product.vat.id }"/>>
+                            <c:out value="${product.vat.value }" default="%" /></option>
+                        <c:forEach items="${vats }" var="vat">
+                            <option value=<c:out value="${vat.id }"/>><c:out
+                                    value="${vat.value}"></c:out></option>
+                        </c:forEach>
+                    </select>
+                </div>
 			</div>
 
 			<div class="row justify-content-around mt-5">

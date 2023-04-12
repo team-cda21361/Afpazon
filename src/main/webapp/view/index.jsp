@@ -33,157 +33,31 @@
 				</div>
 			</div>
 		</div>
+		<c:if test="${msnType.equals('OK')}">
+        <div class="alert alert-success timer" role="alert">
+            <c:out value="${msn }"></c:out>
+        </div>
+    </c:if>
+    <c:if test="${msnType.equals('KO')}">
+        <div class="alert alert-danger timer" role="alert">
+            <c:out value="${msn }"></c:out>
+        </div>
+    </c:if>
 		<hr>
 		<h3>Carousel produits discounts</h3>
-		<hr>
-			<section>
-				<div class="container-fluid">
-					<div class="container swiper">
-						<div class="slide-container">
-							<div class="card-wrapper swiper-wrapper">
-								<c:forEach items="${ newProdSponsored }" var="productSponsored" varStatus="status">
-									<div class="card swiper-slide">
-										<div class="image-box">
-											<img src="assets/products/img/${productSponsored.getProduct().getMainPicPath()}"
-												alt="" />
-										</div>
-										<div class="card-body">
-											<h3 class="card-title">${productSponsored.getProduct().getName()}</h3>
-												<div class="collapse" id="collapse5${status.index}">
-										<p class="card-text">${productSponsored.getProduct().getDescription()}</p>
-									</div>
-									<button class="btn btn-link text-primary btn-toggle-details"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#collapse5${status.index}" aria-expanded="false"
-										aria-controls="collapse${status.index}">Voir plus</button>
-											<h4 class="card-subtitle mb-2 text-muted"><strong>Prix :
-												</strong>${productSponsored.getProduct().getPrice()} &euro;</h4>
-											<div class="d-flex justify-content-between align-items-center">
-												<div class="btn-group">
-													<a href="#" class="btn btn-primary"><i
-															class="bi bi-cart-plus"></i></a>
-													<a href="product?id=${productSponsored.getProduct().getId()}"
-														class="btn btn-success" title="Plus Info"><i
-															class="bi bi-plus-circle"></i></a>
-												</div>
-												<small class="text-muted"><strong>Code de réduction :</strong>
-													${productSponsored.getDiscount().getPercent()}</small>
-											</div>
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-							<div class="swiper-button-next swiper-navBtn"></div>
-							<div class="swiper-button-prev swiper-navBtn"></div>
-							<div class="swiper-pagination"></div>
-						</div>
-					</div>
-				</div>
-			</section>
-		<hr>
 		
-			<%-- <c:import url="carousel/slider.jsp"></c:import> --%>
-		<h3>Carousel New produit</h3>
 		<hr>
-
-				<section>
-					<div class="container-fluid">
-						<div class="container swiper">
-							<div class="slide-container">
-								<div class="card-wrapper swiper-wrapper">
-									<c:forEach items="${discountsProdSponsoring}" var="productDiscount" varStatus="status">
-										<div class="card swiper-slide">
-											<div class="image-box">
-												<img class="myImg" src="assets/products/img/<c:out value="${ productDiscount.getProduct().getMainPicPath() }" />" alt="<c:out value="${ productDiscount.getProduct().getName() }" />">
-											</div>
-											<div class="card-body">
-												<h3 class="card-title">${productDiscount.getProduct().getName()}</h3>
-												
-													<div class="collapse" id="collapse3${status.index}">
-										<p class="card-text">${productDiscount.getProduct().getDescription()}</p>
-									</div>
-									<button class="btn btn-link text-primary btn-toggle-details"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#collapse3${status.index}" aria-expanded="false"
-										aria-controls="collapse${status.index}">Voir plus</button>
-							
-													<h4 class="card-subtitle mb-2 text-muted"><strong>Prix :
-														</strong>${productDiscount.getProduct().getPrice()} &euro;</h4>
-													<div class="d-flex justify-content-between align-items-center">
-														<div class="btn-group">
-															<a href="#" class="btn btn-primary"><i
-																	class="bi bi-cart-plus"></i></a>
-															<a href="product?id=${productDiscount.getId()}"
-																class="btn btn-success" title="Plus Info"><i
-																	class="bi bi-plus-circle"></i></a>
-														</div>
-														<small class="text-muted"><strong>Code de Reference :</strong>
-															${productDiscount.getProduct().getReference()}</small>
-													</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="swiper-button-next swiper-navBtn"></div>
-								<div class="swiper-button-prev swiper-navBtn"></div>
-								<div class="swiper-pagination"></div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<c:import url="carrousel/newProdSponsoredCarousel.jsp"></c:import> 
+		<hr>
+		<h3>Carousel New produit</h3>
+		
+		<hr>
+    			<c:import url="carrousel/newProductCarousel.jsp"></c:import>  			
 			<hr>
-
-			<h3>Carousel New Sponsort</h3>
-
-			<hr>
-				<section>
-					<div class="container-fluid">
-						<div class="container swiper">
-							<div class="slide-container">
-								<div class="card-wrapper swiper-wrapper">
-									<c:forEach items="${newProdCarousel }" var="Newproduct" varStatus="status">
-										<div class="card swiper-slide">
-											<div class="image-box">
-												<img class="myImg" src="assets/products/img/<c:out value="${ Newproduct.getMainPicPath() }" />" alt="<c:out value="${ Newproduct.getName() }" />">
-											</div>
-											<div class="card-body">
-												<h3 class="card-title">${Newproduct.getName()}</h3>
-												<div class="product-details">
-												<div class="collapse" id="collapse2${status.index}">
-										<p class="card-text">${Newproduct.getDescription()}</p>
-									</div>
-									<button class="btn btn-link text-primary btn-toggle-details"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#collapse2${status.index}" aria-expanded="false"
-										aria-controls="collapse${status.index}">Voir plus</button>
-												</div>
-												<h4 class="card-subtitle mb-2 text-muted"><strong>Prix :
-													</strong>${Newproduct.getPrice()} &euro;</h4>
-												<div class="d-flex justify-content-between align-items-center">
-													<div class="btn-group">
-														<a href="#" class="btn btn-primary"><i
-																class="bi bi-cart-plus"></i></a>
-														<a href="product?id=${Newproduct.getId()}"
-															class="btn btn-success" title="Plus Info"><i
-																class="bi bi-plus-circle"></i></a>
-													</div>
-													<small class="text-muted"><strong>Code de Reference :</strong>
-														${Newproduct.getReference()}</small>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</div>
-								<div class="swiper-button-next swiper-navBtn"></div>
-								<div class="swiper-button-prev swiper-navBtn"></div>
-								<div class="swiper-pagination"></div>
-							</div>
-						</div>
-					</div>
-				</section>
-			<hr>
-				
-				
+		<h3>Carousel New Sponsort</h3>
+		
+		<hr>
+				 <c:import url="carrousel/newProductSponsortCarousel.jsp"></c:import> 	
 		<hr>
 			<section id="section4">
 					<div class="container">
@@ -243,7 +117,5 @@
   <img class="modal-content" id="img01">
   <div id="caption"></div>
 </div>
-				
-				<br>
 <!-- ---------------------------------------------------End CAROURSEL -------------------------->
 				

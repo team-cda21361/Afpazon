@@ -1,4 +1,5 @@
 <script type="text/javascript" src="./assets/js/account.js"></script>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <c:if test="${not empty message}">
 	<c:choose>
