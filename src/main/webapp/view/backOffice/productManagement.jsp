@@ -1,6 +1,4 @@
-<script src="assets/js/productManagement.js"></script>
-<!-- ****************************************** TITRE ************************************************************** --
-
+<!-- ****************************************** TITRE ************************************************************** -->
 <h2 class="col-12 text-center mt-5">
 	<c:if test="${action == 'add'}">
 		<c:out value="Ajout " />
@@ -54,7 +52,6 @@
 						type="submit">
 						<i class="bi bi-plus-circle"></i>
 					</button>
-
 				</form>
 			</div>
 		</div>
@@ -113,10 +110,11 @@
 			</div>
 		</div>
 
-		<div class="d-flex flex-row justify-content-between mt-3">
+		<div
+			class="d-flex flex-row justify-content-between mt-3 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
 			<div class="column w-50 m-3">
-				<form method="post" action="actions" enctype="multipart/form-data">
-					<input type="hidden" name="type-media" value="image"> <input
+				<form method="post" enctype="multipart/form-data">
+					<input type="hidden" name="action" value="add-image"> <input
 						type="hidden" name="id-product" value=${product.id }> <input
 						type="file" id="download_img" class="form-control" name="image"
 						accept=".jpg,.png">
@@ -125,56 +123,68 @@
 						<i class="bi bi-plus-circle"></i>
 					</button>
 					<input type="image" class="form-control mb-3"
-						src="
-              <c:if test="${not empty product.mainPicPath }">
-                <c:out value="assets/images/products/${product.mainPicPath }" default=""/>
-              </c:if>
-              <c:if test="${empty product.mainPicPath }">
-                <c:out value="assets/images/products/image_placeholder.png" default=""/>
-              </c:if>
-            "
-          name="image">
+						src="<c:if test="${not empty product.mainPicPath }">
+								<c:out value="assets/products/img/${product.mainPicPath }" default=""/>
+							</c:if>
+							<c:if test="${empty product.mainPicPath }"><c:out value="assets/products/img/image_placeholder.png" default=""/>
+							</c:if>
+							"
+						name="image">
 
 				</form>
-				<label class="form-label"> <a href=""> <img alt=""
-						src="assets/images/back_office/plus.png" width="20"></a> Ajouter
-					des images complèmentaires :
-				</label>
+				<form method="post" enctype="multipart/form-data">
+					<label class="form-label"> Ajouter des images
+						compl�mentaires </label> <input type="hidden" name="action"
+						value="add-more-image"> <input type="hidden"
+						name="id-product" value=${product.id }> <input type="file"
+						id="download_img" class="form-control" name="image"
+						accept=".jpg,.png">
+					<button class="btn btn-success d-flex flex-row align-items-end"
+						type="submit">
+						<i class="bi bi-plus-circle"></i>
+					</button>
+				</form>
 			</div>
-
-			<div class="column w-50 m-3">
-				<form method="post" action="actions" enctype="multipart/form-data">
-					<input type="hidden" name="type-media" value="video"> <input
+			<div
+				class="column w-50 m-3 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
+				<form method="post" enctype="multipart/form-data">
+					<input type="hidden" name="action" value="add-video"> <input
 						type="hidden" name="id-product" value=${product.id }> <input
 						type="file" class="form-control" name="video" accept=".mp4">
 					<button class="btn btn-success d-flex flex-row align-items-end"
 						type="submit">
 						<i class="bi bi-plus-circle"></i>
 					</button>
-					<input type="image" class="form-control mb-3" name="image"
-						src="<c:if test="${not empty product.videoPath }">
-								<c:out value="assets/images/products/${product.videoPath}" default=""/>
+					<video controls class="w-100">
+						<source
+							src="<c:if test="${not empty product.videoPath }">
+								<c:out value="assets/products/vid/${product.videoPath}" default=""/>
 							</c:if>
 							<c:if test="${empty product.videoPath }">
-								<c:out value="assets/images/products/video_placeholder.png" default=""/>
-							</c:if>">
+								<c:out value="assets/products/vid/video_placeholder.png" default=""/>
+							</c:if>"
+							type="video/mp4">
+					</video>
 				</form>
 			</div>
 		</div>
 	</div>
-	<div class="col-4 mt-5 mr-3">
+	<div
+		class="<c:if test="${empty product.id }"><c:out value="col-10 w-50"></c:out></c:if> 
+		<c:if test="${not empty product.id }"><c:out value="col-4 mt-5 mr-3"></c:out></c:if>">
 		<form method="post">
 			<input type="hidden" name="id-product" value=${product.id }>
-			<input type="hidden" name="main-pic-path"
-				value=${product.mainPicPath }> <input type="hidden"
-				name="video-path" value=${product.videoPath }>
+			<input type="hidden" name="action" value="add-product"> <input
+				type="hidden" name="main-pic-path" value=${product.mainPicPath }>
+			<input type="hidden" name="video-path" value=${product.videoPath }>
 
 			<!-- ****************************************** DEUXIEME DIV ******************************************************* -->
 			<div class="row">
 				<div class="w-75">
 					<label>Présent dans le carrousel : </label>
 				</div>
-				<div class="w-25 form-check form-switch d-flex justify-content-end mb-3">
+				<div
+					class="w-25 form-check form-switch d-flex justify-content-end mb-3">
 					<input class="form-check-input" name="in-caroussel" type="checkbox"
 						<c:if test="${product.isInCarousel()}"> <c:out value="checked"/>
 					</c:if>>
@@ -223,8 +233,8 @@
 					<label>Nom :</label>
 				</div>
 				<div class="w-75">
-					<textarea type="text" maxlength="150" class="form-control mb-3"
-						name="name" value="<c:out value="${product.name }" default=""/>"></textarea>
+					<textarea maxlength="150" class="form-control mb-3" name="name"><c:out
+							value="${product.name }" default="" /></textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -243,8 +253,8 @@
 					<label class="form-label">Taille :</label>
 				</div>
 				<div class="w-25">
-					<input type="text" maxlength="30" class="form-control mb-3" name="size"
-						value="<c:out value="${product.size }" default=""/>">
+					<input type="text" maxlength="30" class="form-control mb-3"
+						name="size" value="<c:out value="${product.size }" default=""/>">
 				</div>
 
 				<div class="w-25 text-end">
@@ -263,8 +273,8 @@
 					<label class="form-label">Couleur:</label>
 				</div>
 				<div class="w-75">
-					<input type="text"  maxlength="30" class="form-control mb-3" name="color"
-						value="<c:out value="${product.color}" default=""/>">
+					<input type="text" maxlength="30" class="form-control mb-3"
+						name="color" value="<c:out value="${product.color}" default=""/>">
 				</div>
 			</div>
 
@@ -296,16 +306,24 @@
 			</div>
 
 			<div class="row justify-content-around mt-5">
-				<button type="button" class="btn btn-primary w-25">Gestion
-					des avis</button>
-				<button type="submit" class="btn btn-primary w-25">
-					<c:if test="${action == 'add'}">
-						<c:out value="Ajouter " />
-					</c:if>
-					<c:if test="${action == 'update'}">
-						<c:out value="Modifier " />
-					</c:if>
-				</button>
+				<div class="w-50">
+					<a
+						class="<c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>"
+						href="user-reviews-management?productId=${product.id }">
+						<button type="button" class="btn btn-primary">Gestion des
+							avis</button>
+					</a>
+				</div>
+				<div class="w-50">
+					<button type="submit" id="submit-product" class="btn btn-primary">
+						<c:if test="${action == 'add'}">
+							<c:out value="Ajouter " />
+						</c:if>
+						<c:if test="${action == 'update'}">
+							<c:out value="Modifier " />
+						</c:if>
+					</button>
+				</div>
 			</div>
 		</form>
 	</div>

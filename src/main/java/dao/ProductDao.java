@@ -90,6 +90,9 @@ public class ProductDao implements IDAO<Product> {
 
 	@Override
 	public boolean update(Product product) {
+		
+		System.out.println("Dans Dao : " + product.getVideoPath());
+		System.out.println("Dans Dao : " + product.getId());
 
 		try {
 
