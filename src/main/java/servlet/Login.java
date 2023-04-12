@@ -50,21 +50,26 @@ public class Login extends HttpServlet {
 		System.out.println("password: "+password);
 
 		UserDao userDao = new UserDao();
-		User user = userDao.login(email,password);
-
-		// System.out.println(user.getNom());
-
-		if (user != null) {
-			HttpSession session = request.getSession(true);
-			session.setAttribute("currentUser", user);
-			System.out.println("Connexion ok!!");
-	      	request.setAttribute("msn", "Bienvenue à Afpazon "+ user.getFirstName() +" !.");
-			request.setAttribute("msnType",  "OK");	
-			request.getRequestDispatcher("view/index.jsp").forward(request,response);
-		} else {
-	      	request.setAttribute("msn", "L'email ou le mot de passe n'est pas correct.");
+		if(userDao.userActDes(email) != true) {
+			User user = userDao.login(email,password);
+			if (user != null) {
+				HttpSession session = request.getSession(true);
+				session.setAttribute("currentUser", user);
+				System.out.println("Connexion ok!!");
+				request.setAttribute("msn", "Bienvenue à Afpazon "+ user.getFirstName() +" !.");
+				request.setAttribute("msnType",  "OK");	
+				response.sendRedirect("/Afpazon");
+			} else {
+				request.setAttribute("msn", "L'email ou le mot de passe n'est pas correct.");
+				request.setAttribute("msnType",  "KO");
+				doGet(request, response);
+			}
+			
+		}else {
+			request.setAttribute("msn", "Votre compte est inactif.");
 			request.setAttribute("msnType",  "KO");
 			doGet(request, response);
+			
 		}
 	}
 }

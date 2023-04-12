@@ -308,8 +308,7 @@ public class ProductDao implements IDAO<Product> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return listProducts;
-	}
+
 		return listWarranties;
 	}
 }
