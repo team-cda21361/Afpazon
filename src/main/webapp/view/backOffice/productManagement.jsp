@@ -132,18 +132,6 @@
 						name="image">
 
 				</form>
-				<form method="post" enctype="multipart/form-data">
-					<label class="form-label"> Ajouter des images
-						complï¿½mentaires </label> <input type="hidden" name="action"
-						value="add-more-image"> <input type="hidden"
-						name="id-product" value=${product.id }> <input type="file"
-						id="download_img" class="form-control" name="image"
-						accept=".jpg,.png">
-					<button class="btn btn-success d-flex flex-row align-items-end"
-						type="submit">
-						<i class="bi bi-plus-circle"></i>
-					</button>
-				</form>
 			</div>
 			<div
 				class="column w-50 m-3 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
@@ -217,7 +205,7 @@
 					<label>Garantie (en annÃ©es):</label>
 				</div>
 				<div class="w-25">
-					<select class="form-select mb-3 w-50"
+					<select class="form-select mb-3"
 						aria-label="Default select example" name="warranty">
 						<option selected value=<c:out value="${product.warranty }"/>>
 							<c:out value="${product.warranty }"
@@ -292,17 +280,16 @@
 				</div>
 
 				<div class="w-25">
-					<select class="form-select mb-3" aria-label="Default select example" name="TVA">
-						<option selected value=<c:out value="${product.vat.id }"/>
-							<c:out value="${product.vat.value }" default="%" />
-            </option>
-						<c:forEach items="${vats }" var="vat">
-							<option value=<c:out value="${vat.id }"/>
-                <c:out value="${vat.value}"></c:out>
-              </option>
-						</c:forEach>
-					</select>
-				</div>
+                    <select class="form-select mb-3"
+                        aria-label="Default select example" name="TVA">
+                        <option selected value=<c:out value="${product.vat.id }"/>>
+                            <c:out value="${product.vat.value }" default="%" /></option>
+                        <c:forEach items="${vats }" var="vat">
+                            <option value=<c:out value="${vat.id }"/>><c:out
+                                    value="${vat.value}"></c:out></option>
+                        </c:forEach>
+                    </select>
+                </div>
 			</div>
 
 			<div class="row justify-content-around mt-5">
@@ -315,7 +302,7 @@
 					</a>
 				</div>
 				<div class="w-50">
-					<button type="submit" id="submit-product" class="btn btn-primary">
+					<button type="submit" id="submit-product" class="btn btn-primary <c:if test="${empty product.id }"><c:out value="mb-5"></c:out></c:if>">
 						<c:if test="${action == 'add'}">
 							<c:out value="Ajouter " />
 						</c:if>
@@ -326,5 +313,39 @@
 				</div>
 			</div>
 		</form>
+	</div>
+</div>
+<div class="col-6 ms-5 <c:if test="${empty product.id }"><c:out value="d-none"></c:out></c:if>">
+	<form method="post" class="w-50" enctype="multipart/form-data">
+		<label class="form-label"> Ajouter des images complémentaires
+		</label> <input type="hidden" name="action" value="add-more-image"> <input
+			type="hidden" name="id-product" value=${product.id }> <input
+			type="file" id="download_img" class="form-control" name="image"
+			accept=".jpg,.png">
+		<button class="btn btn-success d-flex flex-row align-items-end"
+			type="submit">
+			<i class="bi bi-plus-circle"></i>
+		</button>
+	</form>
+	<div class="w-50">
+		<table id="tableCategory" class="table table-bordered">
+			<thead class="bg-secondary sticky-top">
+				<tr>
+					<th scope="col">Image(s) complémentaire(s)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${complementary_images }"
+					var="complementary_image">
+					<tr>
+						<td><c:out value="${complementary_image.picPath}"></c:out></td>
+						<td class="text-center"><a
+							href="actions?action=delete-image-complementaire-from-product&id=${complementary_image.picPath}&id-product=${product.id}"><img
+								alt="Icon check" src="assets/images/back_office/deleteIcon.png"
+								width="20"></a></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </div>
