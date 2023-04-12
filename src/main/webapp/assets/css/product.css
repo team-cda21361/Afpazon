@@ -996,6 +996,14 @@
 	font-style: italic;
 	
 } 
+
+#prom{
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: underline;
+	font-style: italic;
+	
+} 
   
   
  
@@ -1052,3 +1060,13 @@
 .attribution:hover {
   color: #1fa67a;
 }
+
+
+
+    .video {
+      object-fit: contain;
+	width: 100%;
+    }
+  
+
+  

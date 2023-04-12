@@ -57,15 +57,16 @@
 						    <c:if test="${empty discount }">		
 								<h3 class="price">
 									<c:out value="${ product.getPrice() }" />
-									&euro; <span>-</span>
+									&euro; <span></span>
 								</h3>
 							</c:if>
 							
 						    <c:if test="${not empty discount }">		
-								<h3 class="price"><c:out value="${ discount.getProduct().getPrice()-(discount.getProduct().getPrice()*discount.getDiscount().getPercent())  }" />
+								<h3 class="price"><c:out value="${ String.format( '%.2f', discount.getProduct().getPrice()-(discount.getProduct().getPrice()*discount.getDiscount().getPercent()))  }" />
 									
 									&euro; <span><c:out value="${ discount.getProduct().getPrice() }" /> &euro; </span>
 								</h3>
+								<p id="prom">Produit en promotion <c:out value="${ String.format( '%.2f', discount.getDiscount().getPercent()*100) }" /> %</p>
 							</c:if>
 							
 							
@@ -123,7 +124,7 @@
 									          </div>
 									        </div>
 								      		<c:if test="${ reviewTP != 0 }">
-									    		<c:out value="${ reviewTP }" />
+									    		<a href="#refstars" ><c:out value="${ reviewTP }" /> Avis</a>
 									    	</c:if>	
 			
 										</div>
@@ -136,10 +137,14 @@
 							<div class="bottom-content">
 								<div class="row align-items-end">
 									<div class="col-lg-4 col-md-4 col-12">
+									<form method="post">
 										<div class="button cart-button">
-											<button class="btn btn-primary" style="width: 100%;"><i
+											<button type="submit" class="btn btn-primary" style="width: 100%;"><i
 												class="bi bi-cart-plus"></i> Ajouter</button>
 										</div>
+										<input type="hidden" name="idProd" value="<c:out value="${ product.getId() }" />">
+										<input type="hidden" name="cantiteProd" value="<c:out value="${ cantite }" />">
+									</form>	
 									</div>
 									<div class="col-lg-4 col-md-4 col-12">
 										<div class="button cart-button">
@@ -164,6 +169,16 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="info-body custom-responsive-margin">
+							  <c:if test="${ not empty product.getVideoPath() }">	
+								<h4>Video</h4>							
+								<video controls class="video">
+								  <source src="assets/products/vid/<c:out value="${ product.getVideoPath() }" />" type="video/mp4">
+								  <source src="assets/products/vid/<c:out value="${ product.getVideoPath() }" />" type="video/webm">
+								  <p>Votre navigateur ne prend pas en charge les vidéos HTML5.
+								     Voici <a href="assets/products/vid/<c:out value="${ product.getVideoPath() }" />">un lien pour télécharger la vidéo</a>.</p>
+								</video>
+							  </c:if>
+								
 								<h4>Details</h4>
 								<p>	<c:out value="${ product.getDescription() }" /></p>
 								<h4>Caractéristiques</h4>
@@ -208,10 +223,13 @@
 									
 									</li>
 								</ul>
+								
+
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
 							<div class="info-body" id="list-Reviews">
+								<a name="refstars"></a>
 								<h4><c:if test="${reviewTP != 0 }"> <c:out value="${reviewTP }" /> </c:if> Commentaires</h4>
 								<hr>
 								<c:if test="${not empty review }">
@@ -245,11 +263,6 @@
 											</div>
 									</c:forEach>
 
-<!-- 
-											<button type="submit" class="btn btn-primary" class="show_more" name="show_more" id="show_more"  value="<c:out value="${ lastIdReview }" />">
-												Voir plus
-											</button>
- -->
 									
 											
 									</c:if>
