@@ -533,10 +533,11 @@ INSERT INTO stock (quantity, id_product) VALUES
     (156, 19)
 ;
 INSERT INTO discount (startDate, endDate, percent, voucher) VALUES 
-    ('01-12-2022', '02-20-2022', 0.8, 'Doubtfull22'),
-    ('04-25-2022', '05-12-2022', 0.9, 'jeSuisReduc10'),
-    ('06-12-2022', '07-20-2022', 0.8, 'olé2022'),
-    ('11-02-2022', '11-20-2022', 0.8, 'fun22')
+    ('2022-01-12', '2022-02-02', 0.8, 'Doubtfull22'),
+    ('2022-04-25', '2022-05-12', 0.9, 'jeSuisReduc10'),
+    ('2022-06-12', '2022-07-20', 0.8, 'olé2022'),
+    ('2022-02-11', '2022-03-11', 0.8, 'fun22'),
+    ('2023-04-10', '2023-04-25', 0.8, null)
 ;
 INSERT INTO product_discount (id_product, id_discount) VALUES 
     (2,2),

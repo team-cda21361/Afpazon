@@ -190,4 +190,22 @@ public class ReviewDao implements IDAO<Review> {
 		}
 		return listReviews;
 	}
+	
+	public Review findUserReviewForProduct(User user, Product product) {
+		try {
+			sql = connect.prepareStatement("SELECT * FROM review WHERE id_user = ? AND id_product = ?");
+			
+			sql.setInt(1, user.getId());
+			sql.setInt(2, product.getId());
+			rs = sql.executeQuery();
+			
+			if (rs.next()) {
+				return new Review(rs.getInt("id"), rs.getString("content"), rs.getInt("stars"), product, user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return null;
+	}
 }
