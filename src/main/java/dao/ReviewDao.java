@@ -204,7 +204,6 @@ public class ReviewDao implements IDAO<Review> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.err.println("Pas de liste de PRODUCTs...");
 		}
 		return null;
 	}
