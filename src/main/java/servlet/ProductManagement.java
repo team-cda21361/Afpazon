@@ -58,6 +58,7 @@ public class ProductManagement extends HttpServlet {
 		String action = "add";
 		ArrayList<Category> categoriesForSelect = new ArrayList<>();
 		ArrayList<beans.Discount> discountsForSelect = new ArrayList<>();
+
 		ArrayList<Image> complementaryImages = new ArrayList<>();
 
 		if (request.getParameter("id") != null) {
