@@ -1,5 +1,6 @@
 package beans;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Cart{
@@ -31,10 +32,20 @@ public class Cart{
     }
     
     public int countProduct() {
-                int count = 0;
+        int count = 0;
         for (Item item : Items) {
             count += item.getQuantity();
         }
         return count;
     }
+    
+    public String countPrixProduct() {
+    	DecimalFormat df = new DecimalFormat("#.00");
+	    double count = 0;
+		for (Item item : Items) {
+		    count += item.getProduct().getPrice() * item.getQuantity();
+		}
+		return df.format(count);
+	}
+    
 }
