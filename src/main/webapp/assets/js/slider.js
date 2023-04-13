@@ -65,3 +65,8 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+$(document).ready(function() {
+    setTimeout(function() {
+        $(".timer").fadeOut(1500);
+    },5000);
+});
