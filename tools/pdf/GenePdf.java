@@ -2,7 +2,6 @@ package pdf;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.Date;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -13,12 +12,14 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 public class GenePdf {
-	
-	public static String createFacturePDF(Order order, ArrayList<Order_product> productsList, String appPath) throws FileNotFoundException {
+
+	public static  String createCommadePDf(String name, String reference, String quantity, String appPath) throws FileNotFoundException {
 		com.itextpdf.text.Font fontHeader = FontFactory.getFont(FontFactory.COURIER, 24, BaseColor.BLACK);
 		com.itextpdf.text.Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
 		
-		String cheminVersPDF = appPath + "afpazon_facture_" + order.getID() + ".pdf";
+		
+		
+		String cheminVersPDF = appPath + "Commande.pdf";
 		
 		try {
 			Document document = new Document();
@@ -26,19 +27,20 @@ public class GenePdf {
 			document.open();
 //			ImageData imageData = ImageDataFactory.create(appPath + "/image.jpg");
 			Paragraph p1 = new Paragraph();
+//			p1.add("Bonjour M. " + UserDao.currentUser.getNom());
 			p1.add("Bonjour M. le fournisseur, nous souhaitons passer commande de(s) produit(s) suivant :");
 			p1.setFont(fontHeader);
 			document.add(p1);
 			Paragraph p2 = new Paragraph();
-			p2.add("Nom du produit :  ");
+			p2.add("Nom du produit :  " + name);
 			p2.setFont(font);
 			document.add(p2);
 			Paragraph p3 = new Paragraph();
-			p3.add("Référence du produit :  ");
+			p3.add("Référence du produit :  " + reference);
 			p3.setFont(font);
 			document.add(p3);
 			Paragraph p4 = new Paragraph();
-			p4.add("Quantité demander :  ");
+			p4.add("Quantité demander :  " + quantity);
 			p4.setFont(font);
 			document.add(p4);
 			Paragraph p5 = new Paragraph();
