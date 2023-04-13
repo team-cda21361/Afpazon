@@ -25,10 +25,10 @@ public class SendMail {
 		String to = client_email;
 
 		// Sender's email ID needs to be mentioned
-		String from = "sender@gmail.com";
+		String from = "test@orange.fr";
 
 		// Assuming you are sending email from through gmails smtp
-		String host = "smtp.server.fr";
+		String host = "smtp.orange.fr";
 
 		// Get system properties
 		Properties properties = System.getProperties();
@@ -96,6 +96,7 @@ public class SendMail {
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
 		} catch (MessagingException mex) {
+			System.out.println("**************************************");
 			mex.printStackTrace();
 		}
 
