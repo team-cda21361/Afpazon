@@ -116,9 +116,9 @@ public class Product extends HttpServlet{
             product = productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd")));
             System.out.println("QUE :"+ product.getName() );
             if(product.getName() != null) {
-            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd"))));
+            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd"))), product_discountDao.findByIdProd(Integer.parseInt(request.getParameter("idProd"))).getDiscount().getPercent() );
             }else {
-            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findById(Integer.parseInt(request.getParameter("idProd"))));
+            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findById(Integer.parseInt(request.getParameter("idProd"))), 0);
             }
         		
                 //Item item = new Item(1, product);
