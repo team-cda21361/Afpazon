@@ -31,10 +31,10 @@
 		</div>
 <!-- **************************************** FORMULAIRE ************************************************************ -->
 		<div class="col-3">
-			<form method="post" action="stockManager">
+			<form method="post" action="stock-management">
 			  <div class="mb-3">
-			    <label for="" >Fournisseur</label>
-			    <input type="text" class="form-control" id="exampleInputEmail1" name="provider" value="${stockEdit.product.name }">
+			    <label for="" >Nom</label>
+			    <input type="text" class="form-control" id="exampleInputEmail1" name="name" value="${stockEdit.product.name }">
 			  </div>
 			  <div class="mb-3">
 			    <label for="reference" class="form-label">Référence</label>
