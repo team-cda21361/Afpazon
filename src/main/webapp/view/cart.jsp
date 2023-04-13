@@ -46,7 +46,7 @@
                         
                         
                         
-                        <td><p class="cartD"><c:out value="${ String.format('%.2f', item.getProduct().getPrice()*item.getQuantity()) }"/> &euro; ttc</p></td>
+                        <td><p class="cartD"><c:out value="${ String.format('%.2f', item.getProduct().getPrice()*item.getQuantity()) }"/> &euro; </p></td>
                     
                     
                   		<td><p class="cartD">
@@ -64,6 +64,18 @@
                     
                     </tr>
                   </c:forEach>  
+                  
+                  
+                  <tr>
+                        <td colspan="4"><p class="total">TOTAL:</p></td>
+         
+                        
+                        <td><p class="cartH"><c:out value="${cart.countProduct() }"/></p></td>
+                    
+                    
+                  		<td><p class="cartH"><c:out value="${cart.countPrixProduct() }"/> &euro; </p></td>
+                    
+                    </tr>
                 </tbody>
             </table>
          
