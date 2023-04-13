@@ -94,6 +94,22 @@ public class UserDao implements IDAO<User> {
 		return false;
 
 	}
+	
+	public boolean updatePassword(User user, String newPwd) {
+		try {
+			sql = connect.prepareStatement("UPDATE user SET password = ? WHERE id = ?");
+
+			sql.setString(1, newPwd);
+			sql.setInt(2, user.getId());
+
+			sql.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	// Just for Interface IDAO ready
 	public boolean delete(User user) {
@@ -165,8 +181,10 @@ public class UserDao implements IDAO<User> {
 	public User findById(int id) {
 		try {
 
+
 			sql = connect.prepareStatement(
 					"select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.id=?");
+
 			sql.setInt(1, id);
 			rs = sql.executeQuery();
 

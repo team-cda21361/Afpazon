@@ -23,6 +23,16 @@ $(document).ready( function () {
     });
 } );
 
+console.log("coucou")
+$('.toModal').click( function(){
+	console.log("coucou2")
+	var value = $(this).attr("href");
+	console.log(value)
+	var modal=document.querySelector("#modal");
+	console.log(modal)
+	modal.setAttribute("href",value);
+})
+
 /**************************** JS POUR STOCKMANAGEMENT *********************************/
 
 $(".toModal").click(function(){
@@ -34,4 +44,3 @@ $(".toModal").click(function(){
 	modal.setAttribute("href", recup)
 	
 })
-
