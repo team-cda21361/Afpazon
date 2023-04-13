@@ -12,7 +12,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 public class GenePdf {
-	
 
 	public static  String createCommadePDf(String name, String reference, String quantity, String appPath) throws FileNotFoundException {
 		com.itextpdf.text.Font fontHeader = FontFactory.getFont(FontFactory.COURIER, 24, BaseColor.BLACK);
@@ -24,8 +23,9 @@ public class GenePdf {
 		
 		try {
 			Document document = new Document();
-			PdfWriter.getInstance(document, new FileOutputStream(cheminVersPDF ));
+			PdfWriter.getInstance(document, new FileOutputStream(cheminVersPDF));
 			document.open();
+//			ImageData imageData = ImageDataFactory.create(appPath + "/image.jpg");
 			Paragraph p1 = new Paragraph();
 //			p1.add("Bonjour M. " + UserDao.currentUser.getNom());
 			p1.add("Bonjour M. le fournisseur, nous souhaitons passer commande de(s) produit(s) suivant :");
@@ -62,5 +62,4 @@ public class GenePdf {
 		return cheminVersPDF;
 
 	}
-	
 }

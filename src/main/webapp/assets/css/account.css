@@ -85,6 +85,7 @@ ul.pagination {
 .messageToUser {
 	display: none;
 	position: sticky;
+	z-index: 1030;
 	float: right;
 	top: 15px;
 	right: 20px;

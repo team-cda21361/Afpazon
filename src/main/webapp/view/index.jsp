@@ -12,7 +12,7 @@
 
 			
 		<div class="container">
-			<div class="row align-items-center">
+			<div class="row justify-content-around">
 				<div class="col-lg-8 col-md-6 col-12">
 					<div class="nav-inner">
 						<nav class="navbar navbar-expand-lg">
@@ -23,7 +23,7 @@
 								<span class="toggler-icon"></span>
 							</button>
 							<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-								<ul id="nav" class="navbar-nav ms-auto">
+								<ul id="nav" class="navbar-nav mx-auto">
 									<li class="nav-item"><a href="index.html" class="nav-link"
 											aria-label="Toggle navigation">Promotion</a></li>
 									<li class="nav-item"><a href="index.html" class="nav-link"
