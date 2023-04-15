@@ -7,7 +7,11 @@ function loadCSS(filename) {
 }
 loadCSS("./assets/css/product.css");
 
-
+$(document).ready(function() {
+    setTimeout(function() {
+        $(".timer").fadeOut(1500);
+    },5000);  
+});
 
 
 /* Script utilice pour gestion de étoiles */ 

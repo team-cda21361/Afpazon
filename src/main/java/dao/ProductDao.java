@@ -316,21 +316,20 @@ public class ProductDao implements IDAO<Product> {
 			Product product = new Product();
 
 			try {
-				sql = connect.prepareStatement("SELECT *, product.id as 'idProd', "
-						+ " FORMAT((product.price-(discount.percent*product.price)),2) AS 'Prix' "
+				sql = connect.prepareStatement("SELECT *, product.id as 'idProd' "
 						+ " FROM product "
 						+ " INNER JOIN product_discount ON product.id = product_discount.id_product "
 						+ " INNER JOIN discount ON product_discount.id_discount = discount.id "
 						+ " INNER JOIN vat ON product.id_vat = vat.id "
-						+ " WHERE product.id=? AND discount.voucher IS NULL");
+						+ " WHERE product.id=? AND now() between discount.startDate and discount.endDate AND discount.voucher IS NULL");
 				sql.setInt(1,id);
-				System.out.println("SQL DISCOUNT: "+sql);
+				System.out.println("SQL DEMANDE SI DESCOUNT 1: "+sql);
 
 				ResultSet rs= sql.executeQuery();
 
 				if(rs.next()) {
 					product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
-							rs.getFloat("Prix"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+							rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
 							rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
 							rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 							rs.getInt("sponsoring"),rs.getBoolean("isActive"),

@@ -3,6 +3,8 @@ package beans;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import dao.Product_discountDao;
+
 
 public class Cart{
     
@@ -16,12 +18,18 @@ public class Cart{
         public void setItems(ArrayList<Item> items) {
         this.Items = items;
     }
+        
+        
+
+    
+ 
+        
+        
     
     // AJOUT ELEMENT
     public boolean addItem(Item newItem) {
         for (Item item : Items) {
             if (item.getProduct().getId() == newItem.getProduct().getId()) {
-                System.out.println();
                 item.setQuantity(newItem.getQuantity() + item.getQuantity());
                 return true;
             }
@@ -40,58 +48,123 @@ public class Cart{
         return count;
     }
     
-    public String countPrixProduct() {
-    	DecimalFormat df = new DecimalFormat("#.00");
+    public double countPrixProduct() {
+  
 	    double count = 0;
 		for (Item item : Items) {
 		    count += item.getProduct().getPrice() * item.getQuantity();
 		}
-		return df.format(count);
+		return count;
+	}
+    
+    public double countPrixProductApresRemise() {
+    
+	    double count = 0;
+		for (Item item : Items) {
+		    count += item.getPrixR() * item.getQuantity();
+		}
+		return count;
 	}
     
     
 	
 	//ADD QTE 
-	public void addQte(int idItem) {
+	public boolean addQte(int idItem) {
 		for(Item  item: Items) {
 			
 			if(item.getProduct().getId()==idItem) {
 				item.setQuantity(item.getQuantity()+1);
 				System.out.println("Quantite Add OK.");
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 	//REMOVE QTE 
-	public void removeQte(int idItem) {
+	public boolean removeQte(int idItem) {
 		for(Item  item: Items) {
 			
 			if(item.getProduct().getId()==idItem) {
 				if(item.getQuantity() <= 1) {
 					item.setQuantity(1);
-					System.out.println("Quantite Add OK NO POSIBLE. -1: ");
+					System.out.println("Quantite removeQte OK NO POSIBLE. -1: ");
+					return true;
 				}else {
 					item.setQuantity(item.getQuantity()-1);
-					System.out.println("Quantite Add OK.");
-				}
-
-				break;
-			}
-		}
-	}
-	
-	//DELETEITEM
-		public boolean deleteById(int idItem) {
-			for(Item  item: Items) {
-				
-				if(item.getProduct().getId()==idItem) {
-					Items.remove(item);
-					System.out.println("Delete Article de panier OK.");
+					System.out.println("Quantite removeQte OK.");
 					return true;
 				}
+
 			}
-			return false;
 		}
+		return false;
+	}
+	
+   	
+	
+	private ArrayList<Discount> discounts = null;
+	//RECHERCHE COUPON
+    public boolean rechercheCoupon(String coupon) {
+    	System.out.println("Llega al metodo: ");
+    	Product_discountDao product_discountDao = new Product_discountDao();
+    	Product_discount product_discount = new Product_discount();
+    	int cont = 0;
+		for(Item  item: Items) {
+			discounts = new ArrayList<>();
+			System.out.println("Ingresa prod: "+cont);
+			
+			product_discount = product_discountDao.findByIdProdCoupon(item.getProduct().getId(), coupon);
+		    
+			if(product_discount != null) {
+				//VALIDATION
+				boolean discountExist = false;
+				if(item.getDiscount() != null) {
+					
+				}
+				for (Discount discount : item.getDiscount()) {
+		       		 if (discount.getId() == product_discount.getDiscount().getId()) {
+		       			 System.out.println("Remise Exist");
+		       			 discountExist = true;
+		       			 break;
+		       		 }
+				 }
+				if(discountExist != true) {
+					System.out.println("Ingresa en if de prod para cambiar el precio: "+cont);
+					item.setPrixR(item.getPrixR()-(product_discount.getDiscount().getPercent() * item.getPrixR()));
+					//CREATION DE TABLEAU
+					for (Discount discount : item.getDiscount()) {
+						 discounts.add(discount);
+					 }
+					discounts.add(product_discount.getDiscount());
+					item.setDiscount(discounts);
+					System.out.println("Add nouvelle discount.");
+					cont++;
+				}
+			}
+			
+		}
+		if(cont > 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	
+	
+	//DELETEITEM
+    public boolean deleteById(int idItem) {
+		for(Item  item: Items) {
+			
+			if(item.getProduct().getId()==idItem) {
+				Items.remove(item);
+				System.out.println("Delete Article de panier OK.");
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

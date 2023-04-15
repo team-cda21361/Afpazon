@@ -1,10 +1,12 @@
 package beans;
 
+import java.util.ArrayList;
+
 public class Item {
 	private int quantity;
 	private Product product;
-	private double discount;
-	
+	private ArrayList<Discount> discount;
+	private double prixR;
 	
 	
 	/*************************************************
@@ -22,12 +24,20 @@ public class Item {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public double getDiscount() {
+	public ArrayList<Discount> getDiscount() {
 		return discount;
 	}
-	public void setDiscount(double discount) {
+	public void setDiscount(ArrayList<Discount> discount) {
 		this.discount = discount;
 	}
+	
+	public double getPrixR() {
+		return prixR;
+	}
+	public void setPrixR(double prixR) {
+		this.prixR = prixR;
+	}
+	
 	/**********************************************
 	 * CONSTRUSTORS
 	 * ****************************************/
@@ -38,13 +48,23 @@ public class Item {
 	public Item(Product product) {
 		this.product = product;
 	}
-	public Item(int quantity, Product product, double discount) {
+	public Item(int quantity, Product product, ArrayList<Discount> discount) {
 		this.quantity = quantity;
 		this.product = product;
 		this.discount = discount;
 	}
 	
-	
+	public Item(int quantity, Product product, ArrayList<Discount> discount, double prixR) {
+		this.quantity = quantity;
+		this.product = product;
+		this.discount = discount;
+		this.prixR = prixR;
+	}
+	public Item(int quantity, Product product, double prixR) {
+		this.quantity = quantity;
+		this.product = product;
+		this.prixR = prixR;
+	}
 	
 	
 
