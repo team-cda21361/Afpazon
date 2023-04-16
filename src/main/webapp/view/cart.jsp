@@ -14,7 +14,7 @@
 		</div>
 </c:if>
 <c:if test="${not empty cart.getItems() }">
-<br>
+<h1 class="text-center text-dark my-3"><i class="bi bi-cart-check-fill"></i> Detaille Panier</h1><hr>
 <div class="container-fluid">
 	<div class="row">
 		<aside class="col-lg-9">
@@ -23,7 +23,7 @@
 					<table class="table text-center">
 						<thead>
 							<tr>
-								<th scope="col">Visuel</th>
+								<th scope="col"></th>
 								<th scope="col">Nom produit</th>
 								<th scope="col">Prix unitaire</th>
 								<th scope="col">Remise</th>
@@ -150,14 +150,14 @@
 				<div class="card-body">
 					
 						<div class="form-group">
-							<label>Vous avez un coupon?</label>
+							<h5>Vous avez un coupon?</h5>
 							<div class="input-group">
 							
 							<form method="post">
 								<input type="text" class="form-control" name="coupon" placeholder="Coupon code"> 
-								
+								<br>
 									<button type="submit" class="btn btn-primary">
-												<i class="bi bi-trash3-fill"></i> Appliquer
+												<i class="bi bi-tag-fill"></i> Appliquer
 											</button>
 							</form>
 										
@@ -213,7 +213,7 @@
 					<div class="align-self-end">
 							<a href="index"	class="btn btn-primary " data-abc="true"><i class="bi bi-sign-turn-slight-left-fill"></i> Continuer les achats</a>
 						<hr>
-							<a href="payment"  class="btn btn-success"><i class="bi bi-cash-coin me-3"></i>Payer		
+							<a href="payment"  class="btn btn-success"><i class="bi bi-cash-coin me-3"></i> Payer		
 						</a>
 				
 					</div>
