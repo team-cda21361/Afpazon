@@ -547,3 +547,30 @@ INSERT INTO product_discount (id_product, id_discount) VALUES
     (4,2),
     (5,4)
 ;
+
+DELIMITER //
+
+create trigger stockReturn 
+before delete on order_product
+for each row
+BEGIN
+DECLARE sum int;
+DECLARE qty1 int;
+DECLARE qty2 int;
+SELECT quantity FROM order_product WHERE id=old.id into qty1;
+SELECT quantity FROM stock WHERE id_product = old.id_product into qty2;
+SET sum = qty1 + qty2;
+UPDATE stock SET quantity = sum WHERE stock.id_product = old.id_product;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+create trigger delete_order_product
+after delete on order_list
+for each row
+BEGIN
+  DELETE FROM order_product WHERE order_product.id_order is null;
+END //
+
+DELIMITER ;

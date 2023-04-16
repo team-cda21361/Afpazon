@@ -25,26 +25,29 @@ public class SendMail {
 		String to = client_email;
 
 		// Sender's email ID needs to be mentioned
-		String from = "test@orange.fr";
+		String from = "espft@outlook.fr";
 
 		// Assuming you are sending email from through gmails smtp
-		String host = "smtp.orange.fr";
+		String host = "smtp.office365.com";
 
 		// Get system properties
 		Properties properties = System.getProperties();
 
 		// Setup mail server
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port", "465");
-		properties.put("mail.smtp.ssl.enable", "true");
 		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.user", "espft@outlook.fr");
+		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
+//		properties.put("mail.smtp.ssl.enable", "true");
 
 		// Get the Session object.// and pass username and password
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication("login_smtp", "mdp_smtp"); // mettre son mot de passe
+				return new PasswordAuthentication("espft@outlook.fr", "This!sAPlaceh0lder!"); // mettre son mot de passe
 
 			}
 
