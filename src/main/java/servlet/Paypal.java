@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.OrderDetail;
-import paypal.PaymentServices;
+import beans.PaymentServices;
 
 import com.paypal.base.rest.PayPalRESTException;
 

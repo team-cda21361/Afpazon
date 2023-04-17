@@ -1,18 +1,19 @@
 package servlet;
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import beans.Stock;
 import dao.StockDao;
 import pdf.GenePdf;
-
-
 
 /**
  * Servlet implementation class Stockmanager
@@ -35,58 +36,61 @@ public class StockManagement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//************************ HYDRATER LE TABLEAU ****************************
-		request.setAttribute("stockList", stockDao.read());
 		
-
+		
+//************************ HYDRATER LE FORMULAIRE ****************************
+		if (request.getParameter("idEdit")!=null) {
+			Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idEdit")));
+			request.setAttribute("stockEdit", stock);
+		}
+		
 //************************ SUPPRIMER UN STOCK ****************************
-		if (request.getParameter("idDelete")!=null) {
+		else if (request.getParameter("idDelete")!=null) {
 			System.out.println();
 			Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idDelete")));
 			request.setAttribute("stockDelete", stockDao.delete(stock));
 			System.err.println("DELETE OKAY !!!!"); 
-			response.sendRedirect("stock-management");
+			
 		}
 		
+//************************ POINTER ET AFFICHER LA BONN PAGE JSP ****************************
 		else {
-			//************************ HYDRATER LE FORMULAIRE ****************************
-			if (request.getParameter("idEdit")!=null) {
-				Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idEdit")));
-				request.setAttribute("stockEdit", stock);
-				System.err.println(stock);
-			}
-//************************ POINTER ET AFFICHER LA BONNE PAGE JSP ****************************	
-			request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
+			
 		}
+//************************ HYDRATER LE TABLEAU ****************************
+		request.setAttribute("stockList", stockDao.read());
+		
+		request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-//************************ RECUP POUR LA COMMANDE DE STOCK *********************************
-		if (request.getParameter("sendForStock")!=null) {
-			String name = request.getParameter("name");
-			String reference = request.getParameter("reference");
-			String quantity = request.getParameter("quantity");
-			
-//**************************** FAIRE UN CHEMIN EPHEMERE POUR L UPLOAD DE PDF (.metadata) ***********************
-			String uploadPath = getServletContext().getRealPath("assets/");
-			
-//**************************** APPELER ET GENERER LE PDF ******************************************
-			String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
-			System.out.println(pdfPath);
-			System.out.println("PDF OKAY !!!");
-			System.out.println("Fournisseur = "+name+" *** "+"Référence = "+reference+" *** "+"Quantité = "+quantity);
-			
-//**************************** ENVOIE DU MAIL ******************************************
-			//SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath);	
-		}
-		
-//************************ RENVOYER LE CONTENUE DU doPost VERS LE doGet  *********************************
-		doGet(request, response);
-	}
+        // TODO Auto-generated method stub
+
+//** RECUP POUR LA COMMANDE DE STOCK **
+        if (request.getParameter("sendForStock")!=null) {
+            String name = request.getParameter("name");
+            String reference = request.getParameter("reference");
+            String quantity = request.getParameter("quantity");
+
+//** FAIRE UN CHEMIN EPHEMERE POUR L UPLOAD DE PDF (.metadata) **
+            String uploadPath = getServletContext().getRealPath("assets/");
+
+//** APPELER ET GENERER LE PDF **
+            //String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
+            //String pdfPath = GenePdf.createFacturePDF(name,reference,quantity,uploadPath);
+            //System.out.println(pdfPath);
+            System.out.println("PDF OKAY !!!");
+            System.out.println("Fournisseur = "+name+"  "+"Référence = "+reference+"  "+"Quantité = "+quantity);
+
+//** ENVOIE DU MAIL **
+            //SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath);
+        }
+
+//** RENVOYER LE CONTENUE DU doPost VERS LE doGet  *
+        doGet(request, response);
+    }
 
 }
