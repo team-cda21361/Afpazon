@@ -9,18 +9,11 @@
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
-		
-		<!-- ========================= Carrousel ========================= -->
-		<link rel="stylesheet" href="assets/carrousel/css/owl.carousel.min.css">
-		<link rel="stylesheet" href="assets/carrousel/css/owl.theme.default.min.carousel.css">
-		<link rel="stylesheet" href="assets/carrousel/css/style.carousel.css">
-		<script src="assets/carrousel/js/jquery.min.carousel.js"></script>
-		<script src="assets/carrousel/js/bootstrap.min.js"></script>
-		<script src="assets/carrousel/js/popper.carousel.js"></script>
 		<!-- ========================= CSS here ========================= -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 		<link rel="stylesheet" href="./assets/css/datatables.min.css" />
+		<link rel="stylesheet" href="assets/css/header.css">
 		<!-- ========================= JS here ========================= -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="./assets/js/jquery-3.6.0.min.js"></script>
@@ -32,13 +25,15 @@
 			<header>
 				<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary ps-3 pe-3" data-bs-theme="dark">
 				  <div class="container-fluid">
-				    <a class="navbar-brand" href="/Afpazon/"><img class="my-2" height=50px src="assets/images/logo/Amazon version_blc_logo.svg.png" alt="Logo"></a>
+				  <div  class="me-3">
+				    <a class="navbar-brand me-0" href="/Afpazon/"><img class="mt-2" height=50px src="assets/images/logo/Amazon version_blc_logo.svg.png" alt="Logo"></a>
+				    <em><a class="nav-link text-warning fs-5 fw-bold text-center">"On vend tout !"</a></em>
+				  </div>
 				  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				      <span class="navbar-toggler-icon"></span>
 				    </button>
 				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			          	<li class="nav-item w-60 fs-5 fw-bold"><em><a class="nav-link text-warning">"On vend tout !"</a></em></li>
 				        <li class="nav-item dropdown ms-3 my-auto" style="z-index: 1050;">
 				          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						    Catégories
@@ -82,9 +77,13 @@
 					      <li>
 					      	<button type="button" class="btn btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas">
 							  <i class="bi bi-cart"></i>
-							  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-							    2
-							  </span>
+							 
+							    <c:if test="${not empty cart.getItems() }">
+							      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+							    	<c:out value="${cart.countProduct() }"/>
+							      </span>
+							    </c:if>
+							  
 							</button>
 						  </li>
 				      </ul>
@@ -100,32 +99,50 @@
 			  </div>
 			  <div class="offcanvas-body">
 			   <div>
+			   
+                   <c:if test="${not empty cart.getItems() }">
 			  <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>visuel</th>
-                        <th>Nom produit</th>
-                        <th>Prix unitaire</th>
+                        <th><p class="cartH">visuel </p></th>
+                        <th><p class="cartH">Nom produit</p></th>
+                        <th><p class="cartH">Quant.</p></th>
+                        <th><p class="cartH">Prix unitaire</p></th>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
+            		  <c:forEach items="${cart.getItems()}" var="item">
+            	
+
                     <tr>
-                        <td><img height=60 src="assets/images/products/product-1.jpg"  alt="#"></td>
-                        <td>Titre produit 1</td>
-                        <td>120 &euro; ttc</td>
+                        <td><img height=40 src="assets/products/img/<c:out value="${item.getProduct().getMainPicPath()}"/>"  alt="#"></td>
+                        <td><p class="cartD"><c:out value="${item.getProduct().getName()}"/></p></td>
+                        <td><p class="cartD"><c:out value="${item.getQuantity()}"/></p></td>
+                        <td><p class="cartD"><c:out value="${item.getProduct().getPrice() }"/> &euro; ttc</p></td>
                     </tr>
-                    <tr>
-                        <td><img height=60 src="assets/images/products/product-2.jpg" alt="#"></td>
-                        <td>Titre produit 2</td>
-                        <td>30 &euro; ttc</td>
+                    
+                	  </c:forEach>
+                	  
+                	<tr>
+                        <td colspan="2"><p class="cartH">Total:</p></td>
+                        <td><p class="cartD"><c:out value="${cart.countProduct() }"/></p></td>
+                        <td><p class="cartD"><c:out value="${ String.format('%.2f', cart.countPrixProductApresRemise()) }"/> &euro; ttc</p></td>
                     </tr>
+                    
                 </tbody>
             </table>
-            </div>
-			  <div class="align-self-end">
+
                 <a href="cart">
                     <button class="btn btn-success" type="submit"><i class="bi bi-eye me-3"></i>Voir Panier</button>
                 </a>
+            	   </c:if>
+            	   <c:if test="${empty cart.getItems() }">
+            	     <div><img src="assets/images/logo/paniervide.png" class="imgCart">  </div>
+            	     <p class="cartL">Votre panier est vide!!!</p>
+            	   </c:if>
+            	   
+            </div>
+			  <div class="align-self-end">
             </div>
 			  </div>
 			</div>

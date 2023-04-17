@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+ .totalPayment{
+  	
+	font-weight: bold;
+	color: #000000;
+	background-color: #fc9c04;
+ 
+  }
+ .totalPaymentGr{
+  
+	font-weight: bold;
+	color: #000000;
+	background-color: #ffe36b;
+
+  }
+  
+ .loginConnect{
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: underline;
+	font-style: italic;
+  }  
+  
+  /*==================================================
+ * Effect 2
+ * ===============================================*/
+.effect2
+{
+  position: relative;
+}
+.effect2:before, .effect2:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.effect2:after
+{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+  

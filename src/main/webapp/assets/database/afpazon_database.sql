@@ -533,10 +533,11 @@ INSERT INTO stock (quantity, id_product) VALUES
     (156, 19)
 ;
 INSERT INTO discount (startDate, endDate, percent, voucher) VALUES 
-    ('01-12-2022', '02-20-2022', 0.8, 'Doubtfull22'),
-    ('04-25-2022', '05-12-2022', 0.9, 'jeSuisReduc10'),
-    ('06-12-2022', '07-20-2022', 0.8, 'olé2022'),
-    ('11-02-2022', '11-20-2022', 0.8, 'fun22')
+    ('2022-01-12', '2022-02-02', 0.8, 'Doubtfull22'),
+    ('2022-04-25', '2022-05-12', 0.9, 'jeSuisReduc10'),
+    ('2022-06-12', '2022-07-20', 0.8, 'olé2022'),
+    ('2022-02-11', '2022-03-11', 0.8, 'fun22'),
+    ('2023-04-10', '2023-04-25', 0.8, null)
 ;
 INSERT INTO product_discount (id_product, id_discount) VALUES 
     (2,2),
@@ -546,3 +547,30 @@ INSERT INTO product_discount (id_product, id_discount) VALUES
     (4,2),
     (5,4)
 ;
+
+DELIMITER //
+
+create trigger stockReturn 
+before delete on order_product
+for each row
+BEGIN
+DECLARE sum int;
+DECLARE qty1 int;
+DECLARE qty2 int;
+SELECT quantity FROM order_product WHERE id=old.id into qty1;
+SELECT quantity FROM stock WHERE id_product = old.id_product into qty2;
+SET sum = qty1 + qty2;
+UPDATE stock SET quantity = sum WHERE stock.id_product = old.id_product;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+create trigger delete_order_product
+after delete on order_list
+for each row
+BEGIN
+  DELETE FROM order_product WHERE order_product.id_order is null;
+END //
+
+DELIMITER ;

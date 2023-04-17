@@ -22,6 +22,9 @@
 		<jsp-property-group>
 			<url-pattern>*.jsp</url-pattern>
 			<include-prelude>/WEB-INF/jstlLib.jsp</include-prelude>
+		</jsp-property-group>
+		<jsp-property-group>
+			<url-pattern>/view/*</url-pattern>
 			<include-prelude>/view/headerFooter/header.jsp</include-prelude>
 			<include-coda>/view/headerFooter/footer.jsp</include-coda>
 		</jsp-property-group>

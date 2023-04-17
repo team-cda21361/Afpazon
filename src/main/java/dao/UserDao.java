@@ -138,7 +138,7 @@ public class UserDao implements IDAO<User> {
 			 * VERSION AVEC BCRYPT
 			 */
 			sql = connect.prepareStatement(
-					"select *, user.id as userId from user inner join role on user.id_role=role.id where email=?"); // test@test.fr
+					"select *, user.id as userId from user inner join role on user.id_role=role.id where user.email=? and user.isActive=1"); // test@test.fr
 			sql.setString(1, email);
 
 			rs = sql.executeQuery();
@@ -157,6 +157,26 @@ public class UserDao implements IDAO<User> {
 		}
 		return null;
 	}
+	
+	public boolean userActDes(String email) {
+		try {
+			/*
+			 * VERSION AVEC BCRYPT
+			 */
+			sql = connect.prepareStatement("select * where user.email=? and user.isActive=1"); // test@test.fr
+			sql.setString(1, email);
+
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 	public User findById(int id) {
 		try {
