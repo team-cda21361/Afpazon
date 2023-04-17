@@ -82,8 +82,16 @@ public class Product extends HttpServlet{
     	}
       request.setAttribute("images", imageDao.findImagesById(id));
       request.setAttribute("cantite", cantite);
-      request.setAttribute("product", productDao.findById(id));
-      request.setAttribute("discount", product_discountDao.findByIdProd(id));
+      product = productDao.findByIdDiscount(id);
+      if(product.getName() != null) {
+    	  request.setAttribute("product", product);
+    	  request.setAttribute("discount", product_discountDao.findByIdProd(id));
+      }else {
+    	  product = productDao.findById(id);
+    	  request.setAttribute("product", product); 
+      }
+      
+      
       CategoryDao.injectCategories(request);
       request.getRequestDispatcher("/view/product.jsp").forward(request, response);
     }
@@ -110,21 +118,33 @@ public class Product extends HttpServlet{
                 sessionP.setAttribute("cart", cart_temp);
             }
             
-           
             cart_temp = (beans.Cart) sessionP.getAttribute("cart");
             Item item = null;
+            ArrayList<beans.Discount> discounts = new ArrayList<>();
             product = productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd")));
-            System.out.println("QUE :"+ product.getName() );
+            beans.Discount discount = new beans.Discount();
+
             if(product.getName() != null) {
-            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd"))), product_discountDao.findByIdProd(Integer.parseInt(request.getParameter("idProd"))).getDiscount().getPercent() );
+            	product = productDao.findByIdDiscount(Integer.parseInt(request.getParameter("idProd")));
+            	discount = product_discountDao.findByIdProd(Integer.parseInt(request.getParameter("idProd"))).getDiscount();
+            	discounts.add(discount);
+            	double remise = product.getPrice()-(discount.getPercent() * product.getPrice());
+            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), product , discounts, remise);
             }else {
-            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), productDao.findById(Integer.parseInt(request.getParameter("idProd"))), 0);
+            	discounts.add(discount);
+            	product = productDao.findById(Integer.parseInt(request.getParameter("idProd")));
+            	item = new Item(Integer.parseInt(request.getParameter("cantiteProd")), product , discounts, product.getPrice() );
             }
         		
-                //Item item = new Item(1, product);
-                
-            cart_temp.addItem(item);
-                sessionP.setAttribute("cart", cart_temp);
+            //Item item = new Item(1, product);
+            if(cart_temp.addItem(item)) {
+	             request.setAttribute("msn", "Le produit a été ajouté à votre panier.");
+	             request.setAttribute("msnType",  "OK");
+            }else {
+	             request.setAttribute("msn", "Le produit n'a été pas ajouté à votre panier.");
+	             request.setAttribute("msnType",  "KO");
+            }
+            sessionP.setAttribute("cart", cart_temp);
       
             // FIN PANIER
                 

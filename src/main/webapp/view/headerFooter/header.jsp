@@ -126,7 +126,7 @@
                 	<tr>
                         <td colspan="2"><p class="cartH">Total:</p></td>
                         <td><p class="cartD"><c:out value="${cart.countProduct() }"/></p></td>
-                        <td><p class="cartD"><c:out value="${cart.countPrixProduct() }"/> &euro; ttc</p></td>
+                        <td><p class="cartD"><c:out value="${ String.format('%.2f', cart.countPrixProductApresRemise()) }"/> &euro; ttc</p></td>
                     </tr>
                     
                 </tbody>

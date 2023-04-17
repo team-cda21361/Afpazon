@@ -2,7 +2,17 @@
 	pageEncoding="UTF-8"%>
 <script defer type="text/javascript" src="./assets/js/product.js"></script>
 <script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
-
+<br>
+<c:if test="${msnType.equals('OK')}">
+		<div class="alert alert-success timer" role="alert">
+			<c:out value="${msn }"></c:out>
+		</div>
+</c:if>
+<c:if test="${msnType.equals('KO')}">
+		<div class="alert alert-danger timer" role="alert">
+			<c:out value="${msn }"></c:out>
+		</div>
+</c:if>
 
 <main>
 	<br>
@@ -96,18 +106,19 @@
 										<h6>Cantite</h6>
 										<div class="cantite">
 										<form method="post">
-											<button type="submit" class="btn btn-light" name="plus"
-												value="<c:out value="${ cantite }" />">
-												<i class="bi bi-plus-circle"></i>
-											</button>
-										</form>
-										<p> <c:out value=" ${ cantite } " /> </p>
-										<form method="post">
 											<button type="submit" class="btn btn-light" name="minus"
 												value="<c:out value="${ cantite }" />">
 												<i class="bi bi-dash-circle"></i>
 											</button>
 										</form>
+										<p> <c:out value=" ${ cantite } " /> </p>
+										<form method="post">
+											<button type="submit" class="btn btn-light" name="plus"
+												value="<c:out value="${ cantite }" />">
+												<i class="bi bi-plus-circle"></i>
+											</button>
+										</form>
+										
 										</div>
 									</div>
 								</div>
