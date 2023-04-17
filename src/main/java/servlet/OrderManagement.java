@@ -1,7 +1,7 @@
+
 package servlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,13 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Address;
-import beans.Address_type;
 import beans.Order;
-import beans.Product;
+import beans.Order_product;
 import beans.Status;
-import beans.User;
-import beans.VAT;
+import dao.OrderDao;
+import dao.Order_productDao;
 
 /**
  * Servlet implementation class OrderManagement
@@ -24,7 +22,8 @@ import beans.VAT;
 @WebServlet("/order-management")
 public class OrderManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       Order_productDao orderProdDao = new Order_productDao(); 
+       OrderDao orderDao=new OrderDao();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,33 +36,29 @@ public class OrderManagement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*******************   MOC  ***************************/
-		String action = "update"; //action is "add" or "update"
-		Address_type typeOfAddress = new Address_type(2,"livraison");
-		Address_type typeOfAddress2 = new Address_type(1,"facturation");
-		Address address1 = new Address(1, "4 rue des pins", 75000,"Paris", new User(), typeOfAddress);
-		Address address2 = new Address(1, "4 rue des pins", 75000,"Paris", new User(), typeOfAddress2);
-		Order order = new Order(1,Date.valueOf("2023-05-13"), 150.6f, "HGHGJHGJ", "GHG77GGGJ", new User(), address1,address2, new Status(1,"En cours"));
 		
-		ArrayList<Product> products = new ArrayList<>();
-		VAT vat = new VAT(1, 19.5f);
-		products.add(new Product(1,"Marco computer", "Super ordi de marc.", 2000.4f, "assets/images/products/product-5.jpg", 
-				"video.mp4", true, "très gros","AT5675657", "Gris", 1.2f, 2,50,true,vat));
-		products.add(new Product(2,"Marco computer", "Super ordi de marc.", 2000.4f, "assets/images/products/product-5.jpg", 
-				"video.mp4", true, "très gros","AT5675657", "Gris", 1.2f, 2,50,true,vat));
-		products.add(new Product(3,"Marco computer", "Super ordi de marc.", 2000.4f, "assets/images/products/product-5.jpg", 
-				"video.mp4", true, "très gros","AT5675657", "Gris", 1.2f, 2,50,true,vat));
-		products.add(new Product(4,"Marco computer", "Super ordi de marc.", 2000.4f, "assets/images/products/product-5.jpg", 
-				"video.mp4", true, "très gros","AT5675657", "Gris", 1.2f, 2,50,true,vat));
-		products.add(new Product(5,"Marco computer", "Super ordi de marc.", 2000.4f, "assets/images/products/product-5.jpg", 
-				"video.mp4", true, "très gros","AT5675657", "Gris", 1.2f, 2,50,true,vat));
+		if (request.getParameter("deleteOption")!=null) {
+			int orderProdId = Integer.parseInt(request.getParameter("orderProdId"));
+			Order_product orderProduct = orderProdDao.findById(orderProdId);
+			System.out.println(orderProduct.getId());
+			if (!orderProdDao.delete(orderProduct)) {
+				request.setAttribute("error", "le produit "+orderProduct.getProduct().getName()+ " n'a pas pu être effacé");
+			}
+			
+		}
+		if (request.getParameter("deleteAllOption")!=null) {
+			int orderId = Integer.parseInt(request.getParameter("orderId"));
+			Order order = orderDao.findById(orderId);
+			if (!orderDao.delete(order)) {
+				request.setAttribute("error", "La commande n'a pas pu être effacée");
+			}
+			response.sendRedirect("dashboard");
+		}
+//		
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		Order order = orderDao.findById(orderId);
 		
 		
-		ArrayList<Status> status = new ArrayList<>();
-		status.add(new Status(1,"Commande validée"));
-		status.add(new Status(2,"En préparation"));
-		status.add(new Status(3,"En cours de livraison"));
-		status.add(new Status(4,"Commande livrée"));
 		
 		
 		
@@ -72,9 +67,7 @@ public class OrderManagement extends HttpServlet {
 		/******************************************************/
 		
 		
-		request.setAttribute("products", products);
-		request.setAttribute("action", action);
-		request.setAttribute("status", status);
+		request.setAttribute("orderProd", orderProdDao.findByOrderId(orderId));
 		request.setAttribute("order", order);
 		
 		

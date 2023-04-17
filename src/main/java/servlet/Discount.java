@@ -41,10 +41,20 @@ public class Discount extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("editOption")!=null) {
+			int discountId = Integer.parseInt(request.getParameter("id"));
+			list=productDao.findProdByIdDiscount(discountId);
+			request.setAttribute("productList", list);
+			/*
+			 * upadte condition to fill inputs in
+			 */
+			request.setAttribute("discountEdit", discountDao.findById(discountId));
+			
+		}
 		/*
 		 * jsp title management
 		 */
-		if (request.getParameter("option")!=null) {
+		if (request.getParameter("editOption")!=null) {
 			request.setAttribute("titleEdit", "Modification");
 		}
 		/*
@@ -60,13 +70,6 @@ public class Discount extends HttpServlet {
 		 */
 		request.setAttribute("categoryList", categoryDao.read());
 	
-		/*
-		 * upadte condition to fill inputs in
-		 */
-		if (request.getParameter("id")!=null) {
-			int discountId = Integer.parseInt(request.getParameter("id"));
-			request.setAttribute("discountEdit", discountDao.findById(discountId));
-		}
 		
 		request.getRequestDispatcher("/view/backOffice/discountManagement.jsp").forward(request, response);
 	}

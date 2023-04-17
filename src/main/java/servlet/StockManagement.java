@@ -1,5 +1,6 @@
 package servlet;
 
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,8 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import beans.Stock;
 import dao.StockDao;
+import pdf.GenePdf;
 
 /**
  * Servlet implementation class Stockmanager
@@ -31,8 +36,6 @@ public class StockManagement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//************************ HYDRATER LE TABLEAU ****************************
-		request.setAttribute("stockList", stockDao.read());
 		
 		
 //************************ HYDRATER LE FORMULAIRE ****************************
@@ -47,14 +50,17 @@ public class StockManagement extends HttpServlet {
 			Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idDelete")));
 			request.setAttribute("stockDelete", stockDao.delete(stock));
 			System.err.println("DELETE OKAY !!!!"); 
-			response.sendRedirect("stock-management");
+			
 		}
 		
 //************************ POINTER ET AFFICHER LA BONN PAGE JSP ****************************
 		else {
 			
-			request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
 		}
+//************************ HYDRATER LE TABLEAU ****************************
+		request.setAttribute("stockList", stockDao.read());
+		
+		request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
 	}
 
 	/**
@@ -67,8 +73,21 @@ public class StockManagement extends HttpServlet {
 		if (request.getParameter("sendForStock")!=null) {
 			String provider = request.getParameter("provider");
 			String reference = request.getParameter("reference");
-			String quantity = request.getParameter("quantity");
-			System.out.println("Fournisseur = "+provider+" *** "+"Référence = "+reference+" *** "+"Quantité = "+quantity);
+			int quantity =Integer.parseInt(request.getParameter("quantity")) ;
+		
+			String imagePath=getServletContext().getRealPath("/assets/image/logo/white-logo.svg");
+			String uploadPath=getServletContext().getRealPath("/assets/mail/");
+			//String uploadPath=getServletContext().getRealPath("/WEB-INF/lib/commandeStock.pdf");
+			//FileOutputStream outputstream= new FileOutputStream(new File(uploadPath));
+		
+			System.out.println(uploadPath);
+			response.setContentType("application/pdf");
+			String result =GenePdf.sendPdf(provider, reference, quantity, uploadPath);
+			System.out.println(result);
+			
+			
+			
+			
 		}
 		
 //************************ RENVOYER LE CONTENUE DU doPost VERS LE doGet  *********************************

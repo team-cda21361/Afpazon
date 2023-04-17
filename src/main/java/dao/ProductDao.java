@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.AddProductList;
+import beans.Discount;
 import beans.Product;
+import beans.Product_discount;
 import beans.VAT;
 import connector.DBConnect;
 
@@ -306,5 +308,43 @@ public class ProductDao implements IDAO<Product> {
 			e.printStackTrace();
 		}
 		return listWarranties;
+	}
+	
+	public ArrayList<Product> findProdByIdDiscount(int id) {
+		ArrayList <Product>  discounts = new ArrayList<>();
+
+		try {
+			sql = connect.prepareStatement("SELECT discount.id as 'iddiscount', discount.startDate, discount.endDate, discount.percent, discount.voucher,"
+					+ " product_discount.id as 'product_discountid', product.id as 'idprod', product.name as 'nameprod', product.price,product.reference  FROM discount "
+					+ " INNER JOIN product_discount ON discount.id = product_discount.id_discount "
+					+ " INNER JOIN product ON product_discount.id_product = product.id "
+					+ " WHERE discount.id=? ;");
+			
+			
+			sql.setInt(1, id);
+			System.out.println("findByIdProd: "+sql);
+			
+			rs = sql.executeQuery();
+		
+			
+			while(rs.next()) {
+	
+				Product product = new Product();
+				product.setId(rs.getInt("idprod"));
+				product.setName(rs.getString("nameprod"));
+				product.setReference(rs.getString("reference"));
+				product.setPrice(rs.getFloat("price"));
+				discounts.add(product);
+
+			}
+			return discounts;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de inf...");
+			
+		}
+		return null;
 	}
 }

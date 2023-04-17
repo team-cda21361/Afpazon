@@ -9,7 +9,7 @@
 						<th scope="col">Nom</th>
 						<th scope="col">référence</th>
 						<th scope="col">Quantité</th>
-						<th scope="col">Editer</th>
+						<th scope="col">Commander</th>
 						<th scope="col">Supprimmer</th>
 					</tr>
 				</thead>
@@ -31,18 +31,18 @@
 		</div>
 <!-- **************************************** FORMULAIRE ************************************************************ -->
 		<div class="col-3">
-			<form method="post" action="stockManager">
+			<form method="post" >
 			  <div class="mb-3">
 			    <label for="" >Fournisseur</label>
-			    <input type="text" class="form-control" id="exampleInputEmail1" name="provider" value="${stockEdit.product.name }">
+			    <input type="text" class="form-control" id="exampleInputEmail1" name="provider" value="${stockEdit.product.name }"required>
 			  </div>
 			  <div class="mb-3">
 			    <label for="reference" class="form-label">Référence</label>
-			    <input type="text" class="form-control" id="idRef" name="reference" value="${stockEdit.product.reference }">
+			    <input type="text" class="form-control" id="idRef" name="reference" value="${stockEdit.product.reference }"required>
 			  </div>
 			  <div class="mb-3">
 			    <label for="reference" class="form-label">Quantité</label>
-			    <input type="number" class="form-control" id="idRef" name="quantity">
+			    <input type="number" class="form-control" id="idRef" name="quantity" required>
 			  </div>
 			  <button type="submit" class="btn btn-outline-primary" name="sendForStock">Commander <img alt="" src="assets/images/back_office/send.png" width="35"></button>
 			</form>

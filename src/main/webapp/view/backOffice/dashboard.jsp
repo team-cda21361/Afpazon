@@ -120,7 +120,7 @@
 								<td><c:out value="${discount.percent }"></c:out></td>
 								<td><c:out value="${discount.startDate }"></c:out></td>
 								<td><c:out value="${discount.endDate }"></c:out></td>
-								<td class="text-center"><a href="discount?option=edit&id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="discount?editOption=1&id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 								<!-- isActive to be developped later-->
 								<!-- <td class="text-center"><a href="discount?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td> -->
 							</tr>
@@ -158,7 +158,7 @@
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
 								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
-								<td class="text-center"><a href="order-management?option=edit&id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="order-management?editOption=1&orderId=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
