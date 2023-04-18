@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.AddProductList;
+import beans.Discount;
 import beans.Product;
+import beans.Product_discount;
 import beans.VAT;
 import connector.DBConnect;
 
@@ -310,6 +312,7 @@ public class ProductDao implements IDAO<Product> {
 		}
 		return listWarranties;
 	}
+
 	//****************** FINDBYID discount **********************************************************************************//
 
 		public Product findByIdDiscount(int id) {
@@ -346,5 +349,4 @@ public class ProductDao implements IDAO<Product> {
 		}
 		
 }
-
 

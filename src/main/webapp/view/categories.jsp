@@ -22,11 +22,11 @@
 					<div class="m-3 ">
 						<!-- Start Single Product -->
 						<div class="card" style="width: 16rem">
-								<img class="card-img-top" src="<c:out value="${product.mainPicPath}" />" alt="#">
+								<img class="card-img-top" src="<c:out value="${product.key.mainPicPath}" />" alt="#">
 							<div class="card-body d-flex flex-column">
 									<h4 class="title text-center">
-										<a class="text-decoration-none text-dark" href="product?id=${product.id }">
-											<c:out value="${product.name }" />
+										<a class="text-decoration-none text-dark" href="product?id=${product.key.id }">
+											<c:out value="${product.key.name }" />
 										</a>
 									</h4>
 								<ul class="review d-flex flex-wrap list-group-flush">
@@ -38,11 +38,11 @@
 										<li class="list-group-item"><i class="bi bi-star"></i></li>
 										<p>
 									</c:forEach>
-									<li class="list-group-item"><span class="mx-2"><c:out value="${number_of_review}" />
+									<li class="list-group-item"><span class="mx-2"><c:out value="${product.value.size()}" />
 											Avis</span></li>
 								</ul>
 								<div class="price text-center">
-									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.price }" /> &euro; TTC</span>
+									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.key.price }" /> &euro; TTC</span>
 								</div>
 								<div class="button btn btn-success align-self-end mt-3">
 									<a href="product-details.html" class="text-light text-decoration-none">
