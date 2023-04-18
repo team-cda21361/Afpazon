@@ -16,6 +16,7 @@ public class Product {
 	private int sponsoring;
 	private boolean isActive;
 	private VAT vat;
+	private Review review;
 	
 	public Product() {
 	}
@@ -59,6 +60,29 @@ public class Product {
 		this.vat = vat;
 	}
 	
+	
+	public Product(int id, String name, String description, Float price, String mainPicPath, String videoPath,
+			boolean inCarousel, String size, String reference, String color, Float weight, int warranty, int sponsoring,
+			boolean isActive, VAT vat, Review review) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.mainPicPath = mainPicPath;
+		this.videoPath = videoPath;
+		this.inCarousel = inCarousel;
+		this.size = size;
+		this.reference = reference;
+		this.color = color;
+		this.weight = weight;
+		this.warranty = warranty;
+		this.sponsoring = sponsoring;
+		this.isActive = isActive;
+		this.vat = vat;
+		this.review = review;
+	}
+
 	public Product(int warranty) {
 		this.warranty = warranty;
 	}
@@ -182,4 +206,13 @@ public class Product {
 	public void setVat(VAT vat) {
 		this.vat = vat;
 	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+	
 }
