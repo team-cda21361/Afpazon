@@ -1,10 +1,12 @@
 <script defer src="./assets/js/backoffice.js"></script>
-
+		
+	<c:if test="${ not empty currentUser && currentUser.role.role == 'Admin' }">
 	<div class="backContainer">
 		<!-- start user -->
 		<div class="row backRowMargin">
 			<div class="col-8">
 				<div class="d-flex justify-content-between">
+
 					<h4>Utilisateurs</h4>
 				</div>
 					<table class="table table-bordered tableManager">
@@ -253,5 +255,18 @@
   </div>
 </div>
 	</div>
+	</c:if>
+	<!--  ==============Message en cas d'erreur ================ -->
+	<c:if test="${ empty currentUser }">
+		<div class="container  text-center">
+				
+		<div class="alert alert-danger">
+				Vous devez être connecter pour acceder à cette page
+		</div>
+		<img src="https://www.kellerinstitute.com/sites/default/files/blog/images/boss-dismisses-employee_MkLKWtCO%282%29_0.jpg" alt=" " width="400" />
+	
+		</div>
+	</c:if>
+	
 </body>
 </html>
