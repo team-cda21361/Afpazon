@@ -1,10 +1,12 @@
 <script defer src="./assets/js/backoffice.js"></script>
-
+		
+	<c:if test="${ not empty currentUser && currentUser.role.role == 'Admin' }">
 	<div class="backContainer">
 		<!-- start user -->
 		<div class="row backRowMargin">
 			<div class="col-8">
 				<div class="d-flex justify-content-between">
+
 					<h4>Utilisateurs</h4>
 				</div>
 					<table class="table table-bordered tableManager">
@@ -49,7 +51,7 @@
 				</c:if>
 					<c:if test="${not empty criticalStock }">
 						<div class="alert alert-danger" role="alert">
-							<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
+							<p><c:out value="${criticalStock }"></c:out> <a href="stock-management"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
 						</div>
 					</c:if>
 			</div>
@@ -120,7 +122,7 @@
 								<td><c:out value="${discount.percent }"></c:out></td>
 								<td><c:out value="${discount.startDate }"></c:out></td>
 								<td><c:out value="${discount.endDate }"></c:out></td>
-								<td class="text-center"><a href="discount?option=edit&id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="discount?editOption=1&id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 								<!-- isActive to be developped later-->
 								<!-- <td class="text-center"><a href="discount?id=${discount.id }"><img alt="Icon check" src="assets/images/back_office/deleteIcon.png" width="20"></a></td> -->
 							</tr>
@@ -157,8 +159,8 @@
 								<td><c:out value="${order.user.email }"></c:out></td>
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
-								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
-								<td class="text-center"><a href="order-management?option=edit&id=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
+								<td class="text-center"><a href="order-management?reSendOption=1&orderId=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
+								<td class="text-center"><a href="order-management?editOption=1&orderId=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>
 						</tbody>
@@ -253,5 +255,18 @@
   </div>
 </div>
 	</div>
+	</c:if>
+	<!--  ==============Message en cas d'erreur ================ -->
+	<c:if test="${ empty currentUser }">
+		<div class="container  text-center">
+				
+		<div class="alert alert-danger">
+				Vous devez être connecter pour acceder à cette page
+		</div>
+		<img src="https://www.kellerinstitute.com/sites/default/files/blog/images/boss-dismisses-employee_MkLKWtCO%282%29_0.jpg" alt=" " width="400" />
+	
+		</div>
+	</c:if>
+	
 </body>
 </html>

@@ -11,38 +11,51 @@
 				<div class="col-12">
 					<div class="section-title">
 						<h2>
-							Produits catégorie :
-							<c:out value="${categorie}" />
+							Produits catÃ©gorie :
+							<c:out value="${category.category}" />
 						</h2>
 					</div>
 				</div>
 			</div>
-			<div class="d-flex flex-wrap m-4">
-				<c:forEach items="${products}" var="product">
+			<div class="d-flex flex-wrap m-4 py-2">
+				<c:forEach items="${catProducts}" var="product">
 					<div class="m-3 ">
 						<!-- Start Single Product -->
-						<div class="card" style="width: 16rem">
-								<img class="card-img-top" src="<c:out value="${product.mainPicPath}" />" alt="#">
+
+						<div class="card h-100"  style="width: 16rem">
+						<div class="img-top"> <img class="card-img-top img-fluid" src="assets/products/img/<c:out value="${product.key.mainPicPath}" />" alt="#"></div>
+					 
+								
+
 							<div class="card-body d-flex flex-column">
 									<h4 class="title text-center">
-										<a class="text-decoration-none text-dark" href="product?id=${product.id }">
-											<c:out value="${product.name }" />
+										<a class="text-decoration-none text-dark" href="product?id=${product.key.id }">
+											<c:out value="${product.key.name }" />
 										</a>
 									</h4>
 								<ul class="review d-flex flex-wrap list-group-flush">
-									<c:forEach var="i" begin="1" end="${moyen_note }">
+								
+								<c:forEach items="${product.value }" var="prod">
+									<c:forEach var="i" begin="1" end="${prod.key }">
 										<li class="list-group-item"><i class="bi bi-star-fill text-warning"></i></li>
-										<p>
 									</c:forEach>
-									<c:forEach var="i" begin="1" end="${5 - moyen_note }">
+									
+									
+									<c:forEach var="i" begin="1" end="${5-prod.key }">
 										<li class="list-group-item"><i class="bi bi-star"></i></li>
 										<p>
 									</c:forEach>
-									<li class="list-group-item"><span class="mx-2"><c:out value="${number_of_review}" />
+
+									
+									
+									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />
+
 											Avis</span></li>
+								</c:forEach>
 								</ul>
+								
 								<div class="price text-center">
-									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.price }" /> &euro; TTC</span>
+									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.key.price }" /> &euro; TTC</span>
 								</div>
 								<div class="button btn btn-success align-self-end mt-3">
 									<a href="product-details.html" class="text-light text-decoration-none">

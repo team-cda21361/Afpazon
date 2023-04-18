@@ -184,8 +184,7 @@ public class UserDao implements IDAO<User> {
 		try {
 
 
-			sql = connect.prepareStatement(
-					"select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.id=?");
+			sql = connect.prepareStatement("select *, user.id as userId from user inner join role on user.id_role=role.id WHERE user.id=?");
 
 			sql.setInt(1, id);
 			rs = sql.executeQuery();
