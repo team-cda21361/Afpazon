@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.PayPalRESTException;
@@ -32,6 +33,12 @@ public class ReviewPaymentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
+        
+		HttpSession session = request.getSession(true);
+		String token = request.getParameter("token");
+
+		session.setAttribute("paymentId", paymentId);
+		session.setAttribute("token", token);
          
         try {
             PaymentServices paymentServices = new PaymentServices();

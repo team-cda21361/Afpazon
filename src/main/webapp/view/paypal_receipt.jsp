@@ -1,5 +1,8 @@
+<script language="JavaScript">
+setTimeout("window.location.href='/Afpazon/'",5000); // delai en millisecondes
+</script> 
 <div align="center">
-    <h1>Payment Done. Thank you for purchasing our products</h1>
+    <h1>Payment Done. Merci d'avoir acheté nos produits</h1>
     <br/>
     <h2>Receipt Details:</h2>
     <table>
@@ -32,4 +35,6 @@
             <td>${transaction.amount.total} USD</td>
         </tr>                    
     </table>
+    
+    
 </div>

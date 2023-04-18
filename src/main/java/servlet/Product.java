@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import beans.Cart;
+import beans.Category;
 import beans.Item;
 import beans.Review;
 import dao.ImageDao;
@@ -45,6 +46,8 @@ public class Product extends HttpServlet{
     Review review = new Review();
     ArrayList<Review> listReviews = new ArrayList<>();
     Product_discountDao product_discountDao = new Product_discountDao();
+    int stock = 0;
+    Category category = new Category();
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -62,9 +65,11 @@ public class Product extends HttpServlet{
     			cantite =1;
     		}
     	}
-    	System.out.println("Plus: "+request.getParameter("plus"));
-    	System.out.println("Minus: "+request.getParameter("minus"));
+
     	listReviews = reviewDao.findByIdProd(id);
+    	stock = productDao.findByIdStock(id);
+    	category = productDao.findByIdCategoriedeProd(id);
+    	
     	request.setAttribute("review", listReviews);
  
     	if(listReviews != null) {
@@ -82,6 +87,8 @@ public class Product extends HttpServlet{
     	}
       request.setAttribute("images", imageDao.findImagesById(id));
       request.setAttribute("cantite", cantite);
+      request.setAttribute("stock", stock);
+      request.setAttribute("category", category);
       product = productDao.findByIdDiscount(id);
       if(product.getName() != null) {
     	  request.setAttribute("product", product);

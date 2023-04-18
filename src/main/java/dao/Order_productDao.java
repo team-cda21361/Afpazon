@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import beans.Order;
 import beans.Order_product;
 import beans.Product;
@@ -22,8 +24,25 @@ public class Order_productDao implements IDAO<Order_product>{
 	VATDao VATDao = new VATDao();
 
 	@Override
-	public boolean create(Order_product object) {
-		// TODO Auto-generated method stub
+	public boolean create(Order_product order_product) {
+
+		try {
+			sql = connect.prepareStatement("INSERT INTO order_product (price, quantity, id_product, id_order) VALUES(?,?,?,?)");
+		
+			sql.setFloat(1, order_product.getPrice());
+			sql.setInt(2, order_product.getQuantity());
+			sql.setInt(3, order_product.getProduct().getId());
+			sql.setInt(4, order_product.getOrder().getId());
+
+			System.out.println("sql: "+ sql);
+
+			sql.execute();
+
+			return true;
+		} catch (Exception e) {
+			System.out.println("Insertion KO");
+			e.printStackTrace();
+		}
 		return false;
 	}
 

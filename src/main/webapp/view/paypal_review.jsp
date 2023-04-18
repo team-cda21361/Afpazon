@@ -1,7 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+<script defer type="text/javascript" src="./assets/js/cart.js"></script>
+<script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
 <div align="center">
     <h1>Please Review Before Paying</h1>
+    <a href="javascript:window.print()" class="btn btn-light"><button>Print <i class="bi bi-printer-fill"></i> </button></a>
     <form action="execute_payment" method="post">
-    <table>
+    <div class="container">
+    
+
+    <table class="table">
         <tr>
             <td colspan="2"><b>Transaction Details:</b></td>
             <td>
@@ -15,19 +23,19 @@
         </tr>
         <tr>
             <td>Subtotal:</td>
-            <td>${transaction.amount.details.subtotal} USD</td>
+            <td>${transaction.amount.details.subtotal} EUR</td>
         </tr>
         <tr>
             <td>Shipping:</td>
-            <td>${transaction.amount.details.shipping} USD</td>
+            <td>${transaction.amount.details.shipping} EUR</td>
         </tr>
         <tr>
             <td>Tax:</td>
-            <td>${transaction.amount.details.tax} USD</td>
+            <td>${transaction.amount.details.tax} EUR</td>
         </tr>
         <tr>
             <td>Total:</td>
-            <td>${transaction.amount.total} USD</td>
+            <td>${transaction.amount.total} EUR</td>
         </tr>
         <tr><td><br/></td></tr>
         <tr>
@@ -80,4 +88,5 @@
         </tr>    
     </table>
     </form>
+</div>
 </div>

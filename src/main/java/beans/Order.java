@@ -16,17 +16,20 @@ public class Order {
 	public Order() {
 	}
 
-	//oder_productDao findById constructor
-	public Order(int id, Date date, Float totalPrice, String paymentToken, String trackingNumber, User user,
-			Status status) {
-		this.id = id;
-		this.date = date;
+	
+	public Order(Float totalPrice, String paymentToken, String trackingNumber, User user,
+			Address address_delivery, Address address_billing, Status status) {
+
 		this.totalPrice = totalPrice;
 		this.paymentToken = paymentToken;
 		this.trackingNumber = trackingNumber;
 		this.user = user;
+
+		this.address_delivery = address_delivery;
+		this.address_billing = address_billing;
 		this.status = status;
 	}
+
 	public Order(Date date, Float totalPrice, String paymentToken, String trackingNumber, User user,
 			Address address_delivery, Address address_billing, Status status) {
 		this.date = date;

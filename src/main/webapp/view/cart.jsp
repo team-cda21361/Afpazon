@@ -57,17 +57,15 @@
 											<c:if test="${not empty item.getDiscount()  }">
 												<c:forEach items="${item.getDiscount() }" var="itemD">
 													<c:if test="${not empty itemD.getPercent()  }">
-														<p class="cartD"> <c:out value="${String.format('%.2f', itemD.getPercent()*100) }" /> %</p>
+														<p class="cartD"> <c:out value="${String.format('%.2f', (itemD.getPercent()*100)) }" /> %</p>
 													</c:if>
-													<c:if test="${item.getDiscount().size() <= 1}">	
+													<c:if test="${empty itemD.getPercent()}">	
 														<p class="cartD">0.00 %</p>
 													
 													</c:if>
 												</c:forEach>
 											</c:if>
-											<c:if test="${empty item.getDiscount()  }">
-												<p class="cartD">0 %</p>
-											</c:if>
+			
 										</div>
 									</td>
 
@@ -179,23 +177,22 @@
 					</dl>
 					<dl class="dlist-align">
 						<dt>Remise: </dt>
-				
-						<c:forEach items="${cart.getItems()}" var="item">
-						 	<c:if test="${item.getDiscount().size() >1 && item.getDiscount() != null}">
-								<p class="cartD"><c:out value="${item.getProduct().getName() }" /></p>							
-								<c:forEach items="${item.getDiscount()}" var="itemR">
-									<c:if test="${not empty itemR.getPercent() }">
-										<dd class="text-right text-danger ml-3">- <c:out value="${ String.format('%.2f', itemR.getPercent()) }" /> %</dd>
-									</c:if>
-									<c:if test="${empty itemR.getPercent() == null}">
-										<dd class="text-right text-danger ml-3">0 %</dd>
-									</c:if>
+														
+								<c:forEach items="${cart.getItems()}" var="item">
+								<p class="cartD"><c:out value="${item.getProduct().getName() }" /></p>
+								<c:if test="${not empty item.getDiscount() }">
+									<c:forEach items="${item.getDiscount() }" var="itemD" >
+										<c:if test="${not empty itemD.getPercent()  }">
+											<p class="cartD">- <c:out value="${String.format('%.2f', (itemD.getPercent()*100)) }" /> %</p>
+										</c:if>
+										<c:if test="${empty itemD.getPercent()}">	
+											<p class="cartD">0.00 %</p>
+										</c:if>
+									</c:forEach>
+								</c:if>
 								</c:forEach>
-							</c:if>
-							<c:if test="${item.getDiscount() == null }">
-								<dd class="text-right text-danger ml-3">0 %</dd>
-							</c:if>
-						</c:forEach>
+				
+						
 				
 	
 					</dl>
@@ -203,8 +200,10 @@
 						<dt>TVA (20 %): </dt>
 						<dd class="text-right ml-3"><c:out value="${ String.format('%.2f', (cart.countPrixProduct()*0.20)) }" /> &euro;</dd>
 					</dl>
+
+					
 					<dl class="dlist-align">
-						<dt>TOTAL TTC: </dt>
+						<dt>TOTAL TTC Apres Remise: </dt>
 						<dd class="text-right ml-3"><c:out value="${ String.format('%.2f', cart.countPrixProductApresRemise()) }" /> &euro;</dd>
 					</dl>
 					<hr>
@@ -213,7 +212,7 @@
 					<div class="align-self-end">
 							<a href="index"	class="btn btn-primary " data-abc="true"><i class="bi bi-sign-turn-slight-left-fill"></i> Continuer les achats</a>
 						<hr>
-							<a href="payment"  class="btn btn-success"><i class="bi bi-cash-coin me-3"></i> Payer		
+							<a href="payment"  class="btn btn-success"><i class="bi bi-send"></i> Passer commande		
 						</a>
 				
 					</div>

@@ -106,5 +106,31 @@ public class AddressDao implements IDAO<Address> {
 		return list;
 
 	}
+	
+	public Address readByIdAdresseFacturation(int id){
+		User currentUser = new User();
+		currentUser.setId(id);
+		Address adresse = null;
+		try {
+			sql = connect.prepareStatement(
+					"SELECT *,a.id as idType FROM address INNER JOIN user u ON u.id =id_user INNER JOIN address_type a ON a.id = id_address_type WHERE u.id=? AND a.type='facturation' LIMIT 1");
+			sql.setInt(1, id);
+			rs = sql.executeQuery();
+      currentUser.setId(id);
+			if(rs.next()) {
+				Address_type addressType = new Address_type(rs.getInt("idType"), rs.getString("type"));
+				adresse = new Address(rs.getInt("id"), rs.getString("address"), rs.getInt("zipCode"),
+						rs.getString("city"), currentUser, addressType);
+				return adresse;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		return adresse;
+
+	}
 
 }

@@ -68,31 +68,31 @@ public class StockManagement extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // TODO Auto-generated method stub
-
-//** RECUP POUR LA COMMANDE DE STOCK **
-        if (request.getParameter("sendForStock")!=null) {
-            String name = request.getParameter("name");
-            String reference = request.getParameter("reference");
-            String quantity = request.getParameter("quantity");
-
-//** FAIRE UN CHEMIN EPHEMERE POUR L UPLOAD DE PDF (.metadata) **
-            String uploadPath = getServletContext().getRealPath("assets/");
-
-//** APPELER ET GENERER LE PDF **
-            //String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
-            //String pdfPath = GenePdf.createFacturePDF(name,reference,quantity,uploadPath);
-            //System.out.println(pdfPath);
-            System.out.println("PDF OKAY !!!");
-            System.out.println("Fournisseur = "+name+"  "+"Référence = "+reference+"  "+"Quantité = "+quantity);
-
-//** ENVOIE DU MAIL **
-            //SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath);
-        }
-
-//** RENVOYER LE CONTENUE DU doPost VERS LE doGet  *
-        doGet(request, response);
-    }
+		// TODO Auto-generated method stub
+		
+//************************ RECUP POUR LA COMMANDE DE STOCK *********************************
+		if (request.getParameter("sendForStock")!=null) {
+			String name = request.getParameter("name");
+			String reference = request.getParameter("reference");
+			String quantity = request.getParameter("quantity");
+			
+//**************************** FAIRE UN CHEMIN EPHEMERE POUR L UPLOAD DE PDF (.metadata) ***********************
+			String uploadPath = getServletContext().getRealPath("assets/");
+			
+//**************************** APPELER ET GENERER LE PDF ******************************************
+			//String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
+			//String pdfPath = GenePdf.createFacturePDF(name,reference,quantity,uploadPath);
+			//System.out.println(pdfPath);
+			System.out.println("PDF OKAY !!!");
+			System.out.println("Fournisseur = "+name+" *** "+"Référence = "+reference+" *** "+"Quantité = "+quantity);
+			
+//**************************** ENVOIE DU MAIL ******************************************
+			//SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath);	
+		}
+		
+//************************ RENVOYER LE CONTENUE DU doPost VERS LE doGet  *********************************
+		doGet(request, response);
+	}
 
 
 }

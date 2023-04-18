@@ -93,9 +93,7 @@ public class Cart extends HttpServlet{
 		}
 		if (request.getParameter("coupon") != null) {
 			String coupon = request.getParameter("coupon");
-			System.out.println("Valor de Coupo,n: "+coupon);
 			if(cart_temp.rechercheCoupon(coupon)) {
-				System.out.println("Entro despues de buscar y encontro: "+coupon);
 	             request.setAttribute("msn", "La remise a été effectuée correctement. Voir Détail de la commande totale.");
 	             request.setAttribute("msnType",  "OK");
 			}else {

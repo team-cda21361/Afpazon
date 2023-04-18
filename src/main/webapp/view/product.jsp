@@ -57,11 +57,18 @@
 							
 							
 							<h2 class="title">
-								<c:out value="${ product.getName() }" />
+								<c:out value="${ product.getName()}"/>
 							</h2>
 							<p class="category">
-								<i class="lni lni-tag"></i> Categorie:<a href="javascript:void(0)">Categorie product</a>
+								<c:if test="${not empty category }">
+									<i class="bi bi-link-45deg"></i> Categorie:<a href="categories?catID=<c:out value="${category.getId()}"/>"><c:out value="${category.getCategory()}"/></a>
+								</c:if>
+								<c:if test="${empty category }">
+									<i class="bi bi-link-45deg"></i> Categorie: Non disponible.
+								</c:if>
 							</p>
+							
+
 							
 							
 						    <c:if test="${empty discount }">		
@@ -159,9 +166,7 @@
 									</div>
 									<div class="col-lg-4 col-md-4 col-12">
 										<div class="button cart-button">
-											<button type="button" class="btn btn-success"
-												data-bs-toggle="modal" data-bs-target="#exampleModal">
-												Me prevenir</button>
+											
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4 col-12">
@@ -229,7 +234,13 @@
 									<c:if test="${ empty product.getReference() }">
 									    Non spécifié.
 									</c:if>
-									
+									 <li><strong>Stock:</strong>  
+								    <c:if test="${ not empty stock }">
+									    <c:out value="${ stock }" />
+									</c:if>	
+									<c:if test="${ empty stock }">
+									    Non spécifié.
+									</c:if>
 									
 									
 									</li>
@@ -291,26 +302,6 @@
 	</section>
 	<!-- End Item Details -->
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
-						title</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	
 
 </main>
