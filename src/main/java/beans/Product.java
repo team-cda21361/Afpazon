@@ -20,7 +20,14 @@ public class Product {
 	
 	public Product() {
 	}
-	
+
+	// backoffice order management order_productDao constructor
+	public Product(int id,String name, String reference, VAT vat) {
+		this.id = id;
+		this.name = name;
+		this.reference = reference;
+		this.vat = vat;
+	}
 	public Product(String name, String description, Float price, String mainPicPath, String videoPath,
 			boolean inCarousel, String size, String reference, String color, Float weight, int warranty, int sponsoring,
 			boolean isActive, VAT vat) {

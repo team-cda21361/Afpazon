@@ -11,7 +11,7 @@
 				<div class="col-12">
 					<div class="section-title">
 						<h2>
-							Produits catégorie :
+							Produits catÃ©gorie :
 							<c:out value="${category.category}" />
 						</h2>
 					</div>
@@ -21,10 +21,12 @@
 				<c:forEach items="${catProducts}" var="product">
 					<div class="m-3 ">
 						<!-- Start Single Product -->
+
 						<div class="card h-100"  style="width: 16rem">
 						<div class="img-top"> <img class="card-img-top img-fluid" src="assets/products/img/<c:out value="${product.key.mainPicPath}" />" alt="#"></div>
 					 
 								
+
 							<div class="card-body d-flex flex-column">
 									<h4 class="title text-center">
 										<a class="text-decoration-none text-dark" href="product?id=${product.key.id }">
@@ -43,9 +45,11 @@
 										<li class="list-group-item"><i class="bi bi-star"></i></li>
 										<p>
 									</c:forEach>
+
 									
 									
 									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />
+
 											Avis</span></li>
 								</c:forEach>
 								</ul>

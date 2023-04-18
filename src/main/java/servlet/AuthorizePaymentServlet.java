@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.paypal.base.rest.PayPalRESTException;
 
 import beans.OrderDetail;
-import paypal.PaymentServices;
+import beans.PaymentServices;
 
 /**
  * Servlet implementation class AuthorizePaymentServlet

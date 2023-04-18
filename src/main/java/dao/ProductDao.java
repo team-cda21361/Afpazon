@@ -8,8 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import beans.AddProductList;
+import beans.Discount;
 import beans.Product;
+
 import beans.Review;
+
+import beans.Product_discount;
+
 import beans.VAT;
 import connector.DBConnect;
 
@@ -312,6 +317,7 @@ public class ProductDao implements IDAO<Product> {
 		}
 		return listWarranties;
 	}
+
 	//****************** FINDBYID discount **********************************************************************************//
 
 		public Product findByIdDiscount(int id) {
@@ -386,5 +392,4 @@ public class ProductDao implements IDAO<Product> {
 			}
 		
 }
-
 

@@ -104,7 +104,15 @@ public class OrderDao implements IDAO<Order> {
 
 	@Override
 	public boolean delete(Order order) {
-		// TODO Auto-generated method stub
+		try {
+			sql = connect.prepareStatement("DELETE from order_list WHERE id =?");
+			sql.setInt(1, order.getId());
+			sql.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -115,8 +123,24 @@ public class OrderDao implements IDAO<Order> {
 	}
 
 	@Override
-	public Object findById(int id) {
-		// TODO Auto-generated method stub
+	public Order findById(int id) {
+		try {
+			sql = connect.prepareStatement("SELECT *,u.id idUser FROM order_list ol INNER JOIN status ON id_status=status.id INNER JOIN user u ON u.id=ol.id_user  WHERE ol.id =?");
+			sql.setInt(1, id);
+			rs=sql.executeQuery();
+			if (rs.next()) {
+				User user=new User();
+				user.setId(rs.getInt("idUser"));
+				user.setEmail(rs.getString("email"));
+				Status status = new Status(rs.getInt("id_status"),rs.getString("status"));
+				return new Order(id,rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,status);
+				
+				
+			}
+		} catch (Exception e) {
+			System.out.println("Insertion KO");
+			e.printStackTrace();
+		}
 		return null;
 	}
 	public ArrayList<Order> search(String search) {
