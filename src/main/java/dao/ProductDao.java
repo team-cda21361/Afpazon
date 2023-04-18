@@ -5,11 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import beans.AddProductList;
 import beans.Discount;
 import beans.Product;
+
+import beans.Review;
+
 import beans.Product_discount;
+
 import beans.VAT;
 import connector.DBConnect;
 
@@ -347,6 +352,44 @@ public class ProductDao implements IDAO<Product> {
 			}
 			return product;
 		}
+
+		public HashMap<Product, HashMap<Integer,Integer>> finMoyenne(int catID) {
+			int moyenne;
+			int totalReview = 0;
+			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new HashMap<>();
+				try {
+					sql = connect.prepareStatement("SELECT *, AVG(rv.stars) moyenne, count(rv.id_product) totalReview, p.id idProd, rv.id idRv  FROM `category_product` cp "
+							+ " left JOIN product p "
+							+ " ON p.id= cp.id_product"
+							+ " LEFT JOIN review rv"
+							+ " ON rv.id_product = p.id"
+							+ " where id_category=?"
+							+ " GROUP BY p.id;");
+					
+					sql.setInt(1, catID);
+					rs = sql.executeQuery();
+					while(rs.next()) {
+						HashMap <Integer,Integer> dataReview=new HashMap<>();
+						Review review = new Review(rs.getInt("idRv"),rs.getString("content"),rs.getInt("stars"));
+						VAT vat = new VAT();
+						Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+								rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+								rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+								rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+								rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+								vat,review);
+							moyenne= rs.getInt("moyenne");
+							totalReview= rs.getInt("totalReview");
+						dataReview.put(moyenne, totalReview);
+						getReviewByProduct.put(product, dataReview);	
+					} 
+					return getReviewByProduct;
+				}catch (SQLException e) {
+					e.printStackTrace();
+					System.err.println("Pas de liste de PRODUCTs...");
+				}
+				return getReviewByProduct;
+			}
 		
 }
 
