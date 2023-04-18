@@ -76,8 +76,9 @@ public class StockManagement extends HttpServlet {
 			String uploadPath = getServletContext().getRealPath("assets/");
 			
 //**************************** APPELER ET GENERER LE PDF ******************************************
-			String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
-			System.out.println(pdfPath);
+			//String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
+			//String pdfPath = GenePdf.createFacturePDF(name,reference,quantity,uploadPath);
+			//System.out.println(pdfPath);
 			System.out.println("PDF OKAY !!!");
 			System.out.println("Fournisseur = "+name+" *** "+"Référence = "+reference+" *** "+"Quantité = "+quantity);
 			

@@ -13,3 +13,10 @@ $(document).ready(function() {
         $(".timer").fadeOut(1500);
     },5000);  
 });
+
+
+document.querySelectorAll('.printbutton').forEach(function(element) {
+    element.addEventListener('click', function() {
+        print();
+    });
+});

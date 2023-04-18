@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.AddProductList;
+import beans.Category;
 import beans.Product;
 import beans.VAT;
 import connector.DBConnect;
@@ -343,6 +344,54 @@ public class ProductDao implements IDAO<Product> {
 				System.err.println("FindByIdDiscount PRODUCT NOK...");
 			}
 			return product;
+		}
+		
+		//****************** FINDBYID categorie de Product **********************************************************************************//
+		public Category findByIdCategoriedeProd(int id) {
+			Category category = new Category();
+
+			try {
+				sql = connect.prepareStatement("SELECT category.id, category.category, category.isActive FROM category_product INNER JOIN category ON category_product.id_category = category.id  WHERE id_product=? AND category.isActive=1 LIMIT 1");
+				sql.setInt(1,id);
+				System.out.println("SQL category: "+sql);
+
+				ResultSet rs= sql.executeQuery();
+
+				if(rs.next()) {
+					category = new Category(rs.getInt("id"),rs.getString("category"),rs.getBoolean("isActive"));
+					return category;
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.err.println("FindByIdDiscount PRODUCT NOK...");
+			}
+			return category;
+		}
+		
+		
+		//****************** FINDBYID categorie **********************************************************************************//
+		public int findByIdStock(int id) {
+			int stock = 0;
+
+			try {
+				sql = connect.prepareStatement("SELECT * FROM stock WHERE id_product=?");
+				sql.setInt(1,id);
+				System.out.println("SQL stock: "+sql);
+
+				ResultSet rs= sql.executeQuery();
+
+				if(rs.next()) {
+					stock = (rs.getInt("quantity"));
+
+					return stock;
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.err.println("FindByIdDiscount PRODUCT NOK...");
+			}
+			return stock;
 		}
 		
 }

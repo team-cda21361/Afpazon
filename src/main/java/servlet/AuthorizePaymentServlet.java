@@ -6,11 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.paypal.base.rest.PayPalRESTException;
 
 import beans.OrderDetail;
-import paypal.PaymentServices;
+import beans.PaymentServices;
 
 /**
  * Servlet implementation class AuthorizePaymentServlet
@@ -32,6 +33,9 @@ public class AuthorizePaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
+		
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -39,12 +43,25 @@ public class AuthorizePaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String adressL = request.getParameter("adressL");
+		String adressF = request.getParameter("adressF");
+		System.out.println("adressL: "+adressL);
+		System.out.println("adressF: "+adressF);
+		HttpSession session = request.getSession(true);
+		session.setAttribute("adressL", adressL);
+		session.setAttribute("adressF", adressF);
+        
+        
         String product = request.getParameter("product");
-        String subtotal = request.getParameter("subtotal");
-        String shipping = request.getParameter("shipping");
-        String tax = request.getParameter("tax");
-        String total = request.getParameter("total");
-         
+        String subtotal = request.getParameter("subtotal").replace(",", ".");
+        String shipping = request.getParameter("shipping").replace(",", ".");
+        String tax = request.getParameter("tax").replace(",", ".");
+        String total = request.getParameter("total").replace(",", ".");
+        System.out.println("product: "+product);
+        System.out.println("subtotal: "+subtotal);
+        System.out.println("shipping: "+shipping);
+        System.out.println("tax: "+tax);
+        System.out.println("total: "+ total);
         OrderDetail orderDetail = new OrderDetail(product, subtotal, shipping, tax, total);
  
         try {

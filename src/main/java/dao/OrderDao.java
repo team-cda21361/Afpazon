@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import beans.Address;
 import beans.Address_type;
 import beans.Order;
@@ -150,4 +152,27 @@ public class OrderDao implements IDAO<Order> {
 
 		return orders;
 	}
+	
+	public int lastId() {
+		int id = 0;
+		try {
+			/*
+			 * VERSION AVEC BCRYPT
+			 */
+			sql = connect.prepareStatement("select last_insert_id() as 'last' from order_list"); // test@test.fr
+	
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				
+
+					return id = (rs.getInt("last"));
+		
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	
 }

@@ -121,14 +121,16 @@ public class Cart{
 				if(item.getDiscount() != null) {
 					
 				}
+				int counter = 0;
 				for (Discount discount : item.getDiscount()) {
-		       		 if (discount.getId() == product_discount.getDiscount().getId()) {
+		       		 if (discount.getId() == product_discount.getDiscount().getId() ) {
 		       			 System.out.println("Remise Exist");
 		       			 discountExist = true;
 		       			 break;
 		       		 }
+		       		counter++;
 				 }
-				if(discountExist != true) {
+				if(discountExist != true && counter < 2) {
 					System.out.println("Ingresa en if de prod para cambiar el precio: "+cont);
 					item.setPrixR(item.getPrixR()-(product_discount.getDiscount().getPercent() * item.getPrixR()));
 					//CREATION DE TABLEAU

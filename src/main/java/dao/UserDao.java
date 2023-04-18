@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import beans.User;
 import beans.Role;
 import connector.DBConnect;
@@ -329,4 +331,23 @@ public class UserDao implements IDAO<User> {
 		}
 		return false;
 	}
+	
+	//Modification de telephone avent commande
+	public boolean changeTelephone(int id, String telephone) {
+		try {
+			sql = connect.prepareStatement("UPDATE user SET phone=? WHERE id=?");
+			sql.setString(1, telephone);
+			sql.setInt(2, id);
+			System.out.println("sql changeTelephone : "+sql);
+			sql.execute();
+
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
 }
