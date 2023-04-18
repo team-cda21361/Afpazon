@@ -49,7 +49,7 @@
 				</c:if>
 					<c:if test="${not empty criticalStock }">
 						<div class="alert alert-danger" role="alert">
-							<p><c:out value="${criticalStock }"></c:out> <a href="stockManager"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
+							<p><c:out value="${criticalStock }"></c:out> <a href="stock-management"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></p>
 						</div>
 					</c:if>
 			</div>
@@ -157,7 +157,7 @@
 								<td><c:out value="${order.user.email }"></c:out></td>
 								<td><c:out value="${order.date }"></c:out></td>
 								<td><c:out value="${order.status.status }"></c:out></td>
-								<td class="text-center"><a href="dashboard?id=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
+								<td class="text-center"><a href="order-management?reSendOption=1&orderId=${order.id }"><img alt="Icon check" src="assets/images/back_office/send.png" width="20"></a></td>
 								<td class="text-center"><a href="order-management?editOption=1&orderId=${order.id }"><img alt="Icon check" src="assets/images/back_office/editIcon.png" width="20"></a></td>
 							</tr>
 						  </c:forEach>

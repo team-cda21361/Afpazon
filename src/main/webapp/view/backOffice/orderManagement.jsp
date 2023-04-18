@@ -1,7 +1,7 @@
 
 <script defer src="assets/js/orderManagement.js"></script>
 <div class="container w-75">
-	<h3 class="col-12 text-center mt-5">
+	<h1 class="col-12 text-center mt-5">
 		<c:if test="${order.status.status == 'Commande livrée'}">
 			<c:out value="Affichage " />
 		</c:if>
@@ -9,10 +9,15 @@
 			<c:out value="Modification " />
 		</c:if>
 		de commande
-	</h3>
+	</h1>
 	<c:if test="${not empty error }">
 		<div class="alert alert-danger" role="alert">
 	 		<c:out value="${error }"></c:out>
+		</div>
+	</c:if>
+	<c:if test="${not empty success }">
+		<div class="alert alert-success" role="alert">
+	 		<c:out value="${success }"></c:out>
 		</div>
 	</c:if>
 	<form id="orderForm" class="w-100 " action="order-management?orderId=${order.id }" method="post">
@@ -29,7 +34,7 @@
 		<div class="row justify-content-center mt-5">
 			<div class="w-75">
 				<h4>Liste des produits :</h4>
-				<table id="example" class="display" style="width: 100%">
+				<table id="orderDetails" class="display" style="width: 100%">
 					<thead>
 						<tr>
 							<th>Nom</th>
@@ -81,9 +86,6 @@
 
 		<div class="row d-flex justify-content-center mt-5 ms-5">
 			<c:if test="${order.status.status != 'Commande livrée'}">
-				<div class="col-5 ms-5" >
-					<button type="submit" class="btn btn-primary w-50 mb-2 ">Modifier</button>
-				</div>
 				<!-- Button trigger modal -->
 				<div class="col-5">
 					<a id="toModal" href="order-management?deleteAllOption=1&orderId=${order.id }" data-bs-toggle="modal" data-bs-target="#exampleModal">

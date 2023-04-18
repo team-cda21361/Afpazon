@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Mail.SendMail;
 import beans.Order;
 import beans.Order_product;
 import beans.Status;
+import beans.User;
 import dao.OrderDao;
 import dao.Order_productDao;
+import dao.UserDao;
 
 /**
  * Servlet implementation class OrderManagement
@@ -54,10 +57,26 @@ public class OrderManagement extends HttpServlet {
 			}
 			response.sendRedirect("dashboard");
 		}
-//		
+//		resend the bill to the custumer
+		if (request.getParameter("reSendOption")!=null) {
+			int orderId = Integer.parseInt(request.getParameter("orderId"));
+			Order order = orderDao.findById(orderId);
+			String creationPath = getServletContext().getRealPath("assets/factures/");
+			String cheminVersPDF = creationPath + "afpazon_facture_" + orderId+ ".pdf";
+			
+			if (SendMail.sendEmail(order.getUser().getEmail(), cheminVersPDF)) {
+				
+				request.setAttribute("success", "La commande n° "+order.getId()+" a bien été envoyée à l'adresse : "+order.getUser().getEmail());
+			}else {
+				request.setAttribute("error", "Oups!! la commande n° "+order.getId()+" n'a pas pu être envoyée à l'adresse : "+order.getUser().getEmail());
+				
+			}
+			
+			
+		}
+		
 		int orderId = Integer.parseInt(request.getParameter("orderId"));
 		Order order = orderDao.findById(orderId);
-		
 		
 		
 		

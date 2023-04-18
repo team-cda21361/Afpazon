@@ -43,7 +43,7 @@ public class Discount extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("editOption")!=null) {
 			int discountId = Integer.parseInt(request.getParameter("id"));
-			list=productDao.findProdByIdDiscount(discountId);
+			productDao.findByIdDiscount(discountId);
 			request.setAttribute("productList", list);
 			/*
 			 * upadte condition to fill inputs in

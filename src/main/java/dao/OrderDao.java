@@ -125,11 +125,13 @@ public class OrderDao implements IDAO<Order> {
 	@Override
 	public Order findById(int id) {
 		try {
-			sql = connect.prepareStatement("SELECT * FROM order_list ol INNER JOIN status ON id_status=status.id  WHERE ol.id =?");
+			sql = connect.prepareStatement("SELECT *,u.id idUser FROM order_list ol INNER JOIN status ON id_status=status.id INNER JOIN user u ON u.id=ol.id_user  WHERE ol.id =?");
 			sql.setInt(1, id);
 			rs=sql.executeQuery();
 			if (rs.next()) {
 				User user=new User();
+				user.setId(rs.getInt("idUser"));
+				user.setEmail(rs.getString("email"));
 				Status status = new Status(rs.getInt("id_status"),rs.getString("status"));
 				return new Order(id,rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,status);
 				

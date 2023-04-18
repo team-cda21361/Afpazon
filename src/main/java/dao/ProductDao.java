@@ -312,42 +312,41 @@ public class ProductDao implements IDAO<Product> {
 		}
 		return listWarranties;
 	}
-	
-	public ArrayList<Product> findProdByIdDiscount(int id) {
-		ArrayList <Product>  discounts = new ArrayList<>();
 
-		try {
-			sql = connect.prepareStatement("SELECT discount.id as 'iddiscount', discount.startDate, discount.endDate, discount.percent, discount.voucher,"
-					+ " product_discount.id as 'product_discountid', product.id as 'idprod', product.name as 'nameprod', product.price,product.reference  FROM discount "
-					+ " INNER JOIN product_discount ON discount.id = product_discount.id_discount "
-					+ " INNER JOIN product ON product_discount.id_product = product.id "
-					+ " WHERE discount.id=? ;");
-			
-			
-			sql.setInt(1, id);
-			System.out.println("findByIdProd: "+sql);
-			
-			rs = sql.executeQuery();
-		
-			
-			while(rs.next()) {
-	
-				Product product = new Product();
-				product.setId(rs.getInt("idprod"));
-				product.setName(rs.getString("nameprod"));
-				product.setReference(rs.getString("reference"));
-				product.setPrice(rs.getFloat("price"));
-				discounts.add(product);
+	//****************** FINDBYID discount **********************************************************************************//
 
+		public Product findByIdDiscount(int id) {
+			Product product = new Product();
+
+			try {
+				sql = connect.prepareStatement("SELECT *, product.id as 'idProd' "
+						+ " FROM product "
+						+ " INNER JOIN product_discount ON product.id = product_discount.id_product "
+						+ " INNER JOIN discount ON product_discount.id_discount = discount.id "
+						+ " INNER JOIN vat ON product.id_vat = vat.id "
+						+ " WHERE product.id=? AND now() between discount.startDate and discount.endDate AND discount.voucher IS NULL");
+				sql.setInt(1,id);
+				System.out.println("SQL DEMANDE SI DESCOUNT 1: "+sql);
+
+				ResultSet rs= sql.executeQuery();
+
+				if(rs.next()) {
+					product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+							rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+							rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+							rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+							rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+							new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
+
+					return product;
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.err.println("FindByIdDiscount PRODUCT NOK...");
 			}
-			return discounts;
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.err.println("Pas de inf...");
-			
+			return product;
 		}
-		return null;
-	}
+		
 }
+
