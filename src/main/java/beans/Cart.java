@@ -168,7 +168,14 @@ public class Cart{
 		return false;
 	}
 	
-	
+	//DELETEITEMS
+    public boolean deleteItems() {
+		for(Item  item: Items) {
+			Items.remove(item);
+			System.out.println("Delete Article de panier OK.");
+		}
+		return true;
+	}
 	
 	
     

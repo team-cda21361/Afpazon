@@ -25,15 +25,16 @@ public class OrderDao implements IDAO<Order> {
 	public boolean create(Order order) {
 
 		try {
-			sql = connect.prepareStatement("INSERT INTO order_list (dateOrder,totalPrice,paymentToken,trackingNumber,"
-					+ " id_user,id_address_delivery,id_status)" + "VALUES (now(),?,?,?,?,?,?)");
+			sql = connect.prepareStatement("INSERT INTO order_list (dateOrder, totalPrice, paymentToken, trackingNumber,"
+					+ " id_user, id_address_delivery, id_address_billing, id_status)" + "VALUES (now(),?,?,?,?,?,?,?)");
 		
 			sql.setFloat(1, order.getTotalPrice());
 			sql.setString(2, order.getPaymentToken());
 			sql.setString(3, order.getTrackingNumber());
 			sql.setInt(4, order.getUser().getId());
 			sql.setInt(5, order.getAddress_delivery().getId());
-			sql.setInt(6, order.getStatus().getId());
+			sql.setInt(6, order.getAddress_billing().getId());
+			sql.setInt(7, order.getStatus().getId());
 			
 
 			sql.execute();

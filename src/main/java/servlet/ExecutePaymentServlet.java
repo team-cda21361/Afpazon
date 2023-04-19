@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,17 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.paypal.api.payments.*;
+import com.paypal.api.payments.PayerInfo;
+import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 
-import beans.Address;
-import beans.Order;
 import beans.Order_product;
 import beans.PaymentServices;
-import beans.Product;
-import beans.Review;
 import beans.Status;
-import beans.User;
 import dao.OrderDao;
 import dao.Order_productDao;
 /**
@@ -53,14 +50,7 @@ public class ExecutePaymentServlet extends HttpServlet {
  
         System.out.println("payerId: "+payerId);
         System.out.println("paymentId: "+paymentId);
-		
-        //sql.setFloat(1, order.getTotalPrice());
-		//sql.setString(2, order.getPaymentToken());
-		//sql.setString(3, order.getTrackingNumber());
-		//sql.setInt(4, order.getUser().getId());
-		//sql.setInt(5, order.getAddress_delivery().getId());
-		//sql.setInt(6, order.getStatus().getId());
-        
+		      
         // PANIER
         beans.Address adressLL = new beans.Address();        
         beans.Address adressFF = new beans.Address();
@@ -81,7 +71,7 @@ public class ExecutePaymentServlet extends HttpServlet {
         adressLL.setId(Integer.parseInt(adressL));
         adressFF.setId(Integer.parseInt(adressF));
         status.setId(1);
-    	Product product ;
+ 
 
         
         // FIN PANIER
@@ -115,9 +105,15 @@ public class ExecutePaymentServlet extends HttpServlet {
             
             request.setAttribute("payer", payerInfo);
             request.setAttribute("transaction", transaction);          
+
  
             // PANIER
-    		sessionP.invalidate();
+    		try {
+                cart_temp.deleteItems();
+                sessionP.setAttribute("cart", cart_temp);
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
     	
             request.getRequestDispatcher("/view/paypal_receipt.jsp").forward(request, response);
             
