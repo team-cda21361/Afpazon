@@ -39,7 +39,9 @@ public class SendMail {
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "587");
 		properties.put("mail.smtp.user", "espft@outlook.fr");
-//		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
+
+		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
+
 //		properties.put("mail.smtp.ssl.enable", "true");
 
 		// Get the Session object.// and pass username and password

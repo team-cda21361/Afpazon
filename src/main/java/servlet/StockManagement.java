@@ -1,5 +1,6 @@
 package servlet;
 
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Stock;
 import dao.StockDao;
-import pdf.GenePdfX;
-
-
 
 /**
  * Servlet implementation class Stockmanager
@@ -35,35 +33,38 @@ public class StockManagement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//************************ HYDRATER LE TABLEAU ****************************
-		request.setAttribute("stockList", stockDao.read());
 		
-
+		
+//************************ HYDRATER LE FORMULAIRE ****************************
+		if (request.getParameter("idEdit")!=null) {
+			Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idEdit")));
+			request.setAttribute("stockEdit", stock);
+		}
+		
 //************************ SUPPRIMER UN STOCK ****************************
-		if (request.getParameter("idDelete")!=null) {
+		else if (request.getParameter("idDelete")!=null) {
 			System.out.println();
 			Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idDelete")));
 			request.setAttribute("stockDelete", stockDao.delete(stock));
 			System.err.println("DELETE OKAY !!!!"); 
-			response.sendRedirect("stock-management");
+			
 		}
 		
+//************************ POINTER ET AFFICHER LA BONN PAGE JSP ****************************
 		else {
-			//************************ HYDRATER LE FORMULAIRE ****************************
-			if (request.getParameter("idEdit")!=null) {
-				Stock stock = stockDao.findById(Integer.parseInt(request.getParameter("idEdit")));
-				request.setAttribute("stockEdit", stock);
-				System.err.println(stock);
-			}
-//************************ POINTER ET AFFICHER LA BONNE PAGE JSP ****************************	
-			request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
+			
 		}
+//************************ HYDRATER LE TABLEAU ****************************
+		request.setAttribute("stockList", stockDao.read());
+		
+		request.getRequestDispatcher("/view/backOffice/stockManagement.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		// TODO Auto-generated method stub
 		
 //************************ RECUP POUR LA COMMANDE DE STOCK *********************************
@@ -89,5 +90,6 @@ public class StockManagement extends HttpServlet {
 //************************ RENVOYER LE CONTENUE DU doPost VERS LE doGet  *********************************
 		doGet(request, response);
 	}
+
 
 }

@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import beans.Address;
 import beans.Address_type;
 import beans.Order;
@@ -107,7 +105,15 @@ public class OrderDao implements IDAO<Order> {
 
 	@Override
 	public boolean delete(Order order) {
-		// TODO Auto-generated method stub
+		try {
+			sql = connect.prepareStatement("DELETE from order_list WHERE id =?");
+			sql.setInt(1, order.getId());
+			sql.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -119,6 +125,7 @@ public class OrderDao implements IDAO<Order> {
 
 	@Override
 	public Order findById(int id) {
+
 		Order orders = new Order();
 		Address_type addtype = new Address_type();
 
@@ -149,6 +156,7 @@ public class OrderDao implements IDAO<Order> {
 		}
 
 		return orders;
+
 	}
 	public ArrayList<Order> search(String search) {
 		ArrayList<Order> orders = new ArrayList<>();

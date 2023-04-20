@@ -7,22 +7,38 @@ public class Review {
 	private Product product;
 	private User user;
 	
-	public Review() {
-	}
+	
 	
 	public Review(String content, int stars, Product product, User user) {
 		this.content = content;
 		this.stars = stars;
 		this.product = product;
-		this.user = user;
 	}
 	
+	public Review() {
+
+	}
+
+	public Review(int id, String content, int stars, Product product) {
+		this.id = id;
+		this.content = content;
+		this.stars = stars;
+		this.product = product;
+	}
+
 	public Review(int id, String content, int stars, Product product, User user) {
 		this.id = id;
 		this.content = content;
 		this.stars = stars;
 		this.product = product;
 		this.user = user;
+	}
+
+	public Review(int id, String content, int stars) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.stars = stars;
 	}
 
 	public int getId() {

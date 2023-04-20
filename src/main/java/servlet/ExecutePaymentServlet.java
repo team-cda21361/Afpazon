@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
-import Mail.SendMail;
 
+import Mail.SendMail;
 import beans.Order_product;
 import beans.PaymentServices;
 import beans.Status;
@@ -22,6 +22,7 @@ import dao.AddressDao;
 import dao.OrderDao;
 import dao.Order_productDao;
 import pdf.GenePdfX;
+
 
 /**
  * Servlet implementation class ExecutePaymentServlet

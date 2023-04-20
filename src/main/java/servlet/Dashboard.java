@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Stock;
 import beans.User;
@@ -39,6 +40,11 @@ public class Dashboard extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Recuperation du nom du user connect�
+		HttpSession session = request.getSession();
+		User currentUser = (User) session.getAttribute("currentUser");
+		request.setAttribute("currentUser", currentUser);
+				
 		/*
 		 * user desactivation
 		 */
@@ -79,13 +85,7 @@ public class Dashboard extends HttpServlet {
 					
 				}
 			}
-			request.setAttribute("userList", userDao.read());
-		
-			request.setAttribute("stockList", stockDao.read());	
 			
-			request.setAttribute("discountList", discountDao.read());
-		
-			request.setAttribute("orderList", orderDao.read());	
 		
 		
 		/*

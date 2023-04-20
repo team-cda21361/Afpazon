@@ -11,6 +11,10 @@ import com.itextpdf.text.log.SysoCounter;
 import beans.Order;
 import beans.Order_product;
 import beans.Product;
+import beans.Status;
+import beans.Stock;
+import beans.User;
+import beans.VAT;
 import connector.DBConnect;
 
 public class Order_productDao implements IDAO<Order_product>{
@@ -73,15 +77,79 @@ public class Order_productDao implements IDAO<Order_product>{
 	}
 
 	@Override
-	public boolean delete(Order_product object) {
-		// TODO Auto-generated method stub
+	public boolean delete(Order_product orderProd) {
+
+		try {
+			sql = connect.prepareStatement("DELETE FROM order_product WHERE id=?");
+
+			sql.setInt(1, orderProd.getId());
+			sql.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
+/*
+ * Method to find all the product from a same order
+ */
+	
+	public ArrayList<Order_product> findByOrderId(int id) {
+		ArrayList<Order_product> orders = new ArrayList<>();
+		
+		try {
+			sql = connect.prepareStatement("SELECT *,u.id as userId,ol.id as orderId, op.id as opId, p.id as prodId, p.price as prodPrice, op.price as opPrice FROM user u INNER JOIN"
+					+ " order_list ol ON u.id = ol.id_user INNER JOIN order_product op ON ol.id = id_order INNER JOIN product p "
+					+ "ON op.id_product=p.id INNER JOIN vat ON id_vat=vat.id LEFT JOIN product_discount pd ON p.id = pd.id_product LEFT JOIN"
+					+ " discount d ON id_discount = d.id INNER JOIN status s ON s.id = id_status WHERE ol.id =?");
+			sql.setInt(1, id);
+			rs = sql.executeQuery();
 
-	@Override
-	public Object findById(int id) {
-		// TODO Auto-generated method stub
+			while (rs.next()) {
+				VAT vat = new VAT(rs.getFloat("value"));
+				Status status =new Status(rs.getString("status"));
+				User user = new User();
+				Product product = new Product(rs.getInt("prodId"),rs.getString("name"),rs.getString("reference"),vat);
+				Order order = new Order(id,rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,status);
+				Order_product orderProduct = new Order_product(rs.getInt("opId"),rs.getFloat("opPrice"),rs.getInt("quantity"),product,order);
+				orders.add(orderProduct);
+			}
+			return orders;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
+	/*
+	 * method to pick one specific product 
+	 */
+	@Override
+	public Order_product findById(int id) {
+		
+		try {
+			sql = connect.prepareStatement("SELECT *,u.id as userId,ol.id as orderId, op.id as opId, p.id as prodId,"
+					+ " p.price as prodPrice, op.price as opPrice FROM user u INNER JOIN order_list ol ON u.id = ol.id_user"
+					+ " INNER JOIN order_product op ON ol.id = id_order INNER JOIN product p ON op.id_product=p.id INNER JOIN"
+					+ " vat ON id_vat=vat.id LEFT JOIN product_discount pd ON p.id = pd.id_product LEFT JOIN discount d ON id_discount"
+					+ " = d.id INNER JOIN status s ON s.id = id_status WHERE op.id =?");
+			sql.setInt(1, id);
+			rs = sql.executeQuery();
 
+			if (rs.next()) {
+				VAT vat = new VAT(rs.getFloat("value"));
+				Status status =new Status(rs.getString("status"));
+				User user = new User();
+				Product product = new Product(rs.getInt("prodId"),rs.getString("name"),rs.getString("reference"),vat);
+				Order order = new Order(id,rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,status);
+				Order_product orderProduct = new Order_product(id,rs.getFloat("opPrice"),rs.getInt("quantity"),product,order);
+				
+				return orderProduct;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

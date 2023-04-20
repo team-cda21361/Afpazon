@@ -294,7 +294,16 @@
 							</c:if>
 						</div>
 						<div class="row mb-3">
-							<a class="btn btn-danger w-75 mx-auto" href="printOrder?orderID=${orderSelected.id}" role="button"><i class="bi bi-file-earmark-pdf-fill"></i> Télécharger la facture</a>
+							<div class="dropdown mx-auto">
+								<button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="bi bi-file-earmark-pdf-fill"></i> Facture
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="printOrderBill?orderID=${orderSelected.id}&sendTo=download"><i class="bi bi-arrow-down-circle"></i> Télécharger</a></li>
+									<li><a class="dropdown-item" href="printOrderBill?orderID=${orderSelected.id}&sendTo=email"><i class="bi bi-envelope-at"></i> Recevoir par email</a></li>
+
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>

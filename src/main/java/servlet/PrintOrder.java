@@ -25,8 +25,7 @@ import pdf.GenePdfX;
 public class PrintOrder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Order_productDao order_productDao = new Order_productDao();
-	OrderDao orderDao = new OrderDao();
-       
+    OrderDao orderDao = new OrderDao();  
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,6 +38,7 @@ public class PrintOrder extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession(true);
 		User currentUser = (User) session.getAttribute("currentUser");
 		String creationPath = getServletContext().getRealPath("assets/factures/");
@@ -70,6 +70,7 @@ public class PrintOrder extends HttpServlet {
 				}
 			}
 		}
+
 		response.sendRedirect("account?showOrderID="+request.getParameter("orderID"));
 	}
 
