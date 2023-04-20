@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import beans.AddProductList;
 
@@ -358,7 +359,7 @@ public class ProductDao implements IDAO<Product> {
 		public HashMap<Product, HashMap<Integer,Integer>> finMoyenne(int catID) {
 			int moyenne;
 			int totalReview = 0;
-			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new HashMap<>();
+			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
 				try {
 					sql = connect.prepareStatement("SELECT *, AVG(rv.stars) moyenne, count(rv.id_product) totalReview, p.id idProd, rv.id idRv  FROM `category_product` cp "
 							+ " left JOIN product p "
@@ -444,7 +445,7 @@ public class ProductDao implements IDAO<Product> {
 		public HashMap<Product, HashMap<Integer,Integer>> searchCat(int catID,String search) {
 			int moyenne;
 			int totalReview = 0;
-			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new HashMap<>();
+			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
 				
 				try {
 					if (catID ==0) {
