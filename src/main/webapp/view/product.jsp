@@ -93,7 +93,7 @@
 							<div class="row">
 								<div class="col-lg-4 col-md-4 col-12">
 									<div class="form-group">
-										<h6>Choose color</h6>
+										<h6>Couleur</h6>
 										<div class="single-checkbox checkbox-style-1">
 									<c:if test="${ not empty product.getColor()  }">
 									    <p><c:out value="${ product.getColor()  }" /></p> 
@@ -110,7 +110,7 @@
 								</div>
 								<div class="col-lg-4 col-md-4 col-12">
 									<div class="form-group ">
-										<h6>Cantite</h6>
+										<h6>Quantité</h6>
 										<div class="cantite">
 										<form method="post">
 											<button type="submit" class="btn btn-light" name="minus"

@@ -16,11 +16,7 @@
 												<div class="collapse" id="collapse2${status.index}">
 										<p class="card-text">${ Newproduct.getDescription() }</p>
 									</div>
-									<button class="btn btn-link text-primary btn-toggle-details"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#collapse2${status.index}" aria-expanded="false"
-										aria-controls="collapse${status.index}">Voir plus</button>
-												</div>
+											</div>
 												<h4 class="card-subtitle mb-2 text-muted"><strong>Prix :
 													</strong>${Newproduct.getPrice()} &euro;</h4>
 												<div class="d-flex justify-content-between align-items-center">

@@ -1,6 +1,16 @@
 <script defer src="./assets/js/backoffice.js"></script>
 <h1 class="backTitle">Gestion stock</h1>
 <div class="backContainer ">
+<c:if test="${not empty error }">
+<div class="alert alert-danger" role="alert">
+  <c:out value="${error }"></c:out>
+</div>
+</c:if>
+<c:if test="${not empty success }">
+<div class="alert alert-danger" role="alert">
+  <c:out value="${success }"></c:out>
+</div>
+</c:if>
 	<div class="row justify-content-center">
 		<div class="col-8" >
 			<table class="table table-bordered tableManager">

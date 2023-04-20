@@ -23,10 +23,17 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="section-title">
-						<h2>
-							Produits catÃ©gorie :
-							<c:out value="${category.category}" />
-						</h2>
+						<c:if test="${not empty category }">
+							<h2>
+								Produits catégorie :
+								<c:out value="${category.category}" />
+							</h2>
+						</c:if>
+						<c:if test="${empty category }">
+							<h2>
+								Résultat de votre recherche :
+							</h2>
+						</c:if>
 					</div>
 				</div>
 			</div>

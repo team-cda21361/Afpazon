@@ -44,15 +44,20 @@ public class Categories extends HttpServlet {
 		
 		ProductDao productDao = new ProductDao();
 		
-	
-	
+
+		CategoryDao.injectCategories(request);
+		if (request.getParameter("categorySearch")!=null) {
+			int catId = Integer.parseInt(request.getParameter("categorySearch"));
+			String search = String.valueOf(request.getParameter("search"));
+			request.setAttribute("catProducts",new ProductDao().searchCat(catId, search));
+		}else {
 
 		int idCTG = Integer.parseInt(request.getParameter("catID"));
 
 		request.setAttribute("category", categoryDao.findById(idCTG));
 		
 		request.setAttribute("catProducts", productDao.finMoyenne(idCTG));
-		
+		}
 		
 		
 		
@@ -96,10 +101,10 @@ public class Categories extends HttpServlet {
         		
             //Item item = new Item(1, product);
             if(cart_temp.addItem(item)) {
-	             request.setAttribute("msn", "Le produit a été ajouté à  votre panier.");
+	             request.setAttribute("msn", "Le produit a ï¿½tï¿½ ajoutï¿½ ï¿½ votre panier.");
 	             request.setAttribute("msnType",  "OK");
             }else {
-	             request.setAttribute("msn", "Le produit n'a été pas ajouté à  votre panier.");
+	             request.setAttribute("msn", "Le produit n'a ï¿½tï¿½ pas ajoutï¿½ ï¿½ votre panier.");
 	             request.setAttribute("msnType",  "KO");
             }
             sessionP.setAttribute("cart", cart_temp);

@@ -16,11 +16,7 @@
 											<h3 class="card-title">${productSponsored.getProduct().getName()}</h3>
 												<div class="collapse" id="collapse5${status.index}">
 										<p class="card-text">${productSponsored.getProduct().getDescription()}</p>
-									</div>
-									<button class="btn btn-link text-primary btn-toggle-details"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#collapse5${status.index}" aria-expanded="false"
-										aria-controls="collapse${status.index}">Voir plus</button>
+									</div>							
 											<h4 class="card-subtitle mb-2 text-muted"><strong>Prix :
 												</strong>${productSponsored.getProduct().getPrice()} &euro;</h4>
 											<div class="d-flex justify-content-between align-items-center">
