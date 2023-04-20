@@ -1,0 +1,26 @@
+@charset "UTF-8";
+/*Style Back office
+*/
+.backTitle{	
+	text-align:center;
+	margin-bottom:8%;
+}
+.backContainer{
+	width:95%;
+	margin:auto;
+}
+.hiddenBtn{
+	border:none;
+	background:none;
+}
+.backRowMargin{
+	margin-top:20px;
+}
+/* review management page */
+
+.reviewStar{
+	list-style:none;
+}
+.backReviewImage{
+	width:50%;
+}

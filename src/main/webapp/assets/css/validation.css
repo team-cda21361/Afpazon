@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+
+.imgv {
+	
+	width: 100%;
+    height: 100%;
+    object-fit: contain;
+ }
+
+
+.error {
+	margin: 0;
+	font-size: small;
+	height: 8px;
+	color: red;
+}
+
+p #passMsn {
+	color: rgb(12, 12, 12);
+}
+
+#passwordDiv {
+	border: 1px solid rgb(255, 173, 173);
+	display: none;
+	background-color: #fbfbff;
+}
+
+.invalid {
+	color: rgb(236, 74, 74);
+	font-weight: bolder; 
+}
+
+.valid {
+	color: rgb(3, 186, 70);
+	font-weight: bolder; 
+}
+
+.valid::before {
+	content: "\2714 ";
+	margin-right: 5px;
+}

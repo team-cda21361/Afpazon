@@ -3,17 +3,17 @@ package beans;
 public class Image {
 	private int id;
 	private String picPath;
-	private Product product;
+	private int product;
 	
 	public Image() {
 	}
 	
-	public Image(String picPath, Product product) {
+	public Image(String picPath, int product) {
 		this.picPath = picPath;
 		this.product = product;
 	}
 
-	public Image(int id, String picPath, Product product) {
+	public Image(int id, String picPath, int product) {
 		this.id = id;
 		this.picPath = picPath;
 		this.product = product;
@@ -35,11 +35,11 @@ public class Image {
 		this.picPath = picPath;
 	}
 
-	public Product getProduct() {
+	public int getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(int product) {
 		this.product = product;
 	}
 }

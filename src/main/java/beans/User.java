@@ -17,7 +17,16 @@ public class User {
 	public User() {
 	}
 	
-	
+	/*
+	 * constructor only for dev mock(to be deleted after developpement
+	 */
+	public User(String email, Role role) {
+		
+		this.email = email;
+		this.role = role;
+	}
+
+
 	/*for registration*/
 	public User(String lastName, String firstName, String email, String password, Role role) {
 		this.lastName = lastName;
@@ -47,6 +56,19 @@ public class User {
 		this.firstName = firstName;
 		this.email = email;
 		this.password = password;
+		this.gender = gender;
+		this.phone = phone;
+		this.registrationDate = registrationDate;
+		this.isActive = isActive;
+		this.role = role;
+	}
+
+	public User(int id, String lastName, String firstName, String email, String gender, String phone,
+			Date registrationDate, boolean isActive, Role role) {
+		this.id = id;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.email = email;
 		this.gender = gender;
 		this.phone = phone;
 		this.registrationDate = registrationDate;
