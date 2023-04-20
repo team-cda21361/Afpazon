@@ -75,7 +75,6 @@
 					        </ul>
 					      </c:if>
 					      <li>
-					      <p></p>
 					      	<button type="button" class="btn btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas">
 							  <i class="bi bi-cart"></i>
 							 

@@ -1,5 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="UTF-8"%>
+<script defer type="text/javascript" src="./assets/js/cart.js"></script>
+<script type="text/javascript" src="./assets/jQuery/jquery-3.6.2.min.js"></script>
 <div class="container">
-
+<c:if test="${msnType.equals('OK')}">
+		<div class="alert alert-success timer" role="alert">
+			<c:out value="${msn }"></c:out>
+		</div>
+</c:if>
+<c:if test="${msnType.equals('KO')}">
+		<div class="alert alert-danger timer" role="alert">
+			<c:out value="${msn }"></c:out>
+		</div>
+</c:if>
 
 	<!-- /************************/
 	/*  Caroussel a ajouter */
@@ -57,9 +70,18 @@
 								<div class="price text-center">
 									<span class="fw-bold fs-4 text-primary">Prix: <c:out value="${product.key.price }" /> &euro; TTC</span>
 								</div>
-								<div class="button btn btn-success align-self-end mt-3">
-									<a href="product-details.html" class="text-light text-decoration-none">
-									<i class="bi bi-cart4"></i></a>
+								<div  class="align-self-end mt-3" style="display: inline-flex;">
+						
+								<form method="post">
+									<div class="mx-auto p-1">
+										<button type="submit" class="btn btn-primary" style="width: 100%;"><i class="bi bi-cart-plus"></i></button>
+									</div>
+								
+										<input type="hidden" name="idProd" value="<c:out value="${ product.key.id }" />">
+								</form>	
+								  <div class="mx-auto p-1">
+									<a href="product?id=${product.key.id }" class="btn btn-success" title="Plus Info" ><i class="bi bi-plus-circle"></i></a>
+								  </div>
 								</div>
 							</div>
 							
