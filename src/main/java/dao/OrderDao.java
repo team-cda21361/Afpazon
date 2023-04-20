@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import beans.Address;
 import beans.Address_type;
 import beans.Order;
@@ -25,15 +23,16 @@ public class OrderDao implements IDAO<Order> {
 	public boolean create(Order order) {
 
 		try {
-			sql = connect.prepareStatement("INSERT INTO order_list (dateOrder,totalPrice,paymentToken,trackingNumber,"
-					+ " id_user,id_address_delivery,id_status)" + "VALUES (now(),?,?,?,?,?,?)");
+			sql = connect.prepareStatement("INSERT INTO order_list (dateOrder, totalPrice, paymentToken, trackingNumber,"
+					+ " id_user, id_address_delivery, id_address_billing, id_status)" + "VALUES (now(),?,?,?,?,?,?,?)");
 		
 			sql.setFloat(1, order.getTotalPrice());
 			sql.setString(2, order.getPaymentToken());
 			sql.setString(3, order.getTrackingNumber());
 			sql.setInt(4, order.getUser().getId());
 			sql.setInt(5, order.getAddress_delivery().getId());
-			sql.setInt(6, order.getStatus().getId());
+			sql.setInt(6, order.getAddress_billing().getId());
+			sql.setInt(7, order.getStatus().getId());
 			
 
 			sql.execute();
@@ -126,24 +125,38 @@ public class OrderDao implements IDAO<Order> {
 
 	@Override
 	public Order findById(int id) {
+
+		Order orders = new Order();
+		Address_type addtype = new Address_type();
+
 		try {
-			sql = connect.prepareStatement("SELECT *,u.id idUser FROM order_list ol INNER JOIN status ON id_status=status.id INNER JOIN user u ON u.id=ol.id_user  WHERE ol.id =?");
+			sql = connect
+					.prepareStatement("select *, u.id as userId, o.id as orderId, a1.id as addressId, a2.id as addressId  from order_list o inner join user u on u.id=o.id_user "
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address_ledger a1 ON o.id_address_delivery = a1.id INNER JOIN address_ledger a2 ON o.id_address_billing = a2.id INNER JOIN status s "
+							+ "ON s.id = o.id_status WHERE o.id=?");
 			sql.setInt(1, id);
-			rs=sql.executeQuery();
+			System.out.println("sql Order: "+sql);
+			rs = sql.executeQuery();
+
 			if (rs.next()) {
-				User user=new User();
-				user.setId(rs.getInt("idUser"));
-				user.setEmail(rs.getString("email"));
-				Status status = new Status(rs.getInt("id_status"),rs.getString("status"));
-				return new Order(id,rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,status);
-				
-				
+				User user = new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
+						rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone"),
+						rs.getDate("registrationDate"), rs.getBoolean("isActive"),
+						new Role(rs.getInt("id_role"), rs.getString("role")));
+				addtype.setId(2);	
+				Status status = new Status(rs.getString("status"));
+				Address address1 = new Address(rs.getInt("a1.addressId"), rs.getString("a1.address"), rs.getInt("a1.zipCode"),rs.getString("a1.city"),user,addtype);
+				Address address2 = new Address(rs.getInt("a2.addressId"), rs.getString("a2.address"), rs.getInt("a2.zipCode"),rs.getString("a2.city"),user,addtype);
+				orders = (new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address1,address2,status) );
+				return orders;
 			}
-		} catch (Exception e) {
-			System.out.println("Insertion KO");
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+
+		return orders;
+
 	}
 	public ArrayList<Order> search(String search) {
 		ArrayList<Order> orders = new ArrayList<>();

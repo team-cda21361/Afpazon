@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendMail {
 	
-	public static void sendEmail(String client_email, String cheminVersPDF) {
+	public static boolean sendEmail(String client_email, String cheminVersPDF) {
 
 		System.out.println("email : " + client_email);
 
@@ -39,7 +39,9 @@ public class SendMail {
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "587");
 		properties.put("mail.smtp.user", "espft@outlook.fr");
+
 		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
+
 //		properties.put("mail.smtp.ssl.enable", "true");
 
 		// Get the Session object.// and pass username and password
@@ -74,14 +76,21 @@ public class SendMail {
             MimeBodyPart attachmentPart = new MimeBodyPart();
 
             MimeBodyPart textPart = new MimeBodyPart();
-            
+            MimeBodyPart textPart2 = new MimeBodyPart();
+            MimeBodyPart textPart3 = new MimeBodyPart();
+
             try {
 
                 File f =new File(cheminVersPDF);
 
                 attachmentPart.attachFile(f);
-                textPart.setText("Mon texte");
+                textPart.setText("Cher client,");
+                textPart2.setText("Merci d'avoir choisi Afpazon pour vous enrichir d'objets toujours plus utiles à nos vie./n"
+                        + "Veuillez trouver ci-joint la facture correspondant à votre achat.");
+                textPart3.setText("La direction.");
                 multipart.addBodyPart(textPart);
+                multipart.addBodyPart(textPart2);
+                multipart.addBodyPart(textPart3);
                 multipart.addBodyPart(attachmentPart);
 
             } catch (IOException e) {
@@ -98,9 +107,11 @@ public class SendMail {
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
+			return true;
 		} catch (MessagingException mex) {
 			System.out.println("**************************************");
 			mex.printStackTrace();
+			return false;
 		}
 
 	}

@@ -342,7 +342,7 @@
 						
 						   <div class="col-md-6">
 						   <form method="post" action="authorize_payment" name="formPaypal">
-							   <input type="hidden" name="product" value="Detaille de Vente">
+							   <input type="hidden" name="product" value="Detaille">
 							   <input type="hidden" name="subtotal" value="<c:out value="${ String.format('%.2f', ((cart.countPrixProduct()-(cart.countPrixProduct()*0.20)))-(cart.countPrixProduct() - cart.countPrixProductApresRemise())) }" />">
 							   <input type="hidden" name="shipping" value="<c:out value="${ String.format('%.2f', (0.00)) }" />">
 							   <input type="hidden" name="tax" value="<c:out value="${ String.format('%.2f', (cart.countPrixProduct()*0.20)) }" />">

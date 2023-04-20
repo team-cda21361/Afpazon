@@ -45,8 +45,8 @@ public class AuthorizePaymentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adressL = request.getParameter("adressL");
 		String adressF = request.getParameter("adressF");
-		System.out.println("adressL: "+adressL);
-		System.out.println("adressF: "+adressF);
+		System.out.println("adressL EN AUTO"+ adressL);
+		System.out.println("adressF EN AUTO"+ adressF);
 		HttpSession session = request.getSession(true);
 		session.setAttribute("adressL", adressL);
 		session.setAttribute("adressF", adressF);
@@ -57,11 +57,7 @@ public class AuthorizePaymentServlet extends HttpServlet {
         String shipping = request.getParameter("shipping").replace(",", ".");
         String tax = request.getParameter("tax").replace(",", ".");
         String total = request.getParameter("total").replace(",", ".");
-        System.out.println("product: "+product);
-        System.out.println("subtotal: "+subtotal);
-        System.out.println("shipping: "+shipping);
-        System.out.println("tax: "+tax);
-        System.out.println("total: "+ total);
+
         OrderDetail orderDetail = new OrderDetail(product, subtotal, shipping, tax, total);
  
         try {
