@@ -38,7 +38,7 @@ public class SendMail {
 		properties.put("mail.smtp.starttls.enable", "true");
 		properties.put("mail.smtp.host", host);
 		properties.put("mail.smtp.port", "587");
-		properties.put("mail.smtp.user", "espft@outlook.fr");
+		properties.put("mail.smtp.user", "afpazon@yahoo.com");
 
 		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
 
@@ -49,7 +49,7 @@ public class SendMail {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication("espft@outlook.fr", "This!sAPlaceh0lder!"); // mettre son mot de passe
+				return new PasswordAuthentication("afpazon@yahoo.com", "This!sAPlaceh0lder!"); // mettre son mot de passe
 
 			}
 
