@@ -85,7 +85,13 @@ public class Dashboard extends HttpServlet {
 					
 				}
 			}
-			
+			request.setAttribute("userList", userDao.read());
+
+            request.setAttribute("stockList", stockDao.read());
+
+            request.setAttribute("discountList", discountDao.read());
+
+            request.setAttribute("orderList", orderDao.read());
 		
 		
 		/*
