@@ -118,9 +118,37 @@ public class OrderDao implements IDAO<Order> {
 	}
 
 	@Override
-	public Object findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Order findById(int id) {
+		Order orders = new Order();
+		Address_type addtype = new Address_type();
+
+		try {
+			sql = connect
+					.prepareStatement("select *, u.id as userId, o.id as orderId, a1.id as addressId, a2.id as addressId  from order_list o inner join user u on u.id=o.id_user "
+							+ "INNER JOIN role r ON r.id = u.id_role INNER JOIN address_ledger a1 ON o.id_address_delivery = a1.id INNER JOIN address_ledger a2 ON o.id_address_billing = a2.id INNER JOIN status s "
+							+ "ON s.id = o.id_status WHERE o.id=?");
+			sql.setInt(1, id);
+			System.out.println("sql Order: "+sql);
+			rs = sql.executeQuery();
+
+			if (rs.next()) {
+				User user = new User(rs.getInt("userId"), rs.getString("lastName"), rs.getString("firstName"),
+						rs.getString("email"), rs.getString("password"), rs.getString("gender"), rs.getString("phone"),
+						rs.getDate("registrationDate"), rs.getBoolean("isActive"),
+						new Role(rs.getInt("id_role"), rs.getString("role")));
+				addtype.setId(2);	
+				Status status = new Status(rs.getString("status"));
+				Address address1 = new Address(rs.getInt("a1.addressId"), rs.getString("a1.address"), rs.getInt("a1.zipCode"),rs.getString("a1.city"),user,addtype);
+				Address address2 = new Address(rs.getInt("a2.addressId"), rs.getString("a2.address"), rs.getInt("a2.zipCode"),rs.getString("a2.city"),user,addtype);
+				orders = (new Order(rs.getInt("orderId"),rs.getDate("dateOrder"),rs.getFloat("totalPrice"),rs.getString("paymentToken"),rs.getString("trackingNumber"),user,address1,address2,status) );
+				return orders;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return orders;
 	}
 	public ArrayList<Order> search(String search) {
 		ArrayList<Order> orders = new ArrayList<>();

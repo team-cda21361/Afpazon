@@ -16,7 +16,7 @@ import beans.Order_product;
 import beans.User;
 import dao.OrderDao;
 import dao.Order_productDao;
-import pdf.GenePdf;
+import pdf.GenePdfX;
 
 /**
  * Servlet implementation class PrintOrder
@@ -50,7 +50,7 @@ public class PrintOrder extends HttpServlet {
 					if (order.getId() == Integer.parseInt(request.getParameter("orderID"))) {
 						Order orderSelected = order;
 						ArrayList<Order_product> productsList = order_productDao.readForOrder(orderSelected);
-						String pdfPath = GenePdf.createFacturePDF(currentUser, orderSelected, productsList, creationPath, logoPath);
+						String pdfPath = GenePdfX.createFacturePDF(currentUser, orderSelected, productsList, creationPath, logoPath);
 						response.setContentType("APPLICATION/OCTET-STREAM");
 					    response.setHeader("Content-Disposition","attachment; filename=\"" + "afpazon_facture_" + orderSelected.getId()+ ".pdf" + "\""); 
 					    response.setHeader("Content-Type","application/force-download"); 

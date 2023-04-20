@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.Stock;
 import dao.StockDao;
-import pdf.GenePdf;
+import pdf.GenePdfX;
 
 
 

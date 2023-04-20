@@ -45,6 +45,8 @@ public class AuthorizePaymentServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adressL = request.getParameter("adressL");
 		String adressF = request.getParameter("adressF");
+		System.out.println("adressL EN AUTO"+ adressL);
+		System.out.println("adressF EN AUTO"+ adressF);
 		HttpSession session = request.getSession(true);
 		session.setAttribute("adressL", adressL);
 		session.setAttribute("adressF", adressF);

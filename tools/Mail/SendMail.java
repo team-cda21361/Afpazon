@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendMail {
 	
-	public static void sendEmail(String client_email, String cheminVersPDF) {
+	public static boolean sendEmail(String client_email, String cheminVersPDF) {
 
 		System.out.println("email : " + client_email);
 
@@ -25,26 +25,29 @@ public class SendMail {
 		String to = client_email;
 
 		// Sender's email ID needs to be mentioned
-		String from = "test@orange.fr";
+		String from = "espft@outlook.fr";
 
 		// Assuming you are sending email from through gmails smtp
-		String host = "smtp.orange.fr";
+		String host = "smtp.office365.com";
 
 		// Get system properties
 		Properties properties = System.getProperties();
 
 		// Setup mail server
-		properties.put("mail.smtp.host", host);
-		properties.put("mail.smtp.port", "465");
-		properties.put("mail.smtp.ssl.enable", "true");
 		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", host);
+		properties.put("mail.smtp.port", "587");
+		properties.put("mail.smtp.user", "espft@outlook.fr");
+//		properties.put("mail.smtp.pwd", "This!sAPlaceh0lder!");
+//		properties.put("mail.smtp.ssl.enable", "true");
 
 		// Get the Session object.// and pass username and password
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
 			protected PasswordAuthentication getPasswordAuthentication() {
 
-				return new PasswordAuthentication("login_smtp", "mdp_smtp"); // mettre son mot de passe
+				return new PasswordAuthentication("espft@outlook.fr", "This!sAPlaceh0lder!"); // mettre son mot de passe
 
 			}
 
@@ -71,14 +74,21 @@ public class SendMail {
             MimeBodyPart attachmentPart = new MimeBodyPart();
 
             MimeBodyPart textPart = new MimeBodyPart();
-            
+            MimeBodyPart textPart2 = new MimeBodyPart();
+            MimeBodyPart textPart3 = new MimeBodyPart();
+
             try {
 
                 File f =new File(cheminVersPDF);
 
                 attachmentPart.attachFile(f);
-                textPart.setText("Mon texte");
+                textPart.setText("Cher client,");
+                textPart2.setText("Merci d'avoir choisi Afpazon pour vous enrichir d'objets toujours plus utiles à nos vie./n"
+                        + "Veuillez trouver ci-joint la facture correspondant à votre achat.");
+                textPart3.setText("La direction.");
                 multipart.addBodyPart(textPart);
+                multipart.addBodyPart(textPart2);
+                multipart.addBodyPart(textPart3);
                 multipart.addBodyPart(attachmentPart);
 
             } catch (IOException e) {
@@ -95,9 +105,11 @@ public class SendMail {
 			// Send message
 			Transport.send(message);
 			System.out.println("Sent message successfully....");
+			return true;
 		} catch (MessagingException mex) {
 			System.out.println("**************************************");
 			mex.printStackTrace();
+			return false;
 		}
 
 	}
