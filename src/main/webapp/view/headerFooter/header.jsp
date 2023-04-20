@@ -26,13 +26,13 @@
 				<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary ps-3 pe-3" data-bs-theme="dark">
 				  <div class="container-fluid">
 				  <div  class="me-3">
-				    <a class="navbar-brand me-0" href="/Afpazon/"><img class="mt-2" height=50px src="assets/images/logo/Amazon version_blc_logo.svg.png" alt="Logo"></a>
+				    <a class="navbar-brand me-0" href="/afpazon/"><img class="mt-2" height=50px src="assets/images/logo/Amazon version_blc_logo.svg.png" alt="Logo"></a>
 				    <em><a class="nav-link text-warning fs-5 fw-bold text-center">"On vend tout !"</a></em>
 				  </div>
 				  	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				      <span class="navbar-toggler-icon"></span>
 				    </button>
-				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				    <div class="collapse navbar-collapse" id="navbarNav">
 				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				        <li class="nav-item dropdown ms-3 my-auto" style="z-index: 1050;">
 				          <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,6 +75,7 @@
 					        </ul>
 					      </c:if>
 					      <li>
+					      <p></p>
 					      	<button type="button" class="btn btn-primary position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartCanvas">
 							  <i class="bi bi-cart"></i>
 							 
