@@ -94,19 +94,19 @@ public class Product_discountDao implements IDAO<Product_discount> {
 	public ArrayList<Product_discount> findSponsoredProducts() {
 	    ArrayList<Product_discount> listSponsoredProducts = new ArrayList<>();
 	    try {
-	        sql = connect.prepareStatement("SELECT * FROM product_discount pd JOIN product p ON pd.id_product = p.id JOIN discount d ON pd.id_discount = d.id JOIN vat ON p.id_vat = vat.id WHERE p.sponsoring IS NOT NULL ORDER BY d.percent DESC;");
+	        sql = connect.prepareStatement("SELECT *,p.id as proId FROM product_discount pd JOIN product p ON pd.id_product = p.id JOIN discount d ON pd.id_discount = d.id JOIN vat ON p.id_vat = vat.id WHERE p.sponsoring IS NOT NULL ORDER BY d.percent DESC;");
 	        rs = sql.executeQuery();
 	        System.out.println("Executing sponsored products query...");
 	        
 	        while(rs.next()) {
-	            Product product = new Product(rs.getInt("id"), rs.getString("name"), rs.getString("description"),
+	            Product product = new Product(rs.getInt("prodId"), rs.getString("name"), rs.getString("description"),
 	                    rs.getFloat("price"), rs.getString("mainPicPath"), rs.getString("videoPath"),
 	                    rs.getBoolean("inCarousel"), rs.getString("size"), rs.getString("reference"),
 	                    rs.getString("color"), rs.getFloat("weight"), rs.getInt("warranty"),
 	                    rs.getInt("sponsoring"), rs.getBoolean("isActive"),
 	                    new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
 	            
-	            Discount discount = new Discount(rs.getInt("id"),rs.getDate("startDate"), rs.getDate("endDate"), rs.getFloat("percent"),rs.getString("voucher"));
+	            Discount discount = new Discount(rs.getInt("id_discount"),rs.getDate("startDate"), rs.getDate("endDate"), rs.getFloat("percent"),rs.getString("voucher"));
 	        	Product_discount productsDiscount = new Product_discount(rs.getInt("id"),product,discount);
 	            listSponsoredProducts.add(productsDiscount);
 	            

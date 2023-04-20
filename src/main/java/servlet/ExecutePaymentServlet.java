@@ -121,7 +121,7 @@ public class ExecutePaymentServlet extends HttpServlet {
         String pdfPath = GenePdfX.createFacturePDF(usercurrent, order, list, creationPath, logoPath);
         System.out.println("facture a cette adresse: "+pdfPath);
         if (SendMail.sendEmail(usercurrent.getEmail(), pdfPath)) {
-            if (SendMail.sendEmail("espft@outlook.fr", pdfPath)) {
+            if (SendMail.sendEmail("afpazon@yahoo.com", pdfPath)) {
                 System.out.println("email envoyé");
             }
         }else {

@@ -24,7 +24,6 @@ public class Order {
 		this.paymentToken = paymentToken;
 		this.trackingNumber = trackingNumber;
 		this.user = user;
-
 		this.address_delivery = address_delivery;
 		this.address_billing = address_billing;
 		this.status = status;
@@ -52,6 +51,17 @@ public class Order {
 		this.user = user;
 		this.address_delivery = address_delivery;
 		this.address_billing = address_billing;
+		this.status = status;
+	}
+	
+	public Order(int id, Date date, Float totalPrice, String paymentToken, String trackingNumber, User user,
+			Status status) {
+		this.id = id;
+		this.date = date;
+		this.totalPrice = totalPrice;
+		this.paymentToken = paymentToken;
+		this.trackingNumber = trackingNumber;
+		this.user = user;
 		this.status = status;
 	}
 
