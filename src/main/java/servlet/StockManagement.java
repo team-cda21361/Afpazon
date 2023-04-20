@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Mail.SendMail;
 import beans.Stock;
 import dao.StockDao;
+import pdf.GenePdf;
 
 /**
  * Servlet implementation class Stockmanager
@@ -77,15 +79,21 @@ public class StockManagement extends HttpServlet {
 			String uploadPath = getServletContext().getRealPath("assets/");
 			
 //**************************** APPELER ET GENERER LE PDF ******************************************
-			//String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
+			String pdfPath = GenePdf.createCommadePDf(name,reference,quantity,uploadPath);
 			//String pdfPath = GenePdf.createFacturePDF(name,reference,quantity,uploadPath);
+			
 			//System.out.println(pdfPath);
 			System.out.println("PDF OKAY !!!");
 			System.out.println("Fournisseur = "+name+" *** "+"Référence = "+reference+" *** "+"Quantité = "+quantity);
 			
 //**************************** ENVOIE DU MAIL ******************************************
-			//SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath);	
-		}
+				if (SendMail.sendEmail("bourgin.fabien@orange.fr", pdfPath)) {
+					request.setAttribute("success","La commande a bien été expédiée!");
+				}else {
+					request.setAttribute("error","La commande n'a pas pu être expédiée!");
+					}
+			}
+			
 		
 //************************ RENVOYER LE CONTENUE DU doPost VERS LE doGet  *********************************
 		doGet(request, response);
