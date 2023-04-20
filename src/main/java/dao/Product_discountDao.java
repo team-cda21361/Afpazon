@@ -94,7 +94,7 @@ public class Product_discountDao implements IDAO<Product_discount> {
 	public ArrayList<Product_discount> findSponsoredProducts() {
 	    ArrayList<Product_discount> listSponsoredProducts = new ArrayList<>();
 	    try {
-	        sql = connect.prepareStatement("SELECT *,p.id as proId FROM product_discount pd JOIN product p ON pd.id_product = p.id JOIN discount d ON pd.id_discount = d.id JOIN vat ON p.id_vat = vat.id WHERE p.sponsoring IS NOT NULL ORDER BY d.percent DESC;");
+	        sql = connect.prepareStatement("SELECT *,p.id as prodId FROM product_discount pd JOIN product p ON pd.id_product = p.id JOIN discount d ON pd.id_discount = d.id JOIN vat ON p.id_vat = vat.id WHERE p.sponsoring IS NOT NULL ORDER BY d.percent DESC;");
 	        rs = sql.executeQuery();
 	        System.out.println("Executing sponsored products query...");
 	        
