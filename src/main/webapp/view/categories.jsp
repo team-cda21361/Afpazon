@@ -25,13 +25,13 @@
 					<div class="section-title">
 						<c:if test="${not empty category }">
 							<h2>
-								Produits catégorie :
+								Produits catÃ©gorie :
 								<c:out value="${category.category}" />
 							</h2>
 						</c:if>
 						<c:if test="${empty category }">
 							<h2>
-								Résultat de votre recherche :
+								RÃ©sultat de votre recherche :
 							</h2>
 						</c:if>
 					</div>
@@ -47,7 +47,7 @@
 					 
 								
 
-							<div class="card-body d-flex flex-column">
+							<div class="card-body d-flex flex-column justify-content-between">
 									<h4 class="title text-center">
 										<a class="text-decoration-none text-dark" href="product?id=${product.key.id }">
 											<c:out value="${product.key.name }" />
@@ -68,7 +68,7 @@
 
 									
 									
-									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />
+									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />>
 
 											Avis</span></li>
 								</c:forEach>
