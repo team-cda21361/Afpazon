@@ -14,6 +14,20 @@ $(document).ready(function() {
     },5000);  
 });
 
+/*************************keep the page position when post datas***** */
+   $(window).scroll(function () {
+        let pageName = location.href.replaceAll('/','').replaceAll(':','');
+        // console.log('scrolled ' + pageName);
+        sessionStorage[pageName + '_scrollTop'] = $(this).scrollTop();
+    });
+$(document).ready(function () {
+    let pageName = location.href.replaceAll('/','').replaceAll(':','');
+    if (sessionStorage[pageName + '_scrollTop'] != "undefined") {
+        // console.log('restored ' + pageName);
+        $(window).scrollTop(sessionStorage[pageName + '_scrollTop']);
+    }
+});
+
 
 document.querySelectorAll('.printbutton').forEach(function(element) {
     element.addEventListener('click', function() {

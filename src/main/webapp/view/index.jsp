@@ -24,11 +24,11 @@
 							</button>
 							<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
 								<ul id="nav" class="navbar-nav mx-auto">
-									<li class="nav-item"><a href="index.html" class="nav-link"
+									<li class="nav-item"><a href="#discountcar" class="nav-link"
 											aria-label="Toggle navigation">Promotions</a></li>
-									<li class="nav-item"><a href="index.html" class="nav-link"
+									<li class="nav-item"><a href="#newness" class="nav-link"
 											aria-label="Toggle navigation">Nouveautés</a></li>
-									<li class="nav-item"><a href="contact.html" class="nav-link"
+									<li class="nav-item"><a href="#contact" class="nav-link"
 											aria-label="Toggle navigation">Contactez-nous</a></li>
 								</ul>
 							</div>
@@ -47,10 +47,10 @@
 	            <c:out value="${msn }"></c:out>
 	        </div>
 	    </c:if>
-		<h3 class="text-center mb-3">Les promos du moment</h3>
+		<h3 id="discountcar" class="text-center mb-3">Les promos du moment</h3>
 		<c:import url="/carrousel/newProdSponsoredCarousel.jsp"></c:import> 
 		<hr>
-		<h3 class="text-center mb-3">Nos nouveautés</h3>
+		<h3 id="newness" class="text-center mb-3">Nos nouveautés</h3>
     	<c:import url="/carrousel/newProductCarousel.jsp"></c:import>  			
 		<hr>
 		<h3 class="text-center mb-3">Sponsorisés</h3>
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="text-center">
+				<div id="contact" class="text-center">
 					<a href="#" class="btn btn-lg btn-primary">Voir plus de témoignages</a>
 				</div>
 			</div>
