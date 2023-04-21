@@ -23,7 +23,7 @@
 													</strong>${productDiscount.getProduct().getPrice()} &euro;</h4>
 												<div class="d-flex justify-content-between align-items-center">
 													<div class="btn-group">
-														<a href="#" class="btn btn-primary"><i
+														<a href="?idProd=${productDiscount.getProduct().getId()}" class="btn btn-primary"><i
 																class="bi bi-cart-plus"></i></a>
 														<a href="product?id=${productDiscount.getId()}"
 															class="btn btn-success" title="Plus Info"><i
