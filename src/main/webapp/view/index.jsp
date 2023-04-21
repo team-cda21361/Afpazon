@@ -25,11 +25,11 @@
 							<div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
 								<ul id="nav" class="navbar-nav mx-auto">
 									<li class="nav-item"><a href="index.html" class="nav-link"
-											aria-label="Toggle navigation">Promotion</a></li>
+											aria-label="Toggle navigation">Promotions</a></li>
 									<li class="nav-item"><a href="index.html" class="nav-link"
-											aria-label="Toggle navigation">Nouveauter</a></li>
+											aria-label="Toggle navigation">Nouveautés</a></li>
 									<li class="nav-item"><a href="contact.html" class="nav-link"
-											aria-label="Toggle navigation">Contactez nous</a></li>
+											aria-label="Toggle navigation">Contactez-nous</a></li>
 								</ul>
 							</div>
 						</nav>

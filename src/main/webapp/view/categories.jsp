@@ -68,7 +68,7 @@
 
 									
 									
-									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />>
+									<li class="list-group-item"><span class="mx-2"><c:out value="${prod.value}" />
 
 											Avis</span></li>
 								</c:forEach>
