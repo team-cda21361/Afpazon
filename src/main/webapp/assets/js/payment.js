@@ -13,6 +13,20 @@ $(document).ready(function() {
         $(".timer").fadeOut(1500);
     },5000);  
 });
+/*************************keep the page position when post datas***** */
+   $(window).scroll(function () {
+        let pageName = location.href.replaceAll('/','').replaceAll(':','');
+        // console.log('scrolled ' + pageName);
+        sessionStorage[pageName + '_scrollTop'] = $(this).scrollTop();
+    });
+$(document).ready(function () {
+    let pageName = location.href.replaceAll('/','').replaceAll(':','');
+    if (sessionStorage[pageName + '_scrollTop'] != "undefined") {
+        // console.log('restored ' + pageName);
+        $(window).scrollTop(sessionStorage[pageName + '_scrollTop']);
+    }
+});
+
 
 /*************Validation Payment****************/
 var regexTelephone = new RegExp(/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/);

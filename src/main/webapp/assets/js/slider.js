@@ -8,6 +8,21 @@ function loadCSS(filename){
 loadCSS("./assets/css/slider.css");
 loadCSS("./assets/css/swiper-bundle.min.css");
 
+/*************************keep the page position when post datas***** */
+   $(window).scroll(function () {
+        let pageName = location.href.replaceAll('/','').replaceAll(':','');
+         console.log('scrolled ' + pageName);
+        sessionStorage[pageName + '_scrollTop'] = $(this).scrollTop();
+    });
+$(document).ready(function () {
+    let pageName = location.href.replaceAll('/','').replaceAll(':','');
+    if (sessionStorage[pageName + '_scrollTop'] != "undefined") {
+        // console.log('restored ' + pageName);
+        $(window).scrollTop(sessionStorage[pageName + '_scrollTop']);
+    }
+});
+
+
 var swiper = new Swiper(".slide-container", {
   slidesPerView: 4,
   spaceBetween: 20,
