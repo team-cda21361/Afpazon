@@ -364,23 +364,27 @@ public class ProductDao implements IDAO<Product> {
 			}
 			return getReviewByProduct;
 		}
+
 		//------------Methode for Category cards
-		public HashMap<Product, HashMap<Integer,Integer>> finMoyenne(int catID) {
-			int moyenne;
+		public HashMap<HashMap<Product,Float>, HashMap<Integer,Integer>> prodCards(int catID,String search) {
+			
+			int moyenne=0;
 			int totalReview = 0;
-			HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
-				try {
-					sql = connect.prepareStatement("SELECT *, AVG(rv.stars) moyenne, count(rv.id_product) totalReview, p.id idProd, rv.id idRv  FROM `category_product` cp "
-							+ " left JOIN product p "
-							+ " ON p.id= cp.id_product"
-							+ " LEFT JOIN review rv"
-							+ " ON rv.id_product = p.id"
-							+ " where id_category=?"
-							+ " GROUP BY p.id;");
+			float percent=0;
+			HashMap<HashMap<Product,Float>, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
+			try {
+				if (catID ==0) {
+					sql = connect.prepareStatement("SELECT *, percent, p.id idProd, rv.id idRv,  AVG(rv.stars)"
+							+ " moyenne, count(rv.id_product) totalReview FROM category_product ct LEFT JOIN product p ON"
+							+ " ct.id_product=p.id   LEFT JOIN product_discount pd ON p.id = pd.id_product LEFT JOIN discount"
+							+ " d ON d.id = pd.id_discount LEFT JOIN review rv ON rv.id_product = p.id WHERE p.name LIKE ? GROUP BY p.id order by"
+							+ " p.sponsoring DESC;");
 					
-					sql.setInt(1, catID);
+					sql.setString(1, "%"+search+"%");
+					
 					rs = sql.executeQuery();
 					while(rs.next()) {
+						HashMap <Product,Float> prodAndPercent=new HashMap<>();
 						HashMap <Integer,Integer> dataReview=new HashMap<>();
 						Review review = new Review(rs.getInt("idRv"),rs.getString("content"),rs.getInt("stars"));
 						VAT vat = new VAT();
@@ -390,18 +394,57 @@ public class ProductDao implements IDAO<Product> {
 								rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
 								rs.getInt("sponsoring"),rs.getBoolean("isActive"),
 								vat,review);
+						moyenne= rs.getInt("moyenne");
+						totalReview= rs.getInt("totalReview");
+						percent=rs.getFloat("percent");
+						prodAndPercent.put(product, percent);
+						dataReview.put(moyenne, totalReview);
+						getReviewByProduct.put(prodAndPercent, dataReview);	
+					} 
+			}else {
+					sql = connect.prepareStatement("SELECT *, percent, p.id idProd, rv.id idRv,  AVG(rv.stars) moyenne,"
+							+ " count(rv.id_product) totalReview FROM category_product ct LEFT JOIN product p ON ct.id_product=p.id"
+							+ "   LEFT JOIN product_discount pd ON p.id = pd.id_product LEFT JOIN discount d ON d.id = pd.id_discount"
+							+ " LEFT JOIN review rv ON rv.id_product = p.id  WHERE p.name LIKE ? AND id_category = ? GROUP BY p.id order by p.sponsoring DESC;");
+					sql.setString(1, "%"+search+"%");
+					sql.setInt(2, catID);
+						
+					rs = sql.executeQuery();
+					while(rs.next()) {
+						HashMap <Product,Float> prodAndPercent=new HashMap<>();
+						HashMap <Integer,Integer> dataReview=new HashMap<>();
+						Review review = null;
+						PreparedStatement sql2 = connect.prepareStatement("SELECT *,rv.id idRv,  AVG(rv.stars) moyenne,count(rv.id_product) totalReview From review rv WHERE id_product = ?");
+						sql2.setInt(1, rs.getInt("idProd"));
+						ResultSet rs2=sql2.executeQuery();
+						if (rs2.next()) {
 							moyenne= rs.getInt("moyenne");
 							totalReview= rs.getInt("totalReview");
+							review = new Review(rs.getInt("idRv"),rs.getString("content"),rs.getInt("stars"));
+						}
+						
+						VAT vat = new VAT();
+						percent=rs.getFloat("percent");
+						
+						Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+								rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+								rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+								rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+								rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+								vat,review);
+						percent=rs.getFloat("percent");
+						prodAndPercent.put(product, percent);
 						dataReview.put(moyenne, totalReview);
-						getReviewByProduct.put(product, dataReview);	
+						getReviewByProduct.put(prodAndPercent, dataReview);	
 					} 
-					return getReviewByProduct;
-				}catch (SQLException e) {
-					e.printStackTrace();
-					System.err.println("Pas de liste de PRODUCTs...");
 				}
 				return getReviewByProduct;
+			}catch (SQLException e) {
+				e.printStackTrace();
+				System.err.println("Pas de liste de PRODUCTs...");
 			}
+			return getReviewByProduct;
+		}
 		
 		//****************** FINDBYID categorie de Product **********************************************************************************//
 		public Category findByIdCategoriedeProd(int id) {

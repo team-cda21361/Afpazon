@@ -49,14 +49,14 @@ public class Categories extends HttpServlet {
 		if (request.getParameter("categorySearch")!=null) {
 			int catId = Integer.parseInt(request.getParameter("categorySearch"));
 			String search = String.valueOf(request.getParameter("search"));
-			request.setAttribute("catProducts",new ProductDao().searchCat(catId, search));
+			request.setAttribute("catProducts",new ProductDao().prodCards(catId, search));
 		}else {
 
 		int idCTG = Integer.parseInt(request.getParameter("catID"));
 
 		request.setAttribute("category", categoryDao.findById(idCTG));
 		
-		request.setAttribute("catProducts", productDao.finMoyenne(idCTG));
+		request.setAttribute("catProducts", productDao.prodCards(idCTG,""));
 		}
 		
 		
