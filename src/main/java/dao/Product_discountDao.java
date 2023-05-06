@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import beans.Discount;
 import beans.Product;
@@ -91,35 +93,88 @@ public class Product_discountDao implements IDAO<Product_discount> {
 			return listProductDiscounts;
 		}
 	
-	public ArrayList<Product_discount> findSponsoredProducts() {
-	    ArrayList<Product_discount> listSponsoredProducts = new ArrayList<>();
-	    try {
-	        sql = connect.prepareStatement("SELECT *,p.id as prodId FROM product_discount pd JOIN product p ON pd.id_product = p.id JOIN discount d ON pd.id_discount = d.id JOIN vat ON p.id_vat = vat.id WHERE p.sponsoring IS NOT NULL ORDER BY d.percent DESC;");
-	        rs = sql.executeQuery();
-	        System.out.println("Executing sponsored products query...");
-	        
-	        while(rs.next()) {
-	            Product product = new Product(rs.getInt("prodId"), rs.getString("name"), rs.getString("description"),
-	                    rs.getFloat("price"), rs.getString("mainPicPath"), rs.getString("videoPath"),
-	                    rs.getBoolean("inCarousel"), rs.getString("size"), rs.getString("reference"),
-	                    rs.getString("color"), rs.getFloat("weight"), rs.getInt("warranty"),
-	                    rs.getInt("sponsoring"), rs.getBoolean("isActive"),
-	                    new VAT(rs.getInt("id_vat"),rs.getFloat("value")));
-	            
-	            Discount discount = new Discount(rs.getInt("id_discount"),rs.getDate("startDate"), rs.getDate("endDate"), rs.getFloat("percent"),rs.getString("voucher"));
-	        	Product_discount productsDiscount = new Product_discount(rs.getInt("id"),product,discount);
-	            listSponsoredProducts.add(productsDiscount);
-	            
-	        }
-	        return listSponsoredProducts;
-	        
-	        
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        System.err.println("Failed to retrieve sponsored products.");
-	    }
-	    return listSponsoredProducts;
+	public HashMap<HashMap<Product,Float>, HashMap<Integer,Integer>> findDiscountProdCarousel() {
+		int moyenne;
+		int totalReview = 0;
+		float percent=0;
+		HashMap<HashMap<Product,Float>, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
+		try {
+			sql = connect.prepareStatement("SELECT *, AVG(rv.stars) moyenne, count(rv.id_product) totalReview, p.id idProd,"
+					+ " rv.id idRv FROM  product p  INNER JOIN product_discount pd ON pd.id_product = p.id LEFT JOIN review rv"
+					+ " ON rv.id_product = p.id  GROUP BY p.id order by p.sponsoring DESC limit 10");
+			
+			rs = sql.executeQuery();
+			while(rs.next()) {
+				HashMap <Product,Float> prodAndPercent=new HashMap<>();
+				HashMap <Integer,Integer> dataReview=new HashMap<>();
+				Review review = new Review(rs.getInt("idRv"),rs.getString("content"),rs.getInt("stars"));
+				VAT vat = new VAT();
+				Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						vat,review);
+				moyenne= rs.getInt("moyenne");
+				totalReview= rs.getInt("totalReview");
+				PreparedStatement sql2 = connect.prepareStatement("SELECT percent From discount d INNER JOIN product_discount p ON"
+						+ " p.id_discount =d.id WHERE p.id_product =?");
+				sql2.setInt(1, rs.getInt("idProd"));
+				ResultSet rs2=sql2.executeQuery();
+				if (rs2.next()) {
+					percent=rs2.getFloat("percent");
+					System.out.println("coucou"+percent);
+				}
+				System.out.println("coucou3");
+				prodAndPercent.put(product, percent);
+				
+				dataReview.put(moyenne, totalReview);
+				System.out.println(dataReview);
+				getReviewByProduct.put(prodAndPercent, dataReview);	
+				System.out.println(getReviewByProduct);
+			} 
+			return getReviewByProduct;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return getReviewByProduct;
 	}
+	//----------method for last carrousel, sponsored
+	public HashMap<Product, HashMap<Integer,Integer>> findSponsoredProducts() {
+		int moyenne;
+		int totalReview = 0;
+		HashMap<Product, HashMap<Integer,Integer>> getReviewByProduct = new LinkedHashMap<>();
+		try {
+			sql = connect.prepareStatement("SELECT *, AVG(rv.stars) moyenne, count(rv.id_product) totalReview,"
+					+ " p.id idProd, rv.id idRv FROM `category_product` cp left JOIN product p ON p.id= cp.id_product"
+					+ " LEFT JOIN review rv ON rv.id_product = p.id WHERE p.sponsoring IS NOT NULL GROUP BY p.id order by p.sponsoring DESC limit 10");
+			
+			rs = sql.executeQuery();
+			while(rs.next()) {
+				HashMap <Integer,Integer> dataReview=new HashMap<>();
+				Review review = new Review(rs.getInt("idRv"),rs.getString("content"),rs.getInt("stars"));
+				VAT vat = new VAT();
+				Product product = new Product(rs.getInt("idProd"),rs.getString("name"),rs.getString("description"),
+						rs.getFloat("price"),rs.getString("mainPicPath"),rs.getString("videoPath"),
+						rs.getBoolean("inCarousel"),rs.getString("size"),rs.getString("reference"),
+						rs.getString("color"),rs.getFloat("weight"),rs.getInt("warranty"),
+						rs.getInt("sponsoring"),rs.getBoolean("isActive"),
+						vat,review);
+				moyenne= rs.getInt("moyenne");
+				totalReview= rs.getInt("totalReview");
+				dataReview.put(moyenne, totalReview);
+				getReviewByProduct.put(product, dataReview);	
+			} 
+			return getReviewByProduct;
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.err.println("Pas de liste de PRODUCTs...");
+		}
+		return getReviewByProduct;
+	}
+	
+
 	
 	
 

@@ -1,0 +1,11 @@
+#promo{
+	padding: 2px;
+	border:2px solid red;
+	color:red;
+	font-weight: bold;
+	font-size:1.5rem;
+	top:7%;
+	right:1%;
+	transform:rotate(45deg);
+	opacity:0.6;
+}

@@ -24,7 +24,6 @@ public class Index extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Product_discountDao produitDaoProduct_discountDao = new Product_discountDao();
 	private ArrayList<beans.Product_discount> lisProductDiscounts = new ArrayList<>();
-	private ArrayList<beans.Product> listNewProduct = new ArrayList<>();
 	private ArrayList<beans.Product_discount> listNewProductDiscount = new ArrayList<>();
 	private ProductDao produitDao = new ProductDao();
 	Product_discountDao product_discountDao = new Product_discountDao();
@@ -110,14 +109,14 @@ if(request.getParameter("idProd") != null ) {
 	}
 	
 	protected void pageLoad(HttpServletRequest request, HttpServletResponse response) {
-		lisProductDiscounts = produitDaoProduct_discountDao.findProdDiscountSponsoring();
-		request.setAttribute("discountsProdSponsoring", lisProductDiscounts);
+	//	lisProductDiscounts = produitDaoProduct_discountDao.findSponsoredProducts(); Attention, a refaire
+		request.setAttribute("discountsProdSponsoring", produitDaoProduct_discountDao.findDiscountProdCarousel());
 		
-		listNewProduct = produitDao.findNewProdCarousel();
-		request.setAttribute("newProdCarousel", listNewProduct);
+		//listNewProduct = produitDao.findNewProdCarousel();
+		request.setAttribute("newProdCarousel", produitDao.finProductForCarousel());
 		
-		listNewProductDiscount = produitDaoProduct_discountDao.findSponsoredProducts();
-		request.setAttribute("newProdSponsored", listNewProductDiscount);
+		//listNewProductDiscount = produitDaoProduct_discountDao.findSponsoredProducts();
+		request.setAttribute("newProdSponsored", produitDaoProduct_discountDao.findSponsoredProducts());
 	
 		try {
 			request.getRequestDispatcher("/view/index.jsp").forward(request,response);
@@ -127,6 +126,7 @@ if(request.getParameter("idProd") != null ) {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 	}
 
